@@ -5,7 +5,9 @@
 
 fetch("artworks.json")
 
+
 .then(response => {
+
 
     if (!response.ok) {
 
@@ -13,7 +15,9 @@ fetch("artworks.json")
 
     }
 
+
     return response.json();
+
 
 })
 
@@ -21,7 +25,10 @@ fetch("artworks.json")
 .then(artworks => {
 
 
-    console.log("Database karya berhasil dimuat:", artworks);
+    console.log(
+        "Database karya berhasil dimuat:",
+        artworks
+    );
 
 
 
@@ -29,10 +36,11 @@ fetch("artworks.json")
 
 
 
-    // Jika elemen gallery tidak ada
     if (!gallery) {
 
-        console.error("Class .works-gallery tidak ditemukan");
+        console.error(
+            "works-gallery tidak ditemukan"
+        );
 
         return;
 
@@ -41,37 +49,64 @@ fetch("artworks.json")
 
 
 
+
     artworks.forEach(work => {
 
 
 
-        const artworkCard = document.createElement("div");
+        const artworkCard =
+        document.createElement("div");
 
-        artworkCard.classList.add("art-card");
+
+
+        artworkCard.classList.add(
+            "art-card"
+        );
+
+
 
 
 
         artworkCard.innerHTML = `
 
 
-        <img src="${work.image}" alt="${work.title}">
+        <a href="artwork.html?id=${work.id}">
 
 
-        <h3>
-        ${work.title}
-        </h3>
+            <img 
+            src="${work.image}" 
+            alt="${work.title}"
+            >
 
 
-        <p>
-        ${work.year}
-        </p>
+
+            <h3>
+
+            ${work.title}
+
+            </h3>
+
+
+
+            <p>
+
+            ${work.year}
+
+            </p>
+
+
+        </a>
 
 
         `;
 
 
 
-        gallery.appendChild(artworkCard);
+
+
+        gallery.appendChild(
+            artworkCard
+        );
 
 
 
@@ -80,7 +115,6 @@ fetch("artworks.json")
 
 
 })
-
 
 
 .catch(error => {
