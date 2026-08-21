@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NIRMUKA | Artwork</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<section class="artwork-page">
+
+
+<div class="artwork-container">
+
+
+<!-- IMAGE -->
+
+<div class="artwork-image">
+
+<img id="art-image" src="" alt="Artwork">
+
+</div>
+
+
+
+
+<!-- INFORMATION -->
+
+<div class="artwork-info">
+
+
+<h1 id="art-title">
+Loading...
+</h1>
+
+
+<div class="meta">
+
+
+<p>
+<strong>YEAR</strong>
+<br>
+<span id="art-year"></span>
+</p>
+
+
+<p>
+<strong>MEDIUM</strong>
+<br>
+<span id="art-medium"></span>
+</p>
+
+
+<p>
+<strong>DIMENSION</strong>
+<br>
+<span id="art-dimension"></span>
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="description-block">
+
+
+<h2>
+BACKGROUND
+</h2>
+
+<p id="art-background"></p>
+
+
+
+<h2>
+CONCEPT
+</h2>
+
+<p id="art-concept"></p>
+
+
+
+
+<h2>
+VISUAL DESCRIPTION
+</h2>
+
+<p id="art-visual"></p>
+
+
+
+
+<h2>
+ARTIST STATEMENT
+</h2>
+
+<p id="art-statement"></p>
+
+
+
+
+<h2>
+INSPIRATION
+</h2>
+
+<p id="art-inspiration"></p>
+
+
+
+
+<h2>
+CREATIVE PROCESS
+</h2>
+
+<p id="art-process"></p>
+
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<script>
+
+
+fetch("artworks.json")
+
+.then(response => response.json())
+
+.then(data => {
+
+
+const params = new URLSearchParams(window.location.search);
+
+
+const id = params.get("id");
+
+
+
+const artwork = data.find(item => item.id === id);
+
+
+
+if(!artwork){
+
+document.querySelector(".artwork-container").innerHTML =
+"<h1>Artwork not found</h1>";
+
+return;
+
+}
+
+
+
+
+
+document.getElementById("art-image").src =
+artwork.image;
+
+
+
+document.getElementById("art-title").innerText =
+artwork.title;
+
+
+
+document.getElementById("art-year").innerText =
+artwork.year;
+
+
+
+document.getElementById("art-medium").innerText =
+artwork.medium;
+
+
+
+document.getElementById("art-dimension").innerText =
+artwork.dimension;
+
+
+
+document.getElementById("art-background").innerText =
+artwork.background;
+
+
+
+document.getElementById("art-concept").innerText =
+artwork.concept;
+
+
+
+document.getElementById("art-visual").innerText =
+artwork.visual_description;
+
+
+
+document.getElementById("art-statement").innerText =
+artwork.artist_statement;
+
+
+
+document.getElementById("art-inspiration").innerText =
+artwork.inspiration;
+
+
+
+document.getElementById("art-process").innerText =
+artwork.creative_process;
+
+
+
+})
+
+
+.catch(error => {
+
+console.error(error);
+
+});
+
+
+</script>
+
+
+</body>
+
+</html>
