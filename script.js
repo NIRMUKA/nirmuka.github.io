@@ -1,34 +1,29 @@
 /* =====================================
-   NIRMUKA DYNAMIC ARCHIVE SYSTEM
+   NIRMUKA DIGITAL ARCHIVE SYSTEM
 ===================================== */
-
 
 
 const curtain = document.querySelector(".curtain");
 
-const content = document.getElementById(
-    "content-container"
-);
+const content =
+document.getElementById("content-container");
 
 const menuLinks =
-document.querySelectorAll(
-    ".main-menu a"
-);
+document.querySelectorAll(".main-menu a");
 
 
 
 
 
-/* ==========================
-   CURTAIN FUNCTION
-========================== */
+/* =====================================
+        CURTAIN TRANSITION
+===================================== */
 
 
-function curtainOpen(callback){
+function curtainTransition(callback){
 
 
     curtain.classList.add("active");
-
 
 
     setTimeout(()=>{
@@ -37,13 +32,43 @@ function curtainOpen(callback){
         callback();
 
 
-
         curtain.classList.remove("active");
 
 
+    },900);
 
-    },800);
 
+}
+
+
+
+
+
+
+/* =====================================
+        BACK TO LANDING
+===================================== */
+
+
+function backToLanding(){
+
+
+    curtainTransition(()=>{
+
+
+        content.innerHTML = "";
+
+
+        window.scrollTo({
+
+            top:0,
+
+            behavior:"smooth"
+
+        });
+
+
+    });
 
 
 }
@@ -54,15 +79,16 @@ function curtainOpen(callback){
 
 
 
-/* ==========================
-   LOAD WORKS
-========================== */
+
+/* =====================================
+        LOAD WORKS
+===================================== */
 
 
 function loadWorks(){
 
 
-curtainOpen(()=>{
+curtainTransition(()=>{
 
 
 content.innerHTML = `
@@ -74,12 +100,15 @@ content.innerHTML = `
 <div class="section-inner">
 
 
-
 <a href="#" class="back-home">
-
 ← BACK
-
 </a>
+
+
+
+<p class="work-number">
+ARCHIVE / WORKS
+</p>
 
 
 
@@ -89,10 +118,7 @@ WORKS
 
 
 
-<div class="works-gallery">
-
-
-</div>
+<div class="works-gallery"></div>
 
 
 
@@ -103,6 +129,7 @@ WORKS
 
 
 `;
+
 
 
 
@@ -117,9 +144,7 @@ fetch("artworks.json")
 
 
 const gallery =
-document.querySelector(
-".works-gallery"
-);
+document.querySelector(".works-gallery");
 
 
 
@@ -129,12 +154,10 @@ artworks.forEach(work=>{
 gallery.innerHTML += `
 
 
-
 <div class="art-card">
 
 
 <a href="artwork.html?id=${work.id}">
-
 
 
 <img 
@@ -149,27 +172,22 @@ ${work.title}
 </h3>
 
 
+
 <p>
 ${work.year}
 </p>
 
 
-
 </a>
-
 
 
 </div>
 
 
-
 `;
 
 
-
 });
-
-
 
 
 });
@@ -177,7 +195,6 @@ ${work.year}
 
 
 });
-
 
 
 }
@@ -189,20 +206,18 @@ ${work.year}
 
 
 
-
-/* ==========================
-   LOAD WRITINGS
-========================== */
+/* =====================================
+        LOAD WRITINGS
+===================================== */
 
 
 function loadWritings(){
 
 
-curtainOpen(()=>{
+curtainTransition(()=>{
 
 
 content.innerHTML = `
-
 
 
 <section class="page-section">
@@ -212,10 +227,14 @@ content.innerHTML = `
 
 
 <a href="#" class="back-home">
-
 ← BACK
-
 </a>
+
+
+
+<p class="work-number">
+ARCHIVE / WRITINGS
+</p>
 
 
 
@@ -225,11 +244,11 @@ WRITINGS
 
 
 
+
 <p class="section-description">
 
-Essays, reflections,
-philosophical notes,
-and artistic writings.
+Essays, reflections, and personal writings
+about art, humanity, memory, and existence.
 
 </p>
 
@@ -241,13 +260,11 @@ and artistic writings.
 </section>
 
 
-
 `;
 
 
 
 });
-
 
 
 }
@@ -259,54 +276,116 @@ and artistic writings.
 
 
 
-/* ==========================
-   LOAD ABOUT
-========================== */
+
+/* =====================================
+        LOAD ABOUT
+===================================== */
 
 
 function loadAbout(){
 
 
-curtainOpen(()=>{
+curtainTransition(()=>{
 
 
 content.innerHTML = `
 
 
 
-<section class="page-section">
+<section class="page-section about-page">
 
 
 <div class="section-inner">
 
 
+
 <a href="#" class="back-home">
-
 ← BACK
-
 </a>
+
+
+
+<p class="work-number">
+
+ABOUT NIRMUKA
+
+</p>
+
 
 
 
 
 <h2>
+
 ABOUT
+
 </h2>
 
 
 
 
-<p class="section-description">
+
+<div class="about-content">
 
 
-NIRMUKA is an artistic archive
-exploring humanity, memory,
-faith, suffering, and existence
-through visual expression.
+
+<p>
+Jujur, saya tidak pernah benar-benar tahu bagaimana cara menjelaskan diri saya sendiri. Saya selalu merasa bahwa manusia terlalu kompleks untuk diringkas menjadi beberapa kalimat sederhana: nama, pekerjaan, pencapaian, atau daftar hal-hal yang pernah dilakukan. Ada terlalu banyak bagian dalam diri seseorang yang tidak terlihat oleh orang lain; ketakutan yang disimpan, pikiran yang tidak pernah diucapkan, ingatan yang terus kembali meskipun kita berusaha melupakannya. Mungkin karena itu saya memilih membuat karya. Bukan karena saya memiliki semua jawaban, tetapi karena saya sendiri sedang mencoba memahami sesuatu yang bahkan sering kali tidak bisa saya jelaskan.
+</p>
 
 
+
+
+<p>
+Saya tidak melihat dunia sebagai tempat yang sepenuhnya indah. Saya sering merasa bahwa ada sesuatu yang salah dalam cara manusia menjalani hidup. Kita membangun begitu banyak hal, mengejar begitu banyak hal, menciptakan berbagai bentuk kemajuan, tetapi di balik semua itu tetap ada rasa kosong yang tidak pernah benar-benar hilang. Manusia mampu menciptakan keindahan yang luar biasa, tetapi manusia yang sama juga mampu menciptakan kehancuran yang mengerikan.
+</p>
+
+
+
+
+<p>
+Karya-karya saya lahir dari kegelisahan terhadap kondisi manusia. Saya tertarik pada sisi yang sering dihindari: rasa kehilangan, kesepian, ketakutan, ingatan yang menyakitkan, dan pertanyaan tentang keberadaan kita. Saya tidak tertarik membuat karya yang hanya memberikan kenyamanan atau menjadi hiasan yang menyenangkan untuk dilihat. Saya ingin karya saya memiliki luka, memiliki gangguan, memiliki sesuatu yang membuat seseorang berhenti sejenak dan bertanya mengapa mereka merasa tidak nyaman ketika melihatnya.
+</p>
+
+
+
+
+<p>
+Dalam proses berkarya, saya banyak menggunakan distorsi, bentuk yang tidak sempurna, warna yang bertabrakan, dan elemen yang terlihat kacau. Bukan karena saya tidak mampu membuat sesuatu yang rapi, tetapi karena dunia yang saya lihat memang tidak selalu rapi. Manusia sendiri adalah sesuatu yang penuh dengan keretakan. Kita membawa masa lalu, trauma, harapan, keinginan, dan ketakutan dalam satu tubuh yang sama.
+</p>
+
+
+
+
+<p>
+Saya tidak percaya bahwa seni harus selalu memberikan solusi. Terkadang seni bukan tentang menemukan cahaya, tetapi tentang berani masuk ke dalam kegelapan dan melihat apa yang ada di sana. Ada hal-hal dalam kehidupan yang mungkin tidak memiliki jawaban. Ada kehilangan yang tidak bisa diperbaiki. Ada pertanyaan yang mungkin akan tetap menjadi pertanyaan sampai akhir hidup kita.
+</p>
+
+
+
+
+<p>
+NIRMUKA adalah ruang untuk semua kegelisahan itu. Sebuah arsip dari pikiran, ingatan, ketakutan, dan perjalanan batin yang terus berubah. Setiap karya bukan hanya sebuah gambar, tetapi sebuah bagian dari proses memahami manusia dan keberadaannya.
+</p>
+
+
+
+
+<p>
+Karena pada akhirnya, mungkin seni bukan tentang menjelaskan dunia. Mungkin seni adalah cara kita bertahan ketika dunia terlalu sulit untuk dijelaskan.
+</p>
+
+
+
+<p class="signature">
+
+— NIRMUKA
 
 </p>
+
+
+
+</div>
 
 
 
@@ -324,7 +403,6 @@ through visual expression.
 });
 
 
-
 }
 
 
@@ -335,20 +413,18 @@ through visual expression.
 
 
 
-/* ==========================
-   MENU EVENT
-========================== */
+/* =====================================
+        MENU EVENT
+===================================== */
 
 
 menuLinks.forEach(link=>{
 
 
-link.addEventListener(
-"click",
-(e)=>{
+link.addEventListener("click",(event)=>{
 
 
-e.preventDefault();
+event.preventDefault();
 
 
 
@@ -364,13 +440,11 @@ loadWorks();
 }
 
 
-
 if(page==="writings"){
 
 loadWritings();
 
 }
-
 
 
 if(page==="about"){
@@ -393,41 +467,32 @@ loadAbout();
 
 
 
-/* ==========================
-   BACK BUTTON
-========================== */
+
+/* =====================================
+        BACK BUTTON EVENT
+===================================== */
 
 
 document.addEventListener(
 "click",
-function(e){
-
+(event)=>{
 
 
 if(
-e.target.classList.contains(
+event.target.classList.contains(
 "back-home"
 )
 
 ){
 
 
-e.preventDefault();
+event.preventDefault();
 
 
-
-curtainOpen(()=>{
-
-
-content.innerHTML="";
-
-
-});
-
+backToLanding();
 
 
 }
-
 
 
 });
