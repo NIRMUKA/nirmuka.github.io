@@ -17,19 +17,43 @@
 <body>
 
 
+
 <section class="artwork-page">
 
 
+
 <div class="artwork-container">
+
+
+
+<!-- BACK BUTTON -->
+
+<a href="index.html#works" class="back-button">
+
+← BACK TO WORKS
+
+</a>
+
+
+
 
 
 <!-- IMAGE -->
 
 <div class="artwork-image">
 
-<img id="art-image" src="" alt="Artwork">
+
+<img 
+id="art-image"
+src=""
+alt="Artwork"
+>
+
 
 </div>
+
+
+
 
 
 
@@ -39,36 +63,60 @@
 <div class="artwork-info">
 
 
+
+<p class="work-number" id="art-id">
+
+WORK 01
+
+</p>
+
+
+
 <h1 id="art-title">
+
 Loading...
+
 </h1>
+
+
+
 
 
 <div class="meta">
 
 
-<p>
+<div>
+
 <strong>YEAR</strong>
-<br>
+
 <span id="art-year"></span>
-</p>
+
+</div>
 
 
-<p>
+
+<div>
+
 <strong>MEDIUM</strong>
-<br>
+
 <span id="art-medium"></span>
-</p>
+
+</div>
 
 
-<p>
+
+<div>
+
 <strong>DIMENSION</strong>
-<br>
+
 <span id="art-dimension"></span>
-</p>
+
+</div>
 
 
 </div>
+
+
 
 
 
@@ -77,11 +125,17 @@ Loading...
 <div class="description-block">
 
 
+
 <h2>
 BACKGROUND
 </h2>
 
-<p id="art-background"></p>
+
+<p id="art-background">
+
+</p>
+
+
 
 
 
@@ -89,7 +143,12 @@ BACKGROUND
 CONCEPT
 </h2>
 
-<p id="art-concept"></p>
+
+<p id="art-concept">
+
+</p>
+
+
 
 
 
@@ -98,7 +157,12 @@ CONCEPT
 VISUAL DESCRIPTION
 </h2>
 
-<p id="art-visual"></p>
+
+<p id="art-visual">
+
+</p>
+
+
 
 
 
@@ -107,7 +171,12 @@ VISUAL DESCRIPTION
 ARTIST STATEMENT
 </h2>
 
-<p id="art-statement"></p>
+
+<p id="art-statement">
+
+</p>
+
+
 
 
 
@@ -116,7 +185,12 @@ ARTIST STATEMENT
 INSPIRATION
 </h2>
 
-<p id="art-inspiration"></p>
+
+<p id="art-inspiration">
+
+</p>
+
+
 
 
 
@@ -125,20 +199,30 @@ INSPIRATION
 CREATIVE PROCESS
 </h2>
 
-<p id="art-process"></p>
+
+<p id="art-process">
+
+</p>
+
+
+
+
+</div>
 
 
 
 </div>
 
 
-</div>
-
 
 </div>
+
 
 
 </section>
+
+
+
 
 
 
@@ -149,28 +233,57 @@ CREATIVE PROCESS
 
 fetch("artworks.json")
 
+
 .then(response => response.json())
 
-.then(data => {
 
-
-const params = new URLSearchParams(window.location.search);
-
-
-const id = params.get("id");
+.then(artworks => {
 
 
 
-const artwork = data.find(item => item.id === id);
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+
+
+const id =
+params.get("id");
+
+
+
+const artwork =
+artworks.find(
+item => item.id === id
+);
+
+
 
 
 
 if(!artwork){
 
+
 document.querySelector(".artwork-container").innerHTML =
-"<h1>Artwork not found</h1>";
+
+`
+
+<h1>
+Artwork Not Found
+</h1>
+
+<a href="index.html#works"
+class="back-button">
+
+← BACK TO WORKS
+
+</a>
+
+`;
 
 return;
+
 
 }
 
@@ -178,8 +291,25 @@ return;
 
 
 
+
+
 document.getElementById("art-image").src =
 artwork.image;
+
+
+
+document.getElementById("art-image").alt =
+artwork.title;
+
+
+
+
+
+document.getElementById("art-id").innerText =
+
+"WORK " + artwork.id.replace("karya","");
+
+
 
 
 
@@ -238,12 +368,19 @@ artwork.creative_process;
 
 .catch(error => {
 
-console.error(error);
+
+console.error(
+"Error loading artwork:",
+error
+);
+
 
 });
 
 
+
 </script>
+
 
 
 </body>
