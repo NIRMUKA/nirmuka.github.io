@@ -1,225 +1,138 @@
-@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Libre+Baskerville:wght@400;700&display=swap');
-
-
 /* =========================
-   RESET
+   NIRMUKA ART ARCHIVE
+   Neo Expressionism Style
 ========================= */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 
-html{
-
-    scroll-behavior:smooth;
-
+html {
+    scroll-behavior: smooth;
 }
 
 
+body {
 
-body{
+    background: #050505;
+    color: #ffffff;
 
-    background:#000;
+    font-family: Arial, Helvetica, sans-serif;
 
-    color:#fff;
-
-    font-family:'Libre Baskerville',serif;
-
-    overflow-x:hidden;
+    overflow-x: hidden;
 
 }
-
-
 
 
 
 /* =========================
-   TEXTURE
+        HERO
 ========================= */
 
 
-body::before{
+.hero {
 
-    content:"";
+    height: 100vh;
 
-    position:fixed;
+    position: relative;
 
-    inset:0;
+    display: flex;
 
+    justify-content: center;
 
-    background-image:url("https://grainy-gradients.vercel.app/noise.svg");
-
-
-    opacity:.1;
-
-
-    pointer-events:none;
-
-
-    z-index:100;
-
-
-}
-
-
-
-
-/* =========================
-   HERO
-========================= */
-
-
-.hero{
-
-
-    height:100vh;
-
-
-    position:sticky;
-
-
-    top:0;
-
-
-    display:flex;
-
-
-    align-items:center;
-
-
-    justify-content:center;
-
-
-
-    overflow:hidden;
-
-
-
-}
-
-
-
-
-.hero img{
-
-
-    position:absolute;
-
-
-    inset:0;
-
-
-    width:100%;
-
-
-    height:100%;
-
-
-    object-fit:cover;
-
-
-
-    filter:
-
-
-    brightness(.45)
-
-    contrast(130%);
-
-
-
-    animation:zoom 20s infinite alternate;
-
-
-
-}
-
-
-
-.hero-overlay{
-
-
-    position:absolute;
-
-
-    inset:0;
-
+    align-items: center;
 
     background:
 
     linear-gradient(
+        rgba(0,0,0,0.55),
+        rgba(0,0,0,0.8)
+    ),
 
-    rgba(0,0,0,.3),
+    url("hero.jpg");
 
-    rgba(0,0,0,.85)
+    background-size: cover;
 
+    background-position: center;
+
+}
+
+
+
+.hero-overlay {
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    repeating-linear-gradient(
+        0deg,
+        rgba(255,255,255,0.02),
+        rgba(255,255,255,0.02) 1px,
+        transparent 1px,
+        transparent 3px
     );
-
-
 
 }
 
 
 
 
-
-/* =========================
-   HERO CONTENT
-========================= */
-
-
-.hero-content{
-
+.hero-content {
 
     position:relative;
 
-
-    z-index:5;
-
-
     text-align:center;
 
-
+    z-index:2;
 
 }
 
 
 
-.hero-content h1{
+/* NIRMUKA */
 
 
-    font-family:'Permanent Marker',cursive;
+.nirmuka {
 
 
-    font-size:
-
-    clamp(70px,9vw,140px);
+    font-size: clamp(70px,10vw,130px);
 
 
-
-    color:#f4eee5;
-
-
-    letter-spacing:4px;
+    font-weight:900;
 
 
-    line-height:.9;
+    letter-spacing:8px;
+
+
+    text-transform:uppercase;
+
+
+    color:white;
+
+
+    font-family:
+
+    Impact,
+    "Arial Black",
+    sans-serif;
 
 
 
-    transform:rotate(-3deg);
+    transform:rotate(-2deg);
 
 
 
     text-shadow:
 
-
-    5px 5px 0 #000,
-
-    10px 10px rgba(120,0,0,.35);
+    3px 3px 0 #111,
+    -2px -2px 0 #222;
 
 
 
@@ -228,10 +141,10 @@ body::before{
 
 
 
-.subtitle{
+.artist-tag {
 
 
-    margin-top:30px;
+    margin-top:25px;
 
 
     font-size:14px;
@@ -240,7 +153,7 @@ body::before{
     letter-spacing:5px;
 
 
-    color:#ccc;
+    opacity:.75;
 
 
 }
@@ -249,12 +162,13 @@ body::before{
 
 
 
+
 /* =========================
-   MENU
+        MENU
 ========================= */
 
 
-.main-entry{
+.main-menu {
 
 
     margin-top:70px;
@@ -266,15 +180,14 @@ body::before{
     justify-content:center;
 
 
-    gap:70px;
-
+    gap:80px;
 
 
 }
 
 
 
-.main-entry a{
+.main-menu a {
 
 
     color:white;
@@ -283,90 +196,19 @@ body::before{
     text-decoration:none;
 
 
-    font-family:'Permanent Marker',cursive;
+    font-size:25px;
 
 
-    font-size:32px;
+    font-weight:800;
 
 
-    transition:.4s;
-
-
-
-}
-
-
-
-.main-entry a:hover{
-
-
-    color:#999;
-
-
-    transform:translateY(-8px) rotate(-3deg);
-
-
-}
-
-
-
-
-
-/* =========================
-   GENERAL SECTION
-========================= */
-
-
-.content-section{
+    letter-spacing:4px;
 
 
     position:relative;
 
 
-    z-index:20;
-
-
-    background:#000;
-
-
-
-    padding:
-
-    120px 8%;
-
-
-
-    min-height:100vh;
-
-
-
-    border-top:
-
-    1px solid rgba(255,255,255,.12);
-
-
-
-}
-
-
-
-.content-section h2{
-
-
-    font-family:'Permanent Marker',cursive;
-
-
-    font-size:
-
-    clamp(60px,9vw,130px);
-
-
-
-    line-height:.8;
-
-
-    transform:rotate(-3deg);
-
+    transition:.4s;
 
 
 }
@@ -374,39 +216,149 @@ body::before{
 
 
 
-.section-intro{
+.main-menu a:hover {
 
 
-    margin-top:40px;
-
-
-    max-width:700px;
-
-
-    color:#aaa;
-
-
-    font-size:22px;
-
-
-    line-height:1.8;
-
+    transform:translateY(-8px);
 
 
 }
+
+
+
+
+
+.main-menu a::after {
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    bottom:-10px;
+
+
+    left:0;
+
+
+    width:0;
+
+
+    height:3px;
+
+
+    background:white;
+
+
+    transition:.4s;
+
+
+}
+
+
+
+.main-menu a:hover::after {
+
+
+    width:100%;
+
+
+}
+
+
 
 
 
 
 /* =========================
-   WORKS SMALL ARCHIVE
+      CONTENT SECTION
 ========================= */
 
 
-.works-gallery{
+.page-section {
 
 
-    margin-top:80px;
+    min-height:100vh;
+
+
+    padding:120px 8%;
+
+
+    position:relative;
+
+
+}
+
+
+
+
+.section-inner {
+
+
+    max-width:1200px;
+
+
+    margin:auto;
+
+
+}
+
+
+
+
+h2 {
+
+
+    font-size:70px;
+
+
+    letter-spacing:8px;
+
+
+    margin-bottom:30px;
+
+
+    font-weight:900;
+
+
+}
+
+
+
+.section-description {
+
+
+    max-width:600px;
+
+
+    font-size:18px;
+
+
+    line-height:1.8;
+
+
+    opacity:.8;
+
+
+}
+
+
+
+
+
+
+
+/* =========================
+        WORKS GRID
+========================= */
+
+
+.works-gallery {
+
+
+    margin-top:70px;
 
 
     display:grid;
@@ -417,101 +369,89 @@ body::before{
     repeat(2,1fr);
 
 
-
-    gap:
-
-    70px 45px;
-
+    gap:35px;
 
 
 }
 
 
 
-.art-card{
+.art-card {
 
 
-    overflow:hidden;
+    background:#0b0b0b;
+
+
+    padding:15px;
+
+
+    transition:.5s;
+
+
+    cursor:pointer;
 
 
 }
 
 
 
-.art-card img{
+.art-card:hover {
+
+
+    transform:
+
+    translateY(-10px)
+    rotate(-1deg);
+
+
+}
+
+
+
+
+.art-card img {
 
 
     width:100%;
 
 
-    height:300px;
+    aspect-ratio:1/1;
 
 
     object-fit:cover;
 
 
-
     display:block;
 
 
-
-    filter:
-
-    contrast(120%);
-
-
-
-    transition:.5s ease;
-
-
-
-}
-
-
-
-.art-card:hover img{
-
-
-    transform:scale(1.04);
-
-
 }
 
 
 
 
-
-.art-card h3{
+.art-card h3 {
 
 
     margin-top:18px;
 
 
-
-    font-family:'Permanent Marker',cursive;
-
+    font-size:22px;
 
 
-    font-size:25px;
-
-
-    font-weight:normal;
+    letter-spacing:2px;
 
 
 }
 
 
 
-.art-card p{
+.art-card p {
 
 
     margin-top:8px;
 
 
-    color:#777;
-
-
-    font-size:14px;
+    opacity:.6;
 
 
 }
@@ -523,27 +463,51 @@ body::before{
 
 
 /* =========================
-   WRITINGS ABOUT
+      CURTAIN EFFECT
 ========================= */
 
 
-.content-section p{
+.page-section {
 
 
-    max-width:800px;
+    opacity:0;
 
 
-    margin-top:40px;
+    transform:translateY(80px);
 
 
-    font-size:24px;
+    animation:
+
+    reveal .9s ease forwards;
 
 
-    line-height:1.8;
+}
 
 
-    color:#ddd;
 
+@keyframes reveal {
+
+
+    from {
+
+
+        opacity:0;
+
+        transform:translateY(80px);
+
+
+    }
+
+
+    to {
+
+
+        opacity:1;
+
+        transform:translateY(0);
+
+
+    }
 
 
 }
@@ -552,15 +516,14 @@ body::before{
 
 
 
+
+
 /* =========================
-   FOOTER
+        FOOTER
 ========================= */
 
 
-footer{
-
-
-    background:#000;
+footer {
 
 
     padding:50px;
@@ -569,38 +532,56 @@ footer{
     text-align:center;
 
 
-    color:#777;
+    border-top:1px solid #222;
 
 
+    opacity:.6;
+
+
+}
+
+
+
+
+
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+
+.main-menu {
+
+    flex-direction:column;
+
+    gap:35px;
 
 }
 
 
 
+.nirmuka {
 
-
-
-
-/* =========================
-   ANIMATION
-========================= */
-
-
-@keyframes zoom{
-
-
-from{
-
-transform:scale(1);
+    font-size:60px;
 
 }
 
 
-to{
 
-transform:scale(1.08);
+h2 {
 
+    font-size:45px;
 
 }
+
+
+
+.works-gallery {
+
+    grid-template-columns:1fr;
+
+}
+
+
 
 }
