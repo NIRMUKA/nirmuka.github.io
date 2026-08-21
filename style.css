@@ -836,5 +836,44 @@ footer {
 }
 
 
+/* =================================
+   PAGE CURTAIN TRANSITION
+================================= */
+
+
+.page-curtain {
+
+    position:fixed;
+
+    inset:0;
+
+    background:#050505;
+
+    z-index:9999;
+
+    transform:translateY(-100%);
+
+    transition:transform .8s cubic-bezier(.77,0,.18,1);
 
 }
+
+
+
+.page-curtain.active {
+
+    transform:translateY(0);
+
+}
+
+
+
+
+
+.back-button {
+
+    position:relative;
+
+    z-index:2;
+
+}
+
