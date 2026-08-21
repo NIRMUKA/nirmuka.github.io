@@ -1,80 +1,606 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Libre+Baskerville:wght@400;700&display=swap');
 
-*{margin:0;padding:0;box-sizing:border-box;}
+
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+
 
 body{
-background:#111;
-color:#eee;
-font-family:'Libre Baskerville',serif;
+
+    background:#000;
+
+    color:#fff;
+
+    font-family:'Libre Baskerville',serif;
+
+    overflow-x:hidden;
+
 }
 
-h1,h2{
-font-family:'Bebas Neue',sans-serif;
-letter-spacing:5px;
+
+
+
+
+/* =========================
+   TEXTURE
+========================= */
+
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+
+    background-image:url("https://grainy-gradients.vercel.app/noise.svg");
+
+
+    opacity:.1;
+
+
+    pointer-events:none;
+
+
+    z-index:100;
+
+
 }
 
-header{
-padding:60px;
-position:absolute;
-z-index:5;
+
+
+
+/* =========================
+   HERO
+========================= */
+
+
+.hero{
+
+
+    height:100vh;
+
+
+    position:sticky;
+
+
+    top:0;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+
+    overflow:hidden;
+
+
+
 }
 
-header h1{
-font-size:120px;
-line-height:.85;
-}
 
-.subtitle{margin-top:20px;}
 
-nav{margin-top:40px;}
-
-nav a{
-color:white;
-text-decoration:none;
-margin-right:30px;
-font-family:'Bebas Neue';
-font-size:28px;
-}
-
-nav a:hover{color:#ff3b30;}
-
-.hero{height:100vh;position:relative;}
 
 .hero img{
-width:100%;
-height:100vh;
-object-fit:cover;
-filter:contrast(120%) brightness(70%);
+
+
+    position:absolute;
+
+
+    inset:0;
+
+
+    width:100%;
+
+
+    height:100%;
+
+
+    object-fit:cover;
+
+
+
+    filter:
+
+
+    brightness(.45)
+
+    contrast(130%);
+
+
+
+    animation:zoom 20s infinite alternate;
+
+
+
 }
 
-.quote{
-position:absolute;
-bottom:80px;
-right:80px;
-font-size:50px;
-font-family:'Bebas Neue';
-color:#ffdd00;
-transform:rotate(-5deg);
+
+
+.hero-overlay{
+
+
+    position:absolute;
+
+
+    inset:0;
+
+
+    background:
+
+    linear-gradient(
+
+    rgba(0,0,0,.3),
+
+    rgba(0,0,0,.85)
+
+    );
+
+
+
 }
 
-.statement{
-padding:120px 80px;
-background:#e8e1d4;
-color:#111;
+
+
+
+
+/* =========================
+   HERO CONTENT
+========================= */
+
+
+.hero-content{
+
+
+    position:relative;
+
+
+    z-index:5;
+
+
+    text-align:center;
+
+
+
 }
 
-.statement h2{
-font-size:150px;
-line-height:.8;
+
+
+.hero-content h1{
+
+
+    font-family:'Permanent Marker',cursive;
+
+
+    font-size:
+
+    clamp(70px,9vw,140px);
+
+
+
+    color:#f4eee5;
+
+
+    letter-spacing:4px;
+
+
+    line-height:.9;
+
+
+
+    transform:rotate(-3deg);
+
+
+
+    text-shadow:
+
+
+    5px 5px 0 #000,
+
+    10px 10px rgba(120,0,0,.35);
+
+
+
 }
 
-.statement p{
-max-width:700px;
-font-size:25px;
-margin-top:50px;
+
+
+
+.subtitle{
+
+
+    margin-top:30px;
+
+
+    font-size:14px;
+
+
+    letter-spacing:5px;
+
+
+    color:#ccc;
+
+
 }
+
+
+
+
+
+/* =========================
+   MENU
+========================= */
+
+
+.main-entry{
+
+
+    margin-top:70px;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    gap:70px;
+
+
+
+}
+
+
+
+.main-entry a{
+
+
+    color:white;
+
+
+    text-decoration:none;
+
+
+    font-family:'Permanent Marker',cursive;
+
+
+    font-size:32px;
+
+
+    transition:.4s;
+
+
+
+}
+
+
+
+.main-entry a:hover{
+
+
+    color:#999;
+
+
+    transform:translateY(-8px) rotate(-3deg);
+
+
+}
+
+
+
+
+
+/* =========================
+   GENERAL SECTION
+========================= */
+
+
+.content-section{
+
+
+    position:relative;
+
+
+    z-index:20;
+
+
+    background:#000;
+
+
+
+    padding:
+
+    120px 8%;
+
+
+
+    min-height:100vh;
+
+
+
+    border-top:
+
+    1px solid rgba(255,255,255,.12);
+
+
+
+}
+
+
+
+.content-section h2{
+
+
+    font-family:'Permanent Marker',cursive;
+
+
+    font-size:
+
+    clamp(60px,9vw,130px);
+
+
+
+    line-height:.8;
+
+
+    transform:rotate(-3deg);
+
+
+
+}
+
+
+
+
+.section-intro{
+
+
+    margin-top:40px;
+
+
+    max-width:700px;
+
+
+    color:#aaa;
+
+
+    font-size:22px;
+
+
+    line-height:1.8;
+
+
+
+}
+
+
+
+
+/* =========================
+   WORKS SMALL ARCHIVE
+========================= */
+
+
+.works-gallery{
+
+
+    margin-top:80px;
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(2,1fr);
+
+
+
+    gap:
+
+    70px 45px;
+
+
+
+}
+
+
+
+.art-card{
+
+
+    overflow:hidden;
+
+
+}
+
+
+
+.art-card img{
+
+
+    width:100%;
+
+
+    height:300px;
+
+
+    object-fit:cover;
+
+
+
+    display:block;
+
+
+
+    filter:
+
+    contrast(120%);
+
+
+
+    transition:.5s ease;
+
+
+
+}
+
+
+
+.art-card:hover img{
+
+
+    transform:scale(1.04);
+
+
+}
+
+
+
+
+
+.art-card h3{
+
+
+    margin-top:18px;
+
+
+
+    font-family:'Permanent Marker',cursive;
+
+
+
+    font-size:25px;
+
+
+    font-weight:normal;
+
+
+}
+
+
+
+.art-card p{
+
+
+    margin-top:8px;
+
+
+    color:#777;
+
+
+    font-size:14px;
+
+
+}
+
+
+
+
+
+
+
+/* =========================
+   WRITINGS ABOUT
+========================= */
+
+
+.content-section p{
+
+
+    max-width:800px;
+
+
+    margin-top:40px;
+
+
+    font-size:24px;
+
+
+    line-height:1.8;
+
+
+    color:#ddd;
+
+
+
+}
+
+
+
+
+
+/* =========================
+   FOOTER
+========================= */
+
 
 footer{
-padding:40px;
-text-align:center;
+
+
+    background:#000;
+
+
+    padding:50px;
+
+
+    text-align:center;
+
+
+    color:#777;
+
+
+
+}
+
+
+
+
+
+
+
+/* =========================
+   ANIMATION
+========================= */
+
+
+@keyframes zoom{
+
+
+from{
+
+transform:scale(1);
+
+}
+
+
+to{
+
+transform:scale(1.08);
+
+
+}
+
 }
