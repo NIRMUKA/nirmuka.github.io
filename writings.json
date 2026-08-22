@@ -1,16 +1,50 @@
 [
   {
+    "id": "kontinuitas-tanpa-diri",
+
+    "category": "FILSAFAT",
+
+    "title": "Ketika Proses Berlanjut, tetapi Subjek Tidak Bertahan: Persoalan Kontinuitas Tanpa Diri yang Berkelanjutan",
+
+    "subtitle": "Sebuah kajian mengenai kontinuitas proses, identitas personal, dan kemungkinan keberlanjutan tanpa subjek yang sama.",
+
+    "year": "2026",
+
+    "type": "PHILOSOPHICAL ESSAY",
+
+    "status": "Published",
+
+    "language": "Indonesia",
+
+    "author": "NIRMUKA",
+
+    "abstract": "Sebuah eksplorasi filosofis mengenai persoalan identitas personal, kontinuitas, dan kemungkinan keberadaan proses yang tetap berlangsung tanpa mempertahankan subjek yang sama.",
+
+    "tags": [
+      "Personal Identity",
+      "Continuity",
+      "Self",
+      "Metaphysics"
+    ],
+
+    "content": "",
+
+    "references": []
+  },
+
+
+  {
     "id": "beyond-homo-technicus",
 
     "category": "FILSAFAT",
 
     "title": "Beyond Homo Technicus: Reconstructing Human Responsibility and Moral Self-Transformation in the Age of Artificial Intelligence",
 
-    "subtitle": "An exploration of human responsibility, technology, and moral transformation in the age of artificial intelligence.",
+    "subtitle": "A philosophical inquiry into human responsibility, moral transformation, and the reconstruction of humanity in the age of artificial intelligence.",
 
     "year": "2026",
 
-    "type": "Philosophical Essay",
+    "type": "PHILOSOPHICAL ESSAY",
 
     "status": "Published",
 
@@ -18,13 +52,48 @@
 
     "author": "NIRMUKA",
 
-    "abstract": "A philosophical exploration of human responsibility and moral self-transformation in relation to artificial intelligence.",
+    "abstract": "A philosophical investigation of artificial intelligence through the perspectives of human responsibility, moral self-transformation, and the relationship between technology and humanity.",
 
     "tags": [
       "Artificial Intelligence",
       "Hans Jonas",
       "Mou Zongsan",
-      "Human Responsibility"
+      "Responsibility",
+      "Human Transformation"
+    ],
+
+    "content": "",
+
+    "references": []
+  },
+
+
+  {
+    "id": "manusia-dan-pencarian-makna",
+
+    "category": "TEOLOGI",
+
+    "title": "Manusia dan Pencarian Makna",
+
+    "subtitle": "Refleksi mengenai manusia, iman, dan keberadaan.",
+
+    "year": "2026",
+
+    "type": "THEOLOGICAL ESSAY",
+
+    "status": "Published",
+
+    "language": "Indonesia",
+
+    "author": "NIRMUKA",
+
+    "abstract": "Sebuah refleksi teologis mengenai manusia, iman, dan pencarian makna dalam pengalaman keberadaan.",
+
+    "tags": [
+      "Human",
+      "Faith",
+      "Meaning",
+      "Existence"
     ],
 
     "content": "",
