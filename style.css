@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Rock+Salt&family=Rubik+Dirt&family=Sedgwick+Ave+Display&display=swap');
+
+
 /* =====================================
    NIRMUKA DIGITAL ART ARCHIVE
+   BRUTAL STREET TYPOGRAPHY SYSTEM
 ===================================== */
 
 * {
@@ -15,7 +19,11 @@ html {
 body {
     background: #050505;
     color: #ffffff;
-    font-family: Arial, Helvetica, sans-serif;
+
+    font-family:
+        "Permanent Marker",
+        cursive;
+
     overflow-x: hidden;
 }
 
@@ -27,7 +35,9 @@ body {
 .curtain {
     position: fixed;
     inset: 0;
+
     background: #050505;
+
     z-index: 9999;
 
     transform: translateY(-100%);
@@ -66,6 +76,8 @@ body {
 }
 
 
+/* grain / rough overlay */
+
 .hero-overlay {
     position: absolute;
     inset: 0;
@@ -90,8 +102,8 @@ body {
 
 
 /* =====================================
-   NIRMUKA TITLE
-   ONLY THIS PART IS MADE WILDER
+   NIRMUKA
+   MAIN STREET TITLE
 ===================================== */
 
 .nirmuka {
@@ -100,155 +112,141 @@ body {
     display: inline-block;
 
     font-family:
-        Impact,
-        "Arial Black",
-        "Arial Narrow",
-        sans-serif;
+        "Rubik Dirt",
+        cursive;
 
-    font-size: clamp(70px, 10vw, 140px);
+    font-size:
+        clamp(72px, 10vw, 145px);
 
-    font-weight: 900;
+    font-weight: 400;
 
-    line-height: .78;
+    line-height: .76;
 
-    letter-spacing: -7px;
+    letter-spacing: -4px;
 
     text-transform: uppercase;
 
-    color: #f5f5f0;
+    color: #f4f2eb;
 
     transform:
-        rotate(-4deg)
-        skewX(-9deg)
-        scaleY(1.09);
+        rotate(-5deg)
+        skewX(-7deg)
+        scaleY(1.07);
 
     transform-origin: center;
 
     isolation: isolate;
 
     text-shadow:
-        -3px 2px 0 rgba(255,255,255,.12),
-        3px -2px 0 rgba(255,255,255,.07),
-        7px 7px 0 rgba(0,0,0,.55),
-        -8px 8px 0 rgba(255,255,255,.035);
+        -4px 3px 0 rgba(255,255,255,.08),
+        5px -3px 0 rgba(255,255,255,.05),
+        8px 7px 0 rgba(0,0,0,.7);
 
     transition:
-        transform .35s ease,
-        letter-spacing .35s ease;
+        transform .3s ease,
+        letter-spacing .3s ease;
 }
 
 
-/* broken ghost lettering */
+/* displaced graffiti ghost */
 
 .nirmuka::before {
     content: "NIRMUKA";
 
     position: absolute;
 
-    left: -7px;
+    left: -8px;
     top: 7px;
 
     width: 100%;
 
+    font-family:
+        "Rubik Dirt",
+        cursive;
+
     color: transparent;
 
     -webkit-text-stroke:
-        2px rgba(255,255,255,.22);
+        2px rgba(255,255,255,.18);
 
     transform:
         rotate(2deg)
-        skewX(5deg)
-        scaleY(.96);
+        skewX(5deg);
 
-    z-index: -2;
+    z-index: -1;
 
-    opacity: .85;
+    opacity: .8;
 
     clip-path: polygon(
-        0% 0%,
+        0 0,
         100% 2%,
-
-        97% 13%,
-        100% 18%,
-
-        92% 27%,
-        100% 34%,
-
-        95% 45%,
-        100% 52%,
-
-        91% 63%,
-        100% 70%,
-
-        96% 83%,
+        96% 15%,
+        100% 25%,
+        92% 38%,
+        100% 50%,
+        94% 63%,
+        100% 75%,
+        95% 88%,
         100% 100%,
-
-        0% 96%,
-
+        0 96%,
         5% 82%,
-        0% 71%,
-
-        7% 57%,
-        0% 44%,
-
-        6% 30%,
-        0% 18%
+        0 67%,
+        7% 51%,
+        0 35%,
+        6% 18%
     );
 }
 
 
-/* raw slash under title */
+/* scratch underneath */
 
 .nirmuka::after {
     content: "";
 
     position: absolute;
 
-    left: -3%;
+    left: -5%;
     bottom: -18px;
 
-    width: 108%;
-    height: 10px;
+    width: 110%;
+    height: 9px;
 
     background:
         repeating-linear-gradient(
-            174deg,
+            173deg,
 
-            rgba(255,255,255,.82) 0px,
-            rgba(255,255,255,.82) 8px,
+            rgba(255,255,255,.8) 0,
+            rgba(255,255,255,.8) 8px,
 
             transparent 8px,
-            transparent 14px,
+            transparent 13px,
 
-            rgba(255,255,255,.27) 14px,
-            rgba(255,255,255,.27) 19px,
+            rgba(255,255,255,.24) 13px,
+            rgba(255,255,255,.24) 18px,
 
-            transparent 19px,
-            transparent 27px
+            transparent 18px,
+            transparent 26px
         );
 
     transform:
         rotate(-3deg)
-        skewX(-22deg);
+        skewX(-20deg);
 
-    opacity: .55;
-
-    filter: blur(.15px);
+    opacity: .58;
 
     pointer-events: none;
 }
 
 
-/* movement stays subtle */
+/* slight vandal movement */
 
 .nirmuka:hover {
     transform:
         rotate(-2deg)
-        skewX(-4deg)
-        scaleY(1.07)
-        scale(1.025);
+        skewX(1deg)
+        scale(1.035);
 
-    letter-spacing: -5px;
+    letter-spacing: -2px;
 }
 
 
@@ -257,13 +255,19 @@ body {
 ===================================== */
 
 .artist-tag {
-    margin-top: 30px;
+    margin-top: 32px;
 
-    font-size: 13px;
+    font-family:
+        "Rock Salt",
+        cursive;
 
-    letter-spacing: 7px;
+    font-size: 10px;
 
-    opacity: .65;
+    letter-spacing: 4px;
+
+    line-height: 1.8;
+
+    opacity: .62;
 }
 
 
@@ -275,7 +279,6 @@ body {
     margin-top: 80px;
 
     display: flex;
-
     justify-content: center;
 
     gap: 80px;
@@ -283,34 +286,80 @@ body {
 
 
 .main-menu a {
-    color: white;
+    position: relative;
+
+    color: #ffffff;
 
     text-decoration: none;
 
-    font-size: 24px;
+    font-family:
+        "Sedgwick Ave Display",
+        cursive;
 
-    font-weight: 800;
+    font-size: 32px;
 
-    letter-spacing: 6px;
+    font-weight: 400;
 
-    position: relative;
+    letter-spacing: 2px;
 
     transition:
-        transform .4s ease,
-        opacity .4s ease;
+        transform .3s ease,
+        opacity .3s ease;
+}
+
+
+.main-menu a:nth-child(1) {
+    transform: rotate(-2deg);
+}
+
+.main-menu a:nth-child(2) {
+    transform: rotate(1deg);
+}
+
+.main-menu a:nth-child(3) {
+    transform: rotate(-1deg);
 }
 
 
 .main-menu a:hover {
-    opacity: .5;
+    opacity: .55;
 
     transform:
-        translateY(-8px);
+        rotate(-5deg)
+        translateY(-8px)
+        scale(1.08);
+}
+
+
+/* rough underline */
+
+.main-menu a::after {
+    content: "";
+
+    position: absolute;
+
+    left: -6%;
+    bottom: -8px;
+
+    width: 0;
+    height: 3px;
+
+    background: rgba(255,255,255,.7);
+
+    transform: rotate(-3deg);
+
+    transition:
+        width .3s ease;
+}
+
+
+.main-menu a:hover::after {
+    width: 112%;
 }
 
 
 /* =====================================
-   DYNAMIC CONTENT
+   CONTENT
 ===================================== */
 
 #content-container {
@@ -333,23 +382,74 @@ body {
 }
 
 
-.work-number {
-    font-size: 12px;
+/* =====================================
+   ARCHIVE SMALL LABEL
+===================================== */
 
-    letter-spacing: 6px;
+.work-number {
+    font-family:
+        "Rock Salt",
+        cursive;
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    line-height: 1.8;
 
     opacity: .5;
 
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 
+/* =====================================
+   MAIN PAGE HEADINGS
+===================================== */
+
 .page-section h2 {
-    font-size: 60px;
+    position: relative;
 
-    letter-spacing: 8px;
+    display: inline-block;
 
-    margin-bottom: 50px;
+    font-family:
+        "Rubik Dirt",
+        cursive;
+
+    font-size: 64px;
+
+    font-weight: 400;
+
+    line-height: 1;
+
+    letter-spacing: 0;
+
+    margin-bottom: 60px;
+
+    transform:
+        rotate(-2deg);
+}
+
+
+/* rough slash under headings */
+
+.page-section h2::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -13px;
+
+    width: 75%;
+    height: 4px;
+
+    background:
+        rgba(255,255,255,.5);
+
+    transform:
+        rotate(-2deg)
+        skewX(-15deg);
 }
 
 
@@ -357,18 +457,21 @@ body {
    BACK BUTTON
 ===================================== */
 
-.back-home {
+.back-home,
+.back-button {
     display: inline-block;
 
-    margin-bottom: 50px;
-
-    color: white;
+    color: #ffffff;
 
     text-decoration: none;
 
-    letter-spacing: 5px;
+    font-family:
+        "Sedgwick Ave Display",
+        cursive;
 
-    font-size: 13px;
+    font-size: 20px;
+
+    letter-spacing: 2px;
 
     opacity: .6;
 
@@ -378,16 +481,28 @@ body {
 }
 
 
-.back-home:hover {
+.back-home {
+    margin-bottom: 50px;
+}
+
+
+.back-button {
+    margin-bottom: 60px;
+}
+
+
+.back-home:hover,
+.back-button:hover {
     opacity: 1;
 
     transform:
-        translateX(-8px);
+        translateX(-8px)
+        rotate(-4deg);
 }
 
 
 /* =====================================
-   WORKS
+   WORKS GALLERY
 ===================================== */
 
 .works-gallery {
@@ -406,18 +521,29 @@ body {
     padding: 18px;
 
     transition:
-        transform .5s ease;
+        transform .4s ease;
+}
+
+
+.art-card:nth-child(odd) {
+    transform: rotate(-.35deg);
+}
+
+
+.art-card:nth-child(even) {
+    transform: rotate(.35deg);
 }
 
 
 .art-card:hover {
     transform:
+        rotate(-1deg)
         translateY(-10px);
 }
 
 
 .art-card a {
-    color: white;
+    color: #ffffff;
 
     text-decoration: none;
 }
@@ -434,17 +560,40 @@ body {
 }
 
 
+/* artwork title */
+
 .art-card h3 {
     margin-top: 20px;
 
-    font-size: 20px;
+    font-family:
+        "Sedgwick Ave Display",
+        cursive;
 
-    letter-spacing: 2px;
+    font-size: 28px;
+
+    font-weight: 400;
+
+    line-height: 1.1;
+
+    letter-spacing: 1px;
+
+    transform:
+        rotate(-1deg);
 }
 
 
+/* year */
+
 .art-card p {
-    margin-top: 10px;
+    margin-top: 12px;
+
+    font-family:
+        "Rock Salt",
+        cursive;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
 
     opacity: .5;
 }
@@ -457,7 +606,11 @@ body {
 .section-description {
     max-width: 700px;
 
-    font-size: 20px;
+    font-family:
+        "Permanent Marker",
+        cursive;
+
+    font-size: 19px;
 
     line-height: 1.9;
 
@@ -480,7 +633,13 @@ body {
 
 
 .about-content p {
-    font-size: 20px;
+    font-family:
+        "Permanent Marker",
+        cursive;
+
+    font-size: 18px;
+
+    font-weight: 400;
 
     line-height: 2;
 
@@ -490,14 +649,23 @@ body {
 }
 
 
+/* signature */
+
 .about-content .signature {
     margin-top: 80px;
 
-    font-size: 22px;
+    font-family:
+        "Sedgwick Ave Display",
+        cursive;
 
-    letter-spacing: 6px;
+    font-size: 34px;
 
-    color: white;
+    letter-spacing: 2px;
+
+    color: #ffffff;
+
+    transform:
+        rotate(-4deg);
 }
 
 
@@ -520,35 +688,6 @@ body {
 }
 
 
-.back-button {
-    display: inline-block;
-
-    color: white;
-
-    text-decoration: none;
-
-    letter-spacing: 5px;
-
-    font-size: 13px;
-
-    opacity: .6;
-
-    margin-bottom: 60px;
-
-    transition:
-        opacity .3s ease,
-        transform .3s ease;
-}
-
-
-.back-button:hover {
-    opacity: 1;
-
-    transform:
-        translateX(-8px);
-}
-
-
 .artwork-image img {
     width: 100%;
 
@@ -568,17 +707,30 @@ body {
 }
 
 
+/* =====================================
+   ARTWORK TITLE
+===================================== */
+
 #art-title {
-    font-size: 60px;
+    font-family:
+        "Rubik Dirt",
+        cursive;
 
-    line-height: 1.1;
+    font-size: 58px;
 
-    letter-spacing: 3px;
+    font-weight: 400;
+
+    line-height: 1.05;
+
+    letter-spacing: 0;
+
+    transform:
+        rotate(-1deg);
 }
 
 
 /* =====================================
-   ARTWORK META
+   META
 ===================================== */
 
 .meta {
@@ -613,16 +765,26 @@ body {
 
 
 .meta strong {
-    font-size: 11px;
+    font-family:
+        "Rock Salt",
+        cursive;
 
-    letter-spacing: 5px;
+    font-size: 9px;
+
+    font-weight: 400;
+
+    letter-spacing: 2px;
 
     opacity: .5;
 }
 
 
 .meta span {
-    font-size: 16px;
+    font-family:
+        "Permanent Marker",
+        cursive;
+
+    font-size: 15px;
 
     line-height: 1.6;
 }
@@ -633,22 +795,35 @@ body {
 ===================================== */
 
 .description-block h2 {
-    font-size: 17px;
+    font-family:
+        "Sedgwick Ave Display",
+        cursive;
 
-    letter-spacing: 6px;
+    font-size: 28px;
+
+    font-weight: 400;
+
+    letter-spacing: 2px;
 
     margin-top: 60px;
 
     margin-bottom: 20px;
+
+    transform:
+        rotate(-1deg);
 }
 
 
 .description-block p {
     max-width: 700px;
 
-    line-height: 2;
+    font-family:
+        "Permanent Marker",
+        cursive;
 
-    font-size: 18px;
+    line-height: 1.95;
+
+    font-size: 17px;
 
     color: #d5d5d5;
 }
@@ -668,24 +843,23 @@ body {
 
     .nirmuka {
         font-size:
-            clamp(55px, 17vw, 78px);
+            clamp(55px, 17vw, 80px);
 
-        letter-spacing: -4px;
+        letter-spacing: -2px;
 
         transform:
-            rotate(-4deg)
-            skewX(-6deg)
-            scaleY(1.06);
+            rotate(-5deg)
+            skewX(-5deg)
+            scaleY(1.05);
     }
 
 
     .nirmuka::before {
         left: -4px;
-
         top: 5px;
 
         -webkit-text-stroke:
-            1px rgba(255,255,255,.22);
+            1px rgba(255,255,255,.18);
     }
 
 
@@ -697,13 +871,11 @@ body {
 
 
     .artist-tag {
-        margin-top: 25px;
+        margin-top: 27px;
 
-        font-size: 10px;
+        font-size: 8px;
 
-        letter-spacing: 4px;
-
-        line-height: 1.7;
+        letter-spacing: 3px;
     }
 
 
@@ -717,9 +889,9 @@ body {
 
 
     .main-menu a {
-        font-size: 19px;
+        font-size: 28px;
 
-        letter-spacing: 5px;
+        letter-spacing: 2px;
     }
 
 
@@ -730,9 +902,7 @@ body {
 
 
     .page-section h2 {
-        font-size: 42px;
-
-        letter-spacing: 5px;
+        font-size: 46px;
     }
 
 
@@ -742,8 +912,13 @@ body {
     }
 
 
+    .art-card h3 {
+        font-size: 25px;
+    }
+
+
     .about-content p {
-        font-size: 17px;
+        font-size: 16px;
 
         line-height: 1.9;
 
@@ -752,7 +927,7 @@ body {
 
 
     #art-title {
-        font-size: 38px;
+        font-size: 40px;
     }
 
 
@@ -762,8 +937,15 @@ body {
     }
 
 
+    .description-block h2 {
+        font-size: 25px;
+    }
+
+
     .description-block p {
-        font-size: 17px;
+        font-size: 16px;
+
+        line-height: 1.9;
     }
 
 }
