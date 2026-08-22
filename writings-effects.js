@@ -5,15 +5,6 @@
    CINEMATIC ARCHIVE SYSTEM
 
 
-   Handles:
-
-   - Page entrance
-   - Archive reveal
-   - Smooth camera movement
-   - Category transition
-   - Writing list reveal
-
-
 ========================================================= */
 
 
@@ -27,51 +18,11 @@
 
 
 /* =========================================================
-   WAIT FOR WRITINGS
+   PAGE ENTRY
 ========================================================= */
 
 
-function waitForWritings(){
-
-
-
-const page =
-document.querySelector(
-".writings-page"
-);
-
-
-
-if(!page){
-
-requestAnimationFrame(
-waitForWritings
-);
-
-
-return;
-
-}
-
-
-
-
-initWritingAtmosphere();
-
-
-
-}
-
-
-
-
-
-/* =========================================================
-   INITIAL ATMOSPHERE
-========================================================= */
-
-
-function initWritingAtmosphere(){
+function init(){
 
 
 
@@ -90,17 +41,18 @@ return;
 
 
 
+setTimeout(()=>{
 
 
 page.classList.add(
-"writing-loaded"
+"page-ready"
 );
 
 
 
+},200);
 
 
-revealIntro();
 
 
 
@@ -108,47 +60,7 @@ observeArchive();
 
 
 
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =========================================================
-   INTRO REVEAL
-========================================================= */
-
-
-function revealIntro(){
-
-
-
-const intro =
-document.querySelector(
-".writing-intro"
-);
-
-
-
-if(!intro){
-
-return;
-
-}
-
-
-
-
-
-intro.classList.add(
-"intro-visible"
-);
+observeWritingList();
 
 
 
@@ -163,7 +75,7 @@ intro.classList.add(
 
 
 /* =========================================================
-   ARCHIVE OBSERVER
+   ARCHIVE REVEAL
 ========================================================= */
 
 
@@ -173,7 +85,7 @@ function observeArchive(){
 
 const archive =
 document.querySelector(
-".writing-archive"
+".writing-category-menu"
 );
 
 
@@ -189,76 +101,12 @@ return;
 
 
 
-const observer =
-new IntersectionObserver(
-(entries)=>{
-
-
-
-entries.forEach(
-(entry)=>{
-
-
-if(entry.isIntersecting){
-
-
-
-revealArchiveBoxes();
-
-
-
-observer.disconnect();
-
-
-
-}
-
-
-
-});
-
-
-},
-{
-
-
-threshold:.35
-
-
-});
-
-
-
-
-observer.observe(
-archive
-);
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =========================================================
-   ARCHIVE BOX REVEAL
-========================================================= */
-
-
-function revealArchiveBoxes(){
-
-
-
 const boxes =
-document.querySelectorAll(
-".writing-category-menu button"
+archive.querySelectorAll(
+"button"
 );
+
+
 
 
 
@@ -271,15 +119,14 @@ setTimeout(()=>{
 
 
 box.classList.add(
-"archive-visible"
+"archive-show"
 );
 
 
 
 },
 
-
-index * 250
+500 + (index * 250)
 
 
 
@@ -330,6 +177,7 @@ return;
 
 
 
+
 const archive =
 document.querySelector(
 ".writing-archive"
@@ -337,12 +185,12 @@ document.querySelector(
 
 
 
+
 if(archive){
 
 
-
 archive.classList.add(
-"archive-leaving"
+"archive-hide"
 );
 
 
@@ -350,36 +198,6 @@ archive.classList.add(
 }
 
 
-
-
-
-
-
-setTimeout(()=>{
-
-
-const list =
-document.querySelector(
-".writing-list-section"
-);
-
-
-
-if(list){
-
-
-
-list.classList.add(
-"list-visible"
-);
-
-
-
-}
-
-
-
-},500);
 
 
 
@@ -394,7 +212,7 @@ list.classList.add(
 
 
 /* =========================================================
-   WRITING ITEM REVEAL
+   LIST OBSERVER
 ========================================================= */
 
 
@@ -402,14 +220,14 @@ function observeWritingList(){
 
 
 
-const list =
-document.querySelector(
-".writing-list-section"
+const target =
+document.getElementById(
+"writing-list"
 );
 
 
 
-if(!list){
+if(!target){
 
 return;
 
@@ -433,21 +251,29 @@ document.querySelectorAll(
 
 
 
+
+
 items.forEach(
 (item,index)=>{
-
 
 
 setTimeout(()=>{
 
 
 item.classList.add(
-"item-visible"
+"writing-show"
 );
 
 
 
-},index*150);
+},
+
+
+index * 150
+
+
+
+);
 
 
 
@@ -456,14 +282,14 @@ item.classList.add(
 
 
 
-
-});
+}
+);
 
 
 
 
 observer.observe(
-list,
+target,
 {
 
 
@@ -473,50 +299,7 @@ childList:true,
 subtree:true
 
 
-});
-
-
-
 }
-
-
-
-
-
-observeWritingList();
-
-
-
-
-
-
-
-
-
-
-/* =========================================================
-   CURSOR ATMOSPHERE
-========================================================= */
-
-
-function createAmbient(){
-
-
-
-const layer =
-document.createElement(
-"div"
-);
-
-
-
-layer.className =
-"writing-ambient";
-
-
-
-document.body.appendChild(
-layer
 );
 
 
@@ -526,20 +309,14 @@ layer
 
 
 
-createAmbient();
 
 
 
 
-
-
-
-/* START */
-
-
-waitForWritings();
-
-
+document.addEventListener(
+"DOMContentLoaded",
+init
+);
 
 
 
