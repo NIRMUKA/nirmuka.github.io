@@ -1,6 +1,5 @@
 /* =========================================================
    NIRMUKA DIGITAL ARCHIVE SYSTEM
-   CENTER FOCUSED CAROUSEL EDITION
 ========================================================= */
 
 
@@ -18,27 +17,6 @@ const menuLinks =
     document.querySelectorAll(".main-menu a");
 
 
-/* =========================================================
-   ACTIVE CAROUSEL CLEANUP
-========================================================= */
-
-let activeCarouselCleanup = null;
-
-
-function destroyActiveCarousel() {
-
-    if (
-        typeof activeCarouselCleanup ===
-        "function"
-    ) {
-
-        activeCarouselCleanup();
-
-        activeCarouselCleanup =
-            null;
-    }
-}
-
 
 /* =========================================================
    CURTAIN TRANSITION
@@ -54,24 +32,19 @@ function curtainTransition(callback) {
     }
 
 
-    curtain.classList.add(
-        "active"
-    );
+    curtain.classList.add("active");
 
 
-    setTimeout(
-        () => {
+    setTimeout(() => {
 
-            callback();
+        callback();
 
-            curtain.classList.remove(
-                "active"
-            );
+        curtain.classList.remove("active");
 
-        },
-        900
-    );
+    }, 900);
+
 }
+
 
 
 /* =========================================================
@@ -80,31 +53,32 @@ function curtainTransition(callback) {
 
 function backToLanding() {
 
-    destroyActiveCarousel();
+    curtainTransition(() => {
 
+        if (content) {
 
-    curtainTransition(
-        () => {
-
-            if (content) {
-
-                content.innerHTML =
-                    "";
-            }
-
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+            content.innerHTML = "";
 
         }
-    );
+
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+        });
+
+    });
+
 }
+
 
 
 /* =========================================================
    LOAD WORKS
+   CENTER-STAGE CAROUSEL
 ========================================================= */
 
 function loadWorks() {
@@ -114,234 +88,228 @@ function loadWorks() {
     }
 
 
-    destroyActiveCarousel();
+    curtainTransition(() => {
 
 
-    curtainTransition(
-        () => {
+        content.innerHTML = `
 
-            content.innerHTML = `
+        <section class="page-section works-page">
 
-                <section
-                    class="page-section works-page"
+            <div class="section-inner works-inner">
+
+
+                <a
+                    href="#"
+                    class="back-home"
                 >
+                    ← BACK
+                </a>
 
-                    <div class="section-inner">
 
-                        <a
-                            href="#"
-                            class="back-home"
-                        >
-                            ← BACK
-                        </a>
+                <div class="works-heading">
 
+                    <div>
 
                         <p class="work-number">
                             ARCHIVE / WORKS
                         </p>
 
-
                         <h2>
                             WORKS
                         </h2>
 
+                    </div>
+
+
+                    <div
+                        class="carousel-counter"
+                        aria-live="polite"
+                    >
+                        01 / 00
+                    </div>
+
+                </div>
+
+
+
+                <div
+                    class="works-carousel"
+                    tabindex="0"
+                    aria-label="NIRMUKA artwork carousel"
+                >
+
+
+                    <div class="carousel-stage">
 
                         <div
-                            class="works-carousel-shell"
-                            tabindex="0"
-                            aria-label="NIRMUKA artwork carousel"
-                        >
-
-                            <div
-                                class="works-carousel-topline"
-                            >
-
-                                <p
-                                    class="carousel-counter"
-                                    aria-live="polite"
-                                >
-                                    01 / 00
-                                </p>
-
-
-                                <p
-                                    class="carousel-status"
-                                    aria-live="polite"
-                                >
-                                    LOADING ARCHIVE
-                                </p>
-
-                            </div>
-
-
-                            <div
-                                class="works-gallery"
-                                aria-label="Artwork carousel"
-                            >
-                            </div>
-
-
-                            <div
-                                class="carousel-controls"
-                            >
-
-                                <button
-                                    type="button"
-                                    class="carousel-arrow carousel-prev"
-                                    aria-label="Previous artwork"
-                                >
-                                    ←
-                                </button>
-
-
-                                <p class="carousel-hint">
-                                    DRAG / SWIPE TO EXPLORE
-                                </p>
-
-
-                                <button
-                                    type="button"
-                                    class="carousel-arrow carousel-next"
-                                    aria-label="Next artwork"
-                                >
-                                    →
-                                </button>
-
-                            </div>
-
-                        </div>
+                            class="carousel-track"
+                        ></div>
 
                     </div>
 
-                </section>
-
-            `;
 
 
-            fetch(
-                "artworks.json?v=20260822-7"
-            )
-
-            .then(
-                response => {
-
-                    if (!response.ok) {
-
-                        throw new Error(
-                            "artworks.json gagal dimuat"
-                        );
-                    }
+                    <div class="carousel-information">
 
 
-                    return response.json();
-                }
-            )
-
-            .then(
-                artworks => {
-
-                    if (
-                        !Array.isArray(artworks) ||
-                        artworks.length === 0
-                    ) {
-
-                        throw new Error(
-                            "Tidak ada artwork di artworks.json"
-                        );
-                    }
+                        <p class="carousel-work-number">
+                            WORK 01
+                        </p>
 
 
-                    buildWorksCarousel(
-                        artworks
-                    );
-                }
-            )
-
-            .catch(
-                error => {
-
-                    console.error(
-                        "Error loading artworks:",
-                        error
-                    );
+                        <h3 class="carousel-title">
+                            Loading...
+                        </h3>
 
 
-                    const gallery =
-                        document.querySelector(
-                            ".works-gallery"
-                        );
+                        <p class="carousel-year"></p>
 
 
-                    const status =
-                        document.querySelector(
-                            ".carousel-status"
-                        );
+                    </div>
 
 
-                    if (gallery) {
 
-                        gallery.innerHTML = `
-
-                            <div
-                                style="
-                                    position:absolute;
-                                    inset:0;
-                                    display:flex;
-                                    align-items:center;
-                                    justify-content:center;
-                                    text-align:center;
-                                    opacity:.6;
-                                "
-                            >
-                                ARCHIVE COULD NOT BE LOADED
-                            </div>
-
-                        `;
-                    }
+                    <div class="carousel-controls">
 
 
-                    if (status) {
+                        <button
+                            type="button"
+                            class="carousel-button carousel-prev"
+                            aria-label="Previous artwork"
+                        >
+                            ←
+                        </button>
 
-                        status.textContent =
-                            "ARCHIVE ERROR";
-                    }
-                }
+
+                        <p class="carousel-hint">
+                            DRAG · SCROLL · USE ARROWS
+                        </p>
+
+
+                        <button
+                            type="button"
+                            class="carousel-button carousel-next"
+                            aria-label="Next artwork"
+                        >
+                            →
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+        `;
+
+
+
+        fetch("/artworks.json?v=20260822-8")
+
+        .then(response => {
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "artworks.json gagal dimuat"
+                );
+
+            }
+
+
+            return response.json();
+
+        })
+
+
+        .then(artworks => {
+
+
+            if (
+                !Array.isArray(artworks) ||
+                artworks.length === 0
+            ) {
+
+                throw new Error(
+                    "Tidak ada karya di artworks.json"
+                );
+
+            }
+
+
+            initializeWorksCarousel(
+                artworks
             );
 
-        }
-    );
+        })
+
+
+        .catch(error => {
+
+
+            console.error(
+                "Error loading artworks:",
+                error
+            );
+
+
+            const carousel =
+                document.querySelector(
+                    ".works-carousel"
+                );
+
+
+            if (carousel) {
+
+                carousel.innerHTML = `
+
+                    <p class="section-description">
+                        WORKS COULD NOT BE LOADED.
+                    </p>
+
+                `;
+
+            }
+
+        });
+
+
+    });
+
 }
 
 
+
 /* =========================================================
-   BUILD WORKS CAROUSEL
+   INITIALIZE WORKS CAROUSEL
 ========================================================= */
 
-function buildWorksCarousel(
+function initializeWorksCarousel(
     artworks
 ) {
 
-    const shell =
+
+    const carousel =
         document.querySelector(
-            ".works-carousel-shell"
+            ".works-carousel"
         );
 
 
-    const gallery =
+    const stage =
         document.querySelector(
-            ".works-gallery"
+            ".carousel-stage"
         );
 
 
-    const counter =
+    const track =
         document.querySelector(
-            ".carousel-counter"
-        );
-
-
-    const status =
-        document.querySelector(
-            ".carousel-status"
+            ".carousel-track"
         );
 
 
@@ -357,431 +325,306 @@ function buildWorksCarousel(
         );
 
 
+    const counter =
+        document.querySelector(
+            ".carousel-counter"
+        );
+
+
+    const title =
+        document.querySelector(
+            ".carousel-title"
+        );
+
+
+    const year =
+        document.querySelector(
+            ".carousel-year"
+        );
+
+
+    const workNumber =
+        document.querySelector(
+            ".carousel-work-number"
+        );
+
+
     if (
-        !shell ||
-        !gallery ||
-        !counter ||
-        !previousButton ||
-        !nextButton
+        !carousel ||
+        !stage ||
+        !track
     ) {
 
         return;
+
     }
 
 
+
     /* =====================================================
-       CREATE ARTWORK CARDS
+       STATE
     ===================================================== */
 
-    gallery.innerHTML =
-        "";
+    let activeIndex = 0;
 
+    let pointerStartX = 0;
+
+    let pointerCurrentX = 0;
+
+    let dragging = false;
+
+    let suppressClickUntil = 0;
+
+    let lastWheelTime = 0;
+
+
+
+    /* =====================================================
+       CREATE ALL ARTWORKS
+    ===================================================== */
 
     artworks.forEach(
         (work, index) => {
 
-            const card =
-                document.createElement(
-                    "div"
-                );
 
-
-            card.className =
-                "art-card is-hidden";
-
-
-            card.dataset.index =
-                String(index);
-
-
-            const link =
+            const artwork =
                 document.createElement(
                     "a"
                 );
 
 
-            link.href =
-                `artwork.html?id=${encodeURIComponent(work.id)}`;
+            artwork.className =
+                "carousel-artwork";
 
 
-            link.setAttribute(
+            artwork.dataset.index =
+                index;
+
+
+            artwork.href =
+                `/artwork.html?id=${work.id}`;
+
+
+            artwork.setAttribute(
                 "aria-label",
-                `${work.title}, ${work.year}`
+                work.title
             );
 
 
-            const image =
-                document.createElement(
-                    "img"
-                );
+            artwork.innerHTML = `
+
+                <div class="carousel-image-frame">
+
+                    <img
+                        src="${work.image}"
+                        alt="${work.title}"
+                        draggable="false"
+                    >
+
+                </div>
 
 
-            image.src =
-                work.image;
+                <span class="carousel-side-number">
+
+                    ${String(index + 1).padStart(2, "0")}
+
+                </span>
+
+            `;
 
 
-            image.alt =
-                work.title;
+            /* =================================================
+               CLICK
+
+               ACTIVE:
+               open artwork detail
+
+               SIDE:
+               move it to center first
+            ================================================= */
+
+            artwork.addEventListener(
+                "click",
+                event => {
 
 
-            image.draggable =
-                false;
+                    if (
+                        performance.now() <
+                        suppressClickUntil
+                    ) {
+
+                        event.preventDefault();
+
+                        return;
+
+                    }
 
 
-            image.loading =
-                index < 3
-                    ? "eager"
-                    : "lazy";
+                    if (
+                        index !== activeIndex
+                    ) {
 
+                        event.preventDefault();
 
-            image.decoding =
-                "async";
+                        setActive(
+                            index
+                        );
 
+                    }
 
-            const title =
-                document.createElement(
-                    "h3"
-                );
-
-
-            title.textContent =
-                work.title;
-
-
-            const year =
-                document.createElement(
-                    "p"
-                );
-
-
-            year.textContent =
-                work.year;
-
-
-            link.appendChild(
-                image
+                }
             );
 
 
-            link.appendChild(
-                title
+            track.appendChild(
+                artwork
             );
 
-
-            link.appendChild(
-                year
-            );
-
-
-            card.appendChild(
-                link
-            );
-
-
-            gallery.appendChild(
-                card
-            );
         }
     );
 
 
-    const cards =
+
+    const slides =
         Array.from(
-            gallery.querySelectorAll(
-                ".art-card"
+            track.querySelectorAll(
+                ".carousel-artwork"
             )
         );
 
 
-    const total =
-        cards.length;
-
-
-    let activeIndex =
-        0;
-
-
-    let suppressClickUntil =
-        0;
-
-
-    /* =====================================================
-       FORMAT NUMBER
-    ===================================================== */
-
-    function formatNumber(
-        value
-    ) {
-
-        return String(value)
-            .padStart(
-                2,
-                "0"
-            );
-    }
-
 
     /* =====================================================
        NORMALIZE INDEX
-       MAKES CAROUSEL INFINITE
     ===================================================== */
 
-    function normalizeIndex(
-        index
-    ) {
+    function normalizeIndex(index) {
+
+        const total =
+            artworks.length;
+
 
         return (
-            (
-                index %
-                total
-            ) +
+            (index % total) +
             total
-        ) %
-        total;
+        ) % total;
+
     }
 
 
+
     /* =====================================================
-       CIRCULAR DISTANCE
-
-       Example:
-       ACTIVE = 0
-
-       Last artwork becomes PREV
-       First artwork becomes ACTIVE
-       Second artwork becomes NEXT
+       SET ACTIVE ARTWORK
     ===================================================== */
 
-    function circularDistance(
-        cardIndex
+    function setActive(
+        newIndex
     ) {
 
-        let distance =
-            cardIndex -
-            activeIndex;
+
+        activeIndex =
+            normalizeIndex(
+                newIndex
+            );
 
 
-        if (
-            distance >
-            total / 2
-        ) {
-
-            distance -=
-                total;
-        }
+        const previousIndex =
+            normalizeIndex(
+                activeIndex - 1
+            );
 
 
-        if (
-            distance <
-            -total / 2
-        ) {
-
-            distance +=
-                total;
-        }
+        const nextIndex =
+            normalizeIndex(
+                activeIndex + 1
+            );
 
 
-        return distance;
-    }
+        slides.forEach(
+            (slide, index) => {
 
 
-    /* =====================================================
-       UPDATE CAROUSEL
-    ===================================================== */
-
-    function updateCarousel() {
-
-        cards.forEach(
-            (card, index) => {
-
-                card.classList.remove(
+                slide.classList.remove(
                     "is-active",
                     "is-prev",
                     "is-next",
-                    "is-far-prev",
-                    "is-far-next",
                     "is-hidden"
                 );
 
 
-                const distance =
-                    circularDistance(
-                        index
-                    );
-
-
-                const link =
-                    card.querySelector(
-                        "a"
-                    );
+                slide.removeAttribute(
+                    "aria-current"
+                );
 
 
                 if (
-                    distance === 0
+                    index === activeIndex
                 ) {
 
-                    card.classList.add(
+                    slide.classList.add(
                         "is-active"
                     );
 
 
-                    card.setAttribute(
+                    slide.setAttribute(
                         "aria-current",
                         "true"
                     );
 
 
-                    card.removeAttribute(
-                        "aria-hidden"
+                    slide.setAttribute(
+                        "aria-hidden",
+                        "false"
                     );
-
-
-                    if (link) {
-
-                        link.tabIndex =
-                            0;
-                    }
 
                 }
 
 
                 else if (
-                    distance === -1
+                    index === previousIndex
                 ) {
 
-                    card.classList.add(
+                    slide.classList.add(
                         "is-prev"
                     );
 
 
-                    card.removeAttribute(
-                        "aria-current"
+                    slide.setAttribute(
+                        "aria-hidden",
+                        "false"
                     );
-
-
-                    card.removeAttribute(
-                        "aria-hidden"
-                    );
-
-
-                    if (link) {
-
-                        link.tabIndex =
-                            0;
-                    }
 
                 }
 
 
                 else if (
-                    distance === 1
+                    index === nextIndex
                 ) {
 
-                    card.classList.add(
+                    slide.classList.add(
                         "is-next"
                     );
 
 
-                    card.removeAttribute(
-                        "aria-current"
-                    );
-
-
-                    card.removeAttribute(
-                        "aria-hidden"
-                    );
-
-
-                    if (link) {
-
-                        link.tabIndex =
-                            0;
-                    }
-
-                }
-
-
-                else if (
-                    distance === -2
-                ) {
-
-                    card.classList.add(
-                        "is-far-prev"
-                    );
-
-
-                    card.removeAttribute(
-                        "aria-current"
-                    );
-
-
-                    card.setAttribute(
+                    slide.setAttribute(
                         "aria-hidden",
-                        "true"
+                        "false"
                     );
-
-
-                    if (link) {
-
-                        link.tabIndex =
-                            -1;
-                    }
-
-                }
-
-
-                else if (
-                    distance === 2
-                ) {
-
-                    card.classList.add(
-                        "is-far-next"
-                    );
-
-
-                    card.removeAttribute(
-                        "aria-current"
-                    );
-
-
-                    card.setAttribute(
-                        "aria-hidden",
-                        "true"
-                    );
-
-
-                    if (link) {
-
-                        link.tabIndex =
-                            -1;
-                    }
 
                 }
 
 
                 else {
 
-                    card.classList.add(
+                    slide.classList.add(
                         "is-hidden"
                     );
 
 
-                    card.removeAttribute(
-                        "aria-current"
-                    );
-
-
-                    card.setAttribute(
+                    slide.setAttribute(
                         "aria-hidden",
                         "true"
                     );
-
-
-                    if (link) {
-
-                        link.tabIndex =
-                            -1;
-                    }
 
                 }
 
@@ -789,54 +632,50 @@ function buildWorksCarousel(
         );
 
 
-        counter.textContent =
-            `${formatNumber(activeIndex + 1)} / ${formatNumber(total)}`;
+
+        /* =================================================
+           CURRENT ARTWORK INFORMATION
+        ================================================= */
+
+        const work =
+            artworks[
+                activeIndex
+            ];
 
 
-        if (status) {
+        if (counter) {
 
-            const artwork =
-                artworks[
-                    activeIndex
-                ];
+            counter.textContent =
+                `${String(activeIndex + 1).padStart(2, "0")} / ${String(artworks.length).padStart(2, "0")}`;
 
-
-            status.textContent =
-                artwork.title
-                    ? `ACTIVE / ${artwork.title}`
-                    : "ACTIVE ARTWORK";
         }
+
+
+        if (workNumber) {
+
+            workNumber.textContent =
+                `WORK ${String(activeIndex + 1).padStart(2, "0")}`;
+
+        }
+
+
+        if (title) {
+
+            title.textContent =
+                work.title || "UNTITLED";
+
+        }
+
+
+        if (year) {
+
+            year.textContent =
+                work.year || "";
+
+        }
+
     }
 
-
-    /* =====================================================
-       GO TO ARTWORK
-    ===================================================== */
-
-    function goToArtwork(
-        index
-    ) {
-
-        activeIndex =
-            normalizeIndex(
-                index
-            );
-
-
-        updateCarousel();
-    }
-
-
-    /* =====================================================
-       NEXT
-    ===================================================== */
-
-    function nextArtwork() {
-
-        goToArtwork(
-            activeIndex + 1
-        );
-    }
 
 
     /* =====================================================
@@ -845,753 +684,400 @@ function buildWorksCarousel(
 
     function previousArtwork() {
 
-        goToArtwork(
+        setActive(
             activeIndex - 1
         );
+
     }
+
 
 
     /* =====================================================
-       BUTTON EVENTS
+       NEXT
     ===================================================== */
 
-    function handlePreviousButton(
-        event
-    ) {
+    function nextArtwork() {
 
-        event.preventDefault();
+        setActive(
+            activeIndex + 1
+        );
 
-        previousArtwork();
     }
 
-
-    function handleNextButton(
-        event
-    ) {
-
-        event.preventDefault();
-
-        nextArtwork();
-    }
-
-
-    previousButton.addEventListener(
-        "click",
-        handlePreviousButton
-    );
-
-
-    nextButton.addEventListener(
-        "click",
-        handleNextButton
-    );
 
 
     /* =====================================================
-       CARD CLICK
-
-       SIDE ARTWORK:
-       click → move to center
-
-       CENTER ARTWORK:
-       click → open artwork detail
+       BUTTONS
     ===================================================== */
 
-    const cardClickHandlers =
-        [];
+    if (previousButton) {
 
-
-    cards.forEach(
-        (card, index) => {
-
-            const link =
-                card.querySelector(
-                    "a"
-                );
-
-
-            if (!link) {
-                return;
-            }
-
-
-            const handler =
-                event => {
-
-                    /*
-                       Prevent accidental opening
-                       immediately after swipe.
-                    */
-
-                    if (
-                        Date.now() <
-                        suppressClickUntil
-                    ) {
-
-                        event.preventDefault();
-
-                        return;
-                    }
-
-
-                    /*
-                       Side artwork clicked:
-                       make it dominant.
-                    */
-
-                    if (
-                        index !==
-                        activeIndex
-                    ) {
-
-                        event.preventDefault();
-
-
-                        goToArtwork(
-                            index
-                        );
-
-
-                        return;
-                    }
-
-
-                    /*
-                       Active artwork clicked:
-                       normal href navigation.
-                    */
-                };
-
-
-            link.addEventListener(
-                "click",
-                handler
-            );
-
-
-            cardClickHandlers.push({
-                link,
-                handler
-            });
-
-        }
-    );
-
-
-    /* =====================================================
-       POINTER / SWIPE SYSTEM
-       WORKS ON:
-       - MOUSE
-       - TOUCH
-       - PEN
-    ===================================================== */
-
-    let activePointerId =
-        null;
-
-
-    let pointerStartX =
-        0;
-
-
-    let pointerStartY =
-        0;
-
-
-    let pointerCurrentX =
-        0;
-
-
-    let pointerCurrentY =
-        0;
-
-
-    let pointerMoved =
-        false;
-
-
-    let horizontalGesture =
-        false;
-
-
-    function handlePointerDown(
-        event
-    ) {
-
-        /*
-           Ignore non-left mouse button.
-        */
-
-        if (
-            event.pointerType === "mouse" &&
-            event.button !== 0
-        ) {
-
-            return;
-        }
-
-
-        activePointerId =
-            event.pointerId;
-
-
-        pointerStartX =
-            event.clientX;
-
-
-        pointerStartY =
-            event.clientY;
-
-
-        pointerCurrentX =
-            event.clientX;
-
-
-        pointerCurrentY =
-            event.clientY;
-
-
-        pointerMoved =
-            false;
-
-
-        horizontalGesture =
-            false;
-
-
-        shell.classList.add(
-            "is-dragging"
+        previousButton.addEventListener(
+            "click",
+            previousArtwork
         );
 
-
-        if (
-            gallery.setPointerCapture
-        ) {
-
-            try {
-
-                gallery.setPointerCapture(
-                    event.pointerId
-                );
-
-            }
-            catch (error) {
-
-                /*
-                   Some browsers may reject
-                   pointer capture.
-                */
-            }
-        }
     }
 
 
-    function handlePointerMove(
-        event
-    ) {
+    if (nextButton) {
 
-        if (
-            activePointerId === null ||
-            event.pointerId !==
-            activePointerId
-        ) {
-
-            return;
-        }
-
-
-        pointerCurrentX =
-            event.clientX;
-
-
-        pointerCurrentY =
-            event.clientY;
-
-
-        const deltaX =
-            pointerCurrentX -
-            pointerStartX;
-
-
-        const deltaY =
-            pointerCurrentY -
-            pointerStartY;
-
-
-        if (
-            Math.abs(deltaX) >
-            7
-        ) {
-
-            pointerMoved =
-                true;
-        }
-
-
-        /*
-           Decide whether gesture
-           is horizontal carousel swipe
-           or normal vertical page scroll.
-        */
-
-        if (
-            !horizontalGesture &&
-            Math.abs(deltaX) > 10 &&
-            Math.abs(deltaX) >
-            Math.abs(deltaY)
-        ) {
-
-            horizontalGesture =
-                true;
-        }
-
-
-        if (
-            horizontalGesture
-        ) {
-
-            event.preventDefault();
-        }
-    }
-
-
-    function finishPointerGesture(
-        event
-    ) {
-
-        if (
-            activePointerId === null
-        ) {
-
-            return;
-        }
-
-
-        if (
-            event.pointerId !==
-            activePointerId
-        ) {
-
-            return;
-        }
-
-
-        const deltaX =
-            pointerCurrentX -
-            pointerStartX;
-
-
-        const deltaY =
-            pointerCurrentY -
-            pointerStartY;
-
-
-        const absoluteX =
-            Math.abs(
-                deltaX
-            );
-
-
-        const absoluteY =
-            Math.abs(
-                deltaY
-            );
-
-
-        const wasSwipe =
-            horizontalGesture &&
-            absoluteX > 45 &&
-            absoluteX >
-            absoluteY;
-
-
-        shell.classList.remove(
-            "is-dragging"
+        nextButton.addEventListener(
+            "click",
+            nextArtwork
         );
 
-
-        if (
-            gallery.releasePointerCapture
-        ) {
-
-            try {
-
-                gallery.releasePointerCapture(
-                    activePointerId
-                );
-
-            }
-            catch (error) {
-
-                /*
-                   Ignore release errors.
-                */
-            }
-        }
-
-
-        activePointerId =
-            null;
-
-
-        /*
-           Swipe left:
-           next artwork.
-        */
-
-        if (
-            wasSwipe &&
-            deltaX < 0
-        ) {
-
-            nextArtwork();
-
-
-            suppressClickUntil =
-                Date.now() +
-                300;
-        }
-
-
-        /*
-           Swipe right:
-           previous artwork.
-        */
-
-        else if (
-            wasSwipe &&
-            deltaX > 0
-        ) {
-
-            previousArtwork();
-
-
-            suppressClickUntil =
-                Date.now() +
-                300;
-        }
-
-
-        /*
-           Small drag:
-           block accidental navigation.
-        */
-
-        else if (
-            pointerMoved
-        ) {
-
-            suppressClickUntil =
-                Date.now() +
-                180;
-        }
-
-
-        pointerMoved =
-            false;
-
-
-        horizontalGesture =
-            false;
     }
 
-
-    function cancelPointerGesture() {
-
-        shell.classList.remove(
-            "is-dragging"
-        );
-
-
-        activePointerId =
-            null;
-
-
-        pointerMoved =
-            false;
-
-
-        horizontalGesture =
-            false;
-    }
-
-
-    gallery.addEventListener(
-        "pointerdown",
-        handlePointerDown
-    );
-
-
-    gallery.addEventListener(
-        "pointermove",
-        handlePointerMove,
-        {
-            passive: false
-        }
-    );
-
-
-    gallery.addEventListener(
-        "pointerup",
-        finishPointerGesture
-    );
-
-
-    gallery.addEventListener(
-        "pointercancel",
-        cancelPointerGesture
-    );
 
 
     /* =====================================================
        KEYBOARD
     ===================================================== */
 
-    function handleKeyboard(
-        event
-    ) {
-
-        /*
-           Only operate while WORKS exists.
-        */
-
-        if (
-            !document.body.contains(
-                shell
-            )
-        ) {
-
-            return;
-        }
-
-
-        if (
-            event.key ===
-            "ArrowLeft"
-        ) {
-
-            event.preventDefault();
-
-            previousArtwork();
-        }
-
-
-        if (
-            event.key ===
-            "ArrowRight"
-        ) {
-
-            event.preventDefault();
-
-            nextArtwork();
-        }
-    }
-
-
-    document.addEventListener(
+    carousel.addEventListener(
         "keydown",
-        handleKeyboard
+        event => {
+
+
+            if (
+                event.key ===
+                "ArrowLeft"
+            ) {
+
+                event.preventDefault();
+
+                previousArtwork();
+
+            }
+
+
+            if (
+                event.key ===
+                "ArrowRight"
+            ) {
+
+                event.preventDefault();
+
+                nextArtwork();
+
+            }
+
+
+            if (
+                event.key ===
+                "Enter"
+            ) {
+
+
+                const currentWork =
+                    artworks[
+                        activeIndex
+                    ];
+
+
+                window.location.href =
+                    `/artwork.html?id=${currentWork.id}`;
+
+            }
+
+        }
     );
 
 
+
     /* =====================================================
-       TRACKPAD HORIZONTAL SWIPE
-
-       Horizontal trackpad movement
-       can also navigate carousel.
-
-       Normal vertical page scrolling
-       is NOT blocked.
+       MOUSE WHEEL / TRACKPAD
     ===================================================== */
 
-    let wheelLocked =
-        false;
-
-
-    let wheelUnlockTimer =
-        null;
-
-
-    function handleWheel(
-        event
-    ) {
-
-        const horizontalAmount =
-            Math.abs(
-                event.deltaX
-            );
-
-
-        const verticalAmount =
-            Math.abs(
-                event.deltaY
-            );
-
-
-        /*
-           Ignore ordinary vertical wheel.
-        */
-
-        if (
-            horizontalAmount <
-            20 ||
-            horizontalAmount <=
-            verticalAmount
-        ) {
-
-            return;
-        }
-
-
-        event.preventDefault();
-
-
-        if (
-            wheelLocked
-        ) {
-
-            return;
-        }
-
-
-        wheelLocked =
-            true;
-
-
-        if (
-            event.deltaX > 0
-        ) {
-
-            nextArtwork();
-
-        }
-        else {
-
-            previousArtwork();
-        }
-
-
-        clearTimeout(
-            wheelUnlockTimer
-        );
-
-
-        wheelUnlockTimer =
-            setTimeout(
-                () => {
-
-                    wheelLocked =
-                        false;
-
-                },
-                380
-            );
-    }
-
-
-    gallery.addEventListener(
+    carousel.addEventListener(
         "wheel",
-        handleWheel,
+        event => {
+
+
+            const now =
+                performance.now();
+
+
+            if (
+                now -
+                lastWheelTime <
+                420
+            ) {
+
+                return;
+
+            }
+
+
+            const movement =
+                Math.abs(
+                    event.deltaX
+                ) >
+                Math.abs(
+                    event.deltaY
+                )
+                ?
+                event.deltaX
+                :
+                event.deltaY;
+
+
+            if (
+                Math.abs(
+                    movement
+                ) <
+                8
+            ) {
+
+                return;
+
+            }
+
+
+            event.preventDefault();
+
+
+            lastWheelTime =
+                now;
+
+
+            if (
+                movement > 0
+            ) {
+
+                nextArtwork();
+
+            }
+
+            else {
+
+                previousArtwork();
+
+            }
+
+        },
         {
             passive: false
         }
     );
 
 
+
+    /* =====================================================
+       DRAG / SWIPE
+    ===================================================== */
+
+    stage.addEventListener(
+        "pointerdown",
+        event => {
+
+
+            pointerStartX =
+                event.clientX;
+
+
+            pointerCurrentX =
+                event.clientX;
+
+
+            dragging =
+                false;
+
+
+            stage.classList.add(
+                "is-dragging"
+            );
+
+
+            if (
+                stage.setPointerCapture
+            ) {
+
+                try {
+
+                    stage.setPointerCapture(
+                        event.pointerId
+                    );
+
+                }
+
+                catch (error) {
+
+                    /* ignore */
+
+                }
+
+            }
+
+        }
+    );
+
+
+
+    stage.addEventListener(
+        "pointermove",
+        event => {
+
+
+            if (
+                !stage.classList.contains(
+                    "is-dragging"
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            pointerCurrentX =
+                event.clientX;
+
+
+            const distance =
+                pointerCurrentX -
+                pointerStartX;
+
+
+            if (
+                Math.abs(
+                    distance
+                ) >
+                10
+            ) {
+
+                dragging =
+                    true;
+
+            }
+
+
+            /* subtle physical movement */
+
+            track.style.setProperty(
+                "--drag-offset",
+                `${distance * .16}px`
+            );
+
+        }
+    );
+
+
+
+    function finishDrag(
+        event
+    ) {
+
+
+        if (
+            !stage.classList.contains(
+                "is-dragging"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        const distance =
+            pointerCurrentX -
+            pointerStartX;
+
+
+        stage.classList.remove(
+            "is-dragging"
+        );
+
+
+        track.style.setProperty(
+            "--drag-offset",
+            "0px"
+        );
+
+
+        if (
+            dragging
+        ) {
+
+            suppressClickUntil =
+                performance.now() +
+                350;
+
+
+            if (
+                distance < -60
+            ) {
+
+                nextArtwork();
+
+            }
+
+
+            else if (
+                distance > 60
+            ) {
+
+                previousArtwork();
+
+            }
+
+        }
+
+
+        dragging =
+            false;
+
+
+        if (
+            event &&
+            stage.releasePointerCapture
+        ) {
+
+            try {
+
+                stage.releasePointerCapture(
+                    event.pointerId
+                );
+
+            }
+
+            catch (error) {
+
+                /* ignore */
+
+            }
+
+        }
+
+    }
+
+
+
+    stage.addEventListener(
+        "pointerup",
+        finishDrag
+    );
+
+
+    stage.addEventListener(
+        "pointercancel",
+        finishDrag
+    );
+
+
+
     /* =====================================================
        INITIAL STATE
     ===================================================== */
 
-    updateCarousel();
-
-
-    /*
-       Give keyboard focus possibility
-       without forcing user focus.
-    */
-
-    shell.setAttribute(
-        "role",
-        "region"
+    setActive(
+        0
     );
 
-
-    /* =====================================================
-       CAROUSEL CLEANUP
-
-       Important because WORKS is dynamically
-       created / destroyed.
-    ===================================================== */
-
-    activeCarouselCleanup =
-        function cleanupCarousel() {
-
-            previousButton.removeEventListener(
-                "click",
-                handlePreviousButton
-            );
-
-
-            nextButton.removeEventListener(
-                "click",
-                handleNextButton
-            );
-
-
-            gallery.removeEventListener(
-                "pointerdown",
-                handlePointerDown
-            );
-
-
-            gallery.removeEventListener(
-                "pointermove",
-                handlePointerMove
-            );
-
-
-            gallery.removeEventListener(
-                "pointerup",
-                finishPointerGesture
-            );
-
-
-            gallery.removeEventListener(
-                "pointercancel",
-                cancelPointerGesture
-            );
-
-
-            gallery.removeEventListener(
-                "wheel",
-                handleWheel
-            );
-
-
-            document.removeEventListener(
-                "keydown",
-                handleKeyboard
-            );
-
-
-            cardClickHandlers.forEach(
-                item => {
-
-                    item.link.removeEventListener(
-                        "click",
-                        item.handler
-                    );
-
-                }
-            );
-
-
-            clearTimeout(
-                wheelUnlockTimer
-            );
-
-        };
 }
+
 
 
 /* =========================================================
@@ -1605,51 +1091,54 @@ function loadWritings() {
     }
 
 
-    destroyActiveCarousel();
+    curtainTransition(() => {
 
 
-    curtainTransition(
-        () => {
+        content.innerHTML = `
 
-            content.innerHTML = `
+        <section class="page-section">
 
-                <section class="page-section">
-
-                    <div class="section-inner">
-
-                        <a
-                            href="#"
-                            class="back-home"
-                        >
-                            ← BACK
-                        </a>
+            <div class="section-inner">
 
 
-                        <p class="work-number">
-                            ARCHIVE / WRITINGS
-                        </p>
+                <a
+                    href="#"
+                    class="back-home"
+                >
+                    ← BACK
+                </a>
 
 
-                        <h2>
-                            WRITINGS
-                        </h2>
+                <p class="work-number">
+                    ARCHIVE / WRITINGS
+                </p>
 
 
-                        <p class="section-description">
-                            Tulisan-tulisan NIRMUKA akan disusun
-                            dalam tiga arsip utama:
-                            Filsafat, Teologi, dan Umum.
-                        </p>
+                <h2>
+                    WRITINGS
+                </h2>
 
-                    </div>
 
-                </section>
+                <p class="section-description">
 
-            `;
+                    Tulisan-tulisan NIRMUKA akan disusun
+                    dalam tiga arsip utama:
+                    Filsafat, Teologi, dan Umum.
 
-        }
-    );
+                </p>
+
+
+            </div>
+
+        </section>
+
+        `;
+
+
+    });
+
 }
+
 
 
 /* =========================================================
@@ -1663,145 +1152,148 @@ function loadAbout() {
     }
 
 
-    destroyActiveCarousel();
+    curtainTransition(() => {
 
 
-    curtainTransition(
-        () => {
+        content.innerHTML = `
 
-            content.innerHTML = `
+        <section class="page-section about-page">
 
-                <section
-                    class="page-section about-page"
+            <div class="section-inner">
+
+
+                <a
+                    href="#"
+                    class="back-home"
                 >
-
-                    <div class="section-inner">
-
-                        <a
-                            href="#"
-                            class="back-home"
-                        >
-                            ← BACK
-                        </a>
+                    ← BACK
+                </a>
 
 
-                        <p class="work-number">
-                            ABOUT NIRMUKA
-                        </p>
+                <p class="work-number">
+                    ABOUT NIRMUKA
+                </p>
 
 
-                        <h2>
-                            ABOUT
-                        </h2>
+                <h2>
+                    ABOUT
+                </h2>
 
 
-                        <div class="about-content">
-
-                            <p>
-                                Jujur, saya tidak pernah benar-benar tahu bagaimana cara menjelaskan diri saya sendiri. Saya selalu merasa bahwa manusia terlalu kompleks untuk diringkas menjadi beberapa kalimat sederhana: nama, pekerjaan, pencapaian, atau daftar hal-hal yang pernah dilakukan. Ada terlalu banyak bagian dalam diri seseorang yang tidak terlihat oleh orang lain; ketakutan yang disimpan, pikiran yang tidak pernah diucapkan, ingatan yang terus kembali meskipun kita berusaha melupakannya. Mungkin karena itu saya memilih membuat karya. Bukan karena saya memiliki semua jawaban, tetapi karena saya sendiri sedang mencoba memahami sesuatu yang bahkan sering kali tidak bisa saya jelaskan.
-                            </p>
+                <div class="about-content">
 
 
-                            <p>
-                                Saya tidak melihat dunia sebagai tempat yang sepenuhnya indah. Saya sering merasa bahwa ada sesuatu yang salah dalam cara manusia menjalani hidup. Kita membangun begitu banyak hal, mengejar begitu banyak hal, menciptakan berbagai bentuk kemajuan, tetapi di balik semua itu tetap ada rasa kosong yang tidak pernah benar-benar hilang. Manusia mampu menciptakan keindahan yang luar biasa, tetapi manusia yang sama juga mampu menciptakan kehancuran yang mengerikan.
-                            </p>
+                    <p>
+                        Jujur, saya tidak pernah benar-benar tahu bagaimana cara menjelaskan diri saya sendiri. Saya selalu merasa bahwa manusia terlalu kompleks untuk diringkas menjadi beberapa kalimat sederhana: nama, pekerjaan, pencapaian, atau daftar hal-hal yang pernah dilakukan. Ada terlalu banyak bagian dalam diri seseorang yang tidak terlihat oleh orang lain; ketakutan yang disimpan, pikiran yang tidak pernah diucapkan, ingatan yang terus kembali meskipun kita berusaha melupakannya. Mungkin karena itu saya memilih membuat karya. Bukan karena saya memiliki semua jawaban, tetapi karena saya sendiri sedang mencoba memahami sesuatu yang bahkan sering kali tidak bisa saya jelaskan.
+                    </p>
 
 
-                            <p>
-                                Karya-karya saya lahir dari kegelisahan terhadap kondisi manusia. Saya tertarik pada sisi yang sering dihindari: rasa kehilangan, kesepian, ketakutan, ingatan yang menyakitkan, dan pertanyaan tentang keberadaan kita. Saya tidak tertarik membuat karya yang hanya memberikan kenyamanan atau menjadi hiasan yang menyenangkan untuk dilihat. Saya ingin karya saya memiliki luka, memiliki gangguan, memiliki sesuatu yang membuat seseorang berhenti sejenak dan bertanya mengapa mereka merasa tidak nyaman ketika melihatnya.
-                            </p>
+                    <p>
+                        Saya tidak melihat dunia sebagai tempat yang sepenuhnya indah. Saya sering merasa bahwa ada sesuatu yang salah dalam cara manusia menjalani hidup. Kita membangun begitu banyak hal, mengejar begitu banyak hal, menciptakan berbagai bentuk kemajuan, tetapi di balik semua itu tetap ada rasa kosong yang tidak pernah benar-benar hilang. Manusia mampu menciptakan keindahan yang luar biasa, tetapi manusia yang sama juga mampu menciptakan kehancuran yang mengerikan.
+                    </p>
 
 
-                            <p>
-                                Dalam proses berkarya, saya banyak menggunakan distorsi, bentuk yang tidak sempurna, warna yang bertabrakan, dan elemen yang terlihat kacau. Bukan karena saya tidak mampu membuat sesuatu yang rapi, tetapi karena dunia yang saya lihat memang tidak selalu rapi. Manusia sendiri adalah sesuatu yang penuh dengan keretakan. Kita membawa masa lalu, trauma, harapan, keinginan, dan ketakutan dalam satu tubuh yang sama.
-                            </p>
+                    <p>
+                        Karya-karya saya lahir dari kegelisahan terhadap kondisi manusia. Saya tertarik pada sisi yang sering dihindari: rasa kehilangan, kesepian, ketakutan, ingatan yang menyakitkan, dan pertanyaan tentang keberadaan kita. Saya tidak tertarik membuat karya yang hanya memberikan kenyamanan atau menjadi hiasan yang menyenangkan untuk dilihat. Saya ingin karya saya memiliki luka, memiliki gangguan, memiliki sesuatu yang membuat seseorang berhenti sejenak dan bertanya mengapa mereka merasa tidak nyaman ketika melihatnya.
+                    </p>
 
 
-                            <p>
-                                Saya tidak percaya bahwa seni harus selalu memberikan solusi. Terkadang seni bukan tentang menemukan cahaya, tetapi tentang berani masuk ke dalam kegelapan dan melihat apa yang ada di sana. Ada hal-hal dalam kehidupan yang mungkin tidak memiliki jawaban. Ada kehilangan yang tidak bisa diperbaiki. Ada pertanyaan yang mungkin akan tetap menjadi pertanyaan sampai akhir hidup kita.
-                            </p>
+                    <p>
+                        Dalam proses berkarya, saya banyak menggunakan distorsi, bentuk yang tidak sempurna, warna yang bertabrakan, dan elemen yang terlihat kacau. Bukan karena saya tidak mampu membuat sesuatu yang rapi, tetapi karena dunia yang saya lihat memang tidak selalu rapi. Manusia sendiri adalah sesuatu yang penuh dengan keretakan. Kita membawa masa lalu, trauma, harapan, keinginan, dan ketakutan dalam satu tubuh yang sama.
+                    </p>
 
 
-                            <p>
-                                NIRMUKA adalah ruang untuk semua kegelisahan itu. Sebuah arsip dari pikiran, ingatan, ketakutan, dan perjalanan batin yang terus berubah. Setiap karya bukan hanya sebuah gambar, tetapi sebuah bagian dari proses memahami manusia dan keberadaannya.
-                            </p>
+                    <p>
+                        Saya tidak percaya bahwa seni harus selalu memberikan solusi. Terkadang seni bukan tentang menemukan cahaya, tetapi tentang berani masuk ke dalam kegelapan dan melihat apa yang ada di sana. Ada hal-hal dalam kehidupan yang mungkin tidak memiliki jawaban. Ada kehilangan yang tidak bisa diperbaiki. Ada pertanyaan yang mungkin akan tetap menjadi pertanyaan sampai akhir hidup kita.
+                    </p>
 
 
-                            <p>
-                                Karena pada akhirnya, mungkin seni bukan tentang menjelaskan dunia. Mungkin seni adalah cara kita bertahan ketika dunia terlalu sulit untuk dijelaskan.
-                            </p>
+                    <p>
+                        NIRMUKA adalah ruang untuk semua kegelisahan itu. Sebuah arsip dari pikiran, ingatan, ketakutan, dan perjalanan batin yang terus berubah. Setiap karya bukan hanya sebuah gambar, tetapi sebuah bagian dari proses memahami manusia dan keberadaannya.
+                    </p>
 
 
-                            <p class="signature">
-                                — NIRMUKA
-                            </p>
+                    <p>
+                        Karena pada akhirnya, mungkin seni bukan tentang menjelaskan dunia. Mungkin seni adalah cara kita bertahan ketika dunia terlalu sulit untuk dijelaskan.
+                    </p>
 
-                        </div>
 
-                    </div>
+                    <p class="signature">
+                        — NIRMUKA
+                    </p>
 
-                </section>
 
-            `;
+                </div>
 
-        }
-    );
+
+            </div>
+
+        </section>
+
+        `;
+
+
+    });
+
 }
+
 
 
 /* =========================================================
    MENU CONTROL
 ========================================================= */
 
-menuLinks.forEach(
-    link => {
-
-        link.addEventListener(
-            "click",
-            event => {
-
-                event.preventDefault();
+menuLinks.forEach(link => {
 
 
-                const page =
-                    link.dataset.page;
+    link.addEventListener(
+        "click",
+        event => {
 
 
-                if (
-                    page ===
-                    "works"
-                ) {
-
-                    loadWorks();
-
-                    return;
-                }
+            event.preventDefault();
 
 
-                if (
-                    page ===
-                    "writings"
-                ) {
-
-                    loadWritings();
-
-                    return;
-                }
+            const page =
+                link.dataset.page;
 
 
-                if (
-                    page ===
-                    "about"
-                ) {
+            if (
+                page ===
+                "works"
+            ) {
 
-                    loadAbout();
-                }
+                loadWorks();
 
             }
-        );
 
-    }
-);
+
+            if (
+                page ===
+                "writings"
+            ) {
+
+                loadWritings();
+
+            }
+
+
+            if (
+                page ===
+                "about"
+            ) {
+
+                loadAbout();
+
+            }
+
+
+        }
+    );
+
+
+});
+
 
 
 /* =========================================================
@@ -1812,6 +1304,7 @@ document.addEventListener(
     "click",
     event => {
 
+
         const backButton =
             event.target.closest(
                 ".back-home"
@@ -1819,7 +1312,6 @@ document.addEventListener(
 
 
         if (!backButton) {
-
             return;
         }
 
@@ -1829,15 +1321,17 @@ document.addEventListener(
 
         backToLanding();
 
+
     }
 );
+
 
 
 /* =========================================================
    NIRMUKA SPRAY PAINT SYSTEM
 ========================================================= */
 
-(function initializeSprayPaint() {
+(function () {
 
 
     /* =====================================================
@@ -1853,6 +1347,7 @@ document.addEventListener(
     if (oldCanvas) {
 
         oldCanvas.remove();
+
     }
 
 
@@ -1865,7 +1360,9 @@ document.addEventListener(
     if (oldNozzle) {
 
         oldNozzle.remove();
+
     }
+
 
 
     /* =====================================================
@@ -1893,14 +1390,9 @@ document.addEventListener(
         );
 
 
-    if (!ctx) {
-
-        return;
-    }
-
 
     /* =====================================================
-       CREATE SPRAY NOZZLE
+       CREATE NOZZLE
     ===================================================== */
 
     const nozzle =
@@ -1918,15 +1410,16 @@ document.addEventListener(
     );
 
 
+
     /* =====================================================
        CANVAS SIZE
     ===================================================== */
 
-    let dpr =
-        1;
+    let dpr = 1;
 
 
     function resizeCanvas() {
+
 
         dpr =
             Math.min(
@@ -1967,6 +1460,8 @@ document.addEventListener(
             0,
             0
         );
+
+
     }
 
 
@@ -1979,8 +1474,9 @@ document.addEventListener(
     );
 
 
+
     /* =====================================================
-       POINTER STATE
+       MOUSE STATE
     ===================================================== */
 
     let mouseX =
@@ -2007,8 +1503,8 @@ document.addEventListener(
         false;
 
 
-    const particles =
-        [];
+    const particles = [];
+
 
 
     /* =====================================================
@@ -2018,6 +1514,7 @@ document.addEventListener(
     document.addEventListener(
         "mousemove",
         event => {
+
 
             previousX =
                 mouseX;
@@ -2061,23 +1558,27 @@ document.addEventListener(
 
 
             nozzle.style.left =
-                mouseX +
-                "px";
+                mouseX + "px";
 
 
             nozzle.style.top =
-                mouseY +
-                "px";
+                mouseY + "px";
 
 
-            if (spraying) {
+            if (
+                spraying
+            ) {
+
 
                 createSpray(
                     mouseX,
                     mouseY,
                     mouseSpeed
                 );
+
+
             }
+
 
         },
         {
@@ -2086,45 +1587,40 @@ document.addEventListener(
     );
 
 
+
     /* =====================================================
-       LEFT MOUSE DOWN
+       LEFT CLICK = SPRAY
+
+       BUT:
+       carousel controls/drag do not spray
     ===================================================== */
 
     document.addEventListener(
         "mousedown",
         event => {
 
+
             if (
-                event.button !==
-                0
+                event.button !== 0
             ) {
 
                 return;
+
             }
 
 
-            /*
-               IMPORTANT:
-
-               Do not spray while user is
-               dragging / operating carousel.
-
-               Otherwise every carousel swipe
-               would also paint the screen.
-            */
-
             if (
                 event.target.closest(
-                    ".works-carousel-shell"
+                    ".works-carousel"
                 )
             ) {
 
                 return;
+
             }
 
 
-            spraying =
-                true;
+            spraying = true;
 
 
             nozzle.classList.add(
@@ -2138,48 +1634,54 @@ document.addEventListener(
                 0
             );
 
+
         }
     );
 
 
+
     /* =====================================================
-       MOUSE RELEASE
+       RELEASE
     ===================================================== */
 
     document.addEventListener(
         "mouseup",
         () => {
 
-            spraying =
-                false;
+
+            spraying = false;
 
 
             nozzle.classList.remove(
                 "spraying"
             );
 
+
         }
     );
+
 
 
     window.addEventListener(
         "blur",
         () => {
 
-            spraying =
-                false;
+
+            spraying = false;
 
 
             nozzle.classList.remove(
                 "spraying"
             );
 
+
         }
     );
 
 
+
     /* =====================================================
-       CREATE SPRAY
+       CREATE SPRAY PARTICLES
     ===================================================== */
 
     function createSpray(
@@ -2187,6 +1689,7 @@ document.addEventListener(
         y,
         speed = 0
     ) {
+
 
         const spread =
             34 +
@@ -2199,7 +1702,6 @@ document.addEventListener(
         const amount =
             Math.min(
                 70,
-
                 30 +
                 Math.floor(
                     speed * .65
@@ -2207,11 +1709,13 @@ document.addEventListener(
             );
 
 
+
         for (
             let i = 0;
             i < amount;
             i++
         ) {
+
 
             const angle =
                 Math.random() *
@@ -2235,38 +1739,44 @@ document.addEventListener(
 
 
             if (
-                random >
-                .97
+                random > .97
             ) {
+
 
                 size =
                     2.8 +
                     Math.random() *
                     3.3;
 
+
             }
 
 
             else if (
-                random >
-                .72
+                random > .72
             ) {
+
 
                 size =
                     1.1 +
                     Math.random() *
                     1.7;
 
+
             }
 
 
             else {
 
+
                 size =
                     .35 +
                     Math.random() *
                     .95;
+
+
             }
+
 
 
             const life =
@@ -2275,58 +1785,59 @@ document.addEventListener(
                 120;
 
 
+
             particles.push({
+
 
                 x:
                     x +
-                    Math.cos(
-                        angle
-                    ) *
+                    Math.cos(angle) *
                     distance,
+
 
                 y:
                     y +
-                    Math.sin(
-                        angle
-                    ) *
+                    Math.sin(angle) *
                     distance,
+
 
                 size:
                     size,
 
+
                 life:
                     life,
+
 
                 maxLife:
                     life,
 
+
                 driftX:
-                    (
-                        Math.random() -
-                        .5
-                    ) *
+                    (Math.random() - .5) *
                     .07,
 
+
                 driftY:
-                    (
-                        Math.random() -
-                        .5
-                    ) *
+                    (Math.random() - .5) *
                     .07
 
+
             });
+
+
         }
 
 
-        /*
-           DENSE CENTER
-        */
+
+        /* dense center */
 
         for (
             let i = 0;
             i < 9;
             i++
         ) {
+
 
             const life =
                 120 +
@@ -2336,55 +1847,62 @@ document.addEventListener(
 
             particles.push({
 
+
                 x:
                     x +
-                    (
-                        Math.random() -
-                        .5
-                    ) *
+                    (Math.random() - .5) *
                     10,
+
 
                 y:
                     y +
-                    (
-                        Math.random() -
-                        .5
-                    ) *
+                    (Math.random() - .5) *
                     10,
+
 
                 size:
                     1.4 +
                     Math.random() *
                     2.4,
 
+
                 life:
                     life,
+
 
                 maxLife:
                     life,
 
+
                 driftX:
                     0,
+
 
                 driftY:
                     0
 
+
             });
+
+
         }
+
+
     }
+
 
 
     /* =====================================================
        CONTINUOUS SPRAY
     ===================================================== */
 
-    let lastSpray =
-        0;
+    let lastSpray = 0;
 
 
     function continuousSpray(
         time
     ) {
+
 
         if (
             spraying &&
@@ -2392,6 +1910,7 @@ document.addEventListener(
             lastSpray >
             25
         ) {
+
 
             createSpray(
                 mouseX,
@@ -2403,8 +1922,13 @@ document.addEventListener(
 
             lastSpray =
                 time;
+
+
         }
+
+
     }
+
 
 
     /* =====================================================
@@ -2414,6 +1938,7 @@ document.addEventListener(
     function draw(
         time
     ) {
+
 
         ctx.clearRect(
             0,
@@ -2428,6 +1953,7 @@ document.addEventListener(
         );
 
 
+
         for (
             let i =
                 particles.length - 1;
@@ -2437,6 +1963,7 @@ document.addEventListener(
             i--
         ) {
 
+
             const particle =
                 particles[i];
 
@@ -2445,10 +1972,11 @@ document.addEventListener(
                 .55;
 
 
+
             if (
-                particle.life <=
-                0
+                particle.life <= 0
             ) {
+
 
                 particles.splice(
                     i,
@@ -2457,7 +1985,10 @@ document.addEventListener(
 
 
                 continue;
+
+
             }
+
 
 
             particle.x +=
@@ -2468,26 +1999,29 @@ document.addEventListener(
                 particle.driftY;
 
 
+
             const ratio =
                 particle.life /
                 particle.maxLife;
+
 
 
             let alpha;
 
 
             if (
-                ratio >
-                .30
+                ratio > .30
             ) {
+
 
                 alpha =
                     .75;
 
+
             }
 
-
             else {
+
 
                 alpha =
                     Math.max(
@@ -2495,7 +2029,10 @@ document.addEventListener(
                         ratio *
                         2.5
                     );
+
+
             }
+
 
 
             ctx.beginPath();
@@ -2506,8 +2043,7 @@ document.addEventListener(
                 particle.y,
                 particle.size,
                 0,
-                Math.PI *
-                2
+                Math.PI * 2
             );
 
 
@@ -2516,18 +2052,24 @@ document.addEventListener(
 
 
             ctx.fill();
+
+
         }
+
 
 
         requestAnimationFrame(
             draw
         );
+
+
     }
 
 
     requestAnimationFrame(
         draw
     );
+
 
 
     /* =====================================================
@@ -2537,6 +2079,7 @@ document.addEventListener(
     document.addEventListener(
         "mouseleave",
         () => {
+
 
             nozzle.style.opacity =
                 "0";
@@ -2550,17 +2093,20 @@ document.addEventListener(
                 "spraying"
             );
 
+
         }
     );
 
 
+
     /* =====================================================
-       RETURN TO WINDOW
+       RETURN
     ===================================================== */
 
     document.addEventListener(
         "mouseenter",
         event => {
+
 
             mouseX =
                 event.clientX;
@@ -2575,17 +2121,16 @@ document.addEventListener(
 
 
             nozzle.style.left =
-                mouseX +
-                "px";
+                mouseX + "px";
 
 
             nozzle.style.top =
-                mouseY +
-                "px";
+                mouseY + "px";
 
 
             nozzle.style.opacity =
                 "1";
+
 
         }
     );
@@ -2594,19 +2139,20 @@ document.addEventListener(
 })();
 
 
+
 /* =========================================================
    NIRMUKA ARTWORK PROTECTION
 
-   ACTIVE ON:
-   - WORKS CAROUSEL IMAGES
-   - ARTWORK DETAIL IMAGE
+   ACTIVE:
+   - CAROUSEL / WORKS
+   - ARTWORK DETAIL
 ========================================================= */
 
-(function initializeArtworkProtection() {
+(function () {
 
 
     /* =====================================================
-       REMOVE OLD WARNING
+       CREATE WARNING
     ===================================================== */
 
     const oldWarning =
@@ -2618,12 +2164,9 @@ document.addEventListener(
     if (oldWarning) {
 
         oldWarning.remove();
+
     }
 
-
-    /* =====================================================
-       CREATE WARNING
-    ===================================================== */
 
     const warning =
         document.createElement(
@@ -2638,7 +2181,9 @@ document.addEventListener(
     warning.innerHTML = `
 
         <div class="theft-warning-text">
+
             THOU SHALL NOT STEAL !!
+
         </div>
 
     `;
@@ -2649,8 +2194,10 @@ document.addEventListener(
     );
 
 
+
     let warningTimer =
         null;
+
 
 
     /* =====================================================
@@ -2658,6 +2205,7 @@ document.addEventListener(
     ===================================================== */
 
     function showWarning() {
+
 
         clearTimeout(
             warningTimer
@@ -2673,40 +2221,44 @@ document.addEventListener(
             setTimeout(
                 () => {
 
+
                     warning.classList.remove(
                         "show"
                     );
 
+
                 },
                 1500
             );
+
+
     }
 
 
+
     /* =====================================================
-       RIGHT CLICK PROTECTION
+       RIGHT CLICK
     ===================================================== */
 
     document.addEventListener(
         "contextmenu",
         event => {
 
+
             const protectedArtwork =
                 event.target.closest(
-                    ".art-card img, #art-image, .artwork-image img"
+
+                    ".carousel-artwork img, .art-card img, #art-image, .artwork-image img"
+
                 );
 
-
-            /*
-               Right click outside artwork:
-               normal browser behaviour.
-            */
 
             if (
                 !protectedArtwork
             ) {
 
                 return;
+
             }
 
 
@@ -2715,21 +2267,26 @@ document.addEventListener(
 
             showWarning();
 
+
         }
     );
 
 
+
     /* =====================================================
-       BLOCK IMAGE DRAG
+       BLOCK DRAG
     ===================================================== */
 
     document.addEventListener(
         "dragstart",
         event => {
 
+
             const protectedArtwork =
                 event.target.closest(
-                    ".art-card img, #art-image, .artwork-image img"
+
+                    ".carousel-artwork img, .art-card img, #art-image, .artwork-image img"
+
                 );
 
 
@@ -2738,26 +2295,32 @@ document.addEventListener(
             ) {
 
                 return;
+
             }
 
 
             event.preventDefault();
 
+
         }
     );
 
 
+
     /* =====================================================
-       BLOCK IMAGE SELECTION
+       BLOCK SELECTION
     ===================================================== */
 
     document.addEventListener(
         "selectstart",
         event => {
 
+
             const protectedArtwork =
                 event.target.closest(
-                    ".art-card img, #art-image, .artwork-image img"
+
+                    ".carousel-artwork img, .art-card img, #art-image, .artwork-image img"
+
                 );
 
 
@@ -2766,10 +2329,12 @@ document.addEventListener(
             ) {
 
                 return;
+
             }
 
 
             event.preventDefault();
+
 
         }
     );
