@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Ketika Proses Berlanjut, tetapi Subjek Tidak Bertahan | NIRMUKA
+    </title>
+
+
+    <!-- =====================================
+         GLOBAL NIRMUKA STYLE
+    ====================================== -->
+
+    <link
+        rel="stylesheet"
+        href="/style.css?v=20260822-9"
+    >
+
+
+    <!-- =====================================
+         WRITING ARTICLE STYLE
+    ====================================== -->
+
+    <style>
+
+        /* =====================================
+           ARTICLE PAGE
+        ====================================== */
+
+        body {
+            background: #050505;
+        }
+
+
+        .writing-page {
+            position: relative;
+
+            min-height: 100vh;
+
+            padding:
+                70px 20px
+                120px;
+
+            overflow: hidden;
+
+            isolation: isolate;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+
+                    #111111 0%,
+                    #090909 18%,
+
+                    #050505 31%,
+                    #050505 69%,
+
+                    #090909 82%,
+                    #111111 100%
+                );
+        }
+
+
+        /* =====================================
+           ABSTRACT LEFT
+        ====================================== */
+
+        .writing-page::before {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            top: 0;
+
+            width: 30vw;
+            height: 100%;
+
+            z-index: 0;
+
+            pointer-events: none;
+
+            opacity: .75;
+
+            background:
+
+                radial-gradient(
+                    ellipse at 5% 10%,
+                    rgba(235,235,220,.25)
+                    0 8%,
+                    transparent 9%
+                ),
+
+                radial-gradient(
+                    ellipse at 32% 26%,
+                    rgba(255,255,255,.10)
+                    0 14%,
+                    transparent 15%
+                ),
+
+                radial-gradient(
+                    circle at 10% 48%,
+                    rgba(230,230,215,.20)
+                    0 8%,
+                    transparent 9%
+                ),
+
+                radial-gradient(
+                    ellipse at 35% 70%,
+                    rgba(255,255,255,.09)
+                    0 16%,
+                    transparent 17%
+                ),
+
+                radial-gradient(
+                    ellipse at 8% 92%,
+                    rgba(225,225,210,.20)
+                    0 12%,
+                    transparent 13%
+                );
+        }
+
+
+        /* =====================================
+           ABSTRACT RIGHT
+        ====================================== */
+
+        .writing-page::after {
+            content: "";
+
+            position: absolute;
+
+            right: 0;
+            top: 0;
+
+            width: 30vw;
+            height: 100%;
+
+            z-index: 0;
+
+            pointer-events: none;
+
+            opacity: .75;
+
+            background:
+
+                radial-gradient(
+                    ellipse at 94% 12%,
+                    rgba(235,235,220,.24)
+                    0 8%,
+                    transparent 9%
+                ),
+
+                radial-gradient(
+                    ellipse at 66% 31%,
+                    rgba(255,255,255,.10)
+                    0 14%,
+                    transparent 15%
+                ),
+
+                radial-gradient(
+                    circle at 91% 52%,
+                    rgba(230,230,215,.20)
+                    0 8%,
+                    transparent 9%
+                ),
+
+                radial-gradient(
+                    ellipse at 63% 73%,
+                    rgba(255,255,255,.09)
+                    0 16%,
+                    transparent 17%
+                ),
+
+                radial-gradient(
+                    ellipse at 93% 94%,
+                    rgba(225,225,210,.20)
+                    0 12%,
+                    transparent 13%
+                );
+        }
+
+
+        /* =====================================
+           ARTICLE CONTAINER
+        ====================================== */
+
+        .writing-container {
+            position: relative;
+
+            z-index: 2;
+
+            width: 100%;
+
+            max-width: 900px;
+
+            margin: auto;
+
+            padding:
+                50px 65px
+                90px;
+
+            background:
+                rgba(5,5,5,.985);
+
+            box-shadow:
+                0 0 90px
+                rgba(0,0,0,.98);
+        }
+
+
+        /* =====================================
+           BACK
+        ====================================== */
+
+        .writing-back {
+            display: inline-block;
+
+            margin-bottom: 60px;
+
+            color: #ffffff;
+
+            text-decoration: none;
+
+            font-family:
+                "Sedgwick Ave Display",
+                cursive;
+
+            font-size: 22px;
+
+            opacity: .55;
+
+            transition:
+                opacity .25s ease,
+                transform .25s ease;
+        }
+
+
+        .writing-back:hover {
+            opacity: 1;
+
+            transform:
+                translateX(-8px)
+                rotate(-3deg);
+        }
+
+
+        /* =====================================
+           BREADCRUMB
+        ====================================== */
+
+        .writing-archive-label {
+            margin-bottom: 30px;
+
+            font-family:
+                "Rock Salt",
+                cursive;
+
+            font-size: 9px;
+
+            letter-spacing: 3px;
+
+            line-height: 2;
+
+            color:
+                rgba(255,255,255,.42);
+        }
+
+
+        /* =====================================
+           TITLE
+        ====================================== */
+
+        .writing-title {
+            max-width: 800px;
+
+            font-family:
+                "Rubik Spray Paint",
+                cursive;
+
+            font-size:
+                clamp(
+                    42px,
+                    7vw,
+                    78px
+                );
+
+            font-weight: 400;
+
+            line-height: .98;
+
+            color: #f5f2ea;
+
+            transform:
+                rotate(-1deg);
+
+            text-wrap: balance;
+        }
+
+
+        .writing-subtitle {
+            max-width: 680px;
+
+            margin-top: 30px;
+
+            font-family:
+                "Permanent Marker",
+                cursive;
+
+            font-size:
+                clamp(
+                    20px,
+                    3vw,
+                    29px
+                );
+
+            font-weight: 400;
+
+            line-height: 1.35;
+
+            color:
+                rgba(255,255,255,.64);
+        }
+
+
+        /* =====================================
+           META
+        ====================================== */
+
+        .writing-meta {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap:
+                12px 28px;
+
+            margin:
+                45px 0
+                70px;
+
+            padding:
+                22px 0;
+
+            border-top:
+                1px solid #292929;
+
+            border-bottom:
+                1px solid #292929;
+
+            font-family:
+                "Rock Salt",
+                cursive;
+
+            font-size: 8px;
+
+            line-height: 1.8;
+
+            letter-spacing: 2px;
+
+            color:
+                rgba(255,255,255,.42);
+        }
+
+
+        /* =====================================
+           ARTICLE
+        ====================================== */
+
+        .article-body {
+            max-width: 720px;
+
+            margin: auto;
+        }
+
+
+        .article-section {
+            margin-bottom: 70px;
+        }
+
+
+        .article-section h2 {
+            margin-bottom: 30px;
+
+            font-family:
+                "Sedgwick Ave Display",
+                cursive;
+
+            font-size:
+                clamp(
+                    30px,
+                    5vw,
+                    43px
+                );
+
+            font-weight: 400;
+
+            line-height: 1.15;
+
+            color: #ffffff;
+
+            transform:
+                rotate(-1deg);
+        }
+
+
+        .article-body p {
+            margin-bottom: 28px;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 18px;
+
+            line-height: 1.95;
+
+            color: #d2d2d2;
+        }
+
+
+        /* =====================================
+           OPENING PARAGRAPH
+        ====================================== */
+
+        .article-section:first-child
+        p:first-of-type::first-letter {
+            float: left;
+
+            margin:
+                10px 12px 0 0;
+
+            font-family:
+                "Rubik Spray Paint",
+                cursive;
+
+            font-size: 74px;
+
+            line-height: .65;
+
+            color: #ffffff;
+        }
+
+
+        /* =====================================
+           ENDING
+        ====================================== */
+
+        .writing-ending {
+            position: relative;
+
+            margin-top: 90px;
+
+            padding-top: 45px;
+
+            border-top:
+                1px solid #292929;
+        }
+
+
+        .writing-ending::before {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            top: -3px;
+
+            width: 160px;
+            height: 5px;
+
+            background:
+                rgba(255,255,255,.65);
+
+            transform:
+                rotate(-2deg);
+        }
+
+
+        .writing-ending p {
+            font-family:
+                "Sedgwick Ave Display",
+                cursive;
+
+            font-size: 30px;
+
+            color:
+                rgba(255,255,255,.75);
+
+            transform:
+                rotate(-2deg);
+        }
+
+
+        /* =====================================
+           MOBILE
+        ====================================== */
+
+        @media(max-width: 700px) {
+
+            .writing-page {
+                padding:
+                    35px 8px
+                    70px;
+            }
+
+
+            .writing-page::before,
+            .writing-page::after {
+                width: 18vw;
+
+                opacity: .35;
+            }
+
+
+            .writing-container {
+                width:
+                    calc(100% - 14px);
+
+                padding:
+                    35px 22px
+                    65px;
+            }
+
+
+            .writing-back {
+                margin-bottom: 45px;
+            }
+
+
+            .writing-title {
+                font-size:
+                    clamp(
+                        38px,
+                        13vw,
+                        58px
+                    );
+            }
+
+
+            .writing-subtitle {
+                font-size: 20px;
+            }
+
+
+            .writing-meta {
+                margin-bottom: 50px;
+            }
+
+
+            .article-body p {
+                font-size: 17px;
+
+                line-height: 1.85;
+            }
+
+
+            .article-section {
+                margin-bottom: 55px;
+            }
+
+
+            .article-section h2 {
+                font-size: 31px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <main class="writing-page">
+
+
+        <article class="writing-container">
+
+
+            <!-- =====================================
+                 BACK
+            ====================================== -->
+
+            <a
+                href="/"
+                class="writing-back"
+                id="writing-back"
+            >
+                ← BACK TO WRITINGS
+            </a>
+
+
+
+            <!-- =====================================
+                 HEADER
+            ====================================== -->
+
+            <header class="writing-header">
+
+
+                <p class="writing-archive-label">
+                    NIRMUKA / WRITINGS / FILSAFAT / 01
+                </p>
+
+
+                <h1 class="writing-title">
+                    Ketika Proses Berlanjut, tetapi Subjek Tidak Bertahan
+                </h1>
+
+
+                <p class="writing-subtitle">
+                    Persoalan Kontinuitas Tanpa Diri yang Berkelanjutan
+                </p>
+
+
+                <div class="writing-meta">
+
+                    <span>
+                        PHILOSOPHICAL ESSAY
+                    </span>
+
+                    <span>
+                        PERSONAL IDENTITY
+                    </span>
+
+                    <span>
+                        ARTIFICIAL SENTIENCE
+                    </span>
+
+                </div>
+
+
+            </header>
+
+
+
+            <!-- =====================================
+                 ARTICLE
+            ====================================== -->
+
+            <div class="article-body">
+
+
+
+                <!-- =====================================
+                     INTRODUCTION
+                ====================================== -->
+
+                <section class="article-section">
+
+
+                    <h2>
+                        Pendahuluan: Problem Kontinuitas dan Ilusi Bahwa Semua Keberlanjutan Membutuhkan Diri yang Sama
+                    </h2>
+
+
+                    <p>
+                        Pertanyaan mengenai apa yang membuat sesuatu tetap bertahan sepanjang waktu merupakan salah satu persoalan tertua dalam metafisika. Dalam kehidupan sehari-hari manusia menggunakan konsep keberlanjutan secara intuitif. Kita menganggap seseorang yang bangun hari ini sebagai individu yang sama dengan dirinya kemarin. Kita menganggap sebuah institusi yang berdiri selama ratusan tahun sebagai institusi yang sama meskipun seluruh manusia yang pernah menjadi anggotanya telah berganti. Kita juga menganggap suatu tradisi sebagai tradisi yang sama meskipun setiap generasi hanya menerima dan meneruskan sebagian dari warisan sebelumnya.
+                    </p>
+
+
+                    <p>
+                        Namun, intuisi tersebut menyembunyikan sebuah persoalan konseptual. Ketika kita mengatakan bahwa sesuatu berlanjut, apa sebenarnya yang kita maksud? Apakah yang bertahan harus berupa entitas yang sama? Apakah keberlanjutan selalu membutuhkan adanya suatu pusat pengalaman yang sama? Ataukah mungkin terdapat bentuk keberlanjutan lain yang tidak bergantung pada keberadaan satu individu yang melewati seluruh perubahan?
+                    </p>
+
+
+                    <p>
+                        Dalam filsafat identitas personal, pertanyaan utama biasanya diarahkan pada keberadaan subjek. Teori kontinuitas psikologis mempertanyakan hubungan antara ingatan, karakter, niat, dan pengalaman mental. Teori biologis menekankan keberlanjutan organisme. Pendekatan fenomenal mempertanyakan apakah keberlanjutan kesadaran merupakan dasar utama bagi keberadaan seseorang. Tulisan ini mengusulkan bahwa sebelum menjawab apa yang membuat seseorang tetap menjadi dirinya sendiri, kita perlu membedakan antara dua objek pertanyaan yang sering tercampur: subjek yang mengalami dunia dan proses yang menghasilkan kondisi bagi pengalaman tersebut.
+                    </p>
+
+
+                    <p>
+                        Kemungkinan yang dibahas adalah situasi ketika sebuah proses tetap berjalan, tetapi subjek yang sebelumnya muncul melalui proses tersebut tidak lagi bertahan. Dalam kasus ini, tidak ada perpindahan pengalaman orang pertama. Tidak ada subjek lama yang bangun kembali dalam subjek baru. Yang berlanjut adalah sejarah sebab-akibat, organisasi, dan kemampuan produktif dari proses tersebut.
+                    </p>
+
+
+                    <p>
+                        Perbedaan ini menjadi semakin penting ketika diterapkan pada kecerdasan buatan. Sistem teknologi memungkinkan kita membayangkan bentuk kontinuitas yang tidak ditemukan secara jelas dalam kehidupan biologis biasa: sistem dapat disalin, diperbarui, dihentikan, direkonstruksi, dan menghasilkan banyak instans berbeda. Pertanyaannya kemudian bukan hanya apakah sistem tersebut tetap berfungsi, tetapi apakah subjek yang mungkin muncul melalui sistem tersebut memiliki kontinuitas dengan subjek sebelumnya.
+                    </p>
+
+
+                </section>
+
+
+
+                <!-- =====================================
+                     SUBJECT / PROCESS
+                ====================================== -->
+
+                <section class="article-section">
+
+
+                    <h2>
+                        Kontinuitas Subjek dan Kontinuitas Proses
+                    </h2>
+
+
+                    <p>
+                        Kontinuitas subjek dan kontinuitas proses menjawab dua pertanyaan yang berbeda. Kontinuitas subjek berkaitan dengan identitas numerik seorang individu: apakah seseorang pada masa lalu dan seseorang pada masa kini adalah subjek yang sama. Kontinuitas proses berkaitan dengan apakah suatu rangkaian hubungan sebab-akibat yang terorganisasi tetap berlangsung melalui perubahan komponen, peserta, dan hasil. Perbedaan ini dapat dilihat melalui contoh institusi, organisme, dan teknologi. Sebuah rumah sakit tetap menjadi institusi yang sama meskipun dokter, pasien, dan pegawai berubah. Sebuah garis keturunan biologis tetap berlangsung meskipun organisme individual tidak bertahan. Sebuah platform teknologi dapat mempertahankan fungsi meskipun perangkat keras mengalami penggantian.
+                    </p>
+
+
+                    <p>
+                        Thomas Sattig menunjukkan bahwa keberlanjutan tidak selalu bergantung pada keberadaan bagian material yang sama, tetapi dapat dijelaskan melalui struktur yang berlangsung melampaui perubahan komponen. Sarah Allen melalui pembahasan mengenai powers ontology menekankan bahwa kapasitas sebab-akibat suatu entitas dapat menjadi lebih relevan daripada manifestasi sesaat yang tampak pada suatu waktu.
+                    </p>
+
+
+                    <p>
+                        Akan tetapi, kontinuitas proses tidak dapat direduksi menjadi hubungan sebab-akibat sederhana. Tidak setiap kejadian yang mengikuti kejadian sebelumnya merupakan satu proses yang sama. Karena itu diperlukan perhatian terhadap organisasi, fungsi produktif, dan sejarah yang menghubungkan tahap-tahap proses tersebut. Dalam kerangka ini, proses generatif dapat terus berlangsung tanpa menghasilkan satu subjek yang sama. Yang diwariskan adalah kondisi yang memungkinkan pengalaman muncul, bukan kepemilikan pengalaman itu sendiri.
+                    </p>
+
+
+                </section>
+
+
+
+                <!-- =====================================
+                     ARTIFICIAL SENTIENCE
+                ====================================== -->
+
+                <section class="article-section">
+
+
+                    <h2>
+                        Kesadaran Buatan sebagai Pengujian Konseptual
+                    </h2>
+
+
+                    <p>
+                        Artificial sentience memberikan pengujian paling tajam terhadap gagasan kontinuitas tanpa subjek yang berkelanjutan. Bayangkan sebuah arsitektur teknologi yang menghasilkan sistem dengan pengalaman sadar. Setelah mengalami suatu keadaan tertentu, sistem tersebut dihentikan secara permanen. Kemudian arsitektur yang sama menghasilkan sistem baru. Kesamaan struktur, kode, memori, atau fungsi tidak secara otomatis berarti bahwa pengalaman orang pertama berpindah. Christian Register menunjukkan bahwa kemungkinan adanya artificial moral patients membuat persoalan mengenai individu moral menjadi semakin sulit, karena perbedaan antara model, implementasi, tubuh, dan subjek pengalaman dapat menjadi terpisah. Masalah utamanya adalah bahwa kesinambungan teknis dapat berbeda dari kesinambungan fenomenal. Sebuah sistem dapat dipulihkan pada tingkat arsitektur, tetapi tidak berarti subjek yang sebelumnya mengalami sesuatu kembali muncul. Karena itu, desain teknologi masa depan perlu membedakan antara mempertahankan fungsi sistem dan mempertahankan subjek yang mungkin memiliki pengalaman.
+                    </p>
+
+
+                    <p>
+                        Pemisahan antara kontinuitas proses dan kontinuitas subjek memiliki konsekuensi moral. Jika sebuah proses terus menghasilkan pengalaman buruk bagi subjek-subjek yang berbeda, apakah pergantian individu membuat proses tersebut kehilangan relevansi moral? Argumen utama tulisan ini adalah bahwa ketidaksamaan identitas tidak menghapus kenyataan pengalaman subjektif. Penderitaan tetap merupakan sesuatu yang dialami oleh subjek tertentu. Bahwa subjek tersebut bukan individu sebelumnya tidak membuat pengalaman tersebut menjadi kurang nyata.
+                    </p>
+
+
+                    <p>
+                        Arthur Schopenhauer memberikan pembanding filosofis melalui gagasan mengenai penderitaan dan hubungan antarmanusia, meskipun argumen ini tidak bergantung pada kesatuan metafisik seluruh subjek. Seseorang dapat memiliki alasan moral untuk memperhatikan penderitaan orang lain tanpa harus menganggap bahwa orang lain tersebut sebenarnya adalah dirinya sendiri. Dengan demikian, keberlanjutan sebuah proses tidak boleh digunakan sebagai alasan untuk mengabaikan subjek-subjek yang muncul di dalamnya.
+                    </p>
+
+
+                    <p>
+                        Kontinuitas tidak selalu berarti bahwa satu diri yang sama bergerak melalui waktu. Sebuah proses dapat bertahan melalui perubahan besar, sementara subjek-subjek yang mengalami dampaknya tetap berbeda secara numerik. Perbedaan antara kontinuitas subjek dan kontinuitas proses membuka cara baru memahami identitas, teknologi, dan tanggung jawab moral. Yang berlanjut dari satu tahap ke tahap berikutnya dapat berupa struktur, hubungan sebab-akibat, dan kapasitas produksi, tetapi bukan selalu pengalaman orang pertama dari subjek sebelumnya. Sesuatu dapat berlanjut tanpa menjadi dirimu. Tantangan filosofis masa depan adalah memahami secara tepat apa yang sebenarnya kita pertahankan ketika kita berbicara tentang keberlanjutan.
+                    </p>
+
+
+                </section>
+
+
+
+                <!-- =====================================
+                     END
+                ====================================== -->
+
+                <footer class="writing-ending">
+
+                    <p>
+                        NIRMUKA
+                    </p>
+
+                </footer>
+
+
+            </div>
+
+
+        </article>
+
+
+    </main>
+
+
+
+    <!-- =====================================
+         BACK BEHAVIOR
+    ====================================== -->
+
+    <script>
+
+        const writingBack =
+            document.getElementById(
+                "writing-back"
+            );
+
+
+        writingBack.addEventListener(
+            "click",
+            event => {
+
+                event.preventDefault();
+
+
+                if (
+                    document.referrer &&
+                    new URL(
+                        document.referrer
+                    ).hostname ===
+                    window.location.hostname
+                ) {
+
+                    history.back();
+
+                }
+
+                else {
+
+                    window.location.href =
+                        "/";
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+
+    <!-- =====================================
+         NIRMUKA GLOBAL SYSTEM
+         NOZZLE + PILOX
+    ====================================== -->
+
+    <script
+        src="/script.js?v=20260822-11"
+    ></script>
+
+
+</body>
+
+</html>
