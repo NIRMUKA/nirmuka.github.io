@@ -1,27 +1,107 @@
-/* =========================================================
-
-   NIRMUKA WRITINGS
-   PHILOSOPHICAL MANUSCRIPT STYLE
-
-========================================================= */
+/* =====================================================
+   NIRMUKA WRITINGS SYSTEM
+===================================================== */
 
 
 
-.article-page {
+/* ===========================
+   WRITINGS ARCHIVE
+=========================== */
 
+
+.writings-page {
 
     min-height:100vh;
 
+    background:#050505;
 
-    background:#0a0a0a;
+    color:white;
+
+    padding:100px 30px;
+
+}
 
 
-    color:#e8e8e8;
+
+.writings-container {
+
+    max-width:1100px;
+
+    margin:auto;
+
+}
 
 
-    padding:
 
-    100px 20px 180px;
+
+
+
+.writing-header {
+
+    text-align:center;
+
+    margin-bottom:90px;
+
+}
+
+
+
+.writing-header .work-number {
+
+    font-family:Arial,sans-serif;
+
+    font-size:11px;
+
+    letter-spacing:5px;
+
+    opacity:.5;
+
+}
+
+
+
+.writing-header h1 {
+
+
+    font-family:
+    "Times New Roman",
+    serif;
+
+
+    font-size:90px;
+
+
+    font-weight:400;
+
+
+    margin:40px 0;
+
+
+}
+
+
+
+.writing-header p {
+
+
+    max-width:650px;
+
+
+    margin:auto;
+
+
+    font-family:
+    "Times New Roman",
+    serif;
+
+
+    font-size:22px;
+
+
+    line-height:1.8;
+
+
+    opacity:.7;
 
 
 }
@@ -32,61 +112,145 @@
 
 
 
-.article-container {
+/* CATEGORY */
 
 
-    width:100%;
+.writing-category-menu {
 
 
-    max-width:850px;
+    display:grid;
 
 
-    margin:0 auto;
+    grid-template-columns:
+    repeat(3,1fr);
 
 
-}
-
-
-
-
-
-
-
-/* ==============================
-   BACK
-============================== */
-
-
-.article-container .back-home {
-
-
-    display:block;
-
-
-    text-align:left;
+    gap:30px;
 
 
     margin-bottom:100px;
 
 
+}
+
+
+
+
+.writing-category-menu button {
+
+
+    height:170px;
+
+
+    background:none;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.35);
+
+
+    color:white;
+
+
     font-family:
 
-    Arial,
-    sans-serif;
+    "Times New Roman",
+    serif;
 
 
-    font-size:11px;
+    font-size:38px;
 
 
-    letter-spacing:5px;
+    cursor:pointer;
 
 
-    text-transform:uppercase;
+    transition:.3s;
 
 
-    color:
+}
 
-    rgba(255,255,255,.45);
+
+
+.writing-category-menu button:hover {
+
+
+    background:white;
+
+
+    color:black;
+
+
+}
+
+
+
+
+
+
+
+
+/* LIST */
+
+
+.writing-title {
+
+
+    font-family:
+
+    "Times New Roman",
+    serif;
+
+
+    font-size:50px;
+
+
+    text-align:center;
+
+
+    margin-bottom:60px;
+
+
+}
+
+
+
+
+
+
+.writing-items {
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+}
+
+
+
+
+
+.writing-item {
+
+
+    display:flex;
+
+
+    gap:30px;
+
+
+    padding:40px 0;
+
+
+    border-bottom:
+
+    1px solid rgba(255,255,255,.2);
+
+
+    color:white;
 
 
     text-decoration:none;
@@ -100,10 +264,61 @@
 
 
 
-.article-container .back-home:hover {
+.writing-number {
 
 
-    color:white;
+    font-family:Arial,sans-serif;
+
+
+    opacity:.5;
+
+
+}
+
+
+
+
+
+.writing-data h2 {
+
+
+    font-family:
+
+    "Times New Roman",
+    serif;
+
+
+    font-size:38px;
+
+
+    font-weight:400;
+
+
+    margin:0;
+
+
+}
+
+
+
+
+
+.writing-data p {
+
+
+    font-family:
+
+    "Times New Roman",
+    serif;
+
+
+    font-size:20px;
+
+
+    line-height:1.7;
+
+
+    opacity:.7;
 
 
 }
@@ -116,9 +331,41 @@
 
 
 
-/* ==============================
-   HEADER
-============================== */
+/* ===========================
+   ARTICLE READING
+=========================== */
+
+
+.article-page {
+
+
+    min-height:100vh;
+
+
+    background:#080808;
+
+
+    color:white;
+
+
+    padding:100px 20px;
+
+
+}
+
+
+
+.article-container {
+
+
+    max-width:850px;
+
+
+    margin:auto;
+
+
+}
+
 
 
 .article-header {
@@ -127,42 +374,10 @@
     text-align:center;
 
 
-    margin-bottom:120px;
+    margin-bottom:100px;
 
 
 }
-
-
-
-.article-header .work-number {
-
-
-    font-family:
-
-    Arial,
-    sans-serif;
-
-
-    font-size:10px;
-
-
-    letter-spacing:6px;
-
-
-    text-transform:uppercase;
-
-
-    color:
-
-    rgba(255,255,255,.45);
-
-
-}
-
-
-
-
-
 
 
 
@@ -172,157 +387,26 @@
     font-family:
 
     "Times New Roman",
-    Times,
     serif;
 
 
     font-weight:400;
 
 
-    font-size:
-
-    clamp(
-        42px,
-        5vw,
-        68px
-    );
+    font-size:60px;
 
 
-    line-height:1.25;
-
-
-    margin:
-
-    50px auto 35px;
-
-
-    max-width:800px;
-
-
-    color:#f5f5f5;
+    line-height:1.3;
 
 
 }
 
-
-
-
-
-
-
-.article-header > p:not(.work-number) {
-
-
-    font-family:
-
-    "Times New Roman",
-    Times,
-    serif;
-
-
-    font-size:22px;
-
-
-    font-style:italic;
-
-
-    line-height:1.7;
-
-
-    max-width:700px;
-
-
-    margin:auto;
-
-
-    color:
-
-    rgba(255,255,255,.65);
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==============================
-   META
-============================== */
-
-
-.article-meta {
-
-
-    margin-top:50px;
-
-
-    display:flex;
-
-
-    justify-content:center;
-
-
-    gap:35px;
-
-
-    flex-wrap:wrap;
-
-
-}
-
-
-
-
-.article-meta span {
-
-
-    font-family:
-
-    Arial,
-    sans-serif;
-
-
-    font-size:10px;
-
-
-    letter-spacing:4px;
-
-
-    text-transform:uppercase;
-
-
-    color:
-
-    rgba(255,255,255,.55);
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==============================
-   CONTENT
-============================== */
 
 
 .article-content {
 
 
-    width:100%;
-
-
-    max-width:760px;
+    max-width:750px;
 
 
     margin:auto;
@@ -331,7 +415,6 @@
     font-family:
 
     "Times New Roman",
-    Times,
     serif;
 
 
@@ -339,19 +422,7 @@
 
 
 
-
-
-
-
-
 .article-content p {
-
-
-    font-family:
-
-    "Times New Roman",
-    Times,
-    serif;
 
 
     font-size:22px;
@@ -363,293 +434,46 @@
     text-align:justify;
 
 
-    margin-bottom:50px;
-
-
-    color:
-
-    rgba(255,255,255,.88);
+    margin-bottom:45px;
 
 
 }
 
-
-
-
-
-
-
-/* DROP CAP */
-
-
-.article-content p:first-child::first-letter {
-
-
-    float:left;
-
-
-    font-size:95px;
-
-
-    line-height:.75;
-
-
-    padding-right:15px;
-
-
-    font-weight:bold;
-
-
-    color:white;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==============================
-   SECTION TITLE
-============================== */
 
 
 .article-content h2 {
 
 
+    text-align:center;
+
+
     font-family:
 
     "Times New Roman",
-    Times,
     serif;
-
-
-    font-size:38px;
 
 
     font-weight:400;
 
 
-    text-align:center;
+    font-size:35px;
 
 
-    line-height:1.4;
-
-
-    margin:
-
-    100px 0 60px;
-
-
-    color:#fff;
+    margin:90px 0 50px;
 
 
 }
 
 
 
-
-
-
-
-/* ==============================
-   QUOTE
-============================== */
-
-
-.article-content blockquote {
-
-
-    max-width:650px;
-
-
-    margin:
-
-    100px auto;
-
-
-    padding:40px 0;
-
-
-    border-top:
-
-    1px solid rgba(255,255,255,.2);
-
-
-    border-bottom:
-
-    1px solid rgba(255,255,255,.2);
-
-
-    text-align:center;
-
-
-    font-family:
-
-    "Times New Roman",
-    Times,
-    serif;
-
-
-    font-size:34px;
-
-
-    font-style:italic;
-
-
-    line-height:1.5;
-
-
-    color:white;
-
-
-}
-
-
-
-
-
-
-
-/* ==============================
-   FOOTER SPACE
-============================== */
-
-
-.article-content p:last-child {
-
-
-    margin-bottom:150px;
-
-
-}
-
-
-
-
-
-
-
-/* ==============================
-   MOBILE
-============================== */
 
 
 @media(max-width:700px){
 
 
+.writing-category-menu {
 
-.article-page{
-
-
-padding:
-
-60px 20px 100px;
-
-
-}
-
-
-
-.article-header{
-
-
-margin-bottom:80px;
-
-
-}
-
-
-
-.article-header h1{
-
-
-font-size:38px;
-
-
-}
-
-
-
-.article-content p{
-
-
-font-size:18px;
-
-
-line-height:1.9;
-
-
-}
-
-
-
-.article-content h2{
-
-
-font-size:30px;
-
-
-}
-
-
-
-.article-content blockquote{
-
-
-font-size:25px;
-
-
-}
-
-/* =====================================
-   WRITINGS ARCHIVE PAGE
-===================================== */
-
-
-.writings-page {
-
-min-height:100vh;
-
-background:#050505;
-
-color:white;
-
-padding:100px 30px;
-
-}
-
-
-
-.writings-container {
-
-
-max-width:1100px;
-
-margin:auto;
-
-background:#050505;
-
-position:relative;
-
-z-index:2;
-
-
-}
-
-
-
-.writing-header {
-
-
-text-align:center;
-
-margin-bottom:100px;
-
+    grid-template-columns:1fr;
 
 }
 
@@ -657,166 +481,18 @@ margin-bottom:100px;
 
 .writing-header h1 {
 
-
-font-family:
-"Times New Roman",
-serif;
-
-
-font-size:90px;
-
-
-font-weight:400;
-
-
-letter-spacing:2px;
-
+    font-size:60px;
 
 }
 
 
 
-.writing-header p {
+.article-header h1 {
 
-
-font-family:
-"Times New Roman",
-serif;
-
-
-font-size:20px;
-
-
-line-height:1.8;
-
-
-max-width:650px;
-
-
-margin:30px auto;
-
-
-color:
-rgba(255,255,255,.7);
-
+    font-size:38px;
 
 }
 
 
-
-
-
-.writing-category-menu {
-
-
-display:grid;
-
-
-grid-template-columns:
-repeat(3,1fr);
-
-
-gap:30px;
-
-
-margin-bottom:100px;
-
-
-}
-
-
-
-.writing-category-menu button {
-
-
-height:180px;
-
-
-background:transparent;
-
-
-border:
-
-1px solid rgba(255,255,255,.4);
-
-
-color:white;
-
-
-font-family:
-"Times New Roman",
-serif;
-
-
-font-size:40px;
-
-
-cursor:pointer;
-
-
-transition:.4s;
-
-
-}
-
-
-
-.writing-category-menu button:hover {
-
-
-background:white;
-
-
-color:black;
-
-
-}
-
-
-
-
-
-.writing-item {
-
-
-display:flex;
-
-
-gap:30px;
-
-
-padding:40px 0;
-
-
-border-bottom:
-
-1px solid rgba(255,255,255,.2);
-
-
-color:white;
-
-
-text-decoration:none;
-
-
-}
-
-
-
-.writing-item h2 {
-
-
-font-family:
-"Times New Roman",
-serif;
-
-
-font-size:40px;
-
-
-font-weight:400;
-
-
-}
 
 }
