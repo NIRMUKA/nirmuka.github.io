@@ -70,7 +70,9 @@ function backToLanding() {
 
 function loadWorks() {
 
-    if (!content) return;
+    if (!content) {
+        return;
+    }
 
     curtainTransition(() => {
 
@@ -80,17 +82,23 @@ function loadWorks() {
 
             <div class="section-inner">
 
-                <a href="#" class="back-home">
+                <a
+                    href="#"
+                    class="back-home"
+                >
                     ← BACK
                 </a>
+
 
                 <p class="work-number">
                     ARCHIVE / WORKS
                 </p>
 
+
                 <h2>
                     WORKS
                 </h2>
+
 
                 <div class="works-gallery"></div>
 
@@ -101,7 +109,7 @@ function loadWorks() {
         `;
 
 
-        fetch("/artworks.json?v=20260822-5")
+        fetch("/artworks.json?v=20260822-6")
 
         .then(response => {
 
@@ -124,13 +132,19 @@ function loadWorks() {
                     ".works-gallery"
                 );
 
-            if (!gallery) return;
+
+            if (!gallery) {
+                return;
+            }
 
 
             artworks.forEach(work => {
 
                 const card =
-                    document.createElement("div");
+                    document.createElement(
+                        "div"
+                    );
+
 
                 card.className =
                     "art-card";
@@ -159,7 +173,9 @@ function loadWorks() {
                 `;
 
 
-                gallery.appendChild(card);
+                gallery.appendChild(
+                    card
+                );
 
             });
 
@@ -185,7 +201,9 @@ function loadWorks() {
 
 function loadWritings() {
 
-    if (!content) return;
+    if (!content) {
+        return;
+    }
 
     curtainTransition(() => {
 
@@ -195,17 +213,23 @@ function loadWritings() {
 
             <div class="section-inner">
 
-                <a href="#" class="back-home">
+                <a
+                    href="#"
+                    class="back-home"
+                >
                     ← BACK
                 </a>
+
 
                 <p class="work-number">
                     ARCHIVE / WRITINGS
                 </p>
 
+
                 <h2>
                     WRITINGS
                 </h2>
+
 
                 <p class="section-description">
                     Tulisan-tulisan NIRMUKA akan disusun
@@ -230,7 +254,9 @@ function loadWritings() {
 
 function loadAbout() {
 
-    if (!content) return;
+    if (!content) {
+        return;
+    }
 
     curtainTransition(() => {
 
@@ -240,20 +266,25 @@ function loadAbout() {
 
             <div class="section-inner">
 
-                <a href="#" class="back-home">
+                <a
+                    href="#"
+                    class="back-home"
+                >
                     ← BACK
                 </a>
+
 
                 <p class="work-number">
                     ABOUT NIRMUKA
                 </p>
 
+
                 <h2>
                     ABOUT
                 </h2>
 
-                <div class="about-content">
 
+                <div class="about-content">
 
                     <p>
                         Jujur, saya tidak pernah benar-benar tahu bagaimana cara menjelaskan diri saya sendiri. Saya selalu merasa bahwa manusia terlalu kompleks untuk diringkas menjadi beberapa kalimat sederhana: nama, pekerjaan, pencapaian, atau daftar hal-hal yang pernah dilakukan. Ada terlalu banyak bagian dalam diri seseorang yang tidak terlihat oleh orang lain; ketakutan yang disimpan, pikiran yang tidak pernah diucapkan, ingatan yang terus kembali meskipun kita berusaha melupakannya. Mungkin karena itu saya memilih membuat karya. Bukan karena saya memiliki semua jawaban, tetapi karena saya sendiri sedang mencoba memahami sesuatu yang bahkan sering kali tidak bisa saya jelaskan.
@@ -294,7 +325,6 @@ function loadAbout() {
                         — NIRMUKA
                     </p>
 
-
                 </div>
 
             </div>
@@ -309,7 +339,7 @@ function loadAbout() {
 
 
 /* =====================================
-   MENU
+   MENU CONTROL
 ===================================== */
 
 menuLinks.forEach(link => {
@@ -319,6 +349,7 @@ menuLinks.forEach(link => {
         event => {
 
             event.preventDefault();
+
 
             const page =
                 link.dataset.page;
@@ -359,7 +390,9 @@ document.addEventListener(
             );
 
 
-        if (!backButton) return;
+        if (!backButton) {
+            return;
+        }
 
 
         event.preventDefault();
@@ -372,13 +405,8 @@ document.addEventListener(
 
 
 /* =========================================================
-   =========================================================
    NIRMUKA SPRAY PAINT SYSTEM
-   =========================================================
-   NO POINTER DETECTION.
-   NO EARLY RETURN.
-   SPRAY SYSTEM IS ALWAYS CREATED.
-   =========================================================
+   ALWAYS CREATED
 ========================================================= */
 
 (function () {
@@ -399,20 +427,20 @@ document.addEventListener(
     }
 
 
-    const oldCursor =
+    const oldNozzle =
         document.querySelector(
             ".spray-cursor"
         );
 
 
-    if (oldCursor) {
-        oldCursor.remove();
+    if (oldNozzle) {
+        oldNozzle.remove();
     }
 
 
 
     /* =====================================
-       CREATE SPRAY CANVAS
+       CREATE CANVAS
     ====================================== */
 
     const canvas =
@@ -461,7 +489,8 @@ document.addEventListener(
        CANVAS SIZE
     ====================================== */
 
-    let dpr = 1;
+    let dpr =
+        1;
 
 
     function resizeCanvas() {
@@ -475,26 +504,22 @@ document.addEventListener(
 
         canvas.width =
             Math.floor(
-                window.innerWidth *
-                dpr
+                window.innerWidth * dpr
             );
 
 
         canvas.height =
             Math.floor(
-                window.innerHeight *
-                dpr
+                window.innerHeight * dpr
             );
 
 
         canvas.style.width =
-            window.innerWidth +
-            "px";
+            window.innerWidth + "px";
 
 
         canvas.style.height =
-            window.innerHeight +
-            "px";
+            window.innerHeight + "px";
 
 
         ctx.setTransform(
@@ -520,7 +545,7 @@ document.addEventListener(
 
 
     /* =====================================
-       MOUSE STATE
+       POINTER STATE
     ====================================== */
 
     let mouseX =
@@ -553,7 +578,7 @@ document.addEventListener(
 
 
     /* =====================================
-       MOVE NOZZLE
+       MOUSE MOVE
     ====================================== */
 
     document.addEventListener(
@@ -577,7 +602,6 @@ document.addEventListener(
                 event.clientY;
 
 
-
             const dx =
                 mouseX - previousX;
 
@@ -594,8 +618,7 @@ document.addEventListener(
 
 
             /*
-               FORCE NOZZLE VISIBLE
-               EVERY SINGLE MOUSE MOVE
+               Force nozzle visible.
             */
 
             nozzle.style.display =
@@ -633,17 +656,13 @@ document.addEventListener(
 
 
     /* =====================================
-       MOUSE DOWN = SPRAY
+       LEFT MOUSE DOWN
     ====================================== */
 
     document.addEventListener(
         "mousedown",
         event => {
 
-
-            /*
-               spray only left button
-            */
 
             if (event.button !== 0) {
                 return;
@@ -671,7 +690,7 @@ document.addEventListener(
 
 
     /* =====================================
-       MOUSE UP
+       MOUSE RELEASE
     ====================================== */
 
     document.addEventListener(
@@ -690,10 +709,6 @@ document.addEventListener(
     );
 
 
-
-    /* =====================================
-       WINDOW LOSES FOCUS
-    ====================================== */
 
     window.addEventListener(
         "blur",
@@ -743,10 +758,6 @@ document.addEventListener(
 
 
 
-        /* =====================================
-           AEROSOL PARTICLES
-        ====================================== */
-
         for (
             let i = 0;
             i < amount;
@@ -776,8 +787,6 @@ document.addEventListener(
 
 
 
-            /* large splatter */
-
             if (random > .97) {
 
                 size =
@@ -787,9 +796,6 @@ document.addEventListener(
 
             }
 
-
-            /* middle particles */
-
             else if (random > .72) {
 
                 size =
@@ -798,9 +804,6 @@ document.addEventListener(
                     1.7;
 
             }
-
-
-            /* aerosol mist */
 
             else {
 
@@ -822,35 +825,28 @@ document.addEventListener(
 
             particles.push({
 
-
                 x:
                     x +
                     Math.cos(angle) *
                     distance,
-
 
                 y:
                     y +
                     Math.sin(angle) *
                     distance,
 
-
                 size:
                     size,
-
 
                 life:
                     life,
 
-
                 maxLife:
                     life,
-
 
                 driftX:
                     (Math.random() - .5) *
                     .07,
-
 
                 driftY:
                     (Math.random() - .5) *
@@ -862,9 +858,7 @@ document.addEventListener(
 
 
 
-        /* =====================================
-           DENSE CENTER
-        ====================================== */
+        /* dense center */
 
         for (
             let i = 0;
@@ -881,36 +875,29 @@ document.addEventListener(
 
             particles.push({
 
-
                 x:
                     x +
                     (Math.random() - .5) *
                     10,
-
 
                 y:
                     y +
                     (Math.random() - .5) *
                     10,
 
-
                 size:
                     1.4 +
                     Math.random() *
                     2.4,
 
-
                 life:
                     life,
-
 
                 maxLife:
                     life,
 
-
                 driftX:
                     0,
-
 
                 driftY:
                     0
@@ -924,7 +911,7 @@ document.addEventListener(
 
 
     /* =====================================
-       HOLD = CONTINUOUS SPRAY
+       CONTINUOUS SPRAY
     ====================================== */
 
     let lastSpray =
@@ -938,8 +925,7 @@ document.addEventListener(
 
         if (
             spraying &&
-            time - lastSpray >
-            25
+            time - lastSpray > 25
         ) {
 
 
@@ -1037,10 +1023,7 @@ document.addEventListener(
 
 
 
-            if (
-                ratio > .30
-            ) {
-
+            if (ratio > .30) {
 
                 alpha =
                     .75;
@@ -1048,7 +1031,6 @@ document.addEventListener(
             }
 
             else {
-
 
                 alpha =
                     Math.max(
@@ -1089,7 +1071,6 @@ document.addEventListener(
     }
 
 
-
     requestAnimationFrame(
         draw
     );
@@ -1097,13 +1078,12 @@ document.addEventListener(
 
 
     /* =====================================
-       MOUSE LEAVES WINDOW
+       LEAVE WINDOW
     ====================================== */
 
     document.addEventListener(
         "mouseleave",
         () => {
-
 
             nozzle.style.opacity =
                 "0";
@@ -1123,13 +1103,12 @@ document.addEventListener(
 
 
     /* =====================================
-       MOUSE RETURNS
+       RETURN TO WINDOW
     ====================================== */
 
     document.addEventListener(
         "mouseenter",
         event => {
-
 
             mouseX =
                 event.clientX;
@@ -1163,35 +1142,18 @@ document.addEventListener(
 
 
 /* =========================================================
-   ARTWORK PROTECTION
-   DETAIL PAGE ONLY
+   NIRMUKA ARTWORK PROTECTION
+
+   ACTIVE ON:
+   - WORKS THUMBNAILS
+   - ARTWORK DETAIL IMAGE
 ========================================================= */
 
 (function () {
 
 
-    const artwork =
-        document.getElementById(
-            "art-image"
-        );
-
-
-    /*
-       WORKS PAGE does not contain #art-image.
-
-       Therefore:
-       THOU SHALL NOT STEAL
-       DOES NOT EXIST on WORKS.
-    */
-
-    if (!artwork) {
-        return;
-    }
-
-
-
     /* =====================================
-       WARNING SCREEN
+       CREATE WARNING
     ====================================== */
 
     const warning =
@@ -1224,6 +1186,10 @@ document.addEventListener(
 
 
 
+    /* =====================================
+       SHOW WARNING
+    ====================================== */
+
     function showWarning() {
 
 
@@ -1255,16 +1221,40 @@ document.addEventListener(
 
 
     /* =====================================
-       RIGHT CLICK
+       RIGHT CLICK PROTECTION
     ====================================== */
 
-    artwork.addEventListener(
+    document.addEventListener(
         "contextmenu",
         event => {
 
 
+            const protectedArtwork =
+                event.target.closest(
+                    ".art-card img, #art-image, .artwork-image img"
+                );
+
+
+            /*
+               Right click outside artwork:
+               normal browser behavior.
+            */
+
+            if (!protectedArtwork) {
+                return;
+            }
+
+
+            /*
+               Stop Save Image As...
+            */
+
             event.preventDefault();
 
+
+            /*
+               Show warning.
+            */
 
             showWarning();
 
@@ -1274,18 +1264,24 @@ document.addEventListener(
 
 
     /* =====================================
-       DRAG
+       BLOCK DRAG
     ====================================== */
 
-    artwork.setAttribute(
-        "draggable",
-        "false"
-    );
-
-
-    artwork.addEventListener(
+    document.addEventListener(
         "dragstart",
         event => {
+
+
+            const protectedArtwork =
+                event.target.closest(
+                    ".art-card img, #art-image, .artwork-image img"
+                );
+
+
+            if (!protectedArtwork) {
+                return;
+            }
+
 
             event.preventDefault();
 
@@ -1295,12 +1291,24 @@ document.addEventListener(
 
 
     /* =====================================
-       SELECT
+       BLOCK SELECTION
     ====================================== */
 
-    artwork.addEventListener(
+    document.addEventListener(
         "selectstart",
         event => {
+
+
+            const protectedArtwork =
+                event.target.closest(
+                    ".art-card img, #art-image, .artwork-image img"
+                );
+
+
+            if (!protectedArtwork) {
+                return;
+            }
+
 
             event.preventDefault();
 
