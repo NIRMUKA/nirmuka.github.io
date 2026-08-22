@@ -1,44 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
-
 
 <meta charset="UTF-8">
 
-
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<title>
-NIRMUKA | Artwork
-</title>
+<title>NIRMUKA | Artwork</title>
 
 
-
-<link
-rel="stylesheet"
-href="/style.css?v=3"
-/>
-
+<link rel="stylesheet" href="/style.css?v=20260822">
 
 
 </head>
 
 
 
-
 <body>
-
-
-
-<!-- =====================================
-     CURTAIN
-===================================== -->
 
 
 <div class="curtain"></div>
@@ -47,33 +27,22 @@ href="/style.css?v=3"
 
 
 
+<main class="artwork-page">
 
 
-<!-- =====================================
-     ARTWORK DETAIL
-===================================== -->
-
-
-<main
-class="artwork-detail-page"
->
-
-
-
-<div
-class="artwork-container"
->
+<div class="artwork-container">
 
 
 
 
 
 <a
-href="/index.html"
-class="back-home"
+href="/"
+class="back-button"
+id="artwork-back"
 >
 
-← BACK TO ARCHIVE
+← BACK TO WORKS
 
 </a>
 
@@ -83,20 +52,20 @@ class="back-home"
 
 
 
-<div
-class="artwork-image-container"
->
-
+<div class="artwork-image">
 
 
 <img
-id="art-image"
-class="artwork-image"
-src=""
-alt=""
-draggable="false"
-/>
 
+id="art-image"
+
+src=""
+
+alt="Artwork"
+
+draggable="false"
+
+>
 
 
 </div>
@@ -107,53 +76,77 @@ draggable="false"
 
 
 
-<div
-class="artwork-information"
->
+
+<div class="artwork-info">
 
 
 
 <p
 class="work-number"
+id="art-id"
 >
-
-ARTWORK / DETAIL
-
+WORK
 </p>
 
 
 
 
 
-<h1
-id="art-title"
->
-
+<h1 id="art-title">
+Loading...
 </h1>
 
 
 
 
 
-<p
-id="art-year"
->
 
-</p>
+<div class="meta">
 
 
+<div>
+
+<strong>
+YEAR
+</strong>
+
+<span id="art-year">
+—
+</span>
+
+
+</div>
+
+
+
+<div>
+
+<strong>
+MEDIUM
+</strong>
+
+<span id="art-medium">
+—
+</span>
+
+
+</div>
 
 
 
 
-<p
-id="art-description"
->
+<div>
 
-</p>
+<strong>
+DIMENSION
+</strong>
+
+<span id="art-dimension">
+—
+</span>
 
 
-
+</div>
 
 
 
@@ -164,8 +157,78 @@ id="art-description"
 
 
 
+
+
+
+
+<div class="description-block">
+
+
+<h2>
+BACKGROUND
+</h2>
+
+<p id="art-background"></p>
+
+
+
+
+<h2>
+CONCEPT
+</h2>
+
+<p id="art-concept"></p>
+
+
+
+
+<h2>
+VISUAL DESCRIPTION
+</h2>
+
+<p id="art-visual"></p>
+
+
+
+
+<h2>
+ARTIST STATEMENT
+</h2>
+
+<p id="art-statement"></p>
+
+
+
+
+<h2>
+INSPIRATION
+</h2>
+
+<p id="art-inspiration"></p>
+
+
+
+
+<h2>
+CREATIVE PROCESS
+</h2>
+
+<p id="art-process"></p>
+
+
+
 </div>
 
+
+
+
+
+
+
+</div>
+
+
+</div>
 
 
 </main>
@@ -177,28 +240,19 @@ id="art-description"
 
 
 
-
-<!-- =====================================
-     DATA LOADER
-===================================== -->
-
-
 <script>
 
 
-(async function(){
-
-
-
-const params =
-new URLSearchParams(
-window.location.search
-);
+(function(){
 
 
 
 const id =
-params.get("id");
+new URLSearchParams(
+window.location.search
+)
+.get("id");
+
 
 
 
@@ -213,20 +267,21 @@ return;
 
 
 
-try{
 
 
-const response =
-await fetch(
-"/artworks.json?v=3"
-);
+fetch(
+"/artworks.json?v=10"
+)
 
 
+.then(
+response =>
+response.json()
+)
 
-const artworks =
-await response.json();
 
-
+.then(
+artworks=>{
 
 
 const artwork =
@@ -239,11 +294,10 @@ item.id === id
 
 
 
-
 if(!artwork){
 
 console.error(
-"Artwork tidak ditemukan"
+"Artwork not found"
 );
 
 return;
@@ -254,25 +308,35 @@ return;
 
 
 
+document.title =
+artwork.title +
+" | NIRMUKA";
 
 
-document
-.getElementById(
+
+
+
+
+/* IMAGE */
+
+
+const image =
+document.getElementById(
 "art-image"
-)
-.src =
-artwork.image;
+);
 
 
 
+image.src =
+artwork.image.startsWith("/")
+?
+artwork.image
+:
+"/"+artwork.image;
 
 
 
-document
-.getElementById(
-"art-image"
-)
-.alt =
+image.alt =
 artwork.title;
 
 
@@ -280,47 +344,133 @@ artwork.title;
 
 
 
-document
-.getElementById(
-"art-title"
+/* BASIC */
+
+
+set(
+"art-id",
+"WORK "+
+String(
+id.replace("karya","")
 )
-.textContent =
-artwork.title || "UNTITLED";
+.padStart(2,"0")
+);
+
+
+
+set(
+"art-title",
+artwork.title
+);
+
+
+
+set(
+"art-year",
+artwork.year
+);
+
+
+
+set(
+"art-medium",
+artwork.medium
+);
+
+
+
+set(
+"art-dimension",
+artwork.dimension
+);
 
 
 
 
 
-document
-.getElementById(
-"art-year"
-)
-.textContent =
-artwork.year || "";
+
+
+/* TEXT */
+
+
+set(
+"art-background",
+artwork.background
+);
+
+
+
+set(
+"art-concept",
+artwork.concept
+);
+
+
+
+set(
+"art-visual",
+artwork.visual_description
+);
+
+
+
+set(
+"art-statement",
+artwork.artist_statement
+);
+
+
+
+set(
+"art-inspiration",
+artwork.inspiration
+);
+
+
+
+set(
+"art-process",
+artwork.creative_process
+);
 
 
 
 
 
-
-document
-.getElementById(
-"art-description"
-)
-.textContent =
-artwork.description || "";
-
-
-
-
-
-}
-catch(error){
-
+})
+.catch(
+error=>{
 
 console.error(
+"NIRMUKA ERROR",
 error
 );
+
+}
+
+);
+
+
+
+
+
+
+
+function set(
+id,
+value
+){
+
+const el =
+document.getElementById(id);
+
+
+if(el){
+
+el.textContent =
+value || "";
+
+}
 
 
 }
@@ -328,7 +478,6 @@ error
 
 
 })();
-
 
 
 </script>
@@ -339,22 +488,56 @@ error
 
 
 
+<!-- VISUAL ENGINE -->
+
+<script src="/spray.js?v=1"></script>
 
 
-<!-- =====================================
-     VISUAL SYSTEM
-===================================== -->
+<!-- ART PROTECTION -->
 
-
-<script
-src="/spray.js?v=3"
-></script>
+<script src="/protection.js?v=1"></script>
 
 
 
-<script
-src="/protection.js?v=3"
-></script>
+
+
+<script>
+
+
+const back =
+document.getElementById(
+"artwork-back"
+);
+
+
+if(back){
+
+
+back.onclick=function(e){
+
+
+if(
+document.referrer
+.includes(
+location.hostname
+)
+){
+
+e.preventDefault();
+
+history.back();
+
+
+}
+
+
+}
+
+
+}
+
+
+</script>
 
 
 
