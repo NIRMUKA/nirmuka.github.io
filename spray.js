@@ -1,15 +1,7 @@
-/* =========================================================
-
-   NIRMUKA SPRAY ENGINE
-
-   GLOBAL VISUAL EFFECT
-
-   Works
-   Artwork
-   Writings
-   Article
-
-========================================================= */
+/* =====================================================
+   NIRMUKA SPRAY / NOZZLE ENGINE
+   GLOBAL EFFECT
+===================================================== */
 
 
 (function(){
@@ -18,78 +10,72 @@
 "use strict";
 
 
-
-function createSprayCanvas(){
-
+function initSpray(){
 
 
-if(
-document.getElementById(
-"nirmuka-spray-canvas"
-)
-){
-
-return;
-
-}
+    if(
+        document.querySelector(".nirmuka-nozzle")
+    ){
+        return;
+    }
 
 
 
-
-const canvas =
-document.createElement(
-"canvas"
-);
+    const nozzle =
+    document.createElement("div");
 
 
 
-canvas.id =
-"nirmuka-spray-canvas";
+    nozzle.className =
+    "nirmuka-nozzle";
 
 
 
-canvas.style.position =
-"fixed";
-
-
-canvas.style.inset =
-"0";
-
-
-
-canvas.style.width =
-"100%";
-
-
-
-canvas.style.height =
-"100%";
-
-
-
-canvas.style.pointerEvents =
-"none";
-
-
-
-canvas.style.zIndex =
-"9999";
-
-
-
-canvas.style.mixBlendMode =
-"screen";
-
-
-
-document.body.appendChild(
-canvas
-);
+    document.body.appendChild(nozzle);
 
 
 
 
-return canvas;
+
+    document.addEventListener(
+        "mousemove",
+        function(e){
+
+
+
+            nozzle.style.left =
+            e.clientX + "px";
+
+
+
+            nozzle.style.top =
+            e.clientY + "px";
+
+
+
+        }
+    );
+
+
+
+
+
+
+
+    document.addEventListener(
+        "click",
+        function(e){
+
+
+
+            createPaint(
+                e.clientX,
+                e.clientY
+            );
+
+
+        }
+    );
 
 
 
@@ -100,277 +86,87 @@ return canvas;
 
 
 
+function createPaint(x,y){
+
+
+    for(
+        let i=0;
+        i<12;
+        i++
+    ){
+
+
+        const drop =
+        document.createElement(
+            "span"
+        );
+
+
+        drop.className =
+        "paint-drop";
 
 
 
-function spray(){
+        drop.style.left =
+        x +
+        (Math.random()*40-20)
+        +
+        "px";
 
 
 
-const canvas =
-createSprayCanvas();
+        drop.style.top =
+        y +
+        (Math.random()*40-20)
+        +
+        "px";
 
 
 
-if(!canvas){
-
-return;
-
-}
-
+        drop.style.width =
+        Math.random()*30+10
+        +
+        "px";
 
 
 
-
-const ctx =
-canvas.getContext(
-"2d"
-);
+        drop.style.height =
+        drop.style.width;
 
 
 
-function resize(){
-
-
-canvas.width =
-window.innerWidth;
-
-
-canvas.height =
-window.innerHeight;
-
-
-}
-
-
-
-resize();
-
-
-window.addEventListener(
-"resize",
-resize
-);
-
-
-
-
-
-
-const particles=[];
+        document.body.appendChild(
+            drop
+        );
 
 
 
 
+        setTimeout(()=>{
+
+            drop.remove();
+
+        },2000);
 
 
-
-function createParticle(){
-
-
-
-particles.push({
-
-
-x:
-Math.random()
-*
-canvas.width,
-
-
-y:
-Math.random()
-*
-canvas.height,
-
-
-size:
-Math.random()
-*
-80
-+
-20,
-
-
-alpha:
-Math.random()
-*
-0.15,
-
-
-speed:
-Math.random()
-*
-0.5
-+
-0.2,
-
-
-angle:
-Math.random()
-*
-Math.PI
-*
-2
-
-
-
-});
-
+    }
 
 
 }
 
 
-
-
-
-for(
-let i=0;
-i<35;
-i++
-){
-
-createParticle();
-
-}
-
-
-
-
-
-
-
-
-
-
-function animate(){
-
-
-
-ctx.clearRect(
-0,
-0,
-canvas.width,
-canvas.height
-);
-
-
-
-particles.forEach(
-p=>{
-
-
-ctx.beginPath();
-
-
-
-ctx.arc(
-p.x,
-p.y,
-p.size,
-0,
-Math.PI*2
-);
-
-
-
-ctx.fillStyle =
-`rgba(
-255,
-255,
-255,
-${p.alpha}
-)`;
-
-
-
-ctx.fill();
-
-
-
-
-p.x +=
-Math.cos(
-p.angle
-)
-*
-p.speed;
-
-
-
-p.y +=
-Math.sin(
-p.angle
-)
-*
-p.speed;
 
 
 
 
 if(
-p.x < -100 ||
-p.x > canvas.width+100 ||
-p.y < -100 ||
-p.y > canvas.height+100
-){
-
-p.x =
-Math.random()
-*
-canvas.width;
-
-
-p.y =
-Math.random()
-*
-canvas.height;
-
-
-}
-
-
-
-});
-
-
-requestAnimationFrame(
-animate
-);
-
-
-
-}
-
-
-
-animate();
-
-
-
-}
-
-
-
-
-
-
-
-/* START */
-
-
-
-
-if(
-document.readyState ===
-"loading"
+document.readyState === "loading"
 ){
 
 
 document.addEventListener(
 "DOMContentLoaded",
-spray
+initSpray
 );
 
 
@@ -378,7 +174,7 @@ spray
 else{
 
 
-spray();
+initSpray();
 
 
 }
