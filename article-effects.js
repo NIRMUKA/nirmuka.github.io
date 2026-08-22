@@ -1,21 +1,3 @@
-/* =========================================================
-
-   NIRMUKA ARTICLE EFFECT ENGINE
-
-   MANUSCRIPT EXPERIENCE
-
-
-   Features:
-
-   - Page entrance
-   - Title reveal
-   - Paragraph reveal
-   - Reading progress
-
-
-========================================================= */
-
-
 (function(){
 
 
@@ -23,167 +5,57 @@
 
 
 
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-
 document.addEventListener(
 "DOMContentLoaded",
 ()=>{
 
 
-initArticleAtmosphere();
-
-
-}
-);
-
-
-
-
-
-
-
-
-
-/* =========================================================
-   PAGE OPENING
-========================================================= */
-
-
-function initArticleAtmosphere(){
-
-
-
-const container =
+const page =
 document.querySelector(
-".article-container"
+".writings-page"
 );
 
 
 
-if(!container){
-
-return;
-
-}
-
-
-
-
+if(page){
 
 setTimeout(()=>{
 
 
-container.classList.add(
-"article-ready"
+page.classList.add(
+"ready"
 );
-
 
 
 },200);
 
 
-
-
-
-revealText();
-
-
-
-createReadingProgress();
-
-
-
 }
 
 
 
 
-
-
-
-
-
-/* =========================================================
-   PARAGRAPH REVEAL
-========================================================= */
-
-
-function revealText(){
-
-
-
-const paragraphs =
+const boxes =
 document.querySelectorAll(
-".article-content p"
+".writing-category-menu button"
 );
 
 
 
+boxes.forEach(
+(box,index)=>{
 
 
-const observer =
-new IntersectionObserver(
-(entries)=>{
+setTimeout(()=>{
 
 
-
-entries.forEach(
-(entry)=>{
-
-
-if(entry.isIntersecting){
-
-
-
-entry.target.classList.add(
+box.classList.add(
 "show"
 );
 
 
 
-observer.unobserve(
-entry.target
-);
-
-
-
-}
-
-
-
-});
-
-
-},
-
-{
-
-
-threshold:.15
-
-
-}
-
-);
-
-
-
-
-
-
-
-paragraphs.forEach(
-paragraph=>{
-
-
-observer.observe(
-paragraph
-);
+},400+(index*250));
 
 
 
@@ -191,91 +63,7 @@ paragraph
 
 
 
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =========================================================
-   READING PROGRESS BAR
-========================================================= */
-
-
-function createReadingProgress(){
-
-
-
-const bar =
-document.createElement(
-"div"
-);
-
-
-
-bar.className =
-"reading-progress";
-
-
-
-document.body.appendChild(
-bar
-);
-
-
-
-
-
-
-window.addEventListener(
-"scroll",
-()=>{
-
-
-const scrollTop =
-window.scrollY;
-
-
-
-const height =
-document.documentElement.scrollHeight
--
-window.innerHeight;
-
-
-
-
-
-const progress =
-(scrollTop / height)
-*
-100;
-
-
-
-
-
-bar.style.width =
-progress + "%";
-
-
-
 });
-
-
-}
-
-
-
-
-
-
 
 
 
