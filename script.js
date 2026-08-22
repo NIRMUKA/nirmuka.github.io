@@ -1153,61 +1153,34 @@ function initializeWorksCarousel(artworks) {
 
 /* =========================================================
    LOAD WRITINGS
+
+   Dipindahkan ke writings.js
+
 ========================================================= */
 
 function loadWritings() {
 
-    if (!content) {
-        return;
+
+    if (
+        window.openWritingArchive
+    ) {
+
+
+        window.openWritingArchive();
+
+
+    } else {
+
+
+        console.error(
+            "writings.js belum aktif"
+        );
+
+
     }
 
 
-    curtainTransition(() => {
-
-
-        content.innerHTML = `
-
-        <section class="page-section">
-
-            <div class="section-inner">
-
-
-                <a
-                    href="#"
-                    class="back-home"
-                >
-                    ← BACK
-                </a>
-
-
-                <p class="work-number">
-                    ARCHIVE / WRITINGS
-                </p>
-
-
-                <h2>
-                    WRITINGS
-                </h2>
-
-
-                <p class="section-description">
-
-                    Tulisan-tulisan NIRMUKA akan disusun
-                    dalam tiga arsip utama:
-                    Filsafat, Teologi, dan Umum.
-
-                </p>
-
-
-            </div>
-
-        </section>
-
-        `;
-
-
-    });
-
+}
 }
 
 
