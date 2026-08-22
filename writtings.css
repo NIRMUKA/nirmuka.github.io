@@ -1,30 +1,46 @@
 /* =========================================================
    NIRMUKA WRITINGS ARCHIVE STYLE
+
+   Philosophy:
+   Dark archive
+   Manifesto
+   Intellectual space
+
 ========================================================= */
 
 
 
 /* =========================================================
-   PAGE BASE
+   WRITING PAGE BASE
 ========================================================= */
 
 
 .writings-page {
 
-    position: relative;
 
-    min-height: 100vh;
+    position:relative;
+
+
+    min-height:100vh;
+
 
     padding:
+
         80px 20px
         120px;
 
-    overflow: hidden;
 
-    background:
-        #050505;
+
+    overflow:hidden;
+
+
+    background:#050505;
+
+
 
 }
+
+
 
 
 
@@ -36,66 +52,63 @@
 .writings-page::before {
 
 
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-
-    top: 0;
+    content:"";
 
 
-    width: 28vw;
-
-    height: 100%;
+    position:absolute;
 
 
-    opacity: .8;
+    left:0;
+
+
+    top:0;
+
+
+    width:30vw;
+
+
+    height:100%;
+
+
+    opacity:.6;
+
 
 
     background:
 
 
-        radial-gradient(
-            ellipse at 10% 15%,
-            rgba(255,255,255,.18)
-            0 10%,
-            transparent 11%
-        ),
+
+    radial-gradient(
+        ellipse at 20% 10%,
+        rgba(255,255,255,.18),
+        transparent 18%
+    ),
 
 
-        radial-gradient(
-            ellipse at 30% 40%,
-            rgba(255,255,255,.10)
-            0 18%,
-            transparent 19%
-        ),
+
+    radial-gradient(
+        ellipse at 5% 35%,
+        rgba(255,255,255,.12),
+        transparent 22%
+    ),
 
 
-        radial-gradient(
-            circle at 5% 70%,
-            rgba(255,255,255,.15)
-            0 8%,
-            transparent 9%
-        ),
 
+    radial-gradient(
+        circle at 25% 70%,
+        rgba(255,255,255,.1),
+        transparent 15%
+    );
 
-        radial-gradient(
-            ellipse at 35% 90%,
-            rgba(255,255,255,.08)
-            0 15%,
-            transparent 16%
-        );
 
 
     filter:
-        blur(3px);
+        blur(8px);
 
-
-    pointer-events:none;
 
 
 }
+
 
 
 
@@ -121,14 +134,14 @@
     top:0;
 
 
-    width:28vw;
+    width:30vw;
 
 
     height:100%;
 
 
 
-    opacity:.8;
+    opacity:.6;
 
 
 
@@ -136,48 +149,34 @@
 
 
 
-        radial-gradient(
-            ellipse at 90% 15%,
-            rgba(255,255,255,.18)
-            0 10%,
-            transparent 11%
-        ),
+    radial-gradient(
+        ellipse at 80% 15%,
+        rgba(255,255,255,.15),
+        transparent 20%
+    ),
 
 
 
-        radial-gradient(
-            ellipse at 70% 40%,
-            rgba(255,255,255,.10)
-            0 18%,
-            transparent 19%
-        ),
+    radial-gradient(
+        ellipse at 95% 45%,
+        rgba(255,255,255,.12),
+        transparent 25%
+    ),
 
 
 
-        radial-gradient(
-            circle at 95% 70%,
-            rgba(255,255,255,.15)
-            0 8%,
-            transparent 9%
-        ),
-
-
-
-        radial-gradient(
-            ellipse at 65% 90%,
-            rgba(255,255,255,.08)
-            0 15%,
-            transparent 16%
-        );
+    radial-gradient(
+        circle at 75% 80%,
+        rgba(255,255,255,.1),
+        transparent 15%
+    );
 
 
 
     filter:
-        blur(3px);
+        blur(8px);
 
 
-
-    pointer-events:none;
 
 }
 
@@ -185,8 +184,11 @@
 
 
 
+
+
+
 /* =========================================================
-   MAIN CONTAINER
+   MAIN PAPER / ARCHIVE AREA
 ========================================================= */
 
 
@@ -199,34 +201,46 @@
     z-index:2;
 
 
+
     max-width:
+
         1100px;
+
 
 
     margin:auto;
 
 
+
+
     background:
-        rgba(5,5,5,.97);
+
+        rgba(0,0,0,.94);
+
 
 
 
     padding:
 
-        60px
+
+        70px
         70px
         100px;
 
 
 
+
     box-shadow:
 
+
         0 0 100px
+
         rgba(0,0,0,.95);
 
 
 
 }
+
 
 
 
@@ -241,12 +255,10 @@
 .writings-header {
 
 
-    max-width:
-        800px;
-
-
     margin-bottom:
+
         90px;
+
 
 
 }
@@ -256,19 +268,23 @@
 .writings-header h2 {
 
 
+
     font-family:
 
         "Rubik Spray Paint",
         cursive;
 
 
+
+
     font-size:
 
         clamp(
             70px,
-            10vw,
-            130px
+            12vw,
+            150px
         );
+
 
 
 
@@ -276,15 +292,18 @@
 
 
 
-    line-height:.9;
+    color:
+
+        #f5f5f0;
 
 
 
-    color:#f5f5f0;
+    line-height:.8;
 
 
 
     transform:
+
         rotate(-3deg);
 
 
@@ -295,36 +314,47 @@
 
 
 
+
 .writings-header .section-description {
 
 
-    max-width:
-        600px;
-
-
-
     margin-top:
-        35px;
+
+        40px;
+
+
+
+    max-width:
+
+        650px;
+
 
 
 
     font-family:
+
         Georgia,
         serif;
 
 
 
+
     font-size:
-        19px;
+
+        20px;
+
 
 
 
     line-height:
-        1.8;
+
+        1.9;
+
 
 
 
     color:
+
         rgba(255,255,255,.65);
 
 
@@ -338,7 +368,7 @@
 
 
 /* =========================================================
-   CATEGORY BUTTONS
+   CATEGORY BUTTON
 ========================================================= */
 
 
@@ -349,6 +379,7 @@
 
 
     grid-template-columns:
+
         repeat(
             3,
             1fr
@@ -357,16 +388,19 @@
 
 
     gap:
+
         25px;
 
 
 
     margin-bottom:
+
         90px;
 
 
 
 }
+
 
 
 
@@ -378,19 +412,30 @@
 
 
 
-    min-height:
+    height:
+
         180px;
 
 
 
-    border:
-        1px solid
-        rgba(255,255,255,.25);
+
+    padding:
+
+        30px;
 
 
 
     background:
+
         transparent;
+
+
+
+    border:
+
+        1px solid
+
+        rgba(255,255,255,.25);
 
 
 
@@ -406,10 +451,6 @@
 
 
 
-    padding:
-        30px;
-
-
 
     overflow:hidden;
 
@@ -417,12 +458,13 @@
 
     transition:
 
-        transform .4s ease,
-        border-color .4s ease;
+        .35s ease;
 
 
 
 }
+
+
 
 
 
@@ -431,10 +473,12 @@
 
     content:"";
 
+
     position:absolute;
 
 
     inset:0;
+
 
 
     background:
@@ -442,23 +486,26 @@
         linear-gradient(
             120deg,
             transparent,
-            rgba(255,255,255,.08),
+            rgba(255,255,255,.15),
             transparent
         );
 
 
 
     transform:
-        translateX(-120%);
+
+        translateX(-100%);
 
 
 
     transition:
-        transform .6s ease;
+
+        .6s ease;
 
 
 
 }
+
 
 
 
@@ -466,7 +513,9 @@
 
 
     transform:
-        translateX(120%);
+
+        translateX(100%);
+
 
 
 }
@@ -474,8 +523,13 @@
 
 
 
+
 .writing-category:hover,
 .writing-category.active {
+
+
+    border-color:white;
+
 
 
     transform:
@@ -485,11 +539,9 @@
 
 
 
-    border-color:white;
-
-
-
 }
+
+
 
 
 
@@ -505,14 +557,12 @@
 
     font-size:
 
-        clamp(
-            30px,
-            4vw,
-            50px
-        );
+        45px;
+
 
 
 }
+
 
 
 
@@ -523,9 +573,7 @@
     display:block;
 
 
-
-    margin-top:
-        20px;
+    margin-top:20px;
 
 
 
@@ -537,20 +585,25 @@
 
 
     font-size:
+
         9px;
 
 
 
     letter-spacing:
+
         3px;
 
 
 
-    opacity:.55;
+    opacity:.5;
 
 
 
 }
+
+
+
 
 
 
@@ -558,32 +611,21 @@
 
 
 /* =========================================================
-   LIST AREA
+   PLACEHOLDER
 ========================================================= */
-
-
-.writing-list {
-
-
-    min-height:
-        200px;
-
-
-}
-
-
-
 
 
 .writing-placeholder {
 
 
-    text-align:center;
-
-
-
     padding:
-        70px 0;
+
+        70px
+        0;
+
+
+
+    text-align:center;
 
 
 
@@ -595,16 +637,19 @@
 
 
     font-size:
+
         10px;
 
 
 
     letter-spacing:
+
         4px;
 
 
 
     color:
+
         rgba(255,255,255,.35);
 
 
@@ -616,10 +661,18 @@
 
 
 
+
+
+/* =========================================================
+   CATEGORY TITLE
+========================================================= */
+
+
 .writing-category-title {
 
 
     margin-bottom:
+
         50px;
 
 
@@ -633,7 +686,7 @@
 
     font-size:
 
-        60px;
+        65px;
 
 
 
@@ -642,6 +695,7 @@
 
 
     transform:
+
         rotate(-2deg);
 
 
@@ -652,8 +706,10 @@
 
 
 
+
+
 /* =========================================================
-   ARTICLE CARDS
+   ARTICLE LIST
 ========================================================= */
 
 
@@ -668,11 +724,13 @@
 
 
     gap:
-        25px;
+
+        20px;
 
 
 
 }
+
 
 
 
@@ -685,13 +743,14 @@
 
 
     gap:
+
         35px;
 
 
 
     padding:
 
-        30px;
+        35px;
 
 
 
@@ -706,36 +765,47 @@
     border-bottom:
 
         1px solid
+
         rgba(255,255,255,.15);
+
 
 
 
     transition:
 
-        transform .35s ease,
-        background .35s ease;
+        .35s ease;
 
 
 
 }
+
+
+
+
 
 
 
 .writing-card:hover {
 
 
+
+    background:
+
+        rgba(255,255,255,.05);
+
+
+
     transform:
-        translateX(15px)
+
+
+        translateX(20px)
         rotate(-1deg);
 
 
 
-    background:
-        rgba(255,255,255,.04);
-
-
-
 }
+
+
 
 
 
@@ -752,6 +822,7 @@
 
 
     font-size:
+
         12px;
 
 
@@ -761,6 +832,8 @@
 
 
 }
+
+
 
 
 
@@ -780,12 +853,13 @@
 
 
 
+
     font-size:
 
         clamp(
-            28px,
+            30px,
             4vw,
-            45px
+            50px
         );
 
 
@@ -798,16 +872,20 @@
 
 
 
+
+
 .writing-information p {
 
 
     margin-top:
+
         15px;
 
 
 
     max-width:
-        650px;
+
+        700px;
 
 
 
@@ -818,7 +896,14 @@
 
 
 
+    font-size:
+
+        18px;
+
+
+
     line-height:
+
         1.7;
 
 
@@ -834,10 +919,13 @@
 
 
 
+
+
 .writing-meta {
 
 
     margin-top:
+
         20px;
 
 
@@ -850,16 +938,18 @@
 
 
     font-size:
+
         8px;
 
 
 
     letter-spacing:
+
         3px;
 
 
 
-    opacity:.45;
+    opacity:.5;
 
 
 
@@ -869,8 +959,11 @@
 
 
 
+
+
+
 /* =========================================================
-   MOBILE
+   RESPONSIVE
 ========================================================= */
 
 
@@ -878,7 +971,7 @@
 
 
 
-    .writings-inner {
+    .writings-inner{
 
 
         padding:
@@ -888,14 +981,17 @@
             70px;
 
 
+
     }
 
 
 
-    .writing-categories {
+
+    .writing-categories{
 
 
         grid-template-columns:
+
             1fr;
 
 
@@ -904,39 +1000,32 @@
 
 
 
-    .writing-category {
+    .writing-category{
 
 
-        min-height:
+        height:
+
             130px;
+
 
 
     }
 
 
 
-    .writing-card {
+
+    .writing-card{
 
 
         padding:
-            20px;
+
+            25px;
 
 
 
         gap:
-            20px;
 
-
-
-    }
-
-
-
-    .writing-category-title {
-
-
-        font-size:
-            45px;
+            15px;
 
 
 
