@@ -1,17 +1,20 @@
 /* =========================================================
    NIRMUKA WRITINGS ENGINE
 
-   SYSTEM:
+   FLOW:
 
-   WRITINGS
-      |
-      ↓
-   writings.json
-      |
-      ↓
-   archive category
-      |
-      ↓
+   HERO
+    |
+    ↓
+   WRITINGS INTRO
+    |
+    ↓ smooth scroll
+   ARCHIVE BOX
+    |
+    ↓ click category
+   WRITING LIST
+    |
+    ↓ click article
    article.html?id=
 
 ========================================================= */
@@ -27,7 +30,7 @@
 
 
 /* =========================================================
-   OPEN WRITINGS ARCHIVE
+   OPEN WRITINGS
 ========================================================= */
 
 
@@ -44,10 +47,6 @@ document.getElementById(
 
 if(!content){
 
-console.error(
-"Content container not found"
-);
-
 return;
 
 }
@@ -56,18 +55,22 @@ return;
 
 
 
-
 content.innerHTML = `
 
 
-
 <section class="writings-page">
+
 
 
 <div class="writings-container">
 
 
 
+
+
+<section 
+class="writing-intro"
+>
 
 
 <a
@@ -78,12 +81,6 @@ class="back-home"
 </a>
 
 
-
-
-
-
-
-<header class="writing-header">
 
 
 <p class="work-number">
@@ -104,11 +101,20 @@ theological, and reflective writings.
 </p>
 
 
-</header>
+
+</section>
 
 
 
 
+
+
+
+
+<section
+class="writing-archive"
+id="archive-section"
+>
 
 
 
@@ -118,9 +124,7 @@ theological, and reflective writings.
 
 
 
-<button 
-data-category="FILSAFAT"
->
+<button data-category="FILSAFAT">
 
 
 <span class="archive-number">
@@ -146,9 +150,7 @@ PHILOSOPHICAL ARCHIVE
 
 
 
-<button 
-data-category="TEOLOGI"
->
+<button data-category="TEOLOGI">
 
 
 <span class="archive-number">
@@ -174,9 +176,7 @@ THEOLOGICAL ARCHIVE
 
 
 
-<button 
-data-category="UMUM"
->
+<button data-category="UMUM">
 
 
 <span class="archive-number">
@@ -203,13 +203,25 @@ GENERAL ARCHIVE
 </div>
 
 
+</section>
 
 
 
 
 
 
-<div id="writing-list">
+
+
+
+<section
+class="writing-list-section"
+id="writing-list-section"
+>
+
+
+<div
+id="writing-list"
+>
 
 
 <p>
@@ -219,6 +231,9 @@ SELECT ARCHIVE
 
 </div>
 
+
+
+</section>
 
 
 
@@ -237,11 +252,47 @@ SELECT ARCHIVE
 
 
 
-
 /* LOAD DATABASE */
 
 
 loadWriting();
+
+
+
+
+
+
+
+/* MOVE CAMERA TO ARCHIVE */
+
+
+setTimeout(()=>{
+
+
+const archive =
+document.getElementById(
+"archive-section"
+);
+
+
+
+if(archive){
+
+
+archive.scrollIntoView({
+
+behavior:"smooth",
+
+block:"center"
+
+});
+
+
+}
+
+
+},1000);
+
 
 
 
@@ -267,28 +318,14 @@ function loadWriting(){
 
 
 fetch(
-"/writings.json?v=50"
+"/writings.json?v=100"
 )
 
 
 
 .then(
-response=>{
-
-
-if(!response.ok){
-
-throw new Error(
-"writings.json error"
-);
-
-}
-
-
-return response.json();
-
-
-}
+response =>
+response.json()
 )
 
 
@@ -297,84 +334,12 @@ return response.json();
 data=>{
 
 
-
 window.nirmukaWritingData =
 data;
 
 
 
-
-initCategory();
-
-
-
-
-
-/* AUTO SCROLL AFTER READY */
-
-
-setTimeout(()=>{
-
-
-const archive =
-document.querySelector(
-".writing-category-menu"
-);
-
-
-
-if(archive){
-
-
-archive.scrollIntoView({
-
-behavior:"smooth",
-
-block:"center"
-
-
-});
-
-
-}
-
-
-
-},1200);
-
-
-
-
-
-/* REVEAL CATEGORY */
-
-
-setTimeout(()=>{
-
-
-document
-.querySelectorAll(
-".writing-category-menu button"
-)
-.forEach(
-(btn,index)=>{
-
-
-btn.style.animationDelay =
-`${index * 0.2}s`;
-
-
-btn.classList.add(
-"archive-ready"
-);
-
-
-});
-
-
-},400);
-
-
+activateCategory();
 
 
 
@@ -389,32 +354,9 @@ error=>{
 
 
 console.error(
-"WRITINGS ERROR:",
+"WRITING ERROR",
 error
 );
-
-
-
-const list =
-document.getElementById(
-"writing-list"
-);
-
-
-
-if(list){
-
-
-list.innerHTML = `
-
-<p>
-FAILED TO LOAD ARCHIVE
-</p>
-
-`;
-
-}
-
 
 
 }
@@ -438,25 +380,20 @@ FAILED TO LOAD ARCHIVE
 ========================================================= */
 
 
-function initCategory(){
+function activateCategory(){
 
 
 
-const buttons =
-document.querySelectorAll(
+document
+.querySelectorAll(
 "[data-category]"
-);
-
-
-
-
-buttons.forEach(
+)
+.forEach(
 button=>{
 
 
-button.addEventListener(
-"click",
-()=>{
+
+button.onclick = function(){
 
 
 showWriting(
@@ -465,7 +402,8 @@ button.dataset.category
 
 
 
-});
+};
+
 
 
 });
@@ -482,13 +420,11 @@ button.dataset.category
 
 
 /* =========================================================
-   SHOW ARTICLE LIST
+   SHOW WRITING LIST
 ========================================================= */
 
 
-function showWriting(
-category
-){
+function showWriting(category){
 
 
 
@@ -509,35 +445,11 @@ return;
 
 
 
-
-const data =
+const writings =
 window.nirmukaWritingData.filter(
-item=>
+item =>
 item.category === category
 );
-
-
-
-
-
-
-
-if(!data.length){
-
-
-list.innerHTML = `
-
-<p>
-NO ARCHIVE FOUND
-</p>
-
-`;
-
-return;
-
-
-}
-
 
 
 
@@ -562,9 +474,9 @@ ${category}
 <div class="writing-items">
 
 
-
 ${
-data.map(
+
+writings.map(
 (item,index)=>{
 
 
@@ -584,14 +496,12 @@ class="writing-item"
 
 <div class="writing-number">
 
-
 ${
 
 String(index+1)
 .padStart(2,"0")
 
 }
-
 
 </div>
 
@@ -610,7 +520,6 @@ ${item.title}
 
 
 
-
 <p>
 
 ${item.subtitle || ""}
@@ -619,13 +528,10 @@ ${item.subtitle || ""}
 
 
 
-
 <span>
 
 ${item.type}
-
-·
-
+ · 
 ${item.year}
 
 </span>
@@ -633,6 +539,7 @@ ${item.year}
 
 
 </div>
+
 
 
 
@@ -646,6 +553,8 @@ ${item.year}
 }
 
 ).join("")
+
+
 }
 
 
@@ -660,30 +569,42 @@ ${item.year}
 
 
 
-/* SCROLL TO ARTICLE LIST */
+
+
+
+/* MOVE CAMERA TO LIST */
 
 
 setTimeout(()=>{
 
 
-list.scrollIntoView({
+const section =
+document.getElementById(
+"writing-list-section"
+);
+
+
+
+if(section){
+
+
+section.scrollIntoView({
 
 behavior:"smooth",
 
 block:"start"
 
-
 });
+
+
+}
 
 
 },300);
 
 
 
-
-
 }
-
 
 
 
