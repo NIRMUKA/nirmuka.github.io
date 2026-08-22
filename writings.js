@@ -1,21 +1,22 @@
 /* =========================================================
+
    NIRMUKA WRITINGS ENGINE
+
+   CORE SYSTEM ONLY
+
 
    FLOW:
 
    HERO
-    |
-    ↓
+     ↓
    WRITINGS INTRO
-    |
-    ↓ smooth scroll
-   ARCHIVE BOX
-    |
-    ↓ click category
+     ↓
+   ARCHIVE CATEGORY
+     ↓
    WRITING LIST
-    |
-    ↓ click article
-   article.html?id=
+     ↓
+   ARTICLE
+
 
 ========================================================= */
 
@@ -27,35 +28,17 @@
 
 
 
-
-
-function smoothScrollTo(element){
-
-    if(!element){
-        return;
-    }
-
-
-    const target =
-    element.getBoundingClientRect().top
-    +
-    window.pageYOffset
-    -
-    (window.innerHeight / 2)
-    +
-    (element.offsetHeight / 2);
+let writingData = [];
 
 
 
-    window.scrollTo({
 
-        top:target,
 
-        behavior:"smooth"
 
-    });
+/* =========================================================
+   OPEN WRITINGS ARCHIVE
+========================================================= */
 
-}
 
 window.openWritingArchive = function(){
 
@@ -77,12 +60,10 @@ return;
 
 
 
-
 content.innerHTML = `
 
 
 <section class="writings-page">
-
 
 
 <div class="writings-container">
@@ -91,9 +72,8 @@ content.innerHTML = `
 
 
 
-<section 
-class="writing-intro"
->
+
+<section class="writing-intro">
 
 
 <a
@@ -102,7 +82,6 @@ class="back-home"
 >
 ← BACK
 </a>
-
 
 
 
@@ -134,21 +113,18 @@ theological, and reflective writings.
 
 
 
+
 <section
 class="writing-archive"
 id="archive-section"
 >
 
 
-
 <div class="writing-category-menu">
 
 
 
-
-
 <button data-category="FILSAFAT">
-
 
 <span class="archive-number">
 01
@@ -172,9 +148,7 @@ PHILOSOPHICAL ARCHIVE
 
 
 
-
 <button data-category="TEOLOGI">
-
 
 <span class="archive-number">
 02
@@ -198,9 +172,7 @@ THEOLOGICAL ARCHIVE
 
 
 
-
 <button data-category="UMUM">
-
 
 <span class="archive-number">
 03
@@ -218,7 +190,6 @@ GENERAL ARCHIVE
 
 
 </button>
-
 
 
 
@@ -242,21 +213,15 @@ id="writing-list-section"
 >
 
 
-<div
-id="writing-list"
->
+<div id="writing-list">
 
-
-<p>
 SELECT ARCHIVE
-</p>
-
 
 </div>
 
 
-
 </section>
+
 
 
 
@@ -275,42 +240,7 @@ SELECT ARCHIVE
 
 
 
-/* LOAD DATABASE */
-
-
-loadWriting();
-
-
-
-
-
-
-
-/* MOVE CAMERA TO ARCHIVE */
-
-
-setTimeout(()=>{
-
-
-const archive =
-document.getElementById(
-"archive-section"
-);
-
-
-
-if(archive){
-
-
-smoothScrollTo(archive);
-
-}
-
-
-},1400);
-
-
-
+loadWritingData();
 
 
 
@@ -325,11 +255,11 @@ smoothScrollTo(archive);
 
 
 /* =========================================================
-   LOAD JSON
+   LOAD DATABASE
 ========================================================= */
 
 
-function loadWriting(){
+function loadWritingData(){
 
 
 
@@ -340,8 +270,23 @@ fetch(
 
 
 .then(
-response =>
-response.json()
+response=>{
+
+
+if(!response.ok){
+
+throw new Error(
+"Cannot load writings.json"
+);
+
+}
+
+
+return response.json();
+
+
+}
+
 )
 
 
@@ -350,13 +295,10 @@ response.json()
 data=>{
 
 
-window.nirmukaWritingData =
-data;
-
+writingData = data;
 
 
 activateCategory();
-
 
 
 }
@@ -370,7 +312,7 @@ error=>{
 
 
 console.error(
-"WRITING ERROR",
+"WRITINGS ERROR:",
 error
 );
 
@@ -400,26 +342,30 @@ function activateCategory(){
 
 
 
-document
-.querySelectorAll(
+const buttons =
+document.querySelectorAll(
 "[data-category]"
-)
-.forEach(
+);
+
+
+
+buttons.forEach(
 button=>{
 
 
+button.addEventListener(
+"click",
+function(){
 
-button.onclick = function(){
 
 
-showWriting(
+renderWritingList(
 button.dataset.category
 );
 
 
 
-};
-
+});
 
 
 });
@@ -436,11 +382,13 @@ button.dataset.category
 
 
 /* =========================================================
-   SHOW WRITING LIST
+   RENDER ARTICLE LIST
 ========================================================= */
 
 
-function showWriting(category){
+function renderWritingList(
+category
+){
 
 
 
@@ -461,11 +409,30 @@ return;
 
 
 
-const writings =
-window.nirmukaWritingData.filter(
-item =>
+
+
+const filtered =
+writingData.filter(
+item=>
 item.category === category
 );
+
+
+
+if(!filtered.length){
+
+
+list.innerHTML = `
+
+<p>
+NO ARCHIVE FOUND
+</p>
+
+`;
+
+return;
+
+}
 
 
 
@@ -477,11 +444,11 @@ list.innerHTML = `
 
 
 
-<div class="writing-title">
+<h2 class="writing-title">
 
 ${category}
 
-</div>
+</h2>
 
 
 
@@ -491,13 +458,8 @@ ${category}
 
 
 ${
-
-writings.map(
-(item,index)=>{
-
-
-return `
-
+filtered.map(
+(item,index)=>`
 
 
 <a
@@ -507,7 +469,6 @@ href="/article.html?id=${item.id}"
 class="writing-item"
 
 >
-
 
 
 <div class="writing-number">
@@ -524,15 +485,14 @@ String(index+1)
 
 
 
-
 <div class="writing-data">
 
 
-<h2>
+<h3>
 
 ${item.title}
 
-</h2>
+</h3>
 
 
 
@@ -544,10 +504,13 @@ ${item.subtitle || ""}
 
 
 
+
 <span>
 
 ${item.type}
- · 
+
+·
+
 ${item.year}
 
 </span>
@@ -558,65 +521,18 @@ ${item.year}
 
 
 
-
 </a>
 
 
-
-`;
-
-
-}
-
+`
 ).join("")
-
-
 }
-
 
 
 </div>
 
 
 `;
-
-
-
-
-
-
-
-
-
-/* MOVE CAMERA TO LIST */
-
-
-setTimeout(()=>{
-
-
-const section =
-document.getElementById(
-"writing-list-section"
-);
-
-
-
-if(section){
-
-
-section.scrollIntoView({
-
-behavior:"smooth",
-
-block:"start"
-
-});
-
-
-}
-
-
-},300);
 
 
 
