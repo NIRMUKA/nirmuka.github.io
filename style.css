@@ -39,14 +39,16 @@ body {
 
     z-index: 9999;
 
-    transform: translateY(-100%);
+    transform:
+        translateY(-100%);
 
     transition:
         transform .9s cubic-bezier(.77, 0, .18, 1);
 }
 
 .curtain.active {
-    transform: translateY(0);
+    transform:
+        translateY(0);
 }
 
 
@@ -65,15 +67,14 @@ body {
 
     background:
         linear-gradient(
-            rgba(0,0,0,.5),
-            rgba(0,0,0,.85)
+            rgba(0,0,0,.50),
+            rgba(0,0,0,.86)
         ),
         url("hero.jpg");
 
     background-size: cover;
     background-position: center;
 }
-
 
 .hero-overlay {
     position: absolute;
@@ -88,7 +89,6 @@ body {
             transparent 4px
         );
 }
-
 
 .hero-content {
     position: relative;
@@ -141,9 +141,6 @@ body {
         transform .35s ease;
 }
 
-
-/* spray ghost */
-
 .nirmuka::before {
     content: "NIRMUKA";
 
@@ -171,9 +168,6 @@ body {
     opacity: .75;
 }
 
-
-/* scratch under logo */
-
 .nirmuka::after {
     content: "";
 
@@ -200,7 +194,6 @@ body {
 
     opacity: .55;
 }
-
 
 .nirmuka:hover {
     transform:
@@ -239,12 +232,10 @@ body {
     margin-top: 80px;
 
     display: flex;
-
     justify-content: center;
 
     gap: 80px;
 }
-
 
 .main-menu a {
     position: relative;
@@ -268,7 +259,6 @@ body {
         opacity .35s ease;
 }
 
-
 .main-menu a:nth-child(1) {
     transform: rotate(-3deg);
 }
@@ -281,7 +271,6 @@ body {
     transform: rotate(-2deg);
 }
 
-
 .main-menu a:hover {
     opacity: .55;
 
@@ -290,7 +279,6 @@ body {
         translateY(-8px)
         scale(1.08);
 }
-
 
 .main-menu a::after {
     content: "";
@@ -313,7 +301,6 @@ body {
         width .3s ease;
 }
 
-
 .main-menu a:hover::after {
     width: 110%;
 }
@@ -328,23 +315,247 @@ body {
 }
 
 
+/* =====================================
+   PAGE
+===================================== */
+
 .page-section {
+    position: relative;
+
     min-height: 100vh;
 
     padding:
         100px 20px;
-}
 
+    overflow: hidden;
 
-.section-inner {
-    max-width: 1100px;
+    isolation: isolate;
 
-    margin: auto;
+    background:
+        linear-gradient(
+            90deg,
+            #111111 0%,
+            #090909 18%,
+            #050505 31%,
+            #050505 69%,
+            #090909 82%,
+            #111111 100%
+        );
 }
 
 
 /* =====================================
-   ARCHIVE SMALL LABEL
+   ABSTRACT PAINT — LEFT
+===================================== */
+
+.page-section::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 31vw;
+    height: 100%;
+
+    z-index: 0;
+
+    pointer-events: none;
+
+    opacity: .94;
+
+    background:
+        radial-gradient(
+            ellipse at 5% 7%,
+            rgba(235,235,220,.30) 0 7%,
+            transparent 8%
+        ),
+
+        radial-gradient(
+            circle at 30% 15%,
+            rgba(255,255,255,.15) 0 4%,
+            transparent 5%
+        ),
+
+        radial-gradient(
+            ellipse at 8% 28%,
+            rgba(220,220,205,.25) 0 11%,
+            transparent 12%
+        ),
+
+        radial-gradient(
+            ellipse at 39% 37%,
+            rgba(255,255,255,.11) 0 14%,
+            transparent 15%
+        ),
+
+        radial-gradient(
+            circle at 12% 48%,
+            rgba(235,235,220,.25) 0 8%,
+            transparent 9%
+        ),
+
+        radial-gradient(
+            ellipse at 36% 61%,
+            rgba(255,255,255,.12) 0 17%,
+            transparent 18%
+        ),
+
+        radial-gradient(
+            circle at 8% 72%,
+            rgba(225,225,210,.28) 0 7%,
+            transparent 8%
+        ),
+
+        radial-gradient(
+            ellipse at 37% 85%,
+            rgba(255,255,255,.11) 0 15%,
+            transparent 16%
+        ),
+
+        radial-gradient(
+            ellipse at 8% 97%,
+            rgba(230,230,215,.23) 0 12%,
+            transparent 13%
+        ),
+
+        repeating-linear-gradient(
+            79deg,
+            transparent 0 20px,
+            rgba(255,255,255,.045) 20px 23px,
+            transparent 23px 47px
+        );
+
+    filter:
+        blur(.45px)
+        contrast(1.25);
+
+    transform:
+        rotate(-1deg)
+        scale(1.04);
+}
+
+
+/* =====================================
+   ABSTRACT PAINT — RIGHT
+===================================== */
+
+.page-section::after {
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+    top: 0;
+
+    width: 31vw;
+    height: 100%;
+
+    z-index: 0;
+
+    pointer-events: none;
+
+    opacity: .94;
+
+    background:
+        radial-gradient(
+            ellipse at 94% 8%,
+            rgba(230,230,218,.28) 0 8%,
+            transparent 9%
+        ),
+
+        radial-gradient(
+            circle at 69% 18%,
+            rgba(255,255,255,.16) 0 5%,
+            transparent 6%
+        ),
+
+        radial-gradient(
+            ellipse at 91% 30%,
+            rgba(215,215,205,.25) 0 12%,
+            transparent 13%
+        ),
+
+        radial-gradient(
+            ellipse at 63% 41%,
+            rgba(255,255,255,.11) 0 15%,
+            transparent 16%
+        ),
+
+        radial-gradient(
+            circle at 89% 52%,
+            rgba(240,240,225,.26) 0 8%,
+            transparent 9%
+        ),
+
+        radial-gradient(
+            ellipse at 66% 64%,
+            rgba(255,255,255,.12) 0 15%,
+            transparent 16%
+        ),
+
+        radial-gradient(
+            circle at 93% 75%,
+            rgba(220,220,205,.27) 0 8%,
+            transparent 9%
+        ),
+
+        radial-gradient(
+            ellipse at 65% 86%,
+            rgba(255,255,255,.11) 0 16%,
+            transparent 17%
+        ),
+
+        radial-gradient(
+            ellipse at 92% 97%,
+            rgba(225,225,215,.23) 0 12%,
+            transparent 13%
+        ),
+
+        repeating-linear-gradient(
+            -76deg,
+            transparent 0 22px,
+            rgba(255,255,255,.04) 22px 25px,
+            transparent 25px 49px
+        );
+
+    filter:
+        blur(.45px)
+        contrast(1.25);
+
+    transform:
+        rotate(1deg)
+        scale(1.04);
+}
+
+
+/* =====================================
+   BLACK READING COLUMN
+===================================== */
+
+.section-inner {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 980px;
+
+    margin: auto;
+
+    padding:
+        50px 55px;
+
+    background:
+        rgba(5,5,5,.985);
+
+    box-shadow:
+        0 0 80px rgba(0,0,0,.98);
+}
+
+
+/* =====================================
+   ARCHIVE LABEL
 ===================================== */
 
 .work-number {
@@ -358,7 +569,7 @@ body {
 
     line-height: 1.8;
 
-    opacity: .5;
+    opacity: .50;
 
     margin-bottom: 28px;
 }
@@ -390,7 +601,6 @@ body {
     transform:
         rotate(-2deg);
 }
-
 
 .page-section h2::after {
     content: "";
@@ -439,16 +649,13 @@ body {
         transform .3s ease;
 }
 
-
 .back-home {
     margin-bottom: 50px;
 }
 
-
 .back-button {
     margin-bottom: 60px;
 }
-
 
 .back-home:hover,
 .back-button:hover {
@@ -461,7 +668,7 @@ body {
 
 
 /* =====================================
-   WORKS GALLERY
+   WORKS
 ===================================== */
 
 .works-gallery {
@@ -473,7 +680,6 @@ body {
     gap: 40px;
 }
 
-
 .art-card {
     background: #0d0d0d;
 
@@ -483,16 +689,15 @@ body {
         transform .45s ease;
 }
 
-
 .art-card:nth-child(odd) {
-    transform: rotate(-.35deg);
+    transform:
+        rotate(-.35deg);
 }
-
 
 .art-card:nth-child(even) {
-    transform: rotate(.35deg);
+    transform:
+        rotate(.35deg);
 }
-
 
 .art-card:hover {
     transform:
@@ -500,13 +705,11 @@ body {
         translateY(-10px);
 }
 
-
 .art-card a {
     color: #ffffff;
 
     text-decoration: none;
 }
-
 
 .art-card img {
     width: 100%;
@@ -517,7 +720,6 @@ body {
 
     display: block;
 }
-
 
 .art-card h3 {
     margin-top: 20px;
@@ -537,7 +739,6 @@ body {
     transform:
         rotate(-1deg);
 }
-
 
 .art-card p {
     margin-top: 12px;
@@ -581,11 +782,9 @@ body {
     max-width: 900px;
 }
 
-
 .about-content {
-    max-width: 800px;
+    max-width: 760px;
 }
-
 
 .about-content p {
     font-family:
@@ -594,15 +793,12 @@ body {
 
     font-size: 18px;
 
-    font-weight: 400;
-
     line-height: 2;
 
     margin-bottom: 45px;
 
     color: #d5d5d5;
 }
-
 
 .about-content .signature {
     margin-top: 80px;
@@ -627,21 +823,196 @@ body {
 ===================================== */
 
 .artwork-page {
+    position: relative;
+
     min-height: 100vh;
 
     padding:
         80px 20px;
+
+    overflow: hidden;
+
+    isolation: isolate;
+
+    background:
+        linear-gradient(
+            90deg,
+            #111111 0%,
+            #090909 18%,
+            #050505 31%,
+            #050505 69%,
+            #090909 82%,
+            #111111 100%
+        );
 }
 
+
+/* =====================================
+   ARTWORK LEFT WALL
+===================================== */
+
+.artwork-page::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 31vw;
+    height: 100%;
+
+    z-index: 0;
+
+    pointer-events: none;
+
+    opacity: .94;
+
+    background:
+        radial-gradient(
+            ellipse at 10% 8%,
+            rgba(235,235,220,.27) 0 8%,
+            transparent 9%
+        ),
+
+        radial-gradient(
+            circle at 35% 20%,
+            rgba(255,255,255,.14) 0 5%,
+            transparent 6%
+        ),
+
+        radial-gradient(
+            ellipse at 11% 36%,
+            rgba(215,215,202,.23) 0 13%,
+            transparent 14%
+        ),
+
+        radial-gradient(
+            ellipse at 39% 51%,
+            rgba(255,255,255,.10) 0 15%,
+            transparent 16%
+        ),
+
+        radial-gradient(
+            circle at 13% 67%,
+            rgba(235,235,220,.25) 0 8%,
+            transparent 9%
+        ),
+
+        radial-gradient(
+            ellipse at 38% 82%,
+            rgba(255,255,255,.10) 0 16%,
+            transparent 17%
+        ),
+
+        radial-gradient(
+            ellipse at 10% 97%,
+            rgba(220,220,205,.22) 0 12%,
+            transparent 13%
+        );
+}
+
+
+/* =====================================
+   ARTWORK RIGHT WALL
+===================================== */
+
+.artwork-page::after {
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+    top: 0;
+
+    width: 31vw;
+    height: 100%;
+
+    z-index: 0;
+
+    pointer-events: none;
+
+    opacity: .94;
+
+    background:
+        radial-gradient(
+            ellipse at 91% 9%,
+            rgba(235,235,220,.26) 0 8%,
+            transparent 9%
+        ),
+
+        radial-gradient(
+            circle at 65% 22%,
+            rgba(255,255,255,.14) 0 5%,
+            transparent 6%
+        ),
+
+        radial-gradient(
+            ellipse at 90% 39%,
+            rgba(215,215,202,.23) 0 13%,
+            transparent 14%
+        ),
+
+        radial-gradient(
+            ellipse at 62% 55%,
+            rgba(255,255,255,.10) 0 15%,
+            transparent 16%
+        ),
+
+        radial-gradient(
+            circle at 88% 70%,
+            rgba(235,235,220,.25) 0 8%,
+            transparent 9%
+        ),
+
+        radial-gradient(
+            ellipse at 64% 84%,
+            rgba(255,255,255,.10) 0 16%,
+            transparent 17%
+        ),
+
+        radial-gradient(
+            ellipse at 91% 97%,
+            rgba(220,220,205,.22) 0 12%,
+            transparent 13%
+        );
+}
+
+
+/* =====================================
+   ARTWORK BLACK CENTER
+===================================== */
 
 .artwork-container {
-    max-width: 900px;
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 980px;
 
     margin: auto;
+
+    padding:
+        50px 55px;
+
+    background:
+        rgba(5,5,5,.985);
+
+    box-shadow:
+        0 0 80px rgba(0,0,0,.98);
 }
 
 
-.artwork-image img {
+/* =====================================
+   ARTWORK IMAGE
+===================================== */
+
+.artwork-image {
+    position: relative;
+}
+
+.artwork-image img,
+#art-image {
     width: 100%;
 
     max-height: 750px;
@@ -651,6 +1022,18 @@ body {
     display: block;
 }
 
+
+/* protection ONLY detail artwork */
+
+#art-image,
+.artwork-image img {
+    -webkit-user-drag: none;
+
+    -webkit-user-select: none;
+    user-select: none;
+
+    -webkit-touch-callout: none;
+}
 
 .artwork-info {
     max-width: 760px;
@@ -707,7 +1090,6 @@ body {
         50px 0;
 }
 
-
 .meta div {
     display: flex;
 
@@ -715,7 +1097,6 @@ body {
 
     gap: 12px;
 }
-
 
 .meta strong {
     font-family:
@@ -730,7 +1111,6 @@ body {
 
     opacity: .5;
 }
-
 
 .meta span {
     font-family:
@@ -766,7 +1146,6 @@ body {
         rotate(-1deg);
 }
 
-
 .description-block p {
     max-width: 700px;
 
@@ -783,7 +1162,7 @@ body {
 
 
 /* =====================================
-   SPRAY PAINT CANVAS
+   SPRAY CANVAS
 ===================================== */
 
 #spray-canvas {
@@ -798,11 +1177,13 @@ body {
     pointer-events: none;
 
     z-index: 9997;
+
+    display: block;
 }
 
 
 /* =====================================
-   SPRAY NOZZLE CURSOR
+   SPRAY NOZZLE
 ===================================== */
 
 .spray-cursor {
@@ -824,15 +1205,14 @@ body {
 
     opacity: 0;
 
+    display: block;
+
     transition:
         width .12s ease,
         height .12s ease,
         transform .12s ease,
         opacity .15s ease;
 }
-
-
-/* outer nozzle */
 
 .spray-cursor::before {
     content: "";
@@ -861,9 +1241,6 @@ body {
         0 0 11px rgba(255,255,255,.16);
 }
 
-
-/* spray opening */
-
 .spray-cursor::after {
     content: "";
 
@@ -880,15 +1257,11 @@ body {
 
     border-radius: 50%;
 
-    background:
-        #ffffff;
+    background: #ffffff;
 
     box-shadow:
         0 0 5px rgba(255,255,255,.8);
 }
-
-
-/* mouse pressed */
 
 .spray-cursor.spraying {
     width: 31px;
@@ -900,12 +1273,143 @@ body {
         scale(.88);
 }
 
-
 .spray-cursor.spraying::before {
     box-shadow:
         0 0 0 1px rgba(0,0,0,.9),
         0 0 16px rgba(255,255,255,.28),
         0 0 32px rgba(255,255,255,.10);
+}
+
+
+/* =====================================
+   THOU SHALL NOT STEAL
+===================================== */
+
+.theft-warning {
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+
+    background:
+        rgba(0,0,0,.985);
+
+    z-index: 999999;
+
+    opacity: 0;
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity .12s ease,
+        visibility .12s ease;
+}
+
+.theft-warning.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.theft-warning-text {
+    position: relative;
+
+    max-width: 1300px;
+
+    font-family:
+        "Rubik Spray Paint",
+        "Permanent Marker",
+        cursive;
+
+    font-size:
+        clamp(62px, 10vw, 170px);
+
+    font-weight: 400;
+
+    line-height: .86;
+
+    letter-spacing: 2px;
+
+    text-align: center;
+
+    text-transform: uppercase;
+
+    color: #ffffff;
+
+    transform:
+        rotate(-5deg)
+        scale(.72);
+
+    opacity: 0;
+
+    text-shadow:
+        8px 8px 0 rgba(255,255,255,.07),
+        -5px -4px 0 rgba(255,255,255,.04);
+
+    transition:
+        transform .18s cubic-bezier(.2,.95,.3,1.4),
+        opacity .12s ease;
+}
+
+.theft-warning.show
+.theft-warning-text {
+    opacity: 1;
+
+    transform:
+        rotate(-5deg)
+        scale(1);
+}
+
+.theft-warning-text::before {
+    content:
+        "THOU SHALL NOT STEAL !!";
+
+    position: absolute;
+
+    inset: 0;
+
+    color: transparent;
+
+    -webkit-text-stroke:
+        2px rgba(255,255,255,.20);
+
+    transform:
+        translate(-11px, 9px)
+        rotate(2deg);
+
+    z-index: -1;
+}
+
+.theft-warning-text::after {
+    content: "";
+
+    position: absolute;
+
+    left: -4%;
+    bottom: -28px;
+
+    width: 108%;
+    height: 10px;
+
+    background:
+        repeating-linear-gradient(
+            173deg,
+            rgba(255,255,255,.88) 0 10px,
+            transparent 10px 16px,
+            rgba(255,255,255,.30) 16px 22px,
+            transparent 22px 31px
+        );
+
+    transform:
+        rotate(-3deg)
+        skewX(-12deg);
+
+    opacity: .72;
 }
 
 
@@ -916,10 +1420,8 @@ body {
 @media(max-width: 700px) {
 
     .landing {
-        padding:
-            20px;
+        padding: 20px;
     }
-
 
     .nirmuka {
         font-size:
@@ -932,19 +1434,15 @@ body {
             skewX(-2deg);
     }
 
-
     .nirmuka::before {
         left: -4px;
         top: 5px;
     }
 
-
     .nirmuka::after {
         bottom: -13px;
-
         height: 7px;
     }
-
 
     .artist-tag {
         margin-top: 28px;
@@ -954,7 +1452,6 @@ body {
         letter-spacing: 3px;
     }
 
-
     .main-menu {
         flex-direction: column;
 
@@ -963,37 +1460,42 @@ body {
         margin-top: 65px;
     }
 
-
     .main-menu a {
         font-size: 31px;
-
-        letter-spacing: 1px;
     }
-
 
     .page-section {
         padding:
-            70px 20px;
+            55px 10px;
     }
 
+    .page-section::before,
+    .page-section::after {
+        width: 19vw;
+
+        opacity: .43;
+    }
+
+    .section-inner {
+        padding:
+            35px 24px;
+
+        max-width:
+            calc(100% - 24px);
+    }
 
     .page-section h2 {
         font-size: 48px;
-
-        letter-spacing: 0;
     }
-
 
     .works-gallery {
         grid-template-columns:
             1fr;
     }
 
-
     .art-card h3 {
         font-size: 24px;
     }
-
 
     .about-content p {
         font-size: 16px;
@@ -1003,22 +1505,38 @@ body {
         margin-bottom: 35px;
     }
 
+    .artwork-page {
+        padding:
+            50px 10px;
+    }
+
+    .artwork-page::before,
+    .artwork-page::after {
+        width: 19vw;
+
+        opacity: .43;
+    }
+
+    .artwork-container {
+        padding:
+            35px 24px;
+
+        max-width:
+            calc(100% - 24px);
+    }
 
     #art-title {
         font-size: 42px;
     }
-
 
     .meta {
         grid-template-columns:
             1fr;
     }
 
-
     .description-block h2 {
         font-size: 27px;
     }
-
 
     .description-block p {
         font-size: 16px;
@@ -1026,31 +1544,34 @@ body {
         line-height: 1.9;
     }
 
-}
+    .theft-warning {
+        padding: 20px;
+    }
 
+    .theft-warning-text {
+        font-size:
+            clamp(46px, 15vw, 92px);
 
-/* =====================================
-   TOUCH DEVICES
-   NORMAL CURSOR BEHAVIOR
-===================================== */
-
-@media (pointer: coarse) {
-
-    #spray-canvas,
-    .spray-cursor {
-        display: none !important;
+        line-height: .92;
     }
 
 }
 
 
 /* =====================================
-   IMPORTANT:
-   COMPLETELY REMOVE NATIVE CURSOR
-   ON DESKTOP
+   CURSOR / NOZZLE FIX
 ===================================== */
 
-@media (pointer: fine) {
+/*
+   IMPORTANT:
+
+   Pakai ANY-POINTER, bukan POINTER.
+
+   Jadi laptop touchscreen + mouse
+   tetap mendeteksi mouse presisi.
+*/
+
+@media (any-pointer: fine) {
 
     html,
     body,
@@ -1059,388 +1580,25 @@ body {
     body *::after {
         cursor: none !important;
     }
-/* =====================================
-   NIRMUKA — ANTI THEFT WARNING
-===================================== */
 
-.theft-warning {
-    position: fixed;
-    inset: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 30px;
-
-    background: rgba(0, 0, 0, .97);
-
-    z-index: 999999;
-
-    opacity: 0;
-    visibility: hidden;
-
-    pointer-events: none;
-
-    transition:
-        opacity .15s ease,
-        visibility .15s ease;
-}
-
-
-.theft-warning.show {
-    opacity: 1;
-    visibility: visible;
-}
-
-
-.theft-warning-text {
-    position: relative;
-
-    max-width: 1200px;
-
-    font-family:
-        "Rubik Spray Paint",
-        "Permanent Marker",
-        cursive;
-
-    font-size:
-        clamp(60px, 10vw, 160px);
-
-    font-weight: 400;
-
-    line-height: .9;
-
-    text-align: center;
-
-    text-transform: uppercase;
-
-    color: #ffffff;
-
-    letter-spacing: 2px;
-
-    transform:
-        rotate(-4deg)
-        scale(.88);
-
-    text-shadow:
-        8px 8px 0 rgba(255,255,255,.08),
-        -6px -3px 0 rgba(255,255,255,.05);
-
-    transition:
-        transform .18s cubic-bezier(.2,.9,.3,1.4);
-}
-
-
-.theft-warning.show .theft-warning-text {
-    transform:
-        rotate(-4deg)
-        scale(1);
-}
-
-
-/* ghost graffiti layer */
-
-.theft-warning-text::before {
-    content: "THOU SHALL NOT STEAL !!";
-
-    position: absolute;
-
-    inset: 0;
-
-    color: transparent;
-
-    -webkit-text-stroke:
-        2px rgba(255,255,255,.20);
-
-    transform:
-        translate(-10px, 9px)
-        rotate(2deg);
-
-    z-index: -1;
-}
-
-
-/* rough slash */
-
-.theft-warning-text::after {
-    content: "";
-
-    position: absolute;
-
-    left: -4%;
-    bottom: -25px;
-
-    width: 108%;
-    height: 9px;
-
-    background:
-        repeating-linear-gradient(
-            173deg,
-            rgba(255,255,255,.85) 0 10px,
-            transparent 10px 16px,
-            rgba(255,255,255,.30) 16px 21px,
-            transparent 21px 30px
-        );
-
-    transform:
-        rotate(-3deg);
-
-    opacity: .7;
-}
-
-
-/* artwork protection */
-
-.art-card img,
-#art-image,
-.artwork-image img {
-    -webkit-user-drag: none;
-    user-drag: none;
-
-    -webkit-user-select: none;
-    user-select: none;
-
-    -webkit-touch-callout: none;
-}
-
-
-@media(max-width:700px) {
-
-    .theft-warning-text {
-        font-size:
-            clamp(48px, 15vw, 90px);
+    #spray-canvas {
+        display: block !important;
     }
 
-}
-}
+    .spray-cursor {
+        display: block !important;
+    }
 
-/* =====================================
-   NIRMUKA — HARD ARTWORK PROTECTION
-===================================== */
-
-
-/* gallery card harus jadi reference layer */
-
-.art-card {
-    position: relative;
-}
-
-
-/* link tetap bisa diklik */
-
-.art-card > a {
-    position: relative;
-    display: block;
 }
 
 
 /*
-   GAMBAR TIDAK MENERIMA POINTER.
+   Tidak ada lagi:
+   @media (pointer: coarse) {
+       .spray-cursor { display:none }
+   }
 
-   Klik kiri tetap bekerja karena
-   event jatuh ke <a> di belakang gambar.
+   Karena itulah yang sebelumnya
+   bisa mematikan nozzle pada
+   laptop touchscreen/hybrid.
 */
-
-.art-card img,
-#art-image,
-.artwork-image img {
-
-    pointer-events: none !important;
-
-    -webkit-user-drag: none !important;
-
-    -webkit-user-select: none !important;
-    user-select: none !important;
-
-    -webkit-touch-callout: none !important;
-
-    draggable: false;
-}
-
-
-/* artwork detail container */
-
-.artwork-image {
-    position: relative;
-
-    overflow: hidden;
-}
-
-
-/*
-   TRANSPARENT SECURITY LAYER
-   menutup permukaan artwork
-*/
-
-.artwork-image::after {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 20;
-
-    background: transparent;
-
-    pointer-events: auto;
-}
-
-
-/* =====================================
-   THOU SHALL NOT STEAL SCREEN
-===================================== */
-
-.theft-warning {
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 9999999;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 30px;
-
-    background: rgba(0,0,0,.985);
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    pointer-events: none;
-
-    transition:
-        opacity .12s ease,
-        visibility .12s ease;
-}
-
-
-.theft-warning.show {
-
-    opacity: 1;
-
-    visibility: visible;
-}
-
-
-.theft-warning-text {
-
-    position: relative;
-
-    max-width: 1300px;
-
-    font-family:
-        "Rubik Spray Paint",
-        "Permanent Marker",
-        cursive;
-
-    font-size:
-        clamp(65px, 11vw, 175px);
-
-    font-weight: 400;
-
-    line-height: .88;
-
-    text-align: center;
-
-    color: #ffffff;
-
-    text-transform: uppercase;
-
-    transform:
-        rotate(-4deg)
-        scale(.78);
-
-    transition:
-        transform .15s cubic-bezier(.2,.9,.3,1.4);
-
-    text-shadow:
-        9px 7px 0 rgba(255,255,255,.07),
-        -5px -4px 0 rgba(255,255,255,.05);
-}
-
-
-.theft-warning.show .theft-warning-text {
-
-    transform:
-        rotate(-4deg)
-        scale(1);
-}
-
-
-.theft-warning-text::before {
-
-    content: "THOU SHALL NOT STEAL !!";
-
-    position: absolute;
-
-    inset: 0;
-
-    z-index: -1;
-
-    color: transparent;
-
-    -webkit-text-stroke:
-        2px rgba(255,255,255,.22);
-
-    transform:
-        translate(-10px,9px)
-        rotate(2deg);
-}
-
-
-.theft-warning-text::after {
-
-    content: "";
-
-    position: absolute;
-
-    left: -5%;
-
-    bottom: -25px;
-
-    width: 110%;
-
-    height: 9px;
-
-    background:
-
-        repeating-linear-gradient(
-            173deg,
-
-            rgba(255,255,255,.9) 0 10px,
-
-            transparent 10px 16px,
-
-            rgba(255,255,255,.30) 16px 22px,
-
-            transparent 22px 31px
-        );
-
-    transform:
-        rotate(-3deg);
-
-    opacity: .7;
-}
-
-
-/* mobile */
-
-@media(max-width:700px) {
-
-    .theft-warning-text {
-
-        font-size:
-            clamp(45px,15vw,90px);
-
-    }
-
-}
