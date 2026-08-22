@@ -1,37 +1,34 @@
 [
-    {
-        "id": "kontinuitas-tanpa-diri",
-        "category": "FILSAFAT",
-        "title": "Ketika Proses Berlanjut, tetapi Subjek Tidak Bertahan: Persoalan Kontinuitas Tanpa Diri yang Berkelanjutan",
-        "subtitle": "Sebuah kajian mengenai kontinuitas proses, identitas personal, dan kemungkinan keberlanjutan tanpa subjek yang sama.",
-        "year": "2026",
-        "type": "PHILOSOPHY ESSAY",
-        "author": "NIRMUKA",
-        "file": "/writings/filsafat/kontinuitas-tanpa-diri.html"
-    },
+  {
+    "id": "beyond-homo-technicus",
 
+    "category": "FILSAFAT",
 
-    {
-        "id": "beyond-homo-technicus",
-        "category": "FILSAFAT",
-        "title": "Beyond Homo Technicus",
-        "subtitle": "Reconstructing Human Responsibility and Moral Self-Transformation in the Age of Artificial Intelligence.",
-        "year": "2026",
-        "type": "PHILOSOPHY / AI",
-        "author": "NIRMUKA",
-        "file": "/writings/filsafat/beyond-homo-technicus.html"
-    },
+    "title": "Beyond Homo Technicus: Reconstructing Human Responsibility and Moral Self-Transformation in the Age of Artificial Intelligence",
 
+    "subtitle": "An exploration of human responsibility, technology, and moral transformation in the age of artificial intelligence.",
 
-    {
-        "id": "manusia-dan-makna",
-        "category": "TEOLOGI",
-        "title": "Manusia dan Pencarian Makna",
-        "subtitle": "Refleksi mengenai manusia, iman, dan keberadaan.",
-        "year": "2026",
-        "type": "THEOLOGY ESSAY",
-        "author": "NIRMUKA",
-        "file": "/writings/teologi/manusia-dan-makna.html"
-    }
+    "year": "2026",
 
+    "type": "Philosophical Essay",
+
+    "status": "Published",
+
+    "language": "English",
+
+    "author": "NIRMUKA",
+
+    "abstract": "A philosophical exploration of human responsibility and moral self-transformation in relation to artificial intelligence.",
+
+    "tags": [
+      "Artificial Intelligence",
+      "Hans Jonas",
+      "Mou Zongsan",
+      "Human Responsibility"
+    ],
+
+    "content": "",
+
+    "references": []
+  }
 ]
