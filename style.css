@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Rock+Salt&family=Rubik+Spray+Paint&family=Sedgwick+Ave+Display&display=swap');
 
 
-/* =====================================
+/* =========================================================
    NIRMUKA DIGITAL ART ARCHIVE
-===================================== */
+========================================================= */
 
 * {
     margin: 0;
@@ -11,12 +11,18 @@
     box-sizing: border-box;
 }
 
+
 html {
     scroll-behavior: smooth;
+    background: #050505;
 }
 
+
 body {
+    min-height: 100vh;
+
     background: #050505;
+
     color: #ffffff;
 
     font-family:
@@ -27,12 +33,29 @@ body {
 }
 
 
-/* =====================================
+
+/* =========================================================
+   IMPORTANT
+   REMOVE ORIGINAL BROWSER CURSOR
+========================================================= */
+
+html,
+body,
+body *,
+body *::before,
+body *::after {
+    cursor: none !important;
+}
+
+
+
+/* =========================================================
    CURTAIN TRANSITION
-===================================== */
+========================================================= */
 
 .curtain {
     position: fixed;
+
     inset: 0;
 
     background: #050505;
@@ -43,8 +66,11 @@ body {
         translateY(-100%);
 
     transition:
-        transform .9s cubic-bezier(.77, 0, .18, 1);
+        transform
+        .9s
+        cubic-bezier(.77, 0, .18, 1);
 }
+
 
 .curtain.active {
     transform:
@@ -52,43 +78,67 @@ body {
 }
 
 
-/* =====================================
+
+/* =========================================================
    LANDING PAGE
-===================================== */
+========================================================= */
 
 .landing {
+    position: relative;
+
+    width: 100%;
+
     height: 100vh;
 
     display: flex;
-    justify-content: center;
+
     align-items: center;
 
-    position: relative;
+    justify-content: center;
+
+    overflow: hidden;
 
     background:
+
         linear-gradient(
             rgba(0,0,0,.50),
             rgba(0,0,0,.86)
         ),
+
         url("hero.jpg");
 
     background-size: cover;
+
     background-position: center;
 }
 
+
+
+/* subtle damaged texture */
+
 .hero-overlay {
     position: absolute;
+
     inset: 0;
 
+    pointer-events: none;
+
     background:
+
         repeating-linear-gradient(
             0deg,
-            rgba(255,255,255,.03),
-            rgba(255,255,255,.03) 1px,
+
+            rgba(255,255,255,.025),
+
+            rgba(255,255,255,.025) 1px,
+
             transparent 1px,
+
             transparent 4px
         );
 }
+
+
 
 .hero-content {
     position: relative;
@@ -99,9 +149,10 @@ body {
 }
 
 
-/* =====================================
-   NIRMUKA TITLE
-===================================== */
+
+/* =========================================================
+   NIRMUKA MAIN TITLE
+========================================================= */
 
 .nirmuka {
     position: relative;
@@ -113,7 +164,11 @@ body {
         cursive;
 
     font-size:
-        clamp(74px, 11vw, 150px);
+        clamp(
+            74px,
+            11vw,
+            150px
+        );
 
     font-weight: 400;
 
@@ -134,12 +189,20 @@ body {
     isolation: isolate;
 
     text-shadow:
-        6px 6px 0 rgba(0,0,0,.70),
-        -2px 3px 0 rgba(255,255,255,.08);
+
+        6px 6px 0
+        rgba(0,0,0,.70),
+
+        -2px 3px 0
+        rgba(255,255,255,.08);
 
     transition:
         transform .35s ease;
 }
+
+
+
+/* ghost spray */
 
 .nirmuka::before {
     content: "NIRMUKA";
@@ -147,6 +210,7 @@ body {
     position: absolute;
 
     left: -8px;
+
     top: 7px;
 
     width: 100%;
@@ -168,24 +232,39 @@ body {
     opacity: .75;
 }
 
+
+
+/* violent underline */
+
 .nirmuka::after {
     content: "";
 
     position: absolute;
 
     left: -4%;
+
     bottom: -18px;
 
     width: 110%;
+
     height: 8px;
 
     background:
+
         repeating-linear-gradient(
             173deg,
-            rgba(255,255,255,.8) 0 8px,
-            transparent 8px 14px,
-            rgba(255,255,255,.25) 14px 19px,
-            transparent 19px 27px
+
+            rgba(255,255,255,.80)
+            0 8px,
+
+            transparent
+            8px 14px,
+
+            rgba(255,255,255,.25)
+            14px 19px,
+
+            transparent
+            19px 27px
         );
 
     transform:
@@ -195,6 +274,8 @@ body {
     opacity: .55;
 }
 
+
+
 .nirmuka:hover {
     transform:
         rotate(-1deg)
@@ -203,9 +284,10 @@ body {
 }
 
 
-/* =====================================
+
+/* =========================================================
    ARTIST TAG
-===================================== */
+========================================================= */
 
 .artist-tag {
     margin-top: 32px;
@@ -224,21 +306,29 @@ body {
 }
 
 
-/* =====================================
+
+/* =========================================================
    MAIN MENU
-===================================== */
+========================================================= */
 
 .main-menu {
     margin-top: 80px;
 
     display: flex;
+
     justify-content: center;
+
+    align-items: center;
 
     gap: 80px;
 }
 
+
+
 .main-menu a {
     position: relative;
+
+    display: inline-block;
 
     color: #ffffff;
 
@@ -255,21 +345,30 @@ body {
     letter-spacing: 1px;
 
     transition:
-        transform .35s ease,
-        opacity .35s ease;
+        opacity .3s ease,
+        transform .3s ease;
 }
+
+
 
 .main-menu a:nth-child(1) {
-    transform: rotate(-3deg);
+    transform:
+        rotate(-3deg);
 }
+
 
 .main-menu a:nth-child(2) {
-    transform: rotate(2deg);
+    transform:
+        rotate(2deg);
 }
 
+
 .main-menu a:nth-child(3) {
-    transform: rotate(-2deg);
+    transform:
+        rotate(-2deg);
 }
+
+
 
 .main-menu a:hover {
     opacity: .55;
@@ -280,15 +379,21 @@ body {
         scale(1.08);
 }
 
+
+
+/* graffiti underline */
+
 .main-menu a::after {
     content: "";
 
     position: absolute;
 
     left: -5%;
-    bottom: -7px;
+
+    bottom: -8px;
 
     width: 0;
+
     height: 3px;
 
     background:
@@ -301,23 +406,31 @@ body {
         width .3s ease;
 }
 
+
 .main-menu a:hover::after {
     width: 110%;
 }
 
 
-/* =====================================
+
+/* =========================================================
    DYNAMIC CONTENT
-===================================== */
+========================================================= */
 
 #content-container {
+    position: relative;
+
     min-height: 100vh;
+
+    background: #050505;
 }
 
 
-/* =====================================
-   PAGE
-===================================== */
+
+/* =========================================================
+   PAGE SYSTEM
+   CHAOS LEFT + BLACK CENTER + CHAOS RIGHT
+========================================================= */
 
 .page-section {
     position: relative;
@@ -332,21 +445,29 @@ body {
     isolation: isolate;
 
     background:
+
         linear-gradient(
             90deg,
+
             #111111 0%,
-            #090909 18%,
+
+            #0a0a0a 18%,
+
             #050505 31%,
+
             #050505 69%,
-            #090909 82%,
+
+            #0a0a0a 82%,
+
             #111111 100%
         );
 }
 
 
-/* =====================================
+
+/* =========================================================
    ABSTRACT PAINT — LEFT
-===================================== */
+========================================================= */
 
 .page-section::before {
     content: "";
@@ -354,82 +475,99 @@ body {
     position: absolute;
 
     left: 0;
+
     top: 0;
 
-    width: 31vw;
+    width: 32vw;
+
     height: 100%;
 
     z-index: 0;
 
     pointer-events: none;
 
-    opacity: .94;
+    opacity: .95;
 
     background:
+
         radial-gradient(
-            ellipse at 5% 7%,
-            rgba(235,235,220,.30) 0 7%,
+            ellipse at 3% 6%,
+            rgba(238,238,220,.32)
+            0 7%,
             transparent 8%
         ),
 
         radial-gradient(
-            circle at 30% 15%,
-            rgba(255,255,255,.15) 0 4%,
+            circle at 29% 15%,
+            rgba(255,255,255,.15)
+            0 4%,
             transparent 5%
         ),
 
         radial-gradient(
-            ellipse at 8% 28%,
-            rgba(220,220,205,.25) 0 11%,
-            transparent 12%
+            ellipse at 8% 27%,
+            rgba(210,210,195,.28)
+            0 12%,
+            transparent 13%
         ),
 
         radial-gradient(
-            ellipse at 39% 37%,
-            rgba(255,255,255,.11) 0 14%,
-            transparent 15%
-        ),
-
-        radial-gradient(
-            circle at 12% 48%,
-            rgba(235,235,220,.25) 0 8%,
+            circle at 43% 34%,
+            rgba(255,255,255,.10)
+            0 8%,
             transparent 9%
         ),
 
         radial-gradient(
-            ellipse at 36% 61%,
-            rgba(255,255,255,.12) 0 17%,
+            ellipse at 12% 47%,
+            rgba(235,235,215,.26)
+            0 10%,
+            transparent 11%
+        ),
+
+        radial-gradient(
+            ellipse at 39% 60%,
+            rgba(255,255,255,.12)
+            0 17%,
             transparent 18%
         ),
 
         radial-gradient(
-            circle at 8% 72%,
-            rgba(225,225,210,.28) 0 7%,
-            transparent 8%
+            circle at 7% 72%,
+            rgba(225,225,208,.29)
+            0 8%,
+            transparent 9%
         ),
 
         radial-gradient(
-            ellipse at 37% 85%,
-            rgba(255,255,255,.11) 0 15%,
+            ellipse at 37% 84%,
+            rgba(255,255,255,.11)
+            0 15%,
             transparent 16%
         ),
 
         radial-gradient(
             ellipse at 8% 97%,
-            rgba(230,230,215,.23) 0 12%,
+            rgba(230,230,215,.25)
+            0 12%,
             transparent 13%
         ),
 
         repeating-linear-gradient(
-            79deg,
+            78deg,
+
             transparent 0 20px,
-            rgba(255,255,255,.045) 20px 23px,
-            transparent 23px 47px
+
+            rgba(255,255,255,.045)
+            20px 23px,
+
+            transparent
+            23px 47px
         );
 
     filter:
         blur(.45px)
-        contrast(1.25);
+        contrast(1.3);
 
     transform:
         rotate(-1deg)
@@ -437,9 +575,10 @@ body {
 }
 
 
-/* =====================================
+
+/* =========================================================
    ABSTRACT PAINT — RIGHT
-===================================== */
+========================================================= */
 
 .page-section::after {
     content: "";
@@ -447,82 +586,99 @@ body {
     position: absolute;
 
     right: 0;
+
     top: 0;
 
-    width: 31vw;
+    width: 32vw;
+
     height: 100%;
 
     z-index: 0;
 
     pointer-events: none;
 
-    opacity: .94;
+    opacity: .95;
 
     background:
+
         radial-gradient(
-            ellipse at 94% 8%,
-            rgba(230,230,218,.28) 0 8%,
+            ellipse at 96% 8%,
+            rgba(235,235,220,.30)
+            0 8%,
             transparent 9%
         ),
 
         radial-gradient(
             circle at 69% 18%,
-            rgba(255,255,255,.16) 0 5%,
+            rgba(255,255,255,.16)
+            0 5%,
             transparent 6%
         ),
 
         radial-gradient(
-            ellipse at 91% 30%,
-            rgba(215,215,205,.25) 0 12%,
+            ellipse at 92% 30%,
+            rgba(215,215,200,.27)
+            0 12%,
             transparent 13%
         ),
 
         radial-gradient(
-            ellipse at 63% 41%,
-            rgba(255,255,255,.11) 0 15%,
+            ellipse at 62% 41%,
+            rgba(255,255,255,.11)
+            0 15%,
             transparent 16%
         ),
 
         radial-gradient(
-            circle at 89% 52%,
-            rgba(240,240,225,.26) 0 8%,
+            circle at 90% 53%,
+            rgba(240,240,220,.27)
+            0 8%,
             transparent 9%
         ),
 
         radial-gradient(
-            ellipse at 66% 64%,
-            rgba(255,255,255,.12) 0 15%,
+            ellipse at 65% 64%,
+            rgba(255,255,255,.12)
+            0 15%,
             transparent 16%
         ),
 
         radial-gradient(
-            circle at 93% 75%,
-            rgba(220,220,205,.27) 0 8%,
+            circle at 94% 76%,
+            rgba(220,220,205,.28)
+            0 8%,
             transparent 9%
         ),
 
         radial-gradient(
-            ellipse at 65% 86%,
-            rgba(255,255,255,.11) 0 16%,
+            ellipse at 65% 87%,
+            rgba(255,255,255,.11)
+            0 16%,
             transparent 17%
         ),
 
         radial-gradient(
-            ellipse at 92% 97%,
-            rgba(225,225,215,.23) 0 12%,
+            ellipse at 93% 98%,
+            rgba(225,225,215,.24)
+            0 12%,
             transparent 13%
         ),
 
         repeating-linear-gradient(
             -76deg,
+
             transparent 0 22px,
-            rgba(255,255,255,.04) 22px 25px,
-            transparent 25px 49px
+
+            rgba(255,255,255,.04)
+            22px 25px,
+
+            transparent
+            25px 49px
         );
 
     filter:
         blur(.45px)
-        contrast(1.25);
+        contrast(1.3);
 
     transform:
         rotate(1deg)
@@ -530,14 +686,17 @@ body {
 }
 
 
-/* =====================================
+
+/* =========================================================
    BLACK READING COLUMN
-===================================== */
+========================================================= */
 
 .section-inner {
     position: relative;
 
     z-index: 2;
+
+    width: 100%;
 
     max-width: 980px;
 
@@ -550,13 +709,15 @@ body {
         rgba(5,5,5,.985);
 
     box-shadow:
-        0 0 80px rgba(0,0,0,.98);
+        0 0 90px
+        rgba(0,0,0,.98);
 }
 
 
-/* =====================================
+
+/* =========================================================
    ARCHIVE LABEL
-===================================== */
+========================================================= */
 
 .work-number {
     font-family:
@@ -575,9 +736,10 @@ body {
 }
 
 
-/* =====================================
+
+/* =========================================================
    PAGE TITLES
-===================================== */
+========================================================= */
 
 .page-section h2 {
     position: relative;
@@ -602,15 +764,19 @@ body {
         rotate(-2deg);
 }
 
+
+
 .page-section h2::after {
     content: "";
 
     position: absolute;
 
     left: 0;
+
     bottom: -13px;
 
     width: 76%;
+
     height: 4px;
 
     background:
@@ -622,9 +788,10 @@ body {
 }
 
 
-/* =====================================
+
+/* =========================================================
    BACK BUTTONS
-===================================== */
+========================================================= */
 
 .back-home,
 .back-button {
@@ -649,13 +816,18 @@ body {
         transform .3s ease;
 }
 
+
+
 .back-home {
     margin-bottom: 50px;
 }
 
+
 .back-button {
     margin-bottom: 60px;
 }
+
+
 
 .back-home:hover,
 .back-button:hover {
@@ -667,9 +839,10 @@ body {
 }
 
 
-/* =====================================
-   WORKS
-===================================== */
+
+/* =========================================================
+   WORKS GALLERY
+========================================================= */
 
 .works-gallery {
     display: grid;
@@ -680,24 +853,33 @@ body {
     gap: 40px;
 }
 
+
+
 .art-card {
+    position: relative;
+
     background: #0d0d0d;
 
     padding: 18px;
 
     transition:
-        transform .45s ease;
+        transform .4s ease;
 }
+
+
 
 .art-card:nth-child(odd) {
     transform:
         rotate(-.35deg);
 }
 
+
 .art-card:nth-child(even) {
     transform:
         rotate(.35deg);
 }
+
+
 
 .art-card:hover {
     transform:
@@ -705,21 +887,29 @@ body {
         translateY(-10px);
 }
 
+
+
 .art-card a {
+    display: block;
+
     color: #ffffff;
 
     text-decoration: none;
 }
+
+
 
 .art-card img {
     width: 100%;
 
     aspect-ratio: 1 / 1;
 
-    object-fit: cover;
-
     display: block;
+
+    object-fit: cover;
 }
+
+
 
 .art-card h3 {
     margin-top: 20px;
@@ -740,6 +930,8 @@ body {
         rotate(-1deg);
 }
 
+
+
 .art-card p {
     margin-top: 12px;
 
@@ -751,13 +943,35 @@ body {
 
     line-height: 1.6;
 
-    opacity: .5;
+    opacity: .50;
 }
 
 
-/* =====================================
+
+/* =========================================================
+   ARTWORK IMAGE PROTECTION
+   WORKS + DETAIL
+========================================================= */
+
+.art-card img,
+#art-image,
+.artwork-image img {
+    -webkit-user-drag: none;
+
+    user-drag: none;
+
+    -webkit-user-select: none;
+
+    user-select: none;
+
+    -webkit-touch-callout: none;
+}
+
+
+
+/* =========================================================
    WRITINGS
-===================================== */
+========================================================= */
 
 .section-description {
     max-width: 700px;
@@ -774,17 +988,21 @@ body {
 }
 
 
-/* =====================================
+
+/* =========================================================
    ABOUT
-===================================== */
+========================================================= */
 
 .about-page .section-inner {
     max-width: 900px;
 }
 
+
 .about-content {
     max-width: 760px;
 }
+
+
 
 .about-content p {
     font-family:
@@ -793,12 +1011,16 @@ body {
 
     font-size: 18px;
 
+    font-weight: 400;
+
     line-height: 2;
 
-    margin-bottom: 45px;
-
     color: #d5d5d5;
+
+    margin-bottom: 45px;
 }
+
+
 
 .about-content .signature {
     margin-top: 80px;
@@ -818,9 +1040,10 @@ body {
 }
 
 
-/* =====================================
+
+/* =========================================================
    ARTWORK DETAIL PAGE
-===================================== */
+========================================================= */
 
 .artwork-page {
     position: relative;
@@ -835,21 +1058,29 @@ body {
     isolation: isolate;
 
     background:
+
         linear-gradient(
             90deg,
+
             #111111 0%,
-            #090909 18%,
+
+            #0a0a0a 18%,
+
             #050505 31%,
+
             #050505 69%,
-            #090909 82%,
+
+            #0a0a0a 82%,
+
             #111111 100%
         );
 }
 
 
-/* =====================================
-   ARTWORK LEFT WALL
-===================================== */
+
+/* =========================================================
+   ARTWORK DETAIL — LEFT PAINT
+========================================================= */
 
 .artwork-page::before {
     content: "";
@@ -857,65 +1088,76 @@ body {
     position: absolute;
 
     left: 0;
+
     top: 0;
 
-    width: 31vw;
+    width: 32vw;
+
     height: 100%;
 
     z-index: 0;
 
     pointer-events: none;
 
-    opacity: .94;
+    opacity: .95;
 
     background:
+
         radial-gradient(
-            ellipse at 10% 8%,
-            rgba(235,235,220,.27) 0 8%,
+            ellipse at 8% 8%,
+            rgba(235,235,220,.29)
+            0 8%,
             transparent 9%
         ),
 
         radial-gradient(
-            circle at 35% 20%,
-            rgba(255,255,255,.14) 0 5%,
+            circle at 34% 20%,
+            rgba(255,255,255,.15)
+            0 5%,
             transparent 6%
         ),
 
         radial-gradient(
-            ellipse at 11% 36%,
-            rgba(215,215,202,.23) 0 13%,
+            ellipse at 10% 36%,
+            rgba(215,215,202,.25)
+            0 13%,
             transparent 14%
         ),
 
         radial-gradient(
             ellipse at 39% 51%,
-            rgba(255,255,255,.10) 0 15%,
+            rgba(255,255,255,.11)
+            0 15%,
             transparent 16%
         ),
 
         radial-gradient(
-            circle at 13% 67%,
-            rgba(235,235,220,.25) 0 8%,
+            circle at 12% 67%,
+            rgba(235,235,220,.26)
+            0 8%,
             transparent 9%
         ),
 
         radial-gradient(
             ellipse at 38% 82%,
-            rgba(255,255,255,.10) 0 16%,
+            rgba(255,255,255,.11)
+            0 16%,
             transparent 17%
         ),
 
         radial-gradient(
-            ellipse at 10% 97%,
-            rgba(220,220,205,.22) 0 12%,
+            ellipse at 9% 97%,
+            rgba(220,220,205,.24)
+            0 12%,
             transparent 13%
         );
 }
 
 
-/* =====================================
-   ARTWORK RIGHT WALL
-===================================== */
+
+/* =========================================================
+   ARTWORK DETAIL — RIGHT PAINT
+========================================================= */
 
 .artwork-page::after {
     content: "";
@@ -923,70 +1165,83 @@ body {
     position: absolute;
 
     right: 0;
+
     top: 0;
 
-    width: 31vw;
+    width: 32vw;
+
     height: 100%;
 
     z-index: 0;
 
     pointer-events: none;
 
-    opacity: .94;
+    opacity: .95;
 
     background:
+
         radial-gradient(
-            ellipse at 91% 9%,
-            rgba(235,235,220,.26) 0 8%,
+            ellipse at 92% 9%,
+            rgba(235,235,220,.28)
+            0 8%,
             transparent 9%
         ),
 
         radial-gradient(
             circle at 65% 22%,
-            rgba(255,255,255,.14) 0 5%,
+            rgba(255,255,255,.15)
+            0 5%,
             transparent 6%
         ),
 
         radial-gradient(
             ellipse at 90% 39%,
-            rgba(215,215,202,.23) 0 13%,
+            rgba(215,215,202,.25)
+            0 13%,
             transparent 14%
         ),
 
         radial-gradient(
             ellipse at 62% 55%,
-            rgba(255,255,255,.10) 0 15%,
+            rgba(255,255,255,.11)
+            0 15%,
             transparent 16%
         ),
 
         radial-gradient(
             circle at 88% 70%,
-            rgba(235,235,220,.25) 0 8%,
+            rgba(235,235,220,.26)
+            0 8%,
             transparent 9%
         ),
 
         radial-gradient(
             ellipse at 64% 84%,
-            rgba(255,255,255,.10) 0 16%,
+            rgba(255,255,255,.11)
+            0 16%,
             transparent 17%
         ),
 
         radial-gradient(
             ellipse at 91% 97%,
-            rgba(220,220,205,.22) 0 12%,
+            rgba(220,220,205,.24)
+            0 12%,
             transparent 13%
         );
 }
 
 
-/* =====================================
+
+/* =========================================================
    ARTWORK BLACK CENTER
-===================================== */
+========================================================= */
 
 .artwork-container {
     position: relative;
 
     z-index: 2;
+
+    width: 100%;
 
     max-width: 980px;
 
@@ -999,17 +1254,20 @@ body {
         rgba(5,5,5,.985);
 
     box-shadow:
-        0 0 80px rgba(0,0,0,.98);
+        0 0 90px
+        rgba(0,0,0,.98);
 }
 
 
-/* =====================================
+
+/* =========================================================
    ARTWORK IMAGE
-===================================== */
+========================================================= */
 
 .artwork-image {
     position: relative;
 }
+
 
 .artwork-image img,
 #art-image {
@@ -1017,23 +1275,12 @@ body {
 
     max-height: 750px;
 
-    object-fit: contain;
-
     display: block;
+
+    object-fit: contain;
 }
 
 
-/* protection ONLY detail artwork */
-
-#art-image,
-.artwork-image img {
-    -webkit-user-drag: none;
-
-    -webkit-user-select: none;
-    user-select: none;
-
-    -webkit-touch-callout: none;
-}
 
 .artwork-info {
     max-width: 760px;
@@ -1043,9 +1290,10 @@ body {
 }
 
 
-/* =====================================
+
+/* =========================================================
    ARTWORK TITLE
-===================================== */
+========================================================= */
 
 #art-title {
     font-family:
@@ -1065,9 +1313,10 @@ body {
 }
 
 
-/* =====================================
+
+/* =========================================================
    ARTWORK META
-===================================== */
+========================================================= */
 
 .meta {
     display: grid;
@@ -1080,15 +1329,17 @@ body {
     padding:
         35px 0;
 
-    border-top:
-        1px solid #333;
-
-    border-bottom:
-        1px solid #333;
-
     margin:
         50px 0;
+
+    border-top:
+        1px solid #333333;
+
+    border-bottom:
+        1px solid #333333;
 }
+
+
 
 .meta div {
     display: flex;
@@ -1097,6 +1348,8 @@ body {
 
     gap: 12px;
 }
+
+
 
 .meta strong {
     font-family:
@@ -1109,8 +1362,10 @@ body {
 
     letter-spacing: 2px;
 
-    opacity: .5;
+    opacity: .50;
 }
+
+
 
 .meta span {
     font-family:
@@ -1123,9 +1378,10 @@ body {
 }
 
 
-/* =====================================
+
+/* =========================================================
    ARTWORK DESCRIPTION
-===================================== */
+========================================================= */
 
 .description-block h2 {
     font-family:
@@ -1146,6 +1402,8 @@ body {
         rotate(-1deg);
 }
 
+
+
 .description-block p {
     max-width: 700px;
 
@@ -1153,66 +1411,84 @@ body {
         "Permanent Marker",
         cursive;
 
-    line-height: 1.95;
-
     font-size: 17px;
+
+    line-height: 1.95;
 
     color: #d5d5d5;
 }
 
 
-/* =====================================
-   SPRAY CANVAS
-===================================== */
+
+/* =========================================================
+   PILOX / SPRAY CANVAS
+========================================================= */
 
 #spray-canvas {
-    position: fixed;
+    position: fixed !important;
 
-    left: 0;
-    top: 0;
+    left: 0 !important;
 
-    width: 100vw;
-    height: 100vh;
+    top: 0 !important;
 
-    pointer-events: none;
+    width: 100vw !important;
 
-    z-index: 9997;
+    height: 100vh !important;
 
-    display: block;
+    display: block !important;
+
+    visibility: visible !important;
+
+    pointer-events: none !important;
+
+    z-index: 9997 !important;
 }
 
 
-/* =====================================
+
+/* =========================================================
    SPRAY NOZZLE
-===================================== */
+========================================================= */
 
 .spray-cursor {
-    position: fixed;
+    position: fixed !important;
 
     left: 0;
+
     top: 0;
 
     width: 24px;
+
     height: 24px;
 
-    pointer-events: none;
+    display: block !important;
 
-    z-index: 10001;
+    visibility: visible !important;
+
+    pointer-events: none !important;
+
+    z-index: 10001 !important;
+
+    opacity: 0;
 
     transform:
         translate(-50%, -50%)
         rotate(-8deg);
 
-    opacity: 0;
-
-    display: block;
-
     transition:
+
         width .12s ease,
+
         height .12s ease,
+
         transform .12s ease,
-        opacity .15s ease;
+
+        opacity .10s ease;
 }
+
+
+
+/* nozzle outer ring */
 
 .spray-cursor::before {
     content: "";
@@ -1220,26 +1496,37 @@ body {
     position: absolute;
 
     left: 50%;
+
     top: 50%;
 
     width: 15px;
+
     height: 15px;
 
     transform:
         translate(-50%, -50%);
 
     border:
-        2px solid rgba(255,255,255,.95);
+        2px solid
+        rgba(255,255,255,.98);
 
     border-radius: 50%;
 
     background:
-        rgba(0,0,0,.45);
+        rgba(0,0,0,.50);
 
     box-shadow:
-        0 0 0 1px rgba(0,0,0,.9),
-        0 0 11px rgba(255,255,255,.16);
+
+        0 0 0 1px
+        rgba(0,0,0,.95),
+
+        0 0 12px
+        rgba(255,255,255,.20);
 }
+
+
+
+/* hole in nozzle */
 
 .spray-cursor::after {
     content: "";
@@ -1247,9 +1534,11 @@ body {
     position: absolute;
 
     left: 50%;
+
     top: 50%;
 
     width: 4px;
+
     height: 4px;
 
     transform:
@@ -1260,12 +1549,18 @@ body {
     background: #ffffff;
 
     box-shadow:
-        0 0 5px rgba(255,255,255,.8);
+        0 0 6px
+        rgba(255,255,255,.85);
 }
 
+
+
+/* while spraying */
+
 .spray-cursor.spraying {
-    width: 31px;
-    height: 31px;
+    width: 32px;
+
+    height: 32px;
 
     transform:
         translate(-50%, -50%)
@@ -1273,17 +1568,26 @@ body {
         scale(.88);
 }
 
+
+
 .spray-cursor.spraying::before {
     box-shadow:
-        0 0 0 1px rgba(0,0,0,.9),
-        0 0 16px rgba(255,255,255,.28),
-        0 0 32px rgba(255,255,255,.10);
+
+        0 0 0 1px
+        rgba(0,0,0,.95),
+
+        0 0 18px
+        rgba(255,255,255,.30),
+
+        0 0 36px
+        rgba(255,255,255,.12);
 }
 
 
-/* =====================================
-   THOU SHALL NOT STEAL
-===================================== */
+
+/* =========================================================
+   ANTI-THEFT FULLSCREEN WARNING
+========================================================= */
 
 .theft-warning {
     position: fixed;
@@ -1291,17 +1595,20 @@ body {
     inset: 0;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     padding: 30px;
 
     background:
-        rgba(0,0,0,.985);
+        rgba(0,0,0,.99);
 
     z-index: 999999;
 
     opacity: 0;
+
     visibility: hidden;
 
     pointer-events: none;
@@ -1311,15 +1618,26 @@ body {
         visibility .12s ease;
 }
 
+
+
 .theft-warning.show {
     opacity: 1;
+
     visibility: visible;
 }
+
+
+
+/* =========================================================
+   THOU SHALL NOT STEAL TEXT
+========================================================= */
 
 .theft-warning-text {
     position: relative;
 
-    max-width: 1300px;
+    width: 100%;
+
+    max-width: 1350px;
 
     font-family:
         "Rubik Spray Paint",
@@ -1327,7 +1645,11 @@ body {
         cursive;
 
     font-size:
-        clamp(62px, 10vw, 170px);
+        clamp(
+            64px,
+            10vw,
+            175px
+        );
 
     font-weight: 400;
 
@@ -1341,20 +1663,31 @@ body {
 
     color: #ffffff;
 
-    transform:
-        rotate(-5deg)
-        scale(.72);
-
     opacity: 0;
 
+    transform:
+        rotate(-5deg)
+        scale(.68);
+
     text-shadow:
-        8px 8px 0 rgba(255,255,255,.07),
-        -5px -4px 0 rgba(255,255,255,.04);
+
+        9px 8px 0
+        rgba(255,255,255,.07),
+
+        -6px -4px 0
+        rgba(255,255,255,.04);
 
     transition:
-        transform .18s cubic-bezier(.2,.95,.3,1.4),
-        opacity .12s ease;
+
+        transform
+        .18s
+        cubic-bezier(.2,.95,.3,1.4),
+
+        opacity
+        .12s ease;
 }
+
+
 
 .theft-warning.show
 .theft-warning-text {
@@ -1364,6 +1697,10 @@ body {
         rotate(-5deg)
         scale(1);
 }
+
+
+
+/* ghost warning */
 
 .theft-warning-text::before {
     content:
@@ -1376,7 +1713,8 @@ body {
     color: transparent;
 
     -webkit-text-stroke:
-        2px rgba(255,255,255,.20);
+        2px
+        rgba(255,255,255,.22);
 
     transform:
         translate(-11px, 9px)
@@ -1385,24 +1723,39 @@ body {
     z-index: -1;
 }
 
+
+
+/* brutal underline */
+
 .theft-warning-text::after {
     content: "";
 
     position: absolute;
 
     left: -4%;
+
     bottom: -28px;
 
     width: 108%;
+
     height: 10px;
 
     background:
+
         repeating-linear-gradient(
             173deg,
-            rgba(255,255,255,.88) 0 10px,
-            transparent 10px 16px,
-            rgba(255,255,255,.30) 16px 22px,
-            transparent 22px 31px
+
+            rgba(255,255,255,.90)
+            0 10px,
+
+            transparent
+            10px 16px,
+
+            rgba(255,255,255,.30)
+            16px 22px,
+
+            transparent
+            22px 31px
         );
 
     transform:
@@ -1413,19 +1766,26 @@ body {
 }
 
 
-/* =====================================
+
+/* =========================================================
    MOBILE
-===================================== */
+========================================================= */
 
 @media(max-width: 700px) {
+
 
     .landing {
         padding: 20px;
     }
 
+
     .nirmuka {
         font-size:
-            clamp(56px, 17vw, 82px);
+            clamp(
+                56px,
+                17vw,
+                82px
+            );
 
         letter-spacing: 0;
 
@@ -1434,15 +1794,20 @@ body {
             skewX(-2deg);
     }
 
+
     .nirmuka::before {
         left: -4px;
+
         top: 5px;
     }
 
+
     .nirmuka::after {
         bottom: -13px;
+
         height: 7px;
     }
+
 
     .artist-tag {
         margin-top: 28px;
@@ -1452,6 +1817,7 @@ body {
         letter-spacing: 3px;
     }
 
+
     .main-menu {
         flex-direction: column;
 
@@ -1460,42 +1826,52 @@ body {
         margin-top: 65px;
     }
 
+
     .main-menu a {
         font-size: 31px;
     }
+
 
     .page-section {
         padding:
             55px 10px;
     }
 
+
     .page-section::before,
     .page-section::after {
         width: 19vw;
 
-        opacity: .43;
+        opacity: .45;
     }
+
 
     .section-inner {
-        padding:
-            35px 24px;
-
         max-width:
             calc(100% - 24px);
+
+        padding:
+            35px 24px;
     }
+
 
     .page-section h2 {
         font-size: 48px;
     }
 
+
     .works-gallery {
         grid-template-columns:
             1fr;
+
+        gap: 35px;
     }
+
 
     .art-card h3 {
         font-size: 24px;
     }
+
 
     .about-content p {
         font-size: 16px;
@@ -1505,38 +1881,45 @@ body {
         margin-bottom: 35px;
     }
 
+
     .artwork-page {
         padding:
             50px 10px;
     }
 
+
     .artwork-page::before,
     .artwork-page::after {
         width: 19vw;
 
-        opacity: .43;
+        opacity: .45;
     }
+
 
     .artwork-container {
-        padding:
-            35px 24px;
-
         max-width:
             calc(100% - 24px);
+
+        padding:
+            35px 24px;
     }
+
 
     #art-title {
         font-size: 42px;
     }
+
 
     .meta {
         grid-template-columns:
             1fr;
     }
 
+
     .description-block h2 {
         font-size: 27px;
     }
+
 
     .description-block p {
         font-size: 16px;
@@ -1544,61 +1927,28 @@ body {
         line-height: 1.9;
     }
 
+
     .theft-warning {
         padding: 20px;
     }
 
+
     .theft-warning-text {
         font-size:
-            clamp(46px, 15vw, 92px);
+            clamp(
+                46px,
+                15vw,
+                94px
+            );
 
         line-height: .92;
     }
 
-}
 
+    .theft-warning-text::after {
+        bottom: -18px;
 
-/* =====================================
-   CURSOR / NOZZLE FIX
-===================================== */
-
-/*
-   IMPORTANT:
-
-   Pakai ANY-POINTER, bukan POINTER.
-
-   Jadi laptop touchscreen + mouse
-   tetap mendeteksi mouse presisi.
-*/
-
-@media (any-pointer: fine) {
-
-    html,
-    body,
-    body *,
-    body *::before,
-    body *::after {
-        cursor: none !important;
-    }
-
-    #spray-canvas {
-        display: block !important;
-    }
-
-    .spray-cursor {
-        display: block !important;
+        height: 7px;
     }
 
 }
-
-
-/*
-   Tidak ada lagi:
-   @media (pointer: coarse) {
-       .spray-cursor { display:none }
-   }
-
-   Karena itulah yang sebelumnya
-   bisa mematikan nozzle pada
-   laptop touchscreen/hybrid.
-*/
