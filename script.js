@@ -1,24 +1,17 @@
 /* =========================================================
-   NIRMUKA CORE SYSTEM
-   PART 1A
+   NIRMUKA MAIN ENGINE
+
+   CORE ONLY
 
    Handle:
-   - Curtain transition
    - Navigation
-   - Works loader
-   - Artwork database
-
-   NOT INCLUDE:
-   - Spray
-   - Writings
-   - Protection
+   - Curtain
+   - Works
+   - Artwork Data
+   - About
 
 ========================================================= */
 
-
-/* =========================================================
-   GLOBAL ELEMENT
-========================================================= */
 
 
 const content =
@@ -34,11 +27,8 @@ const curtain =
 
 
 
-
-
-
 /* =========================================================
-   CURTAIN TRANSITION
+   CURTAIN
 ========================================================= */
 
 
@@ -67,13 +57,12 @@ function curtainTransition(callback){
         callback();
 
 
-
         curtain.classList.remove(
             "active"
         );
 
 
-    },800);
+    },600);
 
 
 
@@ -85,30 +74,25 @@ function curtainTransition(callback){
 
 
 
-
 /* =========================================================
-   MAIN NAVIGATION
+   NAVIGATION
 ========================================================= */
 
 
-const menuLinks =
-    document.querySelectorAll(
-        ".main-menu a"
-    );
-
-
-
-
-menuLinks.forEach(
-    link => {
+document
+.querySelectorAll(
+    ".main-menu a"
+)
+.forEach(
+    link=>{
 
 
         link.addEventListener(
             "click",
-            event => {
+            e=>{
 
 
-                event.preventDefault();
+                e.preventDefault();
 
 
 
@@ -117,35 +101,30 @@ menuLinks.forEach(
 
 
 
+                if(page==="works"){
+
+                    loadWorks();
+
+                }
 
 
-                switch(page){
+                if(page==="about"){
+
+                    loadAbout();
+
+                }
 
 
-                    case "works":
-
-                        loadWorks();
-
-                    break;
+                if(page==="writings"){
 
 
+                    if(
+                        window.openWritingArchive
+                    ){
 
+                        window.openWritingArchive();
 
-                    case "about":
-
-                        loadAbout();
-
-                    break;
-
-
-
-
-                    case "writings":
-
-                        loadWritings();
-
-                    break;
-
+                    }
 
 
                 }
@@ -166,47 +145,6 @@ menuLinks.forEach(
 
 
 /* =========================================================
-   WRITINGS CONNECTOR
-
-   Dipindahkan ke writings.js
-
-========================================================= */
-
-
-function loadWritings(){
-
-
-    if(
-        window.openWritingArchive
-    ){
-
-
-        window.openWritingArchive();
-
-
-
-    }
-
-    else{
-
-
-        console.warn(
-            "writings.js belum dimuat"
-        );
-
-
-    }
-
-
-}
-
-
-
-
-
-
-
-/* =========================================================
    WORKS PAGE
 ========================================================= */
 
@@ -215,164 +153,121 @@ function loadWorks(){
 
 
 
-    if(!content){
+curtainTransition(()=>{
 
-        return;
 
-    }
+content.innerHTML = `
 
 
+<section class="page-section works-page">
 
 
-    curtainTransition(()=>{
+<div class="section-inner">
 
 
-        content.innerHTML = `
 
+<a
+href="#"
+class="back-home"
+>
+← BACK
+</a>
 
-        <section class="page-section works-page">
 
 
-            <div class="section-inner">
 
 
+<p class="work-number">
 
-                <a
-                    href="#"
-                    class="back-home"
-                >
+ARCHIVE / WORKS
 
-                    ← BACK
+</p>
 
-                </a>
 
 
+<h2>
 
+WORKS
 
+</h2>
 
-                <div class="works-header">
 
 
-                    <p class="work-number">
 
-                        ARCHIVE / WORKS
 
-                    </p>
+<div class="works-carousel">
 
 
 
-                    <h2>
+<div class="carousel-track"></div>
 
-                        WORKS
 
-                    </h2>
 
 
 
-                </div>
+<div class="carousel-navigation">
 
 
+<button
+class="carousel-prev"
+>
+←
+</button>
 
 
 
+<button
+class="carousel-next"
+>
+→
+</button>
 
 
-                <div
-                    class="works-carousel"
-                >
+</div>
 
 
-                    <div
-                        class="carousel-stage"
-                    >
 
 
-                        <div
-                            class="carousel-track"
-                        >
+<div class="carousel-caption">
 
-                        </div>
 
+<h3
+class="carousel-title"
+></h3>
 
-                    </div>
 
 
+<p
+class="carousel-year"
+></p>
 
 
+</div>
 
-                    <div
-                        class="carousel-info"
-                    >
 
-                        <h3
-                            class="carousel-title"
-                        >
 
-                        </h3>
 
 
-                        <p
-                            class="carousel-year"
-                        >
+</div>
 
-                        </p>
 
 
-                    </div>
 
 
+</div>
 
 
+</section>
 
-                    <div
-                        class="carousel-controls"
-                    >
 
-                        <button
-                            class="carousel-prev"
-                        >
+`;
 
-                            ←
 
-                        </button>
 
+loadArtworks();
 
 
-                        <button
-                            class="carousel-next"
-                        >
-
-                            →
-
-                        </button>
-
-
-                    </div>
-
-
-
-                </div>
-
-
-
-
-
-            </div>
-
-
-        </section>
-
-
-
-        `;
-
-
-
-        initializeWorks();
-
-
-
-    });
+});
 
 
 
@@ -387,205 +282,175 @@ function loadWorks(){
 
 
 /* =========================================================
-   LOAD ARTWORK DATABASE
+   LOAD ARTWORK JSON
 ========================================================= */
 
 
-function initializeWorks(){
+function loadArtworks(){
 
 
 
-    const track =
-        document.querySelector(
-            ".carousel-track"
-        );
+fetch(
+"/artworks.json?v=10"
+)
 
 
-
-    if(!track){
-
-        return;
-
-    }
+.then(
+response=>response.json()
+)
 
 
+.then(
+data=>{
 
 
+createCarousel(
+data
+);
 
 
-    fetch(
-        "/artworks.json?v=20260822"
-    )
+}
+
+)
 
 
-    .then(
-        response=>{
+.catch(
+error=>{
 
 
-            if(!response.ok){
-
-                throw new Error(
-                    "Artwork database error"
-                );
-
-            }
+console.error(
+"Artwork error:",
+error
+);
 
 
-            return response.json();
+}
 
-
-        }
-    )
-
-
-
-    .then(
-        artworks=>{
-
-
-            createArtworkCarousel(
-                artworks
-            );
-
-
-        }
-    )
-
-
-
-    .catch(
-        error=>{
-
-
-            console.error(
-                error
-            );
-
-
-        }
-    );
+);
 
 
 
 }
 
+
+
+
+
+
+
+
 /* =========================================================
-   CREATE ARTWORK CAROUSEL
+   CAROUSEL SYSTEM
 ========================================================= */
 
 
-function createArtworkCarousel(
-    artworks
+function createCarousel(
+artworks
 ){
 
 
-    const track =
-        document.querySelector(
-            ".carousel-track"
-        );
 
+const track =
+document.querySelector(
+".carousel-track"
+);
 
-    const title =
-        document.querySelector(
-            ".carousel-title"
-        );
 
 
-    const year =
-        document.querySelector(
-            ".carousel-year"
-        );
+const title =
+document.querySelector(
+".carousel-title"
+);
 
 
 
-    const prev =
-        document.querySelector(
-            ".carousel-prev"
-        );
+const year =
+document.querySelector(
+".carousel-year"
+);
 
 
-    const next =
-        document.querySelector(
-            ".carousel-next"
-        );
 
+const prev =
+document.querySelector(
+".carousel-prev"
+);
 
 
-    if(
-        !track
-    ){
 
-        return;
+const next =
+document.querySelector(
+".carousel-next"
+);
 
-    }
 
 
 
+let index=0;
 
 
-    let currentIndex = 0;
 
 
 
-    artworks.forEach(
-        (work,index)=>{
+artworks.forEach(
+(work,i)=>{
 
 
-            const item =
-                document.createElement(
-                    "a"
-                );
+const card =
+document.createElement(
+"a"
+);
 
 
 
-            item.className =
-                "carousel-artwork";
+card.className =
+"carousel-item";
 
 
 
-            item.dataset.index =
-                index;
+card.href =
+`/artwork.html?id=${work.id}`;
 
 
 
-            item.href =
-                `/artwork.html?id=${work.id}`;
+card.innerHTML = `
 
 
+<div class="carousel-image-frame">
 
-            item.innerHTML = `
+<img
 
+src="${work.image}"
 
-                <img
+alt="${work.title}"
 
-                    src="${work.image}"
+draggable="false"
 
-                    alt="${work.title || ""}"
+/>
 
-                    draggable="false"
+</div>
 
-                >
 
+`;
 
-            `;
 
 
+track.appendChild(
+card
+);
 
-            track.appendChild(
-                item
-            );
 
 
-        }
-    );
+}
+);
 
 
 
 
-    const slides =
-        document.querySelectorAll(
-            ".carousel-artwork"
-        );
+const cards =
+document.querySelectorAll(
+".carousel-item"
+);
 
 
 
@@ -593,270 +458,87 @@ function createArtworkCarousel(
 
 
 
-    function updateCarousel(){
 
+function update(){
 
 
-        slides.forEach(
-            (slide,index)=>{
 
+cards.forEach(
+(card,i)=>{
 
-                slide.classList.remove(
-                    "active",
-                    "prev",
-                    "next"
-                );
 
+card.classList.remove(
+"active",
+"left",
+"right"
+);
 
 
-                if(
-                    index === currentIndex
-                ){
 
+if(i===index){
 
-                    slide.classList.add(
-                        "active"
-                    );
 
+card.classList.add(
+"active"
+);
 
-                }
 
+}
 
 
-                else if(
-                    index ===
-                    (
-                        currentIndex - 1 +
-                        artworks.length
-                    )
-                    %
-                    artworks.length
-                ){
+else if(
+i===
+(index-1+cards.length)
+%
+cards.length
+){
 
 
-                    slide.classList.add(
-                        "prev"
-                    );
+card.classList.add(
+"left"
+);
 
 
-                }
+}
 
 
+else if(
+i===
+(index+1)
+%
+cards.length
+){
 
 
-                else if(
-                    index ===
-                    (
-                        currentIndex + 1
-                    )
-                    %
-                    artworks.length
-                ){
+card.classList.add(
+"right"
+);
 
 
-                    slide.classList.add(
-                        "next"
-                    );
+}
 
 
-                }
+}
+);
 
 
 
-            }
-        );
 
 
+if(title){
 
+title.textContent =
+artworks[index].title || "";
 
-        const current =
-            artworks[currentIndex];
+}
 
 
+if(year){
 
-        if(title){
+year.textContent =
+artworks[index].year || "";
 
-            title.textContent =
-                current.title ||
-                "UNTITLED";
-
-        }
-
-
-
-        if(year){
-
-            year.textContent =
-                current.year ||
-                "";
-
-        }
-
-
-
-
-    }
-
-
-
-
-
-
-
-
-    function openArtwork(){
-
-
-
-        const current =
-            artworks[currentIndex];
-
-
-
-        if(!current){
-
-            return;
-
-        }
-
-
-
-        window.location.href =
-            `/artwork.html?id=${current.id}`;
-
-
-    }
-
-
-
-
-
-
-
-
-    slides.forEach(
-        (slide,index)=>{
-
-
-            slide.addEventListener(
-                "click",
-                event=>{
-
-
-                    event.preventDefault();
-
-
-
-                    if(
-                        index === currentIndex
-                    ){
-
-                        openArtwork();
-
-                    }
-
-                    else{
-
-
-                        currentIndex =
-                            index;
-
-
-                        updateCarousel();
-
-
-                    }
-
-
-                }
-            );
-
-
-        }
-    );
-
-
-
-
-
-
-
-    if(prev){
-
-
-        prev.addEventListener(
-            "click",
-            ()=>{
-
-
-                currentIndex--;
-
-
-
-                if(
-                    currentIndex < 0
-                ){
-
-                    currentIndex =
-                        artworks.length - 1;
-
-                }
-
-
-
-                updateCarousel();
-
-
-
-            }
-        );
-
-
-    }
-
-
-
-
-
-
-    if(next){
-
-
-        next.addEventListener(
-            "click",
-            ()=>{
-
-
-                currentIndex++;
-
-
-
-                if(
-                    currentIndex >= artworks.length
-                ){
-
-                    currentIndex = 0;
-
-                }
-
-
-
-                updateCarousel();
-
-
-
-            }
-        );
-
-
-    }
-
-
-
-
-
-
-    updateCarousel();
+}
 
 
 
@@ -869,131 +551,191 @@ function createArtworkCarousel(
 
 
 
+prev.onclick=()=>{
+
+
+index--;
+
+
+if(index<0){
+
+index =
+artworks.length-1;
+
+}
+
+
+update();
+
+
+};
+
+
+
+
+
+
+next.onclick=()=>{
+
+
+index++;
+
+
+if(index>=artworks.length){
+
+index=0;
+
+}
+
+
+update();
+
+
+};
+
+
+
+
+
+cards.forEach(
+(card,i)=>{
+
+
+card.addEventListener(
+"click",
+e=>{
+
+
+if(
+i!==index
+){
+
+
+e.preventDefault();
+
+
+index=i;
+
+
+update();
+
+
+}
+
+
+});
+
+
+}
+);
+
+
+
+
+update();
+
+
+
+}
+
+
+
+
+
+
+
 
 /* =========================================================
-   ABOUT PAGE
+   ABOUT
 ========================================================= */
 
 
 function loadAbout(){
 
 
-    if(!content){
 
-        return;
+curtainTransition(()=>{
 
-    }
 
+content.innerHTML = `
 
 
 
-    curtainTransition(()=>{
+<section class="page-section about-page">
 
 
-        content.innerHTML = `
+<div class="section-inner">
 
 
-        <section class="page-section about-page">
+<a
+href="#"
+class="back-home"
+>
+← BACK
+</a>
 
 
-            <div class="section-inner">
 
+<p class="work-number">
 
+ABOUT NIRMUKA
 
-                <a
-                    href="#"
-                    class="back-home"
-                >
+</p>
 
-                    ← BACK
 
-                </a>
 
+<h2>
 
+ABOUT
 
+</h2>
 
 
-                <p class="work-number">
 
-                    ABOUT NIRMUKA
 
-                </p>
+<div class="about-content">
 
 
+<p>
+So you want to know about me?
+</p>
 
 
-                <h2>
+<p>
+Saya tidak pernah melihat diri saya sebagai sesuatu yang selesai. Saya adalah kumpulan dari pertanyaan, luka, ingatan, kegelisahan, dan pencarian yang tidak pernah benar-benar berakhir.
+</p>
 
-                    ABOUT
 
-                </h2>
+<p>
+NIRMUKA lahir dari ketidakpuasan terhadap dunia yang terlalu cepat memberikan jawaban. Saya tertarik pada ruang gelap manusia: ketakutan, kehampaan, absurditas, kehilangan, dan pertanyaan tentang keberadaan.
+</p>
 
 
+<p>
+Bagi saya seni bukan sekadar membuat sesuatu menjadi indah. Seni adalah cara untuk menghadapi sesuatu yang mungkin terlalu berat untuk diterima.
+</p>
 
 
+<p>
+Saya tidak percaya dunia selalu menuju sesuatu yang lebih baik. Saya hanya percaya manusia terus mencoba menemukan makna di tengah kehancuran yang mereka ciptakan sendiri.
+</p>
 
 
-                <div class="about-content">
 
+</div>
 
-                    <p>
 
-                    So you want to know about me?
+</div>
 
-                    </p>
 
+</section>
 
 
-                    <p>
+`;
 
-                    Saya tidak pernah melihat diri saya sebagai seseorang yang selesai. Saya adalah kumpulan dari pertanyaan, ingatan, ketakutan, kehilangan, dan kegelisahan yang terus berubah. NIRMUKA lahir dari kebutuhan untuk memahami sesuatu yang sering kali tidak dapat dijelaskan dengan kata-kata.
 
-                    </p>
 
-
-
-                    <p>
-
-                    Saya melihat dunia sebagai tempat yang penuh kontradiksi. Manusia menciptakan keindahan sekaligus kehancuran. Kita membangun peradaban, tetapi sering kehilangan hubungan dengan diri sendiri. Kita mencari makna, tetapi terus menciptakan alasan untuk melupakan bahwa hidup memiliki batas.
-
-                    </p>
-
-
-
-                    <p>
-
-                    Seni bagi saya bukan tempat untuk memberikan jawaban. Seni adalah tempat untuk menghadapi kegelapan. Sebuah ruang untuk melihat luka, kehampaan, absurditas, dan pertanyaan yang mungkin tidak pernah memiliki penyelesaian.
-
-                    </p>
-
-
-
-                    <p>
-
-                    NIRMUKA adalah arsip dari semua kegelisahan tersebut.
-
-                    </p>
-
-
-                </div>
-
-
-
-
-            </div>
-
-
-
-        </section>
-
-
-
-        `;
-
-
-
-    });
-
+});
 
 
 }
@@ -1011,40 +753,37 @@ function loadAbout(){
 
 
 document.addEventListener(
-    "click",
-    event=>{
+"click",
+e=>{
 
 
-        const back =
-            event.target.closest(
-                ".back-home"
-            );
-
-
-
-        if(!back){
-
-            return;
-
-        }
-
-
-
-        event.preventDefault();
-
-
-
-        curtainTransition(()=>{
-
-
-            content.innerHTML =
-                "";
-
-
-
-        });
-
-
-
-    }
+const back =
+e.target.closest(
+".back-home"
 );
+
+
+
+if(!back){
+
+return;
+
+}
+
+
+
+e.preventDefault();
+
+
+
+curtainTransition(()=>{
+
+
+content.innerHTML="";
+
+
+});
+
+
+
+});
