@@ -494,5 +494,581 @@ backToLanding();
 
 }
 
+/* =====================================
+   NIRMUKA — SPRAY PAINT SYSTEM
+===================================== */
 
+(function () {
+
+    /* hanya aktif untuk perangkat dengan mouse */
+    if (!window.matchMedia("(pointer: fine)").matches) {
+        return;
+    }
+
+
+    /* =====================================
+       CREATE SPRAY CANVAS
+    ===================================== */
+
+    const sprayCanvas = document.createElement("canvas");
+
+    sprayCanvas.id = "spray-canvas";
+
+    document.body.appendChild(sprayCanvas);
+
+
+    const ctx = sprayCanvas.getContext("2d");
+
+
+    /* =====================================
+       CREATE CUSTOM NOZZLE
+    ===================================== */
+
+    const sprayCursor = document.createElement("div");
+
+    sprayCursor.className = "spray-cursor";
+
+    document.body.appendChild(sprayCursor);
+
+
+    /* =====================================
+       CANVAS SIZE
+    ===================================== */
+
+    let dpr = Math.min(
+        window.devicePixelRatio || 1,
+        2
+    );
+
+
+    function resizeCanvas() {
+
+        sprayCanvas.width =
+            window.innerWidth * dpr;
+
+        sprayCanvas.height =
+            window.innerHeight * dpr;
+
+
+        sprayCanvas.style.width =
+            window.innerWidth + "px";
+
+        sprayCanvas.style.height =
+            window.innerHeight + "px";
+
+
+        ctx.setTransform(
+            dpr,
+            0,
+            0,
+            dpr,
+            0,
+            0
+        );
+
+    }
+
+
+    resizeCanvas();
+
+
+    window.addEventListener(
+        "resize",
+        resizeCanvas
+    );
+
+
+    /* =====================================
+       MOUSE STATE
+    ===================================== */
+
+    let mouseX = 0;
+    let mouseY = 0;
+
+    let previousX = 0;
+    let previousY = 0;
+
+    let spraying = false;
+
+    let mouseVisible = false;
+
+    let mouseSpeed = 0;
+
+
+    const particles = [];
+
+
+    /* =====================================
+       MOVE NOZZLE
+    ===================================== */
+
+    document.addEventListener(
+        "mousemove",
+        (event) => {
+
+            previousX = mouseX;
+            previousY = mouseY;
+
+            mouseX = event.clientX;
+            mouseY = event.clientY;
+
+
+            const dx =
+                mouseX - previousX;
+
+            const dy =
+                mouseY - previousY;
+
+
+            mouseSpeed =
+                Math.sqrt(
+                    dx * dx +
+                    dy * dy
+                );
+
+
+            sprayCursor.style.left =
+                mouseX + "px";
+
+            sprayCursor.style.top =
+                mouseY + "px";
+
+
+            if (!mouseVisible) {
+
+                sprayCursor.style.opacity = "1";
+
+                mouseVisible = true;
+
+            }
+
+
+            if (spraying) {
+
+                createSpray(
+                    mouseX,
+                    mouseY,
+                    mouseSpeed
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =====================================
+       PRESS = START SPRAY
+    ===================================== */
+
+    document.addEventListener(
+        "mousedown",
+        (event) => {
+
+            if (event.button !== 0) {
+                return;
+            }
+
+
+            spraying = true;
+
+
+            sprayCursor.classList.add(
+                "spraying"
+            );
+
+
+            createSpray(
+                mouseX,
+                mouseY,
+                0
+            );
+
+        }
+    );
+
+
+    /* =====================================
+       RELEASE = STOP SPRAY
+    ===================================== */
+
+    document.addEventListener(
+        "mouseup",
+        () => {
+
+            spraying = false;
+
+
+            sprayCursor.classList.remove(
+                "spraying"
+            );
+
+        }
+    );
+
+
+    window.addEventListener(
+        "blur",
+        () => {
+
+            spraying = false;
+
+            sprayCursor.classList.remove(
+                "spraying"
+            );
+
+        }
+    );
+
+
+    /* =====================================
+       SPRAY PARTICLES
+    ===================================== */
+
+    function createSpray(
+        x,
+        y,
+        speed = 0
+    ) {
+
+        /*
+        mouse bergerak cepat =
+        semburan sedikit lebih lebar
+        */
+
+        const amount =
+            Math.min(
+                55,
+                22 + Math.floor(speed * .7)
+            );
+
+
+        for (
+            let i = 0;
+            i < amount;
+            i++
+        ) {
+
+            const angle =
+                Math.random() *
+                Math.PI *
+                2;
+
+
+            /*
+            kebanyakan cat dekat pusat,
+            sebagian menyebar keluar
+            */
+
+            const distance =
+                Math.pow(
+                    Math.random(),
+                    1.8
+                ) *
+                (
+                    32 +
+                    Math.min(speed, 25)
+                );
+
+
+            const px =
+                x +
+                Math.cos(angle) *
+                distance;
+
+
+            const py =
+                y +
+                Math.sin(angle) *
+                distance;
+
+
+            const sizeChance =
+                Math.random();
+
+
+            let size;
+
+
+            if (sizeChance > .94) {
+
+                /* cipratan besar */
+
+                size =
+                    2.5 +
+                    Math.random() * 3;
+
+            }
+
+            else if (sizeChance > .65) {
+
+                size =
+                    1.2 +
+                    Math.random() * 1.5;
+
+            }
+
+            else {
+
+                /* aerosol kecil */
+
+                size =
+                    .35 +
+                    Math.random() * .9;
+
+            }
+
+
+            const life =
+                45 +
+                Math.random() * 65;
+
+
+            particles.push({
+
+                x: px,
+
+                y: py,
+
+                size: size,
+
+                life: life,
+
+                maxLife: life,
+
+                driftX:
+                    (Math.random() - .5) *
+                    .15,
+
+                driftY:
+                    (Math.random() - .5) *
+                    .15
+
+            });
+
+        }
+
+
+        /*
+        beberapa titik padat
+        tepat di pusat nozzle
+        */
+
+        for (
+            let i = 0;
+            i < 5;
+            i++
+        ) {
+
+            const life =
+                55 +
+                Math.random() * 55;
+
+
+            particles.push({
+
+                x:
+                    x +
+                    (Math.random() - .5) *
+                    8,
+
+                y:
+                    y +
+                    (Math.random() - .5) *
+                    8,
+
+                size:
+                    1.5 +
+                    Math.random() *
+                    2.3,
+
+                life: life,
+
+                maxLife: life,
+
+                driftX: 0,
+
+                driftY: 0
+
+            });
+
+        }
+
+    }
+
+
+    /* =====================================
+       CONTINUOUS SPRAY WHILE HELD
+    ===================================== */
+
+    let previousSprayTime = 0;
+
+
+    function continuousSpray(time) {
+
+        if (
+            spraying &&
+            time - previousSprayTime > 28
+        ) {
+
+            createSpray(
+                mouseX,
+                mouseY,
+                mouseSpeed * .3
+            );
+
+
+            previousSprayTime = time;
+
+        }
+
+    }
+
+
+    /* =====================================
+       DRAW PARTICLES
+    ===================================== */
+
+    function drawParticles(time) {
+
+        ctx.clearRect(
+            0,
+            0,
+            window.innerWidth,
+            window.innerHeight
+        );
+
+
+        continuousSpray(time);
+
+
+        for (
+            let i =
+                particles.length - 1;
+
+            i >= 0;
+
+            i--
+        ) {
+
+            const particle =
+                particles[i];
+
+
+            particle.life--;
+
+
+            if (
+                particle.life <= 0
+            ) {
+
+                particles.splice(
+                    i,
+                    1
+                );
+
+                continue;
+
+            }
+
+
+            particle.x +=
+                particle.driftX;
+
+            particle.y +=
+                particle.driftY;
+
+
+            const lifeRatio =
+                particle.life /
+                particle.maxLife;
+
+
+            /*
+            noda bertahan cukup lama,
+            baru memudar di bagian akhir
+            */
+
+            let alpha;
+
+
+            if (
+                lifeRatio > .35
+            ) {
+
+                alpha =
+                    .68 +
+                    Math.random() *
+                    .20;
+
+            }
+
+            else {
+
+                alpha =
+                    lifeRatio *
+                    2;
+
+            }
+
+
+            ctx.beginPath();
+
+
+            ctx.arc(
+                particle.x,
+                particle.y,
+                particle.size,
+                0,
+                Math.PI * 2
+            );
+
+
+            ctx.fillStyle =
+                `rgba(245,245,240,${alpha})`;
+
+
+            ctx.fill();
+
+        }
+
+
+        requestAnimationFrame(
+            drawParticles
+        );
+
+    }
+
+
+    requestAnimationFrame(
+        drawParticles
+    );
+
+
+    /* =====================================
+       MOUSE LEAVES WINDOW
+    ===================================== */
+
+    document.addEventListener(
+        "mouseleave",
+        () => {
+
+            sprayCursor.style.opacity =
+                "0";
+
+        }
+    );
+
+
+    document.addEventListener(
+        "mouseenter",
+        () => {
+
+            sprayCursor.style.opacity =
+                "1";
+
+        }
+    );
+
+})();
 });
