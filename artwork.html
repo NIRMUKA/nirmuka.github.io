@@ -1,62 +1,34 @@
 <!DOCTYPE html>
-
 <html lang="en">
+
 
 <head>
 
-    <meta charset="UTF-8">
+
+<meta charset="UTF-8">
 
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
 
 
-    <title>
-        NIRMUKA | Artwork
-    </title>
-
-
-
-    <!-- =====================================
-         MAIN CSS
-    ====================================== -->
-
-    <link
-        rel="stylesheet"
-        href="/style.css?v=20260822-9"
-    >
+<title>
+NIRMUKA | Artwork
+</title>
 
 
 
-    <!-- =====================================
-         EMERGENCY DARK FALLBACK
+<link
+rel="stylesheet"
+href="/style.css?v=3"
+/>
 
-         Kalau CSS GitHub Pages terlambat
-         dimuat, halaman tidak akan menjadi putih.
-    ====================================== -->
-
-    <style>
-
-        html,
-        body {
-            margin: 0;
-            min-height: 100%;
-            background: #050505;
-            color: #ffffff;
-        }
-
-
-        .artwork-page {
-            min-height: 100vh;
-            background: #050505;
-        }
-
-    </style>
 
 
 </head>
+
 
 
 
@@ -64,611 +36,329 @@
 
 
 
-    <!-- =====================================
-         ARTWORK DETAIL PAGE
-    ====================================== -->
+<!-- =====================================
+     CURTAIN
+===================================== -->
 
-    <main class="artwork-page">
 
+<div class="curtain"></div>
 
-        <div class="artwork-container">
 
 
 
-            <!-- =====================================
-                 BACK
-            ====================================== -->
 
-            <a
-                href="/"
-                class="back-button"
-                id="artwork-back"
-            >
-                ← BACK
-            </a>
 
 
+<!-- =====================================
+     ARTWORK DETAIL
+===================================== -->
 
-            <!-- =====================================
-                 ARTWORK IMAGE
-            ====================================== -->
 
-            <div class="artwork-image">
+<main
+class="artwork-detail-page"
+>
 
 
-                <img
-                    id="art-image"
-                    src=""
-                    alt=""
-                    draggable="false"
-                >
 
+<div
+class="artwork-container"
+>
 
-            </div>
 
 
 
-            <!-- =====================================
-                 ARTWORK INFORMATION
-            ====================================== -->
 
-            <div class="artwork-info">
+<a
+href="/index.html"
+class="back-home"
+>
 
+← BACK TO ARCHIVE
 
+</a>
 
-                <!-- TITLE -->
 
-                <h1 id="art-title">
-                    LOADING...
-                </h1>
 
 
 
-                <!-- META -->
 
-                <div class="meta">
 
+<div
+class="artwork-image-container"
+>
 
-                    <div>
 
-                        <strong>
-                            YEAR
-                        </strong>
 
-                        <span id="art-year">
-                            —
-                        </span>
+<img
+id="art-image"
+class="artwork-image"
+src=""
+alt=""
+draggable="false"
+/>
 
-                    </div>
 
 
+</div>
 
-                    <div>
 
-                        <strong>
-                            MEDIUM
-                        </strong>
 
-                        <span id="art-medium">
-                            —
-                        </span>
 
-                    </div>
 
 
 
-                    <div>
+<div
+class="artwork-information"
+>
 
-                        <strong>
-                            DIMENSION
-                        </strong>
 
-                        <span id="art-dimension">
-                            —
-                        </span>
 
-                    </div>
+<p
+class="work-number"
+>
 
+ARTWORK / DETAIL
 
-                </div>
+</p>
 
 
 
-                <!-- =====================================
-                     BACKGROUND
-                ====================================== -->
 
-                <div class="description-block">
 
-                    <h2>
-                        BACKGROUND
-                    </h2>
+<h1
+id="art-title"
+>
 
-                    <p id="art-background">
-                        —
-                    </p>
+</h1>
 
-                </div>
 
 
 
-                <!-- =====================================
-                     CONCEPT
-                ====================================== -->
 
-                <div class="description-block">
+<p
+id="art-year"
+>
 
-                    <h2>
-                        CONCEPT
-                    </h2>
+</p>
 
-                    <p id="art-concept">
-                        —
-                    </p>
 
-                </div>
 
 
 
-                <!-- =====================================
-                     VISUAL DESCRIPTION
-                ====================================== -->
 
-                <div class="description-block">
+<p
+id="art-description"
+>
 
-                    <h2>
-                        VISUAL DESCRIPTION
-                    </h2>
+</p>
 
-                    <p id="art-visual-description">
-                        —
-                    </p>
 
-                </div>
 
 
 
-                <!-- =====================================
-                     ARTIST STATEMENT
-                ====================================== -->
 
-                <div class="description-block">
+</div>
 
-                    <h2>
-                        ARTIST STATEMENT
-                    </h2>
 
-                    <p id="art-artist-statement">
-                        —
-                    </p>
 
-                </div>
 
 
 
-                <!-- =====================================
-                     INSPIRATION
-                ====================================== -->
+</div>
 
-                <div class="description-block">
 
-                    <h2>
-                        INSPIRATION
-                    </h2>
 
-                    <p id="art-inspiration">
-                        —
-                    </p>
+</main>
 
-                </div>
 
 
 
-                <!-- =====================================
-                     CREATIVE PROCESS
-                ====================================== -->
 
-                <div class="description-block">
 
-                    <h2>
-                        CREATIVE PROCESS
-                    </h2>
 
-                    <p id="art-creative-process">
-                        —
-                    </p>
 
-                </div>
 
+<!-- =====================================
+     DATA LOADER
+===================================== -->
 
-            </div>
 
+<script>
 
-        </div>
 
+(async function(){
 
-    </main>
 
 
+const params =
+new URLSearchParams(
+window.location.search
+);
 
-    <!-- =====================================
-         LOAD ARTWORK DATA
-    ====================================== -->
 
-    <script>
 
-        /* =====================================
-           GET ARTWORK ID FROM URL
+const id =
+params.get("id");
 
-           example:
-           artwork.html?id=karya04
-        ====================================== */
 
-        const params =
-            new URLSearchParams(
-                window.location.search
-            );
 
 
-        const artworkId =
-            params.get("id");
+if(!id){
 
+return;
 
+}
 
-        /* =====================================
-           DOM ELEMENTS
-        ====================================== */
 
-        const artworkImage =
-            document.getElementById(
-                "art-image"
-            );
 
 
-        const artworkTitle =
-            document.getElementById(
-                "art-title"
-            );
 
+try{
 
-        const artworkYear =
-            document.getElementById(
-                "art-year"
-            );
 
+const response =
+await fetch(
+"/artworks.json?v=3"
+);
 
-        const artworkMedium =
-            document.getElementById(
-                "art-medium"
-            );
 
 
-        const artworkDimension =
-            document.getElementById(
-                "art-dimension"
-            );
+const artworks =
+await response.json();
 
 
-        const artworkBackground =
-            document.getElementById(
-                "art-background"
-            );
 
 
-        const artworkConcept =
-            document.getElementById(
-                "art-concept"
-            );
+const artwork =
+artworks.find(
+item =>
+item.id === id
+);
 
 
-        const artworkVisualDescription =
-            document.getElementById(
-                "art-visual-description"
-            );
 
 
-        const artworkArtistStatement =
-            document.getElementById(
-                "art-artist-statement"
-            );
 
 
-        const artworkInspiration =
-            document.getElementById(
-                "art-inspiration"
-            );
+if(!artwork){
 
+console.error(
+"Artwork tidak ditemukan"
+);
 
-        const artworkCreativeProcess =
-            document.getElementById(
-                "art-creative-process"
-            );
+return;
 
+}
 
 
-        /* =====================================
-           SAFE TEXT HELPER
-        ====================================== */
 
-        function setText(
-            element,
-            value
-        ) {
 
-            if (!element) {
-                return;
-            }
 
 
-            element.textContent =
-                value ||
-                "—";
 
-        }
+document
+.getElementById(
+"art-image"
+)
+.src =
+artwork.image;
 
 
 
-        /* =====================================
-           LOAD JSON
-        ====================================== */
 
-        fetch(
-            "/artworks.json?v=20260822-8"
-        )
 
-        .then(response => {
 
+document
+.getElementById(
+"art-image"
+)
+.alt =
+artwork.title;
 
-            if (!response.ok) {
 
-                throw new Error(
-                    "artworks.json gagal dimuat"
-                );
 
-            }
 
 
-            return response.json();
 
-        })
+document
+.getElementById(
+"art-title"
+)
+.textContent =
+artwork.title || "UNTITLED";
 
 
-        .then(artworks => {
 
 
-            /* =================================
-               FIND CURRENT ARTWORK
-            ================================= */
 
-            const artwork =
-                artworks.find(
-                    item =>
-                        item.id ===
-                        artworkId
-                );
+document
+.getElementById(
+"art-year"
+)
+.textContent =
+artwork.year || "";
 
 
 
-            /* =================================
-               NOT FOUND
-            ================================= */
 
-            if (!artwork) {
 
 
-                artworkTitle.textContent =
-                    "ARTWORK NOT FOUND";
+document
+.getElementById(
+"art-description"
+)
+.textContent =
+artwork.description || "";
 
 
-                artworkImage.style.display =
-                    "none";
 
 
-                return;
 
-            }
+}
+catch(error){
 
 
+console.error(
+error
+);
 
-            /* =================================
-               PAGE TITLE
-            ================================= */
 
-            document.title =
-                `${artwork.title} | NIRMUKA`;
+}
 
 
 
-            /* =================================
-               IMAGE
-            ================================= */
+})();
 
-            const imagePath =
-                artwork.image.startsWith("/")
-                ?
-                artwork.image
-                :
-                "/" + artwork.image;
 
 
-            artworkImage.src =
-                imagePath;
+</script>
 
 
-            artworkImage.alt =
-                artwork.title;
 
 
-            artworkImage.setAttribute(
-                "draggable",
-                "false"
-            );
 
 
 
-            /* =================================
-               BASIC INFORMATION
-            ================================= */
 
-            setText(
-                artworkTitle,
-                artwork.title
-            );
 
+<!-- =====================================
+     VISUAL SYSTEM
+===================================== -->
 
-            setText(
-                artworkYear,
-                artwork.year
-            );
 
+<script
+src="/spray.js?v=3"
+></script>
 
-            setText(
-                artworkMedium,
-                artwork.medium
-            );
 
 
-            setText(
-                artworkDimension,
-                artwork.dimension
-            );
+<script
+src="/protection.js?v=3"
+></script>
 
-
-
-            /* =================================
-               LONG TEXT
-            ================================= */
-
-            setText(
-                artworkBackground,
-                artwork.background
-            );
-
-
-            setText(
-                artworkConcept,
-                artwork.concept
-            );
-
-
-            setText(
-                artworkVisualDescription,
-                artwork.visual_description
-            );
-
-
-            setText(
-                artworkArtistStatement,
-                artwork.artist_statement
-            );
-
-
-            setText(
-                artworkInspiration,
-                artwork.inspiration
-            );
-
-
-            setText(
-                artworkCreativeProcess,
-                artwork.creative_process
-            );
-
-
-        })
-
-
-        .catch(error => {
-
-
-            console.error(
-                "Artwork loading error:",
-                error
-            );
-
-
-            artworkTitle.textContent =
-                "ERROR LOADING ARTWORK";
-
-
-            artworkImage.style.display =
-                "none";
-
-
-        });
-
-
-
-        /* =====================================
-           BACK BUTTON
-
-           Kalau datang dari halaman NIRMUKA,
-           kembali ke halaman sebelumnya.
-
-           Kalau membuka URL secara langsung,
-           kembali ke homepage.
-        ====================================== */
-
-        const artworkBack =
-            document.getElementById(
-                "artwork-back"
-            );
-
-
-        artworkBack.addEventListener(
-            "click",
-            event => {
-
-
-                event.preventDefault();
-
-
-                if (
-                    document.referrer &&
-                    new URL(
-                        document.referrer
-                    ).hostname ===
-                    window.location.hostname
-                ) {
-
-
-                    history.back();
-
-
-                }
-
-                else {
-
-
-                    window.location.href =
-                        "/";
-
-
-                }
-
-
-            }
-        );
-
-
-    </script>
-
-
-
-    <!-- =====================================
-         GLOBAL NIRMUKA SYSTEM
-
-         Includes:
-         - spray nozzle
-         - pilox
-         - THOU SHALL NOT STEAL
-    ====================================== -->
-
-    <script
-        src="/script.js?v=20260822-8"
-    ></script>
 
 
 </body>
+
 
 </html>
