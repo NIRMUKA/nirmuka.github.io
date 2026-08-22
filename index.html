@@ -4,46 +4,42 @@
 <head>
 
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 
-
-    <title>
-        NIRMUKA | Visual Archive
-    </title>
-
-
-
-
-    <!-- =====================================
-         MAIN VISUAL SYSTEM
-    ====================================== -->
-
-
-    <link
-        rel="stylesheet"
-        href="/style.css?v=20260822"
-    >
+<title>
+    NIRMUKA
+</title>
 
 
 
+<!-- =================================================
+     MAIN STYLE
+================================================== -->
 
-    <!-- =====================================
-         WRITINGS SYSTEM STYLE
-    ====================================== -->
+
+<link
+    rel="stylesheet"
+    href="/style.css?v=2"
+/>
 
 
-    <link
-        rel="stylesheet"
-        href="/writings.css?v=20260822"
-    >
 
+<!-- =================================================
+     WRITINGS STYLE
+================================================== -->
+
+
+<link
+    rel="stylesheet"
+    href="/writings.css?v=2"
+/>
 
 
 
@@ -51,194 +47,185 @@
 
 
 
+
 <body>
 
 
 
+<!-- =================================================
+     CURTAIN TRANSITION
+================================================== -->
 
-    <!-- =====================================
-         CURTAIN TRANSITION
-    ====================================== -->
 
+<div class="curtain"></div>
 
-    <div class="curtain"></div>
 
 
 
 
 
 
-    <!-- =====================================
-         SPRAY CANVAS
-         (DIISI SCRIPT.JS)
-    ====================================== -->
+<!-- =================================================
+     LANDING PAGE
+================================================== -->
 
 
-   
+<section
+    class="landing"
+>
 
 
 
+<div class="hero-overlay"></div>
 
-    <!-- =====================================
-         LANDING PAGE
-    ====================================== -->
 
 
-    <section
-        class="landing"
-        id="landing"
-    >
 
+<div class="hero-content">
 
 
-        <div class="hero-overlay"></div>
 
+<h1 class="nirmuka">
 
+    NIRMUKA
 
+</h1>
 
-        <div class="hero-content">
 
 
 
-            <h1 class="nirmuka">
+<p class="artist-tag">
 
-                NIRMUKA
+    VISUAL ARCHIVE · WRITER · ARTIST
 
-            </h1>
+</p>
 
 
 
 
-            <p class="artist-tag">
 
-                VISUAL ARTIST · WRITER · ARCHIVE
 
-            </p>
+<nav class="main-menu">
 
 
+<a
+    href="#"
+    data-page="works"
+>
 
+WORKS
 
+</a>
 
 
-            <nav class="main-menu">
 
 
+<a
+    href="#"
+    data-page="writings"
+>
 
-                <a
-                    href="#"
-                    data-page="works"
-                >
+WRITINGS
 
-                    WORKS
+</a>
 
-                </a>
 
 
 
 
-                <a
-                    href="#"
-                    data-page="writings"
-                >
+<a
+    href="#"
+    data-page="about"
+>
 
-                    WRITINGS
+ABOUT
 
-                </a>
+</a>
 
 
 
+</nav>
 
 
-                <a
-                    href="#"
-                    data-page="about"
-                >
 
-                    ABOUT
 
-                </a>
+</div>
 
 
 
+</section>
 
-            </nav>
 
 
 
 
-        </div>
 
 
+<!-- =================================================
+     DYNAMIC PAGE CONTAINER
 
+     WORKS
+     WRITINGS
+     ABOUT
 
-    </section>
+================================================== -->
 
 
+<main
+    id="content-container"
+></main>
 
 
 
 
 
 
-    <!-- =====================================
-         DYNAMIC CONTENT AREA
 
 
-         WORKS
-         WRITINGS
-         ABOUT
+<!-- =================================================
+     JAVASCRIPT SYSTEM
 
-         masuk ke sini
+     IMPORTANT ORDER
 
+================================================== -->
 
-    ====================================== -->
 
 
-    <main
-        id="content-container"
-    ></main>
+<!-- CORE WEBSITE -->
 
+<script
+src="/script.js?v=2">
+</script>
 
 
 
 
 
+<!-- WRITINGS ARCHIVE -->
 
+<script
+src="/writings.js?v=2">
+</script>
 
 
-    <!-- =====================================
-         MAIN SYSTEM
 
-         Visual:
-         - works
-         - about
-         - spray
-         - protection
 
-    ====================================== -->
 
+<!-- SPRAY EFFECT -->
 
-    <script
-        src="/script.js?v=20260822"
-    ></script>
+<script
+src="/spray.js?v=2">
+</script>
 
 
 
 
 
-    <!-- =====================================
-         WRITINGS ENGINE
+<!-- ART PROTECTION -->
 
-         - category
-         - archive
-         - article list
-
-    ====================================== -->
-
-
-    <script
-        src="/writings.js?v=20260822"
-    ></script>
+<script
+src="/protection.js?v=2">
+</script>
 
 
 
