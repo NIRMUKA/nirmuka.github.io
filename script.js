@@ -1,11 +1,29 @@
-/* =====================================================
+/* =========================================================
 
    NIRMUKA CORE ENGINE
 
-   HOME ROUTER
+   ROUTING SYSTEM
 
 
-===================================================== */
+   WORKS
+      |
+      ↓
+   content-container
+
+
+   ABOUT
+      |
+      ↓
+   content-container
+
+
+   WRITINGS
+      |
+      ↓
+   writings.html
+
+
+========================================================= */
 
 
 (function(){
@@ -35,13 +53,18 @@ initNavigation();
 
 
 
+/* =========================================================
+   MENU SYSTEM
+========================================================= */
+
+
 function initNavigation(){
 
 
 
-const links =
+const menuLinks =
 document.querySelectorAll(
-".main-menu a[data-page]"
+".main-menu a"
 );
 
 
@@ -49,18 +72,14 @@ document.querySelectorAll(
 
 
 
-links.forEach(
+menuLinks.forEach(
 link=>{
+
 
 
 link.addEventListener(
 "click",
-function(e){
-
-
-
-e.preventDefault();
-
+function(event){
 
 
 
@@ -69,22 +88,47 @@ this.dataset.page;
 
 
 
-if(page){
+
+
+/*
+   ONLY HANDLE
+   WORKS & ABOUT
+
+
+   WRITINGS HAS NO data-page
+
+   SO IT WILL CONTINUE
+   NATIVELY TO writings.html
+
+*/
+
+
+
+if(!page){
+
+return;
+
+}
+
+
+
+
+event.preventDefault();
+
+
+
 
 loadPage(page);
 
-}
 
+
+});
 
 
 });
 
 
 
-});
-
-
-
 }
 
 
@@ -93,6 +137,11 @@ loadPage(page);
 
 
 
+
+
+/* =========================================================
+   PAGE LOADER
+========================================================= */
 
 
 function loadPage(page){
@@ -106,6 +155,8 @@ document.getElementById(
 
 
 
+
+
 if(!container){
 
 return;
@@ -116,19 +167,77 @@ return;
 
 
 
-if(page==="works"){
+
+switch(page){
+
+
+
+case "works":
+
+
+
+loadWorks(
+container
+);
+
+
+break;
+
+
+
+
+
+case "about":
+
+
+
+loadAbout(
+container
+);
+
+
+break;
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   WORKS
+========================================================= */
+
+
+function loadWorks(container){
 
 
 
 container.innerHTML = `
 
-<section class="page-section">
+
+<section class="page-section works-section">
+
 
 <h1>
+
 WORKS
+
 </h1>
 
+
 </section>
+
 
 `;
 
@@ -141,19 +250,33 @@ WORKS
 
 
 
-if(page==="about"){
+
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+
+function loadAbout(container){
 
 
 
 container.innerHTML = `
 
-<section class="page-section">
+
+<section class="page-section about-section">
+
 
 <h1>
+
 ABOUT
+
 </h1>
 
+
 </section>
+
 
 `;
 
@@ -164,7 +287,7 @@ ABOUT
 
 
 
-}
+
 
 
 
