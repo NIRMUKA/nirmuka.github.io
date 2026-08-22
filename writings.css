@@ -8,7 +8,11 @@
 /* ===============================
    MAIN PAGE
 =============================== */
+html {
 
+scroll-behavior:smooth;
+
+}
 
 .writings-page {
 
@@ -539,7 +543,38 @@
 
 
 
+/* ===============================
+   SCROLL CINEMATIC
+=============================== */
 
+
+html {
+
+    scroll-behavior:smooth;
+
+}
+
+
+
+.writing-intro,
+.writing-archive,
+.writing-list-section {
+
+
+    scroll-snap-align:center;
+
+
+}
+
+
+
+.writings-page {
+
+
+    scroll-snap-type:y proximity;
+
+
+}
 
 
 .writing-item {
