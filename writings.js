@@ -2,17 +2,19 @@
 
    NIRMUKA WRITINGS ENGINE
 
-   CORE ONLY
+   STANDALONE PAGE VERSION
 
-   FLOW:
 
-   WRITINGS
-      ↓
-   ARCHIVE CATEGORY
-      ↓
-   WRITING LIST
-      ↓
-   ARTICLE
+   writings.html
+        |
+        ↓
+   writings.json
+        |
+        ↓
+   archive category
+        |
+        ↓
+   article.html?id=
 
 
 ========================================================= */
@@ -25,278 +27,28 @@
 
 
 
-let writingsDatabase = [];
-
+let writingsData = [];
 
 
 
 
 
 /* =========================================================
-   OPEN WRITINGS
+   INITIALIZE
 ========================================================= */
 
 
-window.openWritingArchive = function(){
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
 
 
-
-const content =
-document.getElementById(
-"content-container"
-);
-
-
-
-if(!content){
-
-return;
-
-}
-
-
-
-
-
-content.innerHTML = `
-
-
-
-<section class="writings-page">
-
-
-
-<div class="writings-container">
-
-
-
-
-
-<section class="writing-intro">
-
-
-<a href="#" class="back-home">
-
-← BACK
-
-</a>
-
-
-
-<p class="work-number">
-
-ARCHIVE / WRITINGS
-
-</p>
-
-
-
-<h1>
-
-WRITINGS
-
-</h1>
-
-
-
-<p>
-
-A collection of philosophical,
-theological, and reflective writings.
-
-</p>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<section 
-class="writing-archive"
-id="archive-section"
->
-
-
-
-
-<div class="writing-category-menu">
-
-
-
-
-
-<button data-category="FILSAFAT">
-
-
-<span class="archive-number">
-01
-</span>
-
-
-<span class="archive-name">
-FILSAFAT
-</span>
-
-
-<span class="archive-label">
-PHILOSOPHICAL ARCHIVE
-</span>
-
-
-</button>
-
-
-
-
-
-
-<button data-category="TEOLOGI">
-
-
-<span class="archive-number">
-02
-</span>
-
-
-<span class="archive-name">
-TEOLOGI
-</span>
-
-
-<span class="archive-label">
-THEOLOGICAL ARCHIVE
-</span>
-
-
-</button>
-
-
-
-
-
-
-<button data-category="UMUM">
-
-
-<span class="archive-number">
-03
-</span>
-
-
-<span class="archive-name">
-UMUM
-</span>
-
-
-<span class="archive-label">
-GENERAL ARCHIVE
-</span>
-
-
-</button>
-
-
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<section
-class="writing-list-section"
-id="writing-list-section"
->
-
-
-
-<div id="writing-list">
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-</div>
-
-
-</section>
-
-
-`;
-
-
-
-
-
-loadWriting();
-
-
-
-
-
-
-/* CAMERA TO ARCHIVE */
-
-setTimeout(()=>{
-
-
-const archive =
-document.getElementById(
-"archive-section"
-);
-
-
-
-if(archive){
-
-
-archive.scrollIntoView({
-
-behavior:"smooth",
-
-block:"center"
-
-});
+loadWritings();
 
 
 }
 
-
-
-},700);
-
-
-
-
-
-};
-
-
+);
 
 
 
@@ -305,40 +57,65 @@ block:"center"
 
 
 /* =========================================================
-   LOAD JSON
+   LOAD DATABASE
 ========================================================= */
 
 
-function loadWriting(){
+function loadWritings(){
 
 
 
 fetch(
-"/writings.json?v=100"
+"/writings.json?v=20"
 )
+
 
 
 .then(
-response=>response.json()
+response=>{
+
+
+if(!response.ok){
+
+throw new Error(
+"writings.json not found"
+);
+
+}
+
+
+return response.json();
+
+
+}
+
 )
+
 
 
 .then(
 data=>{
 
 
-writingsDatabase =
-data;
+writingsData = data;
 
 
 
-activateArchiveButton();
+console.log(
+"NIRMUKA WRITINGS LOADED",
+writingsData
+);
+
+
+
+activateCategories();
 
 
 
 }
 
 )
+
 
 
 .catch(
@@ -346,9 +123,10 @@ error=>{
 
 
 console.error(
-"WRITINGS ERROR",
+"WRITINGS ERROR:",
 error
 );
+
 
 
 }
@@ -372,7 +150,7 @@ error
 ========================================================= */
 
 
-function activateArchiveButton(){
+function activateCategories(){
 
 
 
@@ -383,8 +161,11 @@ document.querySelectorAll(
 
 
 
+
+
 buttons.forEach(
 button=>{
+
 
 
 button.addEventListener(
@@ -392,8 +173,13 @@ button.addEventListener(
 ()=>{
 
 
-showCategory(
-button.dataset.category
+const category =
+button.dataset.category;
+
+
+
+showWritingList(
+category
 );
 
 
@@ -402,6 +188,7 @@ button.dataset.category
 
 
 });
+
 
 
 }
@@ -419,20 +206,20 @@ button.dataset.category
 ========================================================= */
 
 
-function showCategory(
+function showWritingList(
 category
 ){
 
 
 
-const list =
+const container =
 document.getElementById(
 "writing-list"
 );
 
 
 
-if(!list){
+if(!container){
 
 return;
 
@@ -442,9 +229,11 @@ return;
 
 
 
-const result =
-writingsDatabase.filter(
-item =>
+
+
+const articles =
+writingsData.filter(
+item=>
 item.category === category
 );
 
@@ -452,14 +241,20 @@ item.category === category
 
 
 
-if(result.length===0){
 
 
-list.innerHTML = `
+if(!articles.length){
 
-<h2>
+
+container.innerHTML = `
+
+
+<p>
+
 NO ARCHIVE FOUND
-</h2>
+
+</p>
+
 
 `;
 
@@ -473,17 +268,15 @@ return;
 
 
 
-list.innerHTML = `
+container.innerHTML = `
 
 
 
-<div class="writing-title">
-
+<h2 class="writing-title">
 
 ${category}
 
-
-</div>
+</h2>
 
 
 
@@ -492,18 +285,18 @@ ${category}
 <div class="writing-items">
 
 
-${
 
-result.map(
+${
+articles.map(
 (item,index)=>`
 
 
 
 <a
 
-class="writing-item"
-
 href="/article.html?id=${item.id}"
+
+class="writing-item"
 
 >
 
@@ -516,7 +309,6 @@ String(index+1)
 .padStart(2,"0")
 
 }
-
 
 </div>
 
@@ -543,11 +335,14 @@ ${item.subtitle || ""}
 
 
 
+
 <span>
 
-${item.type}
- · 
-${item.year}
+${item.type || ""}
+
+·
+
+${item.year || ""}
 
 </span>
 
@@ -561,9 +356,9 @@ ${item.year}
 
 
 
+
 `
 ).join("")
-
 }
 
 
@@ -580,27 +375,28 @@ ${item.year}
 
 
 
-/* CAMERA TO LIST */
+/* SMOOTH CAMERA */
+
+setTimeout(
+()=>{
 
 
-setTimeout(()=>{
-
-
-const section =
+const target =
 document.getElementById(
 "writing-list-section"
 );
 
 
 
-if(section){
+if(target){
 
 
-section.scrollIntoView({
+target.scrollIntoView({
 
 behavior:"smooth",
 
 block:"start"
+
 
 });
 
@@ -608,14 +404,13 @@ block:"start"
 }
 
 
-
-},400);
+},
+300
+);
 
 
 
 }
-
-
 
 
 
