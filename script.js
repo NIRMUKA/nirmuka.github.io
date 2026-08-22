@@ -1077,3 +1077,141 @@ document.addEventListener(
     );
 
 })();
+
+/* =====================================
+   NIRMUKA — THOU SHALL NOT STEAL
+===================================== */
+
+(function () {
+
+    /* CREATE WARNING SCREEN */
+
+    const warning =
+        document.createElement("div");
+
+
+    warning.className =
+        "theft-warning";
+
+
+    warning.innerHTML = `
+
+        <div class="theft-warning-text">
+            THOU SHALL NOT STEAL !!
+        </div>
+
+    `;
+
+
+    document.body.appendChild(
+        warning
+    );
+
+
+    let warningTimer = null;
+
+
+
+    /* =====================================
+       SHOW WARNING
+    ===================================== */
+
+    function showTheftWarning() {
+
+        clearTimeout(
+            warningTimer
+        );
+
+
+        warning.classList.add(
+            "show"
+        );
+
+
+        warningTimer =
+            setTimeout(() => {
+
+                warning.classList.remove(
+                    "show"
+                );
+
+            }, 1500);
+
+    }
+
+
+
+    /* =====================================
+       RIGHT CLICK PROTECTION
+    ===================================== */
+
+    document.addEventListener(
+        "contextmenu",
+        function (event) {
+
+            const artwork =
+                event.target.closest(
+                    ".art-card img, #art-image, .artwork-image"
+                );
+
+
+            if (!artwork) {
+                return;
+            }
+
+
+            event.preventDefault();
+
+
+            showTheftWarning();
+
+        }
+    );
+
+
+
+    /* =====================================
+       PREVENT DRAGGING
+    ===================================== */
+
+    document.addEventListener(
+        "dragstart",
+        function (event) {
+
+            if (
+                event.target.matches(
+                    ".art-card img, #art-image, .artwork-image img"
+                )
+            ) {
+
+                event.preventDefault();
+
+            }
+
+        }
+    );
+
+
+
+    /* =====================================
+       PREVENT IMAGE SELECTION
+    ===================================== */
+
+    document.addEventListener(
+        "selectstart",
+        function (event) {
+
+            if (
+                event.target.matches(
+                    ".art-card img, #art-image, .artwork-image img"
+                )
+            ) {
+
+                event.preventDefault();
+
+            }
+
+        }
+    );
+
+})();
