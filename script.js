@@ -1,455 +1,47 @@
-/* =========================================================
-   NIRMUKA MAIN ENGINE
+/* =====================================================
 
-   CORE ONLY
+   NIRMUKA CORE ENGINE
 
-   Handle:
-   - Navigation
-   - Curtain
-   - Works
-   - Artwork Data
-   - About
+   HOME ROUTER
 
-========================================================= */
 
+===================================================== */
 
 
-const content =
-    document.getElementById(
-        "content-container"
-    );
+(function(){
 
 
-const curtain =
-    document.querySelector(
-        ".curtain"
-    );
+"use strict";
 
 
 
-/* =========================================================
-   CURTAIN
-========================================================= */
 
 
-function curtainTransition(callback){
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
 
 
-    if(!curtain){
-
-        callback();
-
-        return;
-
-    }
-
-
-
-    curtain.classList.add(
-        "active"
-    );
-
-
-
-    setTimeout(()=>{
-
-
-        callback();
-
-
-        curtain.classList.remove(
-            "active"
-        );
-
-
-    },600);
-
-
-
-}
-
-
-
-
-
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-
-document
-.querySelectorAll(
-    ".main-menu a"
-)
-.forEach(
-    link=>{
-
-
-        link.addEventListener(
-            "click",
-            e=>{
-
-
-                e.preventDefault();
-
-
-
-                const page =
-                    link.dataset.page;
-
-
-
-                if(page==="works"){
-
-                    loadWorks();
-
-                }
-
-
-                if(page==="about"){
-
-                    loadAbout();
-
-                }
-
-
-                if(page==="writings"){
-
-
-                    if(
-                        window.openWritingArchive
-                    ){
-
-                        window.openWritingArchive();
-
-                    }
-
-
-                }
-
-
-
-            }
-        );
-
-
-    }
-);
-
-
-
-
-
-
-
-/* =========================================================
-   WORKS PAGE
-========================================================= */
-
-
-function loadWorks(){
-
-
-
-curtainTransition(()=>{
-
-
-content.innerHTML = `
-
-
-<section class="page-section works-page">
-
-
-<div class="section-inner">
-
-
-
-<a
-href="#"
-class="back-home"
->
-← BACK
-</a>
-
-
-
-
-
-<p class="work-number">
-
-ARCHIVE / WORKS
-
-</p>
-
-
-
-<h2>
-
-WORKS
-
-</h2>
-
-
-
-
-
-<div class="works-carousel">
-
-
-
-<div class="carousel-track"></div>
-
-
-
-
-
-<div class="carousel-navigation">
-
-
-<button
-class="carousel-prev"
->
-←
-</button>
-
-
-
-<button
-class="carousel-next"
->
-→
-</button>
-
-
-</div>
-
-
-
-
-<div class="carousel-caption">
-
-
-<h3
-class="carousel-title"
-></h3>
-
-
-
-<p
-class="carousel-year"
-></p>
-
-
-</div>
-
-
-
-
-
-</div>
-
-
-
-
-
-</div>
-
-
-</section>
-
-
-`;
-
-
-
-loadArtworks();
+initNavigation();
 
 
 });
 
 
 
-}
 
 
 
 
 
 
+function initNavigation(){
 
 
 
-/* =========================================================
-   LOAD ARTWORK JSON
-========================================================= */
-
-
-function loadArtworks(){
-
-
-
-fetch(
-"/artworks.json?v=10"
-)
-
-
-.then(
-response=>response.json()
-)
-
-
-.then(
-data=>{
-
-
-createCarousel(
-data
-);
-
-
-}
-
-)
-
-
-.catch(
-error=>{
-
-
-console.error(
-"Artwork error:",
-error
-);
-
-
-}
-
-);
-
-
-
-}
-
-
-
-
-
-
-
-
-/* =========================================================
-   CAROUSEL SYSTEM
-========================================================= */
-
-
-function createCarousel(
-artworks
-){
-
-
-
-const track =
-document.querySelector(
-".carousel-track"
-);
-
-
-
-const title =
-document.querySelector(
-".carousel-title"
-);
-
-
-
-const year =
-document.querySelector(
-".carousel-year"
-);
-
-
-
-const prev =
-document.querySelector(
-".carousel-prev"
-);
-
-
-
-const next =
-document.querySelector(
-".carousel-next"
-);
-
-
-
-
-let index=0;
-
-
-
-
-
-artworks.forEach(
-(work,i)=>{
-
-
-const card =
-document.createElement(
-"a"
-);
-
-
-
-card.className =
-"carousel-item";
-
-
-
-card.href =
-`/artwork.html?id=${work.id}`;
-
-
-
-card.innerHTML = `
-
-
-<div class="carousel-image-frame">
-
-<img
-
-src="${work.image}"
-
-alt="${work.title}"
-
-draggable="false"
-
-/>
-
-</div>
-
-
-`;
-
-
-
-track.appendChild(
-card
-);
-
-
-
-}
-);
-
-
-
-
-const cards =
+const links =
 document.querySelectorAll(
-".carousel-item"
+".main-menu a[data-page]"
 );
 
 
@@ -457,287 +49,42 @@ document.querySelectorAll(
 
 
 
+links.forEach(
+link=>{
 
 
-function update(){
-
-
-
-cards.forEach(
-(card,i)=>{
-
-
-card.classList.remove(
-"active",
-"left",
-"right"
-);
-
-
-
-if(i===index){
-
-
-card.classList.add(
-"active"
-);
-
-
-}
-
-
-else if(
-i===
-(index-1+cards.length)
-%
-cards.length
-){
-
-
-card.classList.add(
-"left"
-);
-
-
-}
-
-
-else if(
-i===
-(index+1)
-%
-cards.length
-){
-
-
-card.classList.add(
-"right"
-);
-
-
-}
-
-
-}
-);
-
-
-
-
-
-if(title){
-
-title.textContent =
-artworks[index].title || "";
-
-}
-
-
-if(year){
-
-year.textContent =
-artworks[index].year || "";
-
-}
-
-
-
-}
-
-
-
-
-
-
-
-
-prev.onclick=()=>{
-
-
-index--;
-
-
-if(index<0){
-
-index =
-artworks.length-1;
-
-}
-
-
-update();
-
-
-};
-
-
-
-
-
-
-next.onclick=()=>{
-
-
-index++;
-
-
-if(index>=artworks.length){
-
-index=0;
-
-}
-
-
-update();
-
-
-};
-
-
-
-
-
-cards.forEach(
-(card,i)=>{
-
-
-card.addEventListener(
+link.addEventListener(
 "click",
-e=>{
+function(e){
 
-
-if(
-i!==index
-){
 
 
 e.preventDefault();
 
 
-index=i;
 
 
-update();
-
-
-}
-
-
-});
-
-
-}
-);
+const page =
+this.dataset.page;
 
 
 
+if(page){
 
-update();
-
-
+loadPage(page);
 
 }
-
-
-
-
-
-
-
-
-/* =========================================================
-   ABOUT
-========================================================= */
-
-
-function loadAbout(){
-
-
-
-curtainTransition(()=>{
-
-
-content.innerHTML = `
-
-
-
-<section class="page-section about-page">
-
-
-<div class="section-inner">
-
-
-<a
-href="#"
-class="back-home"
->
-← BACK
-</a>
-
-
-
-<p class="work-number">
-
-ABOUT NIRMUKA
-
-</p>
-
-
-
-<h2>
-
-ABOUT
-
-</h2>
-
-
-
-
-<div class="about-content">
-
-
-<p>
-So you want to know about me?
-</p>
-
-
-<p>
-Saya tidak pernah melihat diri saya sebagai sesuatu yang selesai. Saya adalah kumpulan dari pertanyaan, luka, ingatan, kegelisahan, dan pencarian yang tidak pernah benar-benar berakhir.
-</p>
-
-
-<p>
-NIRMUKA lahir dari ketidakpuasan terhadap dunia yang terlalu cepat memberikan jawaban. Saya tertarik pada ruang gelap manusia: ketakutan, kehampaan, absurditas, kehilangan, dan pertanyaan tentang keberadaan.
-</p>
-
-
-<p>
-Bagi saya seni bukan sekadar membuat sesuatu menjadi indah. Seni adalah cara untuk menghadapi sesuatu yang mungkin terlalu berat untuk diterima.
-</p>
-
-
-<p>
-Saya tidak percaya dunia selalu menuju sesuatu yang lebih baik. Saya hanya percaya manusia terus mencoba menemukan makna di tengah kehancuran yang mereka ciptakan sendiri.
-</p>
-
-
-
-</div>
-
-
-</div>
-
-
-</section>
-
-
-`;
 
 
 
 });
 
 
+
+});
+
+
+
 }
 
 
@@ -747,24 +94,19 @@ Saya tidak percaya dunia selalu menuju sesuatu yang lebih baik. Saya hanya perca
 
 
 
-/* =========================================================
-   BACK BUTTON
-========================================================= */
+
+function loadPage(page){
 
 
-document.addEventListener(
-"click",
-e=>{
 
-
-const back =
-e.target.closest(
-".back-home"
+const container =
+document.getElementById(
+"content-container"
 );
 
 
 
-if(!back){
+if(!container){
 
 return;
 
@@ -772,18 +114,58 @@ return;
 
 
 
-e.preventDefault();
+
+
+if(page==="works"){
 
 
 
-curtainTransition(()=>{
+container.innerHTML = `
+
+<section class="page-section">
+
+<h1>
+WORKS
+</h1>
+
+</section>
+
+`;
 
 
-content.innerHTML="";
+
+}
 
 
-});
 
 
 
-});
+
+if(page==="about"){
+
+
+
+container.innerHTML = `
+
+<section class="page-section">
+
+<h1>
+ABOUT
+</h1>
+
+</section>
+
+`;
+
+
+
+}
+
+
+
+
+}
+
+
+
+})();
