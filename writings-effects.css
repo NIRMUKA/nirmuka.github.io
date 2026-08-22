@@ -1,478 +1,102 @@
 /* =====================================================
 
-   NIRMUKA WRITINGS EFFECTS
-
-   DARK ARCHIVE ATMOSPHERE
+ NIRMUKA WRITINGS EFFECTS
 
 ===================================================== */
 
 
 
+.writings-page{
 
 
-/* =====================================================
-   PAGE ENTRANCE
-===================================================== */
+opacity:0;
 
-
-.writings-page {
-
-
-    opacity:0;
-
-
-    transform:
-
-    translateY(40px);
-
-
-}
-
-
-
-
-
-.writings-page.page-ready {
-
-
-    opacity:1;
-
-
-    transform:
-
-    translateY(0);
-
-
-    transition:
-
-    opacity 1.8s ease,
-    transform 1.8s cubic-bezier(
-        .16,
-        1,
-        .3,
-        1
-    );
-
-
-}
-
-
-
-
-
-
-
-
-/* =====================================================
-   AMBIENT LIGHT
-===================================================== */
-
-
-.writings-page::before {
-
-
-    content:"";
-
-
-    position:fixed;
-
-
-    width:700px;
-
-
-    height:700px;
-
-
-    top:10%;
-
-
-    left:50%;
-
-
-    transform:translateX(-50%);
-
-
-    background:
-
-    radial-gradient(
-        circle,
-        rgba(255,255,255,.07),
-        transparent 70%
-    );
-
-
-    filter:blur(100px);
-
-
-    pointer-events:none;
-
-
-    z-index:-1;
-
-
-}
-
-
-
-
-
-
-
-
-/* =====================================================
-   ARCHIVE BOX REVEAL
-===================================================== */
-
-
-.writing-category-menu button {
-
-
-    opacity:0;
-
-
-    transform:
-
-    translateY(100px);
-
-
-}
-
-
-
-
-
-.writing-category-menu button.archive-show {
-
-
-    opacity:1;
-
-
-    transform:
-
-    translateY(0);
-
-
-    transition:
-
-    opacity 1.2s ease,
-    transform 1.2s cubic-bezier(
-        .16,
-        1,
-        .3,
-        1
-    );
-
-
-}
-
-
-
-
-
-
-
-
-/* =====================================================
-   ARCHIVE BOX HOVER
-===================================================== */
-
-
-.writing-category-menu button {
-
-
-    transition:
-
-    transform .8s ease,
-    border-color .8s ease,
-    background .8s ease,
-    box-shadow .8s ease;
-
-
-}
-
-
-
-
-
-
-
-.writing-category-menu button:hover {
-
-
-    transform:
-
-    translateY(-18px);
-
-
-    border-color:
-
-    rgba(255,255,255,.8);
-
-
-    background:
-
-    rgba(255,255,255,.05);
-
-
-    box-shadow:
-
-    0 40px 100px rgba(0,0,0,.8);
-
-
-}
-
-
-
-
-
-
-
-
-.archive-number {
-
-
-    transition:
-
-    transform 1s ease,
-    opacity 1s ease;
-
-
-}
-
-
-
-
-
-.writing-category-menu button:hover
-.archive-number {
-
-
-    transform:
-
-    scale(1.15);
-
-
-    opacity:.5;
-
-
-}
-
-
-
-
-
-
-
-
-/* =====================================================
-   ARCHIVE EXIT
-===================================================== */
-
-
-.writing-archive.archive-hide {
-
-
-    opacity:.15;
-
-
-    transform:
-
-    translateY(-60px);
-
-
-    transition:
-
-    1.2s ease;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =====================================================
-   WRITING LIST REVEAL
-===================================================== */
-
-
-.writing-item {
-
-
-    opacity:0;
-
-
-    transform:
-
-    translateX(-50px);
-
-
-}
-
-
-
-
-
-.writing-item.writing-show {
-
-
-    opacity:1;
-
-
-    transform:
-
-    translateX(0);
-
-
-    transition:
-
-    opacity 1s ease,
-    transform 1s cubic-bezier(
-        .16,
-        1,
-        .3,
-        1
-    );
-
-
-}
-
-
-
-
-
-
-
-
-/* =====================================================
-   LIST HOVER
-===================================================== */
-
-
-.writing-item {
-
-
-    transition:
-
-    padding-left .5s ease;
-
-
-}
-
-
-
-
-
-.writing-item:hover {
-
-
-    padding-left:20px;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =====================================================
-   FILM GRAIN
-===================================================== */
-
-
-.writing-page-body::after {
-
-
-    content:"";
-
-
-    position:fixed;
-
-
-    inset:0;
-
-
-    pointer-events:none;
-
-
-    opacity:.045;
-
-
-    background-image:
-
-
-    url(
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"
-    );
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =====================================================
-   SLOW LIGHT MOVEMENT
-===================================================== */
-
-
-@keyframes archiveLight {
-
-
-0%{
 
 transform:
-translateX(-50%)
-translateY(0);
+
+translateY(40px);
+
 
 }
 
 
 
-50%{
+.writings-page.ready{
+
+
+opacity:1;
+
+
+transform:none;
+
+
+transition:
+
+1.5s ease;
+
+
+}
+
+
+
+
+
+.writing-category-menu button{
+
+
+opacity:0;
+
 
 transform:
-translateX(-50%)
-translateY(30px);
+
+translateY(80px);
+
 
 }
 
 
 
-100%{
+
+
+.writing-category-menu button.show{
+
+
+opacity:1;
+
+
+transform:none;
+
+
+transition:
+
+1s cubic-bezier(
+.16,
+1,
+.3,
+1
+);
+
+
+}
+
+
+
+
+
+.writing-category-menu button:hover{
+
 
 transform:
-translateX(-50%)
-translateY(0);
 
-}
+translateY(-15px);
 
 
-
-}
-
+border-color:white;
 
 
+box-shadow:
 
-.writings-page::before {
-
-
-    animation:
-
-    archiveLight 12s ease-in-out infinite;
+0 40px 80px rgba(0,0,0,.8);
 
 
 }
@@ -481,39 +105,45 @@ translateY(0);
 
 
 
+.writing-item:hover{
 
 
+padding-left:20px;
 
 
-/* =====================================================
-   MOBILE
-===================================================== */
-
-
-@media(max-width:900px){
-
-
-
-.writing-category-menu button:hover {
-
-
-    transform:
-
-    translateY(-8px);
+transition:.5s;
 
 
 }
 
 
 
-.writing-item:hover {
 
 
-    padding-left:10px;
+
+.writing-page-body::after{
 
 
-}
+content:"";
 
+
+position:fixed;
+
+
+inset:0;
+
+
+pointer-events:none;
+
+
+opacity:.04;
+
+
+background-image:
+
+url(
+"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8'/%3E%3C/filter%3E%3C/svg%3E"
+);
 
 
 }
