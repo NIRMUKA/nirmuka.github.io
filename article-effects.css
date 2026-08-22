@@ -239,3 +239,36 @@ url(
 
 
 }
+/* ===============================
+   READING PROGRESS
+=============================== */
+
+
+.reading-progress {
+
+
+    position:fixed;
+
+
+    top:0;
+
+
+    left:0;
+
+
+    height:2px;
+
+
+    width:0;
+
+
+    background:white;
+
+
+    z-index:9999;
+
+
+    transition:.1s;
+
+
+}
