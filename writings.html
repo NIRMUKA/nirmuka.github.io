@@ -1,96 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta 
+name="viewport" 
+content="width=device-width, initial-scale=1.0"
+>
+
 
 <title>
-NIRMUKA — WRITINGS
+NIRMUKA | WRITINGS
 </title>
 
 
-<style>
 
-body {
+<link rel="stylesheet" href="/style.css?v=20">
 
-    margin:0;
-
-    background:#050505;
-
-    color:white;
-
-    font-family:
-    "Times New Roman",
-    serif;
-
-}
-
-
-.container {
-
-    width:80%;
-
-    margin:auto;
-
-    padding-top:100px;
-
-    text-align:center;
-
-}
-
-
-h1 {
-
-    font-size:100px;
-
-    font-weight:400;
-
-}
-
-
-.cards {
-
-    display:flex;
-
-    gap:30px;
-
-    justify-content:center;
-
-    margin-top:80px;
-
-}
-
-
-.card {
-
-    width:300px;
-
-    height:250px;
-
-    border:1px solid rgba(255,255,255,.3);
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-}
-
-
-.card h2 {
-
-    font-size:40px;
-
-    font-weight:400;
-
-}
-
-
-</style>
+<link rel="stylesheet" href="/writings.css?v=1">
 
 
 </head>
@@ -100,81 +30,193 @@ h1 {
 <body>
 
 
-<div class="container">
+
+<div class="curtain"></div>
 
 
-<p>
+
+
+<main class="writings-page">
+
+
+
+<section class="writing-intro">
+
+
+
+<a 
+href="/index.html"
+class="back-home"
+>
+
+← BACK TO NIRMUKA
+
+</a>
+
+
+
+<p class="work-number">
+
 ARCHIVE / WRITINGS
+
 </p>
+
 
 
 <h1>
+
 WRITINGS
+
 </h1>
 
 
+
 <p>
-A collection of philosophical, theological, and reflective writings.
+
+An archive of philosophical,
+theological, and reflective writings.
+
 </p>
 
 
 
-<div class="cards">
+</section>
 
 
-<div class="card">
 
-<h2>
+
+
+
+
+
+
+<section class="writing-archive">
+
+
+<div class="writing-category-menu">
+
+
+
+<button 
+data-category="FILSAFAT"
+>
+
+<span class="archive-number">
+01
+</span>
+
+
+<span class="archive-name">
 FILSAFAT
-</h2>
+</span>
 
-<p>
+
+<span class="archive-label">
 PHILOSOPHICAL ARCHIVE
-</p>
-
-</div>
+</span>
 
 
+</button>
 
 
-<div class="card">
 
-<h2>
+
+
+
+<button 
+data-category="TEOLOGI"
+>
+
+<span class="archive-number">
+02
+</span>
+
+
+<span class="archive-name">
 TEOLOGI
-</h2>
+</span>
 
-<p>
+
+<span class="archive-label">
 THEOLOGICAL ARCHIVE
-</p>
-
-</div>
+</span>
 
 
+</button>
 
 
 
-<div class="card">
 
-<h2>
+
+
+
+<button 
+data-category="UMUM"
+>
+
+<span class="archive-number">
+03
+</span>
+
+
+<span class="archive-name">
 UMUM
-</h2>
+</span>
 
-<p>
+
+<span class="archive-label">
 GENERAL ARCHIVE
-</p>
+</span>
+
+
+</button>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section 
+class="writing-list-section"
+>
+
+
+<div 
+id="writing-list"
+>
+
 
 </div>
 
 
 
-</div>
+</section>
 
 
 
-</div>
+
+</main>
+
+
+
+
+
+<script src="/writings.js?v=1"></script>
 
 
 
 </body>
+
 
 </html>
