@@ -3,39 +3,43 @@
 
 <head>
 
+
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 
 <title>
-NIRMUKA
+    NIRMUKA
 </title>
 
 
-<!-- =========================
-     GLOBAL STYLE
-========================= -->
 
-<link rel="stylesheet" href="/style.css?v=10">
-
+<!-- =================================================
+     MAIN STYLE
+================================================== -->
 
 
-<!-- =========================
-     WORKS / ARTWORK STYLE
-========================= -->
-
-<link rel="stylesheet" href="/artwork.css?v=10">
+<link
+    rel="stylesheet"
+    href="/style.css?v=2"
+/>
 
 
 
-<!-- =========================
-     WRITINGS SYSTEM STYLE
-========================= -->
+<!-- =================================================
+     WRITINGS STYLE
+================================================== -->
 
-<link rel="stylesheet" href="/writings.css?v=20">
 
-<link rel="stylesheet" href="/writings-effects.css?v=1">
+<link
+    rel="stylesheet"
+    href="/writings.css?v=2"
+/>
 
 
 
@@ -44,33 +48,104 @@ NIRMUKA
 
 
 
-
 <body>
 
 
 
-
-<!-- =================================
-     MAIN WEBSITE CONTAINER
-     
-     JANGAN DIUBAH
-     
-     SCRIPT.JS MENGGUNAKAN INI
-================================= -->
+<!-- =================================================
+     CURTAIN TRANSITION
+================================================== -->
 
 
-<div id="content-container">
+<div class="curtain"></div>
 
 
-<!--
-
-HERO ORIGINAL ANDA DI SINI
 
 
-WORKS ORIGINAL ANDA DI SINI
 
 
--->
+
+<!-- =================================================
+     LANDING PAGE
+================================================== -->
+
+
+<section
+    class="landing"
+>
+
+
+
+<div class="hero-overlay"></div>
+
+
+
+
+<div class="hero-content">
+
+
+
+<h1 class="nirmuka">
+
+    NIRMUKA
+
+</h1>
+
+
+
+
+<p class="artist-tag">
+
+    VISUAL ARCHIVE · WRITER · ARTIST
+
+</p>
+
+
+
+
+
+
+<nav class="main-menu">
+
+
+<a
+    href="#"
+    data-page="works"
+>
+
+WORKS
+
+</a>
+
+
+
+
+<a
+    href="#"
+    data-page="writings"
+>
+
+WRITINGS
+
+</a>
+
+
+
+
+
+<a
+    href="#"
+    data-page="about"
+>
+
+ABOUT
+
+</a>
+
+
+
+</nav>
+
 
 
 
@@ -78,54 +153,79 @@ WORKS ORIGINAL ANDA DI SINI
 
 
 
-
-
-
-
-<!-- =========================
-     GLOBAL ENGINE
-========================= -->
-
-
-<script src="/script.js?v=20"></script>
+</section>
 
 
 
 
 
-<!-- =========================
-     WORKS ENGINE
-========================= -->
 
 
-<script src="/artworks.js?v=10"></script>
+<!-- =================================================
+     DYNAMIC PAGE CONTAINER
+
+     WORKS
+     WRITINGS
+     ABOUT
+
+================================================== -->
 
 
-
-
-
-<!-- =========================
-     WRITINGS ENGINE
-========================= -->
-
-
-<script src="/writings.js?v=20"></script>
-
-
-<script src="/writings-effects.js?v=1"></script>
+<main
+    id="content-container"
+></main>
 
 
 
 
 
-<!-- =========================
-     SPRAY / VISUAL EFFECT
-     NANTI KITA HUBUNGKAN
-========================= -->
 
 
-<script src="/spray.js?v=10"></script>
 
+<!-- =================================================
+     JAVASCRIPT SYSTEM
+
+     IMPORTANT ORDER
+
+================================================== -->
+
+
+
+<!-- CORE WEBSITE -->
+
+<script
+src="/script.js?v=2">
+</script>
+
+
+
+
+
+<!-- WRITINGS ARCHIVE -->
+
+<script
+src="/writings.js?v=2">
+</script>
+
+
+
+
+
+<!-- SPRAY EFFECT -->
+
+<script
+src="/spray.js?v=2">
+</script>
+
+
+
+
+
+<!-- ART PROTECTION -->
+
+<script
+src="/protection.js?v=2">
+</script>
 
 
 
