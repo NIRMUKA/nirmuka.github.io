@@ -2,19 +2,16 @@
 
    NIRMUKA WRITINGS ENGINE
 
-   CORE SYSTEM ONLY
-
+   CORE ONLY
 
    FLOW:
 
-   HERO
-     ↓
-   WRITINGS INTRO
-     ↓
+   WRITINGS
+      ↓
    ARCHIVE CATEGORY
-     ↓
+      ↓
    WRITING LIST
-     ↓
+      ↓
    ARTICLE
 
 
@@ -28,7 +25,7 @@
 
 
 
-let writingData = [];
+let writingsDatabase = [];
 
 
 
@@ -36,7 +33,7 @@ let writingData = [];
 
 
 /* =========================================================
-   OPEN WRITINGS ARCHIVE
+   OPEN WRITINGS
 ========================================================= */
 
 
@@ -60,10 +57,13 @@ return;
 
 
 
+
 content.innerHTML = `
 
 
+
 <section class="writings-page">
+
 
 
 <div class="writings-container">
@@ -72,34 +72,38 @@ content.innerHTML = `
 
 
 
-
 <section class="writing-intro">
 
 
-<a
-href="#"
-class="back-home"
->
+<a href="#" class="back-home">
+
 ← BACK
+
 </a>
 
 
 
 <p class="work-number">
+
 ARCHIVE / WRITINGS
+
 </p>
 
 
 
 <h1>
+
 WRITINGS
+
 </h1>
 
 
 
 <p>
+
 A collection of philosophical,
 theological, and reflective writings.
+
 </p>
 
 
@@ -114,17 +118,22 @@ theological, and reflective writings.
 
 
 
-<section
+<section 
 class="writing-archive"
 id="archive-section"
 >
+
+
 
 
 <div class="writing-category-menu">
 
 
 
+
+
 <button data-category="FILSAFAT">
+
 
 <span class="archive-number">
 01
@@ -150,6 +159,7 @@ PHILOSOPHICAL ARCHIVE
 
 <button data-category="TEOLOGI">
 
+
 <span class="archive-number">
 02
 </span>
@@ -174,6 +184,7 @@ THEOLOGICAL ARCHIVE
 
 <button data-category="UMUM">
 
+
 <span class="archive-number">
 03
 </span>
@@ -190,6 +201,7 @@ GENERAL ARCHIVE
 
 
 </button>
+
 
 
 
@@ -213,11 +225,12 @@ id="writing-list-section"
 >
 
 
+
 <div id="writing-list">
 
-SELECT ARCHIVE
 
 </div>
+
 
 
 </section>
@@ -240,7 +253,44 @@ SELECT ARCHIVE
 
 
 
-loadWritingData();
+loadWriting();
+
+
+
+
+
+
+/* CAMERA TO ARCHIVE */
+
+setTimeout(()=>{
+
+
+const archive =
+document.getElementById(
+"archive-section"
+);
+
+
+
+if(archive){
+
+
+archive.scrollIntoView({
+
+behavior:"smooth",
+
+block:"center"
+
+});
+
+
+}
+
+
+
+},700);
+
+
 
 
 
@@ -255,11 +305,11 @@ loadWritingData();
 
 
 /* =========================================================
-   LOAD DATABASE
+   LOAD JSON
 ========================================================= */
 
 
-function loadWritingData(){
+function loadWriting(){
 
 
 
@@ -268,43 +318,27 @@ fetch(
 )
 
 
-
 .then(
-response=>{
-
-
-if(!response.ok){
-
-throw new Error(
-"Cannot load writings.json"
-);
-
-}
-
-
-return response.json();
-
-
-}
-
+response=>response.json()
 )
-
 
 
 .then(
 data=>{
 
 
-writingData = data;
+writingsDatabase =
+data;
 
 
-activateCategory();
+
+activateArchiveButton();
+
 
 
 }
 
 )
-
 
 
 .catch(
@@ -312,7 +346,7 @@ error=>{
 
 
 console.error(
-"WRITINGS ERROR:",
+"WRITINGS ERROR",
 error
 );
 
@@ -338,7 +372,7 @@ error
 ========================================================= */
 
 
-function activateCategory(){
+function activateArchiveButton(){
 
 
 
@@ -355,11 +389,10 @@ button=>{
 
 button.addEventListener(
 "click",
-function(){
+()=>{
 
 
-
-renderWritingList(
+showCategory(
 button.dataset.category
 );
 
@@ -382,11 +415,11 @@ button.dataset.category
 
 
 /* =========================================================
-   RENDER ARTICLE LIST
+   SHOW WRITING LIST
 ========================================================= */
 
 
-function renderWritingList(
+function showCategory(
 category
 ){
 
@@ -409,24 +442,24 @@ return;
 
 
 
-
-
-const filtered =
-writingData.filter(
-item=>
+const result =
+writingsDatabase.filter(
+item =>
 item.category === category
 );
 
 
 
-if(!filtered.length){
+
+
+if(result.length===0){
 
 
 list.innerHTML = `
 
-<p>
+<h2>
 NO ARCHIVE FOUND
-</p>
+</h2>
 
 `;
 
@@ -444,11 +477,13 @@ list.innerHTML = `
 
 
 
-<h2 class="writing-title">
+<div class="writing-title">
+
 
 ${category}
 
-</h2>
+
+</div>
 
 
 
@@ -458,15 +493,17 @@ ${category}
 
 
 ${
-filtered.map(
+
+result.map(
 (item,index)=>`
+
 
 
 <a
 
-href="/article.html?id=${item.id}"
-
 class="writing-item"
+
+href="/article.html?id=${item.id}"
 
 >
 
@@ -480,7 +517,9 @@ String(index+1)
 
 }
 
+
 </div>
+
 
 
 
@@ -488,11 +527,11 @@ String(index+1)
 <div class="writing-data">
 
 
-<h3>
+<h2>
 
 ${item.title}
 
-</h3>
+</h2>
 
 
 
@@ -504,13 +543,10 @@ ${item.subtitle || ""}
 
 
 
-
 <span>
 
 ${item.type}
-
-·
-
+ · 
 ${item.year}
 
 </span>
@@ -524,20 +560,60 @@ ${item.year}
 </a>
 
 
+
 `
 ).join("")
+
 }
 
 
+
 </div>
+
 
 
 `;
 
 
 
+
+
+
+
+/* CAMERA TO LIST */
+
+
+setTimeout(()=>{
+
+
+const section =
+document.getElementById(
+"writing-list-section"
+);
+
+
+
+if(section){
+
+
+section.scrollIntoView({
+
+behavior:"smooth",
+
+block:"start"
+
+});
+
+
 }
 
+
+
+},400);
+
+
+
+}
 
 
 
