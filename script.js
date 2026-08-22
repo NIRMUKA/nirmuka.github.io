@@ -787,3 +787,358 @@ content.innerHTML="";
 
 
 });
+/* =====================================================
+   NIRMUKA WORKS CAROUSEL SYSTEM
+===================================================== */
+
+
+.works-carousel {
+
+    position:relative;
+
+    width:100%;
+
+    height:650px;
+
+    overflow:hidden;
+
+    margin-top:80px;
+
+}
+
+
+
+
+
+.carousel-track {
+
+
+    position:relative;
+
+    width:100%;
+
+    height:100%;
+
+
+}
+
+
+
+
+
+.carousel-item {
+
+
+    position:absolute;
+
+
+    top:50%;
+
+    left:50%;
+
+
+    width:380px;
+
+    height:500px;
+
+
+
+    transform:
+
+        translate(-50%,-50%)
+        scale(.7);
+
+
+
+    opacity:0;
+
+
+    transition:
+
+        transform .6s ease,
+        opacity .6s ease;
+
+
+
+    cursor:pointer;
+
+
+    text-decoration:none;
+
+
+
+}
+
+
+
+
+
+
+.carousel-image-frame {
+
+
+    width:100%;
+
+    height:100%;
+
+
+    overflow:hidden;
+
+
+
+    background:#111;
+
+
+}
+
+
+
+
+
+
+.carousel-image-frame img {
+
+
+    width:100%;
+
+    height:100%;
+
+
+    object-fit:cover;
+
+
+    display:block;
+
+
+}
+
+
+
+
+
+
+
+
+/* CENTER IMAGE */
+
+.carousel-item.active {
+
+
+    transform:
+
+        translate(-50%,-50%)
+        scale(1);
+
+
+
+    opacity:1;
+
+
+    z-index:5;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* LEFT IMAGE */
+
+.carousel-item.left {
+
+
+    transform:
+
+        translate(
+            -130%,
+            -50%
+        )
+        scale(.75);
+
+
+
+    opacity:.45;
+
+
+    z-index:3;
+
+
+}
+
+
+
+
+
+
+
+
+/* RIGHT IMAGE */
+
+.carousel-item.right {
+
+
+    transform:
+
+        translate(
+            30%,
+            -50%
+        )
+        scale(.75);
+
+
+
+    opacity:.45;
+
+
+    z-index:3;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* BUTTON */
+
+.carousel-navigation {
+
+
+    position:absolute;
+
+
+    bottom:30px;
+
+
+    left:50%;
+
+
+    transform:
+        translateX(-50%);
+
+
+
+    display:flex;
+
+
+    gap:30px;
+
+
+
+}
+
+
+
+
+.carousel-navigation button {
+
+
+    width:60px;
+
+
+    height:60px;
+
+
+
+    border:
+
+        1px solid white;
+
+
+
+    background:
+
+        transparent;
+
+
+
+    color:white;
+
+
+
+    font-size:25px;
+
+
+
+    cursor:pointer;
+
+
+
+}
+
+
+
+
+
+.carousel-navigation button:hover {
+
+
+    background:white;
+
+
+    color:black;
+
+
+}
+
+
+
+
+
+
+
+
+/* INFO */
+
+
+.carousel-caption {
+
+
+    position:absolute;
+
+
+    bottom:40px;
+
+
+    right:50px;
+
+
+    text-align:right;
+
+
+}
+
+
+
+.carousel-caption h3 {
+
+
+    font-size:35px;
+
+
+    color:white;
+
+
+}
+
+
+
+.carousel-caption p {
+
+
+    color:white;
+
+
+    opacity:.5;
+
+
+}
