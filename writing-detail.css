@@ -1,0 +1,575 @@
+/* =====================================================
+   NIRMUKA WRITING DETAIL
+   INTELLECTUAL ARCHIVE STYLE
+===================================================== */
+
+
+
+/* ===============================
+   PAGE
+=============================== */
+
+
+.writing-detail-page {
+
+
+    min-height:100vh;
+
+
+    background:#050505;
+
+
+    color:white;
+
+
+    padding:80px 30px;
+
+
+}
+
+
+
+.writing-detail-container {
+
+
+    max-width:950px;
+
+
+    margin:auto;
+
+
+}
+
+
+
+
+
+
+
+/* ===============================
+   BACK
+=============================== */
+
+
+.writing-detail-page .back-home {
+
+
+    display:inline-block;
+
+
+    margin-bottom:80px;
+
+
+    color:white;
+
+
+    text-decoration:none;
+
+
+    font-family:Arial,sans-serif;
+
+
+    font-size:12px;
+
+
+    letter-spacing:4px;
+
+
+    opacity:.5;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+.writing-detail-page .back-home:hover {
+
+
+    opacity:1;
+
+
+}
+
+
+
+
+
+
+
+/* ===============================
+   HEADER
+=============================== */
+
+
+.writing-header {
+
+
+    text-align:center;
+
+
+    margin-bottom:150px;
+
+
+}
+
+
+
+
+
+.writing-category {
+
+
+    font-family:Arial,sans-serif;
+
+
+    font-size:11px;
+
+
+    letter-spacing:7px;
+
+
+    opacity:.5;
+
+
+    margin-bottom:50px;
+
+
+}
+
+
+
+
+
+.writing-header h1 {
+
+
+    font-family:
+    "Times New Roman",
+    serif;
+
+
+    font-size:
+    clamp(
+        45px,
+        7vw,
+        85px
+    );
+
+
+    font-weight:400;
+
+
+    line-height:1.2;
+
+
+    margin:0;
+
+
+}
+
+
+
+
+
+.writing-subtitle {
+
+
+    max-width:750px;
+
+
+    margin:50px auto;
+
+
+    font-family:
+    "Times New Roman",
+    serif;
+
+
+    font-size:24px;
+
+
+    line-height:1.8;
+
+
+    opacity:.65;
+
+
+}
+
+
+
+
+
+
+
+.writing-meta {
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    gap:20px;
+
+
+    font-family:Arial,sans-serif;
+
+
+    font-size:11px;
+
+
+    letter-spacing:4px;
+
+
+    opacity:.5;
+
+
+}
+
+
+
+
+
+
+
+
+/* ===============================
+   SECTION
+=============================== */
+
+
+.writing-abstract,
+.writing-content,
+.writing-reference {
+
+
+    margin-bottom:120px;
+
+
+}
+
+
+
+
+
+.writing-abstract h2,
+.writing-content h2,
+.writing-reference h2 {
+
+
+    font-family:Arial,sans-serif;
+
+
+    font-size:12px;
+
+
+    letter-spacing:8px;
+
+
+    font-weight:400;
+
+
+    margin-bottom:50px;
+
+
+    opacity:.5;
+
+
+}
+
+
+
+
+
+
+
+
+/* ===============================
+   ABSTRACT
+=============================== */
+
+
+.writing-abstract p {
+
+
+    font-family:
+    "Times New Roman",
+    serif;
+
+
+    font-size:25px;
+
+
+    line-height:1.9;
+
+
+    opacity:.8;
+
+
+}
+
+
+
+
+
+
+
+/* ===============================
+   ARTICLE CONTENT
+=============================== */
+
+
+#writings-content {
+
+
+    font-family:
+    "Times New Roman",
+    serif;
+
+
+}
+
+
+
+
+
+#writing-content h1 {
+
+
+    font-size:50px;
+
+
+    font-weight:400;
+
+
+    margin:
+    80px 0 40px;
+
+
+}
+
+
+
+
+#writing-content h2 {
+
+
+    font-family:
+    "Times New Roman",
+    serif;
+
+
+    font-size:38px;
+
+
+    letter-spacing:0;
+
+
+    opacity:1;
+
+
+    margin:
+    80px 0 35px;
+
+
+}
+
+
+
+
+#writing-content h3 {
+
+
+    font-size:30px;
+
+
+    font-weight:400;
+
+
+    margin:
+    60px 0 30px;
+
+
+}
+
+
+
+
+
+
+
+#writing-content p {
+
+
+    font-size:22px;
+
+
+    line-height:2;
+
+
+    margin-bottom:35px;
+
+
+    color:
+    rgba(255,255,255,.85);
+
+
+}
+
+
+
+
+
+
+#writing-content strong {
+
+
+    color:white;
+
+
+    font-weight:600;
+
+
+}
+
+
+
+
+
+
+
+/* ===============================
+   REFERENCES
+=============================== */
+
+
+#writing-references {
+
+
+    padding-left:30px;
+
+
+}
+
+
+
+
+#writing-references li {
+
+
+    font-family:
+    "Times New Roman",
+    serif;
+
+
+    font-size:20px;
+
+
+    line-height:2;
+
+
+    opacity:.7;
+
+
+    margin-bottom:15px;
+
+
+}
+
+
+
+
+
+
+
+
+/* ===============================
+   READING WIDTH
+=============================== */
+
+
+#writing-content {
+
+
+    max-width:800px;
+
+
+    margin:auto;
+
+
+}
+
+
+
+
+
+
+
+/* ===============================
+   MOBILE
+=============================== */
+
+
+@media(max-width:900px){
+
+
+
+.writing-detail-page {
+
+
+    padding:50px 20px;
+
+
+}
+
+
+
+.writing-header {
+
+
+    margin-bottom:90px;
+
+
+}
+
+
+
+.writing-subtitle {
+
+
+    font-size:20px;
+
+
+}
+
+
+
+.writing-meta {
+
+
+    flex-direction:column;
+
+
+}
+
+
+
+#writing-content p {
+
+
+    font-size:18px;
+
+
+    line-height:1.8;
+
+
+}
+
+
+
+}
