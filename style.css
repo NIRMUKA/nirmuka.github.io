@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Rock+Salt&family=Rubik+Dirt&family=Sedgwick+Ave+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Rock+Salt&family=Rubik+Spray+Paint&family=Sedgwick+Ave+Display&display=swap');
 
 
 /* =====================================
    NIRMUKA DIGITAL ART ARCHIVE
-   BRUTAL STREET TYPOGRAPHY SYSTEM
+   STREET ART TYPOGRAPHY SYSTEM
 ===================================== */
 
 * {
@@ -76,8 +76,6 @@ body {
 }
 
 
-/* grain / rough overlay */
-
 .hero-overlay {
     position: absolute;
     inset: 0;
@@ -95,6 +93,7 @@ body {
 
 .hero-content {
     position: relative;
+
     z-index: 2;
 
     text-align: center;
@@ -102,8 +101,7 @@ body {
 
 
 /* =====================================
-   NIRMUKA
-   MAIN STREET TITLE
+   NIRMUKA TITLE
 ===================================== */
 
 .nirmuka {
@@ -112,43 +110,40 @@ body {
     display: inline-block;
 
     font-family:
-        "Rubik Dirt",
+        "Rubik Spray Paint",
         cursive;
 
     font-size:
-        clamp(72px, 10vw, 145px);
+        clamp(74px, 11vw, 150px);
 
     font-weight: 400;
 
-    line-height: .76;
+    line-height: .88;
 
-    letter-spacing: -4px;
+    letter-spacing: 1px;
 
     text-transform: uppercase;
 
-    color: #f4f2eb;
+    color: #f5f2ea;
 
     transform:
-        rotate(-5deg)
-        skewX(-7deg)
-        scaleY(1.07);
+        rotate(-4deg)
+        skewX(-3deg);
 
     transform-origin: center;
 
     isolation: isolate;
 
     text-shadow:
-        -4px 3px 0 rgba(255,255,255,.08),
-        5px -3px 0 rgba(255,255,255,.05),
-        8px 7px 0 rgba(0,0,0,.7);
+        6px 6px 0 rgba(0,0,0,.70),
+        -2px 3px 0 rgba(255,255,255,.08);
 
     transition:
-        transform .3s ease,
-        letter-spacing .3s ease;
+        transform .35s ease;
 }
 
 
-/* displaced graffiti ghost */
+/* duplicated spray / ghost */
 
 .nirmuka::before {
     content: "NIRMUKA";
@@ -161,92 +156,58 @@ body {
     width: 100%;
 
     font-family:
-        "Rubik Dirt",
+        "Rubik Spray Paint",
         cursive;
 
     color: transparent;
 
     -webkit-text-stroke:
-        2px rgba(255,255,255,.18);
+        1px rgba(255,255,255,.22);
 
     transform:
-        rotate(2deg)
-        skewX(5deg);
+        rotate(2deg);
 
     z-index: -1;
 
-    opacity: .8;
-
-    clip-path: polygon(
-        0 0,
-        100% 2%,
-        96% 15%,
-        100% 25%,
-        92% 38%,
-        100% 50%,
-        94% 63%,
-        100% 75%,
-        95% 88%,
-        100% 100%,
-        0 96%,
-        5% 82%,
-        0 67%,
-        7% 51%,
-        0 35%,
-        6% 18%
-    );
+    opacity: .75;
 }
 
 
-/* scratch underneath */
+/* rough slash */
 
 .nirmuka::after {
     content: "";
 
     position: absolute;
 
-    left: -5%;
+    left: -4%;
     bottom: -18px;
 
     width: 110%;
-    height: 9px;
+    height: 8px;
 
     background:
         repeating-linear-gradient(
             173deg,
-
-            rgba(255,255,255,.8) 0,
-            rgba(255,255,255,.8) 8px,
-
-            transparent 8px,
-            transparent 13px,
-
-            rgba(255,255,255,.24) 13px,
-            rgba(255,255,255,.24) 18px,
-
-            transparent 18px,
-            transparent 26px
+            rgba(255,255,255,.8) 0 8px,
+            transparent 8px 14px,
+            rgba(255,255,255,.25) 14px 19px,
+            transparent 19px 27px
         );
 
     transform:
         rotate(-3deg)
         skewX(-20deg);
 
-    opacity: .58;
-
-    pointer-events: none;
+    opacity: .55;
 }
 
 
-/* slight vandal movement */
-
 .nirmuka:hover {
     transform:
-        rotate(-2deg)
-        skewX(1deg)
+        rotate(-1deg)
+        skewX(2deg)
         scale(1.035);
-
-    letter-spacing: -2px;
 }
 
 
@@ -279,6 +240,7 @@ body {
     margin-top: 80px;
 
     display: flex;
+
     justify-content: center;
 
     gap: 80px;
@@ -296,28 +258,28 @@ body {
         "Sedgwick Ave Display",
         cursive;
 
-    font-size: 32px;
+    font-size: 36px;
 
     font-weight: 400;
 
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 
     transition:
-        transform .3s ease,
-        opacity .3s ease;
+        transform .35s ease,
+        opacity .35s ease;
 }
 
 
 .main-menu a:nth-child(1) {
-    transform: rotate(-2deg);
+    transform: rotate(-3deg);
 }
 
 .main-menu a:nth-child(2) {
-    transform: rotate(1deg);
+    transform: rotate(2deg);
 }
 
 .main-menu a:nth-child(3) {
-    transform: rotate(-1deg);
+    transform: rotate(-2deg);
 }
 
 
@@ -331,20 +293,18 @@ body {
 }
 
 
-/* rough underline */
-
 .main-menu a::after {
     content: "";
 
     position: absolute;
 
-    left: -6%;
-    bottom: -8px;
+    left: -5%;
+    bottom: -7px;
 
     width: 0;
     height: 3px;
 
-    background: rgba(255,255,255,.7);
+    background: rgba(255,255,255,.65);
 
     transform: rotate(-3deg);
 
@@ -354,12 +314,12 @@ body {
 
 
 .main-menu a:hover::after {
-    width: 112%;
+    width: 110%;
 }
 
 
 /* =====================================
-   CONTENT
+   DYNAMIC CONTENT
 ===================================== */
 
 #content-container {
@@ -370,8 +330,7 @@ body {
 .page-section {
     min-height: 100vh;
 
-    padding:
-        100px 20px;
+    padding: 100px 20px;
 }
 
 
@@ -383,7 +342,7 @@ body {
 
 
 /* =====================================
-   ARCHIVE SMALL LABEL
+   SMALL ARCHIVE LABEL
 ===================================== */
 
 .work-number {
@@ -399,12 +358,12 @@ body {
 
     opacity: .5;
 
-    margin-bottom: 30px;
+    margin-bottom: 28px;
 }
 
 
 /* =====================================
-   MAIN PAGE HEADINGS
+   PAGE TITLES
 ===================================== */
 
 .page-section h2 {
@@ -413,16 +372,16 @@ body {
     display: inline-block;
 
     font-family:
-        "Rubik Dirt",
+        "Rubik Spray Paint",
         cursive;
 
-    font-size: 64px;
+    font-size: 68px;
 
     font-weight: 400;
 
     line-height: 1;
 
-    letter-spacing: 0;
+    letter-spacing: 1px;
 
     margin-bottom: 60px;
 
@@ -430,8 +389,6 @@ body {
         rotate(-2deg);
 }
 
-
-/* rough slash under headings */
 
 .page-section h2::after {
     content: "";
@@ -441,20 +398,20 @@ body {
     left: 0;
     bottom: -13px;
 
-    width: 75%;
+    width: 76%;
     height: 4px;
 
     background:
-        rgba(255,255,255,.5);
+        rgba(255,255,255,.48);
 
     transform:
         rotate(-2deg)
-        skewX(-15deg);
+        skewX(-16deg);
 }
 
 
 /* =====================================
-   BACK BUTTON
+   BACK BUTTONS
 ===================================== */
 
 .back-home,
@@ -469,11 +426,11 @@ body {
         "Sedgwick Ave Display",
         cursive;
 
-    font-size: 20px;
+    font-size: 22px;
 
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 
-    opacity: .6;
+    opacity: .62;
 
     transition:
         opacity .3s ease,
@@ -521,14 +478,13 @@ body {
     padding: 18px;
 
     transition:
-        transform .4s ease;
+        transform .45s ease;
 }
 
 
 .art-card:nth-child(odd) {
     transform: rotate(-.35deg);
 }
-
 
 .art-card:nth-child(even) {
     transform: rotate(.35deg);
@@ -560,22 +516,22 @@ body {
 }
 
 
-/* artwork title */
+/* title */
 
 .art-card h3 {
     margin-top: 20px;
 
     font-family:
-        "Sedgwick Ave Display",
+        "Permanent Marker",
         cursive;
 
-    font-size: 28px;
+    font-size: 27px;
 
     font-weight: 400;
 
-    line-height: 1.1;
+    line-height: 1.15;
 
-    letter-spacing: 1px;
+    letter-spacing: .5px;
 
     transform:
         rotate(-1deg);
@@ -593,7 +549,7 @@ body {
 
     font-size: 9px;
 
-    letter-spacing: 1px;
+    line-height: 1.6;
 
     opacity: .5;
 }
@@ -610,9 +566,9 @@ body {
         "Permanent Marker",
         cursive;
 
-    font-size: 19px;
+    font-size: 18px;
 
-    line-height: 1.9;
+    line-height: 1.95;
 
     color: #d5d5d5;
 }
@@ -649,8 +605,6 @@ body {
 }
 
 
-/* signature */
-
 .about-content .signature {
     margin-top: 80px;
 
@@ -658,9 +612,9 @@ body {
         "Sedgwick Ave Display",
         cursive;
 
-    font-size: 34px;
+    font-size: 36px;
 
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 
     color: #ffffff;
 
@@ -713,16 +667,16 @@ body {
 
 #art-title {
     font-family:
-        "Rubik Dirt",
+        "Rubik Spray Paint",
         cursive;
 
-    font-size: 58px;
+    font-size: 60px;
 
     font-weight: 400;
 
     line-height: 1.05;
 
-    letter-spacing: 0;
+    letter-spacing: .5px;
 
     transform:
         rotate(-1deg);
@@ -730,7 +684,7 @@ body {
 
 
 /* =====================================
-   META
+   ARTWORK META
 ===================================== */
 
 .meta {
@@ -799,11 +753,11 @@ body {
         "Sedgwick Ave Display",
         cursive;
 
-    font-size: 28px;
+    font-size: 30px;
 
     font-weight: 400;
 
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 
     margin-top: 60px;
 
@@ -843,23 +797,19 @@ body {
 
     .nirmuka {
         font-size:
-            clamp(55px, 17vw, 80px);
+            clamp(56px, 17vw, 82px);
 
-        letter-spacing: -2px;
+        letter-spacing: 0;
 
         transform:
-            rotate(-5deg)
-            skewX(-5deg)
-            scaleY(1.05);
+            rotate(-4deg)
+            skewX(-2deg);
     }
 
 
     .nirmuka::before {
         left: -4px;
         top: 5px;
-
-        -webkit-text-stroke:
-            1px rgba(255,255,255,.18);
     }
 
 
@@ -871,7 +821,7 @@ body {
 
 
     .artist-tag {
-        margin-top: 27px;
+        margin-top: 28px;
 
         font-size: 8px;
 
@@ -889,9 +839,9 @@ body {
 
 
     .main-menu a {
-        font-size: 28px;
+        font-size: 31px;
 
-        letter-spacing: 2px;
+        letter-spacing: 1px;
     }
 
 
@@ -902,7 +852,9 @@ body {
 
 
     .page-section h2 {
-        font-size: 46px;
+        font-size: 48px;
+
+        letter-spacing: 0;
     }
 
 
@@ -913,7 +865,7 @@ body {
 
 
     .art-card h3 {
-        font-size: 25px;
+        font-size: 24px;
     }
 
 
@@ -927,7 +879,7 @@ body {
 
 
     #art-title {
-        font-size: 40px;
+        font-size: 42px;
     }
 
 
@@ -938,7 +890,7 @@ body {
 
 
     .description-block h2 {
-        font-size: 25px;
+        font-size: 27px;
     }
 
 
