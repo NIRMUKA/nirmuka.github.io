@@ -1,17 +1,37 @@
 [
-  {
-    "id": "kontinuitas-tanpa-diri",
-    "category": "FILSAFAT",
-    "title": "Ketika Proses Berlanjut, tetapi Subjek Tidak Bertahan",
-    "subtitle": "Persoalan Kontinuitas Tanpa Diri yang Berkelanjutan",
-    "type": "Philosophical Essay",
-    "tags": [
-      "Personal Identity",
-      "Process Continuity",
-      "Artificial Sentience",
-      "Consciousness",
-      "Moral Responsibility"
-    ],
-    "link": "/writings/filsafat/kontinuitas-tanpa-diri.html"
-  }
+    {
+        "id": "kontinuitas-tanpa-diri",
+        "category": "FILSAFAT",
+        "title": "Ketika Proses Berlanjut, tetapi Subjek Tidak Bertahan: Persoalan Kontinuitas Tanpa Diri yang Berkelanjutan",
+        "subtitle": "Sebuah kajian mengenai kontinuitas proses, identitas personal, dan kemungkinan keberlanjutan tanpa subjek yang sama.",
+        "year": "2026",
+        "type": "PHILOSOPHY ESSAY",
+        "author": "NIRMUKA",
+        "file": "/writings/filsafat/kontinuitas-tanpa-diri.html"
+    },
+
+
+    {
+        "id": "beyond-homo-technicus",
+        "category": "FILSAFAT",
+        "title": "Beyond Homo Technicus",
+        "subtitle": "Reconstructing Human Responsibility and Moral Self-Transformation in the Age of Artificial Intelligence.",
+        "year": "2026",
+        "type": "PHILOSOPHY / AI",
+        "author": "NIRMUKA",
+        "file": "/writings/filsafat/beyond-homo-technicus.html"
+    },
+
+
+    {
+        "id": "manusia-dan-makna",
+        "category": "TEOLOGI",
+        "title": "Manusia dan Pencarian Makna",
+        "subtitle": "Refleksi mengenai manusia, iman, dan keberadaan.",
+        "year": "2026",
+        "type": "THEOLOGY ESSAY",
+        "author": "NIRMUKA",
+        "file": "/writings/teologi/manusia-dan-makna.html"
+    }
+
 ]
