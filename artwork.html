@@ -3,388 +3,530 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<title>NIRMUKA | Artwork</title>
+    <title>NIRMUKA | Artwork</title>
 
-<link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
 </head>
 
 
 <body>
 
-<div class="page-curtain"></div>
 
+<!-- =====================================
+     CURTAIN
+===================================== -->
+
+<div class="curtain"></div>
+
+
+
+<!-- =====================================
+     ARTWORK PAGE
+===================================== -->
 
 <section class="artwork-page">
 
+    <div class="artwork-container">
 
-<section class="artwork-page">
 
+        <!-- BACK -->
 
+        <a
+            href="index.html"
+            class="back-button"
+            id="artwork-back"
+        >
+            ← BACK TO WORKS
+        </a>
 
-<div class="artwork-container">
 
 
+        <!-- ARTWORK IMAGE -->
 
-<!-- BACK BUTTON -->
+        <div class="artwork-image">
 
-<a href="index.html#works" class="back-button">
+            <img
+                id="art-image"
+                src=""
+                alt="Artwork"
+            >
 
-← BACK TO WORKS
+        </div>
 
-</a>
 
 
+        <!-- ARTWORK INFORMATION -->
 
+        <div class="artwork-info">
 
 
-<!-- IMAGE -->
+            <p
+                class="work-number"
+                id="art-id"
+            >
+                WORK
+            </p>
 
-<div class="artwork-image">
 
+            <h1 id="art-title">
+                Loading...
+            </h1>
 
-<img 
-id="art-image"
-src=""
-alt="Artwork"
->
 
 
-</div>
+            <!-- META -->
 
+            <div class="meta">
 
 
+                <div>
 
+                    <strong>
+                        YEAR
+                    </strong>
 
+                    <span id="art-year"></span>
 
+                </div>
 
-<!-- INFORMATION -->
 
-<div class="artwork-info">
 
+                <div>
 
+                    <strong>
+                        MEDIUM
+                    </strong>
 
-<p class="work-number" id="art-id">
+                    <span id="art-medium"></span>
 
-WORK 01
+                </div>
 
-</p>
 
 
+                <div>
 
-<h1 id="art-title">
+                    <strong>
+                        DIMENSION
+                    </strong>
 
-Loading...
+                    <span id="art-dimension"></span>
 
-</h1>
+                </div>
 
 
+            </div>
 
 
 
-<div class="meta">
+            <!-- DESCRIPTION -->
 
+            <div class="description-block">
 
-<div>
 
-<strong>YEAR</strong>
+                <h2>
+                    BACKGROUND
+                </h2>
 
-<span id="art-year"></span>
+                <p id="art-background"></p>
 
-</div>
 
 
+                <h2>
+                    CONCEPT
+                </h2>
 
-<div>
+                <p id="art-concept"></p>
 
-<strong>MEDIUM</strong>
 
-<span id="art-medium"></span>
 
-</div>
+                <h2>
+                    VISUAL DESCRIPTION
+                </h2>
 
+                <p id="art-visual"></p>
 
 
-<div>
 
-<strong>DIMENSION</strong>
+                <h2>
+                    ARTIST STATEMENT
+                </h2>
 
-<span id="art-dimension"></span>
+                <p id="art-statement"></p>
 
-</div>
 
 
-</div>
+                <h2>
+                    INSPIRATION
+                </h2>
 
+                <p id="art-inspiration"></p>
 
 
 
+                <h2>
+                    CREATIVE PROCESS
+                </h2>
 
+                <p id="art-process"></p>
 
 
-<div class="description-block">
+            </div>
 
 
+        </div>
 
-<h2>
-BACKGROUND
-</h2>
 
-
-<p id="art-background">
-
-</p>
-
-
-
-
-
-<h2>
-CONCEPT
-</h2>
-
-
-<p id="art-concept">
-
-</p>
-
-
-
-
-
-
-<h2>
-VISUAL DESCRIPTION
-</h2>
-
-
-<p id="art-visual">
-
-</p>
-
-
-
-
-
-
-<h2>
-ARTIST STATEMENT
-</h2>
-
-
-<p id="art-statement">
-
-</p>
-
-
-
-
-
-
-<h2>
-INSPIRATION
-</h2>
-
-
-<p id="art-inspiration">
-
-</p>
-
-
-
-
-
-
-<h2>
-CREATIVE PROCESS
-</h2>
-
-
-<p id="art-process">
-
-</p>
-
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-</div>
-
-
+    </div>
 
 </section>
 
 
 
-
-
-
-
+<!-- =====================================
+     LOAD ARTWORK DATA
+===================================== -->
 
 <script>
 
+(function () {
 
-fetch("artworks.json")
 
+    /* =====================================
+       GET ARTWORK ID
+    ===================================== */
 
-.then(response => response.json())
+    const parameters =
+        new URLSearchParams(
+            window.location.search
+        );
 
 
-.then(artworks => {
+    const artworkId =
+        parameters.get("id");
 
 
 
-const params =
-new URLSearchParams(
-window.location.search
-);
+    /* =====================================
+       LOAD DATABASE
+    ===================================== */
 
+    fetch("artworks.json")
 
+    .then(response => {
 
-const id =
-params.get("id");
 
+        if (!response.ok) {
 
+            throw new Error(
+                "artworks.json could not be loaded."
+            );
 
-const artwork =
-artworks.find(
-item => item.id === id
-);
+        }
 
 
+        return response.json();
 
+    })
 
 
-if(!artwork){
+    .then(artworks => {
 
 
-document.querySelector(".artwork-container").innerHTML =
+        const artwork =
+            artworks.find(
+                item =>
+                    item.id === artworkId
+            );
 
-`
 
-<h1>
-Artwork Not Found
-</h1>
 
-<a href="index.html#works"
-class="back-button">
+        /* =====================================
+           ARTWORK NOT FOUND
+        ===================================== */
 
-← BACK TO WORKS
+        if (!artwork) {
 
-</a>
 
-`;
+            const container =
+                document.querySelector(
+                    ".artwork-container"
+                );
 
-return;
 
+            container.innerHTML = `
 
-}
+                <a
+                    href="index.html"
+                    class="back-button"
+                >
+                    ← BACK
+                </a>
 
 
+                <p class="work-number">
+                    ARCHIVE ERROR
+                </p>
 
 
+                <h1 id="art-title">
+                    ARTWORK NOT FOUND
+                </h1>
 
+            `;
 
 
-document.getElementById("art-image").src =
-artwork.image;
+            return;
 
+        }
 
 
-document.getElementById("art-image").alt =
-artwork.title;
 
+        /* =====================================
+           PAGE TITLE
+        ===================================== */
 
+        document.title =
+            `${artwork.title} | NIRMUKA`;
 
 
 
-document.getElementById("art-id").innerText =
+        /* =====================================
+           IMAGE
+        ===================================== */
 
-"WORK " + artwork.id.replace("karya","");
+        const image =
+            document.getElementById(
+                "art-image"
+            );
 
 
+        image.src =
+            artwork.image;
 
 
+        image.alt =
+            artwork.title;
 
-document.getElementById("art-title").innerText =
-artwork.title;
 
 
+        /* =====================================
+           WORK NUMBER
+        ===================================== */
 
-document.getElementById("art-year").innerText =
-artwork.year;
+        let workNumber =
+            artwork.id.replace(
+                "karya",
+                ""
+            );
 
 
+        workNumber =
+            workNumber.padStart(
+                2,
+                "0"
+            );
 
-document.getElementById("art-medium").innerText =
-artwork.medium;
 
+        document.getElementById(
+            "art-id"
+        ).textContent =
+            `WORK ${workNumber}`;
 
 
-document.getElementById("art-dimension").innerText =
-artwork.dimension;
 
+        /* =====================================
+           BASIC INFORMATION
+        ===================================== */
 
+        document.getElementById(
+            "art-title"
+        ).textContent =
+            artwork.title || "";
 
-document.getElementById("art-background").innerText =
-artwork.background;
 
+        document.getElementById(
+            "art-year"
+        ).textContent =
+            artwork.year || "—";
 
 
-document.getElementById("art-concept").innerText =
-artwork.concept;
+        document.getElementById(
+            "art-medium"
+        ).textContent =
+            artwork.medium || "—";
 
 
+        document.getElementById(
+            "art-dimension"
+        ).textContent =
+            artwork.dimension || "—";
 
-document.getElementById("art-visual").innerText =
-artwork.visual_description;
 
 
+        /* =====================================
+           LONG DESCRIPTION
+        ===================================== */
 
-document.getElementById("art-statement").innerText =
-artwork.artist_statement;
+        document.getElementById(
+            "art-background"
+        ).textContent =
+            artwork.background || "";
 
 
+        document.getElementById(
+            "art-concept"
+        ).textContent =
+            artwork.concept || "";
 
-document.getElementById("art-inspiration").innerText =
-artwork.inspiration;
 
+        document.getElementById(
+            "art-visual"
+        ).textContent =
+            artwork.visual_description || "";
 
 
-document.getElementById("art-process").innerText =
-artwork.creative_process;
+        document.getElementById(
+            "art-statement"
+        ).textContent =
+            artwork.artist_statement || "";
 
 
+        document.getElementById(
+            "art-inspiration"
+        ).textContent =
+            artwork.inspiration || "";
 
-})
 
+        document.getElementById(
+            "art-process"
+        ).textContent =
+            artwork.creative_process || "";
 
-.catch(error => {
 
+    })
 
-console.error(
-"Error loading artwork:",
-error
-);
 
+    /* =====================================
+       DATABASE ERROR
+    ===================================== */
 
-});
+    .catch(error => {
 
 
+        console.error(
+            "Error loading artwork:",
+            error
+        );
+
+
+        const container =
+            document.querySelector(
+                ".artwork-container"
+            );
+
+
+        container.innerHTML = `
+
+            <a
+                href="index.html"
+                class="back-button"
+            >
+                ← BACK
+            </a>
+
+
+            <p class="work-number">
+                ARCHIVE ERROR
+            </p>
+
+
+            <h1 id="art-title">
+                ARTWORK COULD NOT BE LOADED
+            </h1>
+
+        `;
+
+
+    });
+
+
+})();
 
 </script>
 
+
+
+<!-- =====================================
+     NIRMUKA GLOBAL SYSTEM
+     CURSOR / SPRAY / INTERACTION
+===================================== -->
+
+<script src="script.js"></script>
+
+
+
+<!-- =====================================
+     BACK TO PREVIOUS WORKS PAGE
+===================================== -->
+
+<script>
+
+(function () {
+
+
+    const backButton =
+        document.getElementById(
+            "artwork-back"
+        );
+
+
+    if (!backButton) {
+        return;
+    }
+
+
+    backButton.addEventListener(
+        "click",
+        event => {
+
+
+            /*
+               Kalau pengunjung datang
+               dari halaman WORKS,
+               kembali ke halaman sebelumnya.
+            */
+
+            if (
+                document.referrer &&
+                document.referrer.includes(
+                    window.location.hostname
+                )
+            ) {
+
+                event.preventDefault();
+
+                history.back();
+
+            }
+
+        }
+    );
+
+
+})();
+
+</script>
 
 
 </body>
