@@ -1,23 +1,367 @@
-/* =========================================================
-   NIRMUKA ARTWORK DETAIL SYSTEM
+<!DOCTYPE html>
+<html lang="en">
 
-   Museum / Archive Experience
+<head>
 
-========================================================= */
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>
+NIRMUKA | Artwork
+</title>
+
+
+<link rel="stylesheet" href="/style.css?v=10">
+
+<link rel="stylesheet" href="/artwork.css?v=10">
+
+
+</head>
 
 
 
-.artwork-detail-page {
+<body>
 
-    min-height:100vh;
 
-    background:#050505;
 
-    color:white;
+<main class="artwork-detail-page">
 
-    padding:
 
-    80px 30px 150px;
+<div class="artwork-container">
+
+
+
+<a href="/index.html" class="back-home">
+
+← BACK TO WORKS
+
+</a>
+
+
+
+
+
+<div class="archive-number">
+
+ARCHIVE
+
+<span id="archive-number">
+00 / 00
+</span>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="artwork-image-container">
+
+
+<img
+
+id="art-image"
+
+class="artwork-image"
+
+src=""
+
+alt=""
+
+draggable="false"
+
+
+>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="artwork-information">
+
+
+
+<p class="work-number">
+
+ARTWORK / DETAIL
+
+</p>
+
+
+
+
+<h1 id="art-title">
+
+LOADING...
+
+</h1>
+
+
+
+
+
+
+
+<div class="artwork-meta">
+
+
+<span id="art-year"></span>
+
+<span id="art-medium"></span>
+
+<span id="art-dimension"></span>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<section class="artwork-section">
+
+
+<h2>
+BACKGROUND
+</h2>
+
+
+<p id="art-background"></p>
+
+
+</section>
+
+
+
+
+
+
+
+
+<section class="artwork-section">
+
+
+<h2>
+CONCEPT
+</h2>
+
+
+<p id="art-concept"></p>
+
+
+</section>
+
+
+
+
+
+
+
+
+<section class="artwork-section">
+
+
+<h2>
+VISUAL DESCRIPTION
+</h2>
+
+
+<p id="art-visual"></p>
+
+
+</section>
+
+
+
+
+
+
+
+
+<section class="artwork-section">
+
+
+<h2>
+ARTIST STATEMENT
+</h2>
+
+
+<p id="art-statement"></p>
+
+
+</section>
+
+
+
+
+
+
+
+
+<section class="artwork-section">
+
+
+<h2>
+INSPIRATION
+</h2>
+
+
+<p id="art-inspiration"></p>
+
+
+</section>
+
+
+
+
+
+
+
+
+<section class="artwork-section">
+
+
+<h2>
+CREATIVE PROCESS
+</h2>
+
+
+<p id="art-process"></p>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<div class="art-navigation">
+
+
+<a id="previous-artwork">
+
+← PREVIOUS
+
+</a>
+
+
+
+<a id="next-artwork">
+
+NEXT →
+
+</a>
+
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+</main>
+
+
+
+
+
+
+
+
+
+<script>
+
+
+(async function(){
+
+
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+
+
+const id =
+params.get("id");
+
+
+
+
+
+const response =
+await fetch(
+"/artworks.json?v=20"
+);
+
+
+
+const artworks =
+await response.json();
+
+
+
+
+
+const index =
+artworks.findIndex(
+item =>
+item.id === id
+);
+
+
+
+
+
+const artwork =
+artworks[index];
+
+
+
+
+
+
+if(!artwork){
+
+
+document.body.innerHTML =
+
+"<h1>ARTWORK NOT FOUND</h1>";
+
+
+return;
+
 
 }
 
@@ -25,43 +369,50 @@
 
 
 
-.artwork-container {
 
-    max-width:1200px;
 
-    margin:auto;
 
-}
+/* =========================
+   BASIC DATA
+========================= */
 
 
+document
+.getElementById("art-image")
+.src =
+artwork.image;
 
 
 
 
-/* BACK */
+document
+.getElementById("art-title")
+.textContent =
+artwork.title || "";
 
-.back-home {
 
-    color:white;
 
-    text-decoration:none;
 
-    letter-spacing:4px;
+document
+.getElementById("art-year")
+.textContent =
+artwork.year || "";
 
-    font-size:12px;
 
-    opacity:.7;
 
-    transition:.3s;
 
-}
+document
+.getElementById("art-medium")
+.textContent =
+artwork.medium || "";
 
 
-.back-home:hover {
 
-    opacity:1;
 
-}
+document
+.getElementById("art-dimension")
+.textContent =
+artwork.dimension || "";
 
 
 
@@ -69,283 +420,159 @@
 
 
 
+/* =========================
+   ARCHIVE NUMBER
+========================= */
 
-/* IMAGE */
 
-.artwork-image-container {
+document
+.getElementById(
+"archive-number"
+)
+.textContent =
 
-    margin-top:70px;
+String(index+1)
+.padStart(2,"0")
 
-    width:100%;
++
 
-}
+" / "
 
++
 
+String(artworks.length)
+.padStart(2,"0");
 
-.artwork-image {
 
 
-    width:100%;
 
 
-    max-height:850px;
 
 
-    object-fit:contain;
 
 
-    display:block;
+/* =========================
+   TEXT CONTENT
+========================= */
 
 
-    user-select:none;
+document
+.getElementById("art-background")
+.textContent =
+artwork.background || "-";
 
 
-}
 
+document
+.getElementById("art-concept")
+.textContent =
+artwork.concept || "-";
 
 
 
+document
+.getElementById("art-visual")
+.textContent =
+artwork.visual_description || "-";
 
 
 
+document
+.getElementById("art-statement")
+.textContent =
+artwork.artist_statement || "-";
 
 
-/* INFORMATION */
 
-.artwork-information {
+document
+.getElementById("art-inspiration")
+.textContent =
+artwork.inspiration || "-";
 
 
-    margin-top:90px;
 
+document
+.getElementById("art-process")
+.textContent =
+artwork.creative_process || "-";
 
-}
 
 
 
 
 
-.artwork-information h1 {
 
 
-    font-family:
 
-    "Rubik Spray Paint",
-    cursive;
+/* =========================
+   PREVIOUS NEXT
+========================= */
 
 
-    font-size:
 
-    clamp(
-        60px,
-        10vw,
-        150px
-    );
+const previous =
+artworks[
+(index-1+artworks.length)
+%
+artworks.length
+];
 
 
-    line-height:.85;
 
+const next =
+artworks[
+(index+1)
+%
+artworks.length
+];
 
-    font-weight:400;
 
 
-    text-transform:uppercase;
 
 
-}
+document
+.getElementById(
+"previous-artwork"
+)
+.href =
+`/artwork.html?id=${previous.id}`;
 
 
 
 
 
+document
+.getElementById(
+"next-artwork"
+)
+.href =
+`/artwork.html?id=${next.id}`;
 
 
-.artwork-meta {
 
 
-    margin-top:40px;
 
 
-    display:flex;
+})();
 
 
-    flex-wrap:wrap;
 
+</script>
 
-    gap:15px;
 
 
-}
 
 
 
-.artwork-meta span {
 
+<script src="/spray.js?v=10"></script>
 
-    border:
 
-    1px solid rgba(255,255,255,.3);
+<script src="/protection.js?v=10"></script>
 
 
-    padding:
 
-    12px 20px;
+</body>
 
 
-    font-size:11px;
-
-
-    letter-spacing:3px;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* WRITING STYLE */
-
-.artwork-section {
-
-
-    max-width:900px;
-
-
-    margin-top:120px;
-
-
-}
-
-
-
-
-.artwork-section h2 {
-
-
-    font-family:
-
-    "Sedgwick Ave Display",
-    cursive;
-
-
-    font-size:
-
-    clamp(
-        35px,
-        5vw,
-        60px
-    );
-
-
-    margin-bottom:35px;
-
-
-    transform:
-
-    rotate(-2deg);
-
-
-}
-
-
-
-
-
-.artwork-section p {
-
-
-    font-family:
-
-    Georgia,
-    serif;
-
-
-    font-size:20px;
-
-
-    line-height:2;
-
-
-    color:
-
-    rgba(255,255,255,.75);
-
-
-}
-
-
-
-
-
-
-
-
-/* DIVIDER */
-
-.artwork-section::after {
-
-
-    content:"";
-
-
-    display:block;
-
-
-    margin-top:70px;
-
-
-    width:100%;
-
-
-    height:1px;
-
-
-    background:
-
-    rgba(255,255,255,.15);
-
-
-}
-
-
-
-
-
-
-
-
-/* MOBILE */
-
-@media(max-width:700px){
-
-
-.artwork-detail-page {
-
-    padding:
-
-    40px 20px 100px;
-
-}
-
-
-
-.artwork-information h1 {
-
-    font-size:60px;
-
-}
-
-
-
-.artwork-section p {
-
-    font-size:17px;
-
-}
-
-
-}
+</html>
