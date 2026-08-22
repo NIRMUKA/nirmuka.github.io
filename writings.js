@@ -2,19 +2,7 @@
 
    NIRMUKA WRITINGS ENGINE
 
-   STANDALONE PAGE VERSION
-
-
-   writings.html
-        |
-        ↓
-   writings.json
-        |
-        ↓
-   archive category
-        |
-        ↓
-   article.html?id=
+   STANDALONE ARCHIVE SYSTEM
 
 
 ========================================================= */
@@ -27,15 +15,10 @@
 
 
 
-let writingsData = [];
+let database = [];
 
 
 
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
 
 
 document.addEventListener(
@@ -43,42 +26,31 @@ document.addEventListener(
 ()=>{
 
 
-loadWritings();
+loadArchive();
 
 
-}
-
-);
-
+});
 
 
 
 
 
 
-/* =========================================================
-   LOAD DATABASE
-========================================================= */
 
 
-function loadWritings(){
+function loadArchive(){
 
 
 
-fetch(
-"/writings.json?v=20"
-)
+fetch("/writings.json?v=50")
 
-
-
-.then(
-response=>{
+.then(response=>{
 
 
 if(!response.ok){
 
 throw new Error(
-"writings.json not found"
+"JSON NOT FOUND"
 );
 
 }
@@ -87,51 +59,36 @@ throw new Error(
 return response.json();
 
 
-}
+})
 
-)
-
-
-
-.then(
-data=>{
+.then(data=>{
 
 
-writingsData = data;
-
+database=data;
 
 
 console.log(
-"NIRMUKA WRITINGS LOADED",
-writingsData
+"WRITINGS DATABASE",
+database
 );
 
 
 
-activateCategories();
+activateCategory();
 
 
 
-}
+})
 
-)
-
-
-
-.catch(
-error=>{
+.catch(error=>{
 
 
 console.error(
-"WRITINGS ERROR:",
 error
 );
 
 
-
-}
-
-);
+});
 
 
 
@@ -145,26 +102,16 @@ error
 
 
 
-/* =========================================================
-   CATEGORY BUTTON
-========================================================= */
-
-
-function activateCategories(){
+function activateCategory(){
 
 
 
-const buttons =
-document.querySelectorAll(
+document
+.querySelectorAll(
 "[data-category]"
-);
+)
 
-
-
-
-
-buttons.forEach(
-button=>{
+.forEach(button=>{
 
 
 
@@ -173,13 +120,8 @@ button.addEventListener(
 ()=>{
 
 
-const category =
-button.dataset.category;
-
-
-
-showWritingList(
-category
+renderList(
+button.dataset.category
 );
 
 
@@ -188,7 +130,6 @@ category
 
 
 });
-
 
 
 }
@@ -201,14 +142,7 @@ category
 
 
 
-/* =========================================================
-   SHOW WRITING LIST
-========================================================= */
-
-
-function showWritingList(
-category
-){
+function renderList(category){
 
 
 
@@ -232,11 +166,12 @@ return;
 
 
 const articles =
-writingsData.filter(
+database.filter(
 item=>
-item.category === category
-);
 
+item.category === category
+
+);
 
 
 
@@ -246,15 +181,12 @@ item.category === category
 if(!articles.length){
 
 
+
 container.innerHTML = `
 
-
 <p>
-
-NO ARCHIVE FOUND
-
+NO WRITING FOUND
 </p>
-
 
 `;
 
@@ -267,12 +199,11 @@ return;
 
 
 
-
 container.innerHTML = `
 
 
 
-<h2 class="writing-title">
+<h2 class="archive-title">
 
 ${category}
 
@@ -285,19 +216,13 @@ ${category}
 <div class="writing-items">
 
 
-
 ${
 articles.map(
 (item,index)=>`
 
-
-
 <a
-
 href="/article.html?id=${item.id}"
-
 class="writing-item"
-
 >
 
 
@@ -319,11 +244,11 @@ String(index+1)
 <div class="writing-data">
 
 
-<h2>
+<h3>
 
 ${item.title}
 
-</h2>
+</h3>
 
 
 
@@ -355,8 +280,6 @@ ${item.year || ""}
 </a>
 
 
-
-
 `
 ).join("")
 }
@@ -373,46 +296,27 @@ ${item.year || ""}
 
 
 
+setTimeout(()=>{
 
 
-/* SMOOTH CAMERA */
-
-setTimeout(
-()=>{
-
-
-const target =
-document.getElementById(
+document
+.getElementById(
 "writing-list-section"
-);
-
-
-
-if(target){
-
-
-target.scrollIntoView({
+)
+.scrollIntoView({
 
 behavior:"smooth",
 
 block:"start"
 
-
 });
 
 
-}
-
-
-},
-300
-);
+},200);
 
 
 
 }
-
-
 
 
 
