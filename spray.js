@@ -1,123 +1,155 @@
 /* =========================================================
-   NIRMUKA SPRAY SYSTEM
 
-   Handle:
-   - Custom nozzle cursor
-   - Spray paint particles
-   - Canvas effect
-   - Mouse interaction
+   NIRMUKA SPRAY ENGINE
+
+   GLOBAL VISUAL EFFECT
+
+   Works
+   Artwork
+   Writings
+   Article
 
 ========================================================= */
 
 
-
 (function(){
-
 
 
 "use strict";
 
 
 
+function createSprayCanvas(){
 
 
-/* =========================================================
-   CREATE CANVAS
-========================================================= */
+
+if(
+document.getElementById(
+"nirmuka-spray-canvas"
+)
+){
+
+return;
+
+}
+
+
 
 
 const canvas =
-    document.createElement(
-        "canvas"
-    );
+document.createElement(
+"canvas"
+);
+
 
 
 canvas.id =
-    "spray-canvas";
+"nirmuka-spray-canvas";
+
+
+
+canvas.style.position =
+"fixed";
+
+
+canvas.style.inset =
+"0";
+
+
+
+canvas.style.width =
+"100%";
+
+
+
+canvas.style.height =
+"100%";
+
+
+
+canvas.style.pointerEvents =
+"none";
+
+
+
+canvas.style.zIndex =
+"9999";
+
+
+
+canvas.style.mixBlendMode =
+"screen";
 
 
 
 document.body.appendChild(
-    canvas
+canvas
 );
+
+
+
+
+return canvas;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function spray(){
+
+
+
+const canvas =
+createSprayCanvas();
+
+
+
+if(!canvas){
+
+return;
+
+}
+
+
 
 
 
 const ctx =
-    canvas.getContext(
-        "2d"
-    );
-
-
-
-
-
-/* =========================================================
-   CREATE NOZZLE CURSOR
-========================================================= */
-
-
-const nozzle =
-    document.createElement(
-        "div"
-    );
-
-
-nozzle.className =
-    "spray-nozzle";
-
-
-
-nozzle.innerHTML = `
-
-
-<div class="nozzle-top"></div>
-
-
-<div class="nozzle-body"></div>
-
-
-`;
-
-
-
-document.body.appendChild(
-    nozzle
+canvas.getContext(
+"2d"
 );
 
-
-
-
-
-
-
-
-/* =========================================================
-   RESIZE CANVAS
-========================================================= */
 
 
 function resize(){
 
 
-    canvas.width =
-        window.innerWidth;
+canvas.width =
+window.innerWidth;
 
 
-    canvas.height =
-        window.innerHeight;
+canvas.height =
+window.innerHeight;
 
 
 }
 
 
+
 resize();
 
 
-
 window.addEventListener(
-    "resize",
-    resize
+"resize",
+resize
 );
 
 
@@ -125,32 +157,7 @@ window.addEventListener(
 
 
 
-
-/* =========================================================
-   PARTICLE SYSTEM
-========================================================= */
-
-
-const particles = [];
-
-
-
-let mouseX =
-    window.innerWidth / 2;
-
-
-let mouseY =
-    window.innerHeight / 2;
-
-
-
-let spraying =
-    false;
-
-
-
-let lastSpray =
-    0;
+const particles=[];
 
 
 
@@ -158,71 +165,73 @@ let lastSpray =
 
 
 
-function createParticle(
-    x,
-    y
+function createParticle(){
+
+
+
+particles.push({
+
+
+x:
+Math.random()
+*
+canvas.width,
+
+
+y:
+Math.random()
+*
+canvas.height,
+
+
+size:
+Math.random()
+*
+80
++
+20,
+
+
+alpha:
+Math.random()
+*
+0.15,
+
+
+speed:
+Math.random()
+*
+0.5
++
+0.2,
+
+
+angle:
+Math.random()
+*
+Math.PI
+*
+2
+
+
+
+});
+
+
+
+}
+
+
+
+
+
+for(
+let i=0;
+i<35;
+i++
 ){
 
-
-    const angle =
-        Math.random()
-        *
-        Math.PI
-        *
-        2;
-
-
-
-    const speed =
-        Math.random()
-        *
-        4
-        +
-        1;
-
-
-
-    particles.push({
-
-
-        x:x,
-
-        y:y,
-
-
-        vx:
-            Math.cos(angle)
-            *
-            speed,
-
-
-        vy:
-            Math.sin(angle)
-            *
-            speed,
-
-
-
-        size:
-            Math.random()
-            *
-            3
-            +
-            .5,
-
-
-
-        life:
-            80
-            +
-            Math.random()
-            *
-            80
-
-
-    });
-
-
+createParticle();
 
 }
 
@@ -233,296 +242,146 @@ function createParticle(
 
 
 
-
-function sprayBurst(
-    x,
-    y
-){
-
-
-
-    for(
-        let i=0;
-        i<45;
-        i++
-    ){
-
-
-        createParticle(
-            x,
-            y
-        );
-
-
-    }
-
-
-
-}
-
-
-
-
-
-
-
-/* =========================================================
-   DRAW LOOP
-========================================================= */
 
 
 function animate(){
 
 
 
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
+ctx.clearRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+
+
+particles.forEach(
+p=>{
+
+
+ctx.beginPath();
+
+
+
+ctx.arc(
+p.x,
+p.y,
+p.size,
+0,
+Math.PI*2
+);
+
+
+
+ctx.fillStyle =
+`rgba(
+255,
+255,
+255,
+${p.alpha}
+)`;
+
+
+
+ctx.fill();
 
 
 
 
-    particles.forEach(
-        (particle,index)=>{
-
-
-            particle.x +=
-                particle.vx;
-
-
-
-            particle.y +=
-                particle.vy;
+p.x +=
+Math.cos(
+p.angle
+)
+*
+p.speed;
 
 
 
-            particle.life--;
-
-
-
-            ctx.beginPath();
-
-
-
-            ctx.arc(
-                particle.x,
-                particle.y,
-                particle.size,
-                0,
-                Math.PI*2
-            );
-
-
-
-            ctx.fillStyle =
-                `rgba(245,245,235,${particle.life/150})`;
-
-
-
-            ctx.fill();
+p.y +=
+Math.sin(
+p.angle
+)
+*
+p.speed;
 
 
 
 
+if(
+p.x < -100 ||
+p.x > canvas.width+100 ||
+p.y < -100 ||
+p.y > canvas.height+100
+){
 
-            if(
-                particle.life <= 0
-            ){
-
-
-                particles.splice(
-                    index,
-                    1
-                );
-
-
-            }
+p.x =
+Math.random()
+*
+canvas.width;
 
 
-
-        }
-    );
-
-
-
-    requestAnimationFrame(
-        animate
-    );
+p.y =
+Math.random()
+*
+canvas.height;
 
 
 }
+
+
+
+});
+
+
+requestAnimationFrame(
+animate
+);
+
+
+
+}
+
 
 
 animate();
 
 
 
-
-
-
-
-
-/* =========================================================
-   MOUSE MOVE
-========================================================= */
-
-
-document.addEventListener(
-    "mousemove",
-    event=>{
-
-
-        mouseX =
-            event.clientX;
-
-
-
-        mouseY =
-            event.clientY;
-
-
-
-
-        nozzle.style.left =
-            `${mouseX}px`;
-
-
-
-        nozzle.style.top =
-            `${mouseY}px`;
-
-
-
-    }
-
-);
-
-
-
-
-
-
-
-/* =========================================================
-   SPRAY ACTION
-
-   CLICK HOLD
-
-========================================================= */
-
-
-document.addEventListener(
-    "mousedown",
-    event=>{
-
-
-        if(
-            event.button !== 0
-        ){
-
-            return;
-
-        }
-
-
-
-        spraying = true;
-
-
-
-        nozzle.classList.add(
-            "active"
-        );
-
-
-
-    }
-
-);
-
-
-
-
-
-document.addEventListener(
-    "mouseup",
-    ()=>{
-
-
-        spraying = false;
-
-
-
-        nozzle.classList.remove(
-            "active"
-        );
-
-
-    }
-
-);
-
-
-
-
-
-
-
-/* =========================================================
-   SPRAY LOOP
-========================================================= */
-
-
-function sprayLoop(
-    time
-){
-
-
-
-    if(
-        spraying
-    ){
-
-
-
-        if(
-            time-lastSpray > 30
-        ){
-
-
-            sprayBurst(
-                mouseX,
-                mouseY
-            );
-
-
-            lastSpray =
-                time;
-
-
-        }
-
-
-    }
-
-
-
-    requestAnimationFrame(
-        sprayLoop
-    );
-
-
 }
 
 
-requestAnimationFrame(
-    sprayLoop
+
+
+
+
+
+/* START */
+
+
+
+
+if(
+document.readyState ===
+"loading"
+){
+
+
+document.addEventListener(
+"DOMContentLoaded",
+spray
 );
 
 
+}
+else{
+
+
+spray();
+
+
+}
 
 
 
