@@ -1,25 +1,32 @@
 /* =========================================================
-   NIRMUKA WRITINGS ARCHIVE SYSTEM
+   NIRMUKA WRITINGS SYSTEM
 
-   Fungsi:
-   - membuka halaman writings
-   - membaca writings.json
-   - filter kategori
-   - menampilkan daftar tulisan
-   - menuju halaman artikel
+   Handle:
+   - Writing archive
+   - Category filter
+   - Article list
+   - Link to article page
 
 ========================================================= */
+
+
+(function(){
+
+
+"use strict";
 
 
 
 /* =========================================================
-   OPEN WRITINGS PAGE
+   OPEN WRITINGS ARCHIVE
 
-   Dipanggil oleh script.js
+   Dipanggil dari script.js
 
 ========================================================= */
 
-window.openWritingArchive = function () {
+
+window.openWritingArchive = function(){
+
 
 
     const content =
@@ -28,11 +35,15 @@ window.openWritingArchive = function () {
         );
 
 
-    if (!content) {
+
+    if(!content){
 
         return;
 
     }
+
+
+
 
 
 
@@ -58,6 +69,7 @@ window.openWritingArchive = function () {
 
 
 
+
             <header class="writings-header">
 
 
@@ -69,6 +81,7 @@ window.openWritingArchive = function () {
 
 
 
+
                 <h2>
 
                     WRITINGS
@@ -77,14 +90,14 @@ window.openWritingArchive = function () {
 
 
 
+
                 <p class="section-description">
 
-                    Sebuah ruang untuk menyimpan
-                    gagasan, refleksi, kritik,
-                    dan kegelisahan.
+                    Sebuah arsip pemikiran,
+                    refleksi, kegelisahan,
+                    dan catatan perjalanan intelektual.
 
                 </p>
-
 
 
             </header>
@@ -93,8 +106,6 @@ window.openWritingArchive = function () {
 
 
 
-
-            <!-- CATEGORY -->
 
             <div class="writing-categories">
 
@@ -111,7 +122,9 @@ window.openWritingArchive = function () {
                         PHILOSOPHY
                     </small>
 
+
                 </button>
+
 
 
 
@@ -126,6 +139,7 @@ window.openWritingArchive = function () {
                     <small>
                         THEOLOGY
                     </small>
+
 
                 </button>
 
@@ -144,6 +158,7 @@ window.openWritingArchive = function () {
                         NOTES
                     </small>
 
+
                 </button>
 
 
@@ -154,11 +169,12 @@ window.openWritingArchive = function () {
 
 
 
-            <!-- LIST -->
+
 
             <div
                 class="writing-list"
             >
+
 
                 <p class="writing-placeholder">
 
@@ -172,18 +188,22 @@ window.openWritingArchive = function () {
 
 
 
+
+
         </div>
 
 
     </section>
 
 
-
     `;
 
 
 
+
+
     loadWritingDatabase();
+
 
 
 };
@@ -194,8 +214,10 @@ window.openWritingArchive = function () {
 
 
 
+
+
 /* =========================================================
-   LOAD JSON DATABASE
+   LOAD DATABASE
 
 ========================================================= */
 
@@ -203,83 +225,99 @@ window.openWritingArchive = function () {
 function loadWritingDatabase(){
 
 
+
     fetch(
-        "/writings.json?v=20260822"
+        "/writings.json?v=1"
     )
 
 
-    .then(response => {
+    .then(
+        response=>{
 
 
-        if(
-            !response.ok
-        ){
-
-            throw new Error(
-                "writings.json tidak ditemukan"
-            );
-
-        }
+            if(!response.ok){
 
 
-        return response.json();
+                throw new Error(
+                    "writings.json tidak ditemukan"
+                );
 
 
-    })
-
-
-    .then(data => {
-
-
-        window.nirmukaWritings =
-            data;
+            }
 
 
 
-        activateWritingCategory();
+            return response.json();
 
-
-    })
-
-
-    .catch(error => {
-
-
-        console.error(
-            error
-        );
-
-
-        const list =
-            document.querySelector(
-                ".writing-list"
-            );
-
-
-        if(list){
-
-
-            list.innerHTML = `
-
-
-                <p class="writing-placeholder">
-
-                    FAILED TO LOAD ARCHIVE
-
-                </p>
-
-
-            `;
 
 
         }
+    )
 
 
-    });
+    .then(
+        data=>{
+
+
+            window.nirmukaWritingData =
+                data;
+
+
+
+            activateCategories();
+
+
+
+        }
+    )
+
+
+
+    .catch(
+        error=>{
+
+
+            console.error(
+                error
+            );
+
+
+
+            const list =
+                document.querySelector(
+                    ".writing-list"
+                );
+
+
+
+            if(list){
+
+
+                list.innerHTML = `
+
+
+                    <p class="writing-placeholder">
+
+                        ARCHIVE ERROR
+
+                    </p>
+
+
+                `;
+
+
+            }
+
+
+
+        }
+    );
 
 
 
 }
+
+
 
 
 
@@ -293,7 +331,8 @@ function loadWritingDatabase(){
 ========================================================= */
 
 
-function activateWritingCategory(){
+function activateCategories(){
+
 
 
     const buttons =
@@ -304,29 +343,23 @@ function activateWritingCategory(){
 
 
     buttons.forEach(
-        button => {
+        button=>{
 
 
             button.addEventListener(
                 "click",
-                function(){
+                ()=>{
 
 
 
                     const category =
-                        this.dataset.category;
-
-
-
-                    showWritingList(
-                        category
-                    );
+                        button.dataset.category;
 
 
 
 
                     buttons.forEach(
-                        item => {
+                        item=>{
 
 
                             item.classList.remove(
@@ -339,9 +372,17 @@ function activateWritingCategory(){
 
 
 
-                    this.classList.add(
+                    button.classList.add(
                         "active"
                     );
+
+
+
+
+                    showWritingList(
+                        category
+                    );
+
 
 
 
@@ -362,8 +403,9 @@ function activateWritingCategory(){
 
 
 
+
 /* =========================================================
-   SHOW WRITING LIST
+   SHOW ARTICLE LIST
 
 ========================================================= */
 
@@ -389,18 +431,20 @@ function showWritingList(
 
 
 
-    const writings =
-        window.nirmukaWritings
-        .filter(
-            item =>
-            item.category === category
+
+
+    const articles =
+        window.nirmukaWritingData.filter(
+            article=>
+                article.category === category
         );
 
 
 
 
+
     if(
-        writings.length === 0
+        articles.length === 0
     ){
 
 
@@ -409,7 +453,7 @@ function showWritingList(
 
             <p class="writing-placeholder">
 
-                NO WRITING AVAILABLE
+                NO ARCHIVE FOUND
 
             </p>
 
@@ -419,7 +463,9 @@ function showWritingList(
 
         return;
 
+
     }
+
 
 
 
@@ -432,11 +478,10 @@ function showWritingList(
 
         <div class="writing-category-title">
 
-
             ${category}
 
-
         </div>
+
 
 
 
@@ -445,19 +490,16 @@ function showWritingList(
         <div class="writing-items">
 
 
-
         ${
-            writings.map(
-                (item,index)=>`
-
+            articles.map(
+                (article,index)=>`
 
 
                 <a
 
-                    href="${item.link}"
+                    href="${article.link}"
 
                     class="writing-card"
-
 
                 >
 
@@ -481,20 +523,17 @@ function showWritingList(
 
                         <h3>
 
-
-                            ${item.title}
-
+                            ${article.title}
 
                         </h3>
 
 
 
 
+
                         <p>
 
-
-                            ${item.subtitle || ""}
-
+                            ${article.subtitle || ""}
 
                         </p>
 
@@ -505,13 +544,13 @@ function showWritingList(
                         <div class="writing-meta">
 
 
-                            ${item.type || ""}
+                            ${article.type || "ESSAY"}
 
 
                             ${
-                                item.year
+                                article.year
                                 ?
-                                " · " + item.year
+                                " · " + article.year
                                 :
                                 ""
                             }
@@ -529,11 +568,9 @@ function showWritingList(
                 </a>
 
 
-
                 `
             ).join("")
         }
-
 
 
         </div>
@@ -545,3 +582,10 @@ function showWritingList(
 
 
 }
+
+
+
+
+
+
+})();
