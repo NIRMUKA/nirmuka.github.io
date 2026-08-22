@@ -1,89 +1,177 @@
-/* =========================================================
-
+/* =====================================================
    NIRMUKA WRITINGS ENGINE
+   VERSION 1.0
 
-   STANDALONE ARCHIVE SYSTEM
+   Handle:
+   - Load writings database
+   - Category archive
+   - Writing list
+   - Detail navigation
 
-
-========================================================= */
+===================================================== */
 
 
 (function(){
 
-
 "use strict";
 
 
-
-let database = [];
-
+let writingsDatabase = [];
 
 
 
-
-document.addEventListener(
-"DOMContentLoaded",
-()=>{
-
-
-loadArchive();
+/* =====================================================
+   OPEN WRITINGS ARCHIVE
+===================================================== */
 
 
-});
+window.openWritingArchive = function(){
 
 
-
-
-
-
-
-
-function loadArchive(){
-
-
-
-fetch("/writings.json?v=50")
-
-.then(response=>{
-
-
-if(!response.ok){
-
-throw new Error(
-"JSON NOT FOUND"
+const content =
+document.getElementById(
+"content-container"
 );
 
+
+if(!content){
+return;
 }
 
 
-return response.json();
+
+content.innerHTML = `
 
 
-})
+<section class="page-section writings-page">
+
+
+<div class="section-inner">
+
+
+<a href="#"
+class="back-home">
+
+← BACK
+
+</a>
+
+
+
+<p class="work-number">
+
+ARCHIVE / WRITINGS
+
+</p>
+
+
+
+<h2>
+
+WRITINGS
+
+</h2>
+
+
+
+<div class="writing-category-menu">
+
+
+<button data-category="FILSAFAT">
+
+01
+
+<br>
+
+FILSAFAT
+
+</button>
+
+
+
+<button data-category="TEOLOGI">
+
+02
+
+<br>
+
+TEOLOGI
+
+</button>
+
+
+
+<button data-category="UMUM">
+
+03
+
+<br>
+
+UMUM
+
+</button>
+
+
+</div>
+
+
+
+
+<div id="writing-list">
+
+</div>
+
+
+
+</div>
+
+</section>
+
+
+`;
+
+
+
+loadWritings();
+
+
+};
+
+
+
+
+
+/* =====================================================
+   LOAD JSON
+===================================================== */
+
+
+function loadWritings(){
+
+
+fetch("/writings.json?v=1")
+
+
+.then(response=>response.json())
+
 
 .then(data=>{
 
 
-database=data;
-
-
-console.log(
-"WRITINGS DATABASE",
-database
-);
-
+writingsDatabase=data;
 
 
 activateCategory();
 
 
-
 })
+
 
 .catch(error=>{
 
 
 console.error(
+"WRITINGS ERROR",
 error
 );
 
@@ -91,7 +179,6 @@ error
 });
 
 
-
 }
 
 
@@ -99,20 +186,22 @@ error
 
 
 
-
+/* =====================================================
+   CATEGORY BUTTON
+===================================================== */
 
 
 function activateCategory(){
 
 
-
-document
-.querySelectorAll(
+const buttons =
+document.querySelectorAll(
 "[data-category]"
-)
+);
 
-.forEach(button=>{
 
+
+buttons.forEach(button=>{
 
 
 button.addEventListener(
@@ -120,10 +209,9 @@ button.addEventListener(
 ()=>{
 
 
-renderList(
+showCategory(
 button.dataset.category
 );
-
 
 
 });
@@ -140,75 +228,65 @@ button.dataset.category
 
 
 
+/* =====================================================
+   SHOW WRITING LIST
+===================================================== */
 
 
-function renderList(category){
+function showCategory(category){
 
 
 
-const container =
+const list =
 document.getElementById(
 "writing-list"
 );
 
 
 
-if(!container){
-
+if(!list){
 return;
-
 }
 
 
 
-
-
-
-
-const articles =
-database.filter(
-item=>
-
+const writings =
+writingsDatabase.filter(
+item =>
 item.category === category
-
 );
 
 
 
+if(writings.length===0){
 
 
+list.innerHTML=`
 
-if(!articles.length){
-
-
-
-container.innerHTML = `
-
-<p>
-NO WRITING FOUND
-</p>
+<h3>
+NO ARCHIVE FOUND
+</h3>
 
 `;
 
+
 return;
+
 
 }
 
 
 
 
-
-
-container.innerHTML = `
+list.innerHTML=`
 
 
 
-<h2 class="archive-title">
+<h3 class="writing-category-title">
 
 ${category}
 
-</h2>
-
+</h3>
 
 
 
@@ -217,12 +295,16 @@ ${category}
 
 
 ${
-articles.map(
+writings.map(
 (item,index)=>`
 
+
 <a
-href="/article.html?id=${item.id}"
+
 class="writing-item"
+
+href="/writing-detail.html?id=${item.id}"
+
 >
 
 
@@ -240,15 +322,14 @@ String(index+1)
 
 
 
-
 <div class="writing-data">
 
 
-<h3>
+<h2>
 
 ${item.title}
 
-</h3>
+</h2>
 
 
 
@@ -260,14 +341,13 @@ ${item.subtitle || ""}
 
 
 
-
 <span>
 
-${item.type || ""}
+${item.type}
 
 ·
 
-${item.year || ""}
+${item.year}
 
 </span>
 
@@ -285,7 +365,6 @@ ${item.year || ""}
 }
 
 
-
 </div>
 
 
@@ -294,29 +373,8 @@ ${item.year || ""}
 
 
 
-
-
-setTimeout(()=>{
-
-
-document
-.getElementById(
-"writing-list-section"
-)
-.scrollIntoView({
-
-behavior:"smooth",
-
-block:"start"
-
-});
-
-
-},200);
-
-
-
 }
+
 
 
 
