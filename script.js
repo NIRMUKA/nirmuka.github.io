@@ -78,7 +78,6 @@ function backToLanding() {
 
 /* =========================================================
    LOAD WORKS
-   CENTER-STAGE CAROUSEL
 ========================================================= */
 
 function loadWorks() {
@@ -141,16 +140,13 @@ function loadWorks() {
 
                     <div class="carousel-stage">
 
-                        <div
-                            class="carousel-track"
-                        ></div>
+                        <div class="carousel-track"></div>
 
                     </div>
 
 
 
                     <div class="carousel-information">
-
 
                         <p class="carousel-work-number">
                             WORK 01
@@ -163,7 +159,6 @@ function loadWorks() {
 
 
                         <p class="carousel-year"></p>
-
 
                     </div>
 
@@ -209,7 +204,7 @@ function loadWorks() {
 
 
 
-        fetch("/artworks.json?v=20260822-8")
+        fetch("/artworks.json?v=20260822-10")
 
         .then(response => {
 
@@ -287,12 +282,10 @@ function loadWorks() {
 
 
 /* =========================================================
-   INITIALIZE WORKS CAROUSEL
+   WORKS CAROUSEL
 ========================================================= */
 
-function initializeWorksCarousel(
-    artworks
-) {
+function initializeWorksCarousel(artworks) {
 
 
     const carousel =
@@ -367,6 +360,8 @@ function initializeWorksCarousel(
 
     let activeIndex = 0;
 
+    let pointerDown = false;
+
     let pointerStartX = 0;
 
     let pointerCurrentX = 0;
@@ -380,7 +375,7 @@ function initializeWorksCarousel(
 
 
     /* =====================================================
-       CREATE ALL ARTWORKS
+       CREATE ARTWORKS
     ===================================================== */
 
     artworks.forEach(
@@ -402,12 +397,12 @@ function initializeWorksCarousel(
 
 
             artwork.href =
-                `/artwork.html?id=${work.id}`;
+                `/artwork.html?id=${encodeURIComponent(work.id)}`;
 
 
             artwork.setAttribute(
                 "aria-label",
-                work.title
+                work.title || `Artwork ${index + 1}`
             );
 
 
@@ -417,7 +412,7 @@ function initializeWorksCarousel(
 
                     <img
                         src="${work.image}"
-                        alt="${work.title}"
+                        alt="${work.title || ""}"
                         draggable="false"
                     >
 
@@ -433,14 +428,15 @@ function initializeWorksCarousel(
             `;
 
 
-            /* =================================================
-               CLICK
 
-               ACTIVE:
-               open artwork detail
+            /* =================================================
+               CLICK BEHAVIOR
+
+               CENTER:
+               OPEN DETAIL IMMEDIATELY
 
                SIDE:
-               move it to center first
+               MOVE TO CENTER
             ================================================= */
 
             artwork.addEventListener(
@@ -448,29 +444,54 @@ function initializeWorksCarousel(
                 event => {
 
 
+                    event.preventDefault();
+
+
+                    /*
+                       A real drag just happened.
+                       Do not accidentally open artwork.
+                    */
+
                     if (
                         performance.now() <
                         suppressClickUntil
                     ) {
-
-                        event.preventDefault();
 
                         return;
 
                     }
 
 
+
+                    /*
+                       CLICK ACTIVE ARTWORK
+                       → OPEN DETAIL PAGE
+                    */
+
                     if (
-                        index !== activeIndex
+                        index === activeIndex
                     ) {
 
-                        event.preventDefault();
 
-                        setActive(
-                            index
-                        );
+                        window.location.href =
+                            `/artwork.html?id=${encodeURIComponent(work.id)}`;
+
+
+                        return;
 
                     }
+
+
+
+                    /*
+                       CLICK SIDE ARTWORK
+                       → MOVE TO CENTER
+                    */
+
+                    setActive(
+                        index
+                    );
+
 
                 }
             );
@@ -500,6 +521,7 @@ function initializeWorksCarousel(
 
     function normalizeIndex(index) {
 
+
         const total =
             artworks.length;
 
@@ -514,12 +536,10 @@ function initializeWorksCarousel(
 
 
     /* =====================================================
-       SET ACTIVE ARTWORK
+       SET ACTIVE
     ===================================================== */
 
-    function setActive(
-        newIndex
-    ) {
+    function setActive(newIndex) {
 
 
         activeIndex =
@@ -540,6 +560,7 @@ function initializeWorksCarousel(
             );
 
 
+
         slides.forEach(
             (slide, index) => {
 
@@ -557,9 +578,11 @@ function initializeWorksCarousel(
                 );
 
 
+
                 if (
                     index === activeIndex
                 ) {
+
 
                     slide.classList.add(
                         "is-active"
@@ -584,6 +607,7 @@ function initializeWorksCarousel(
                     index === previousIndex
                 ) {
 
+
                     slide.classList.add(
                         "is-prev"
                     );
@@ -601,6 +625,7 @@ function initializeWorksCarousel(
                     index === nextIndex
                 ) {
 
+
                     slide.classList.add(
                         "is-next"
                     );
@@ -616,6 +641,7 @@ function initializeWorksCarousel(
 
                 else {
 
+
                     slide.classList.add(
                         "is-hidden"
                     );
@@ -628,19 +654,21 @@ function initializeWorksCarousel(
 
                 }
 
+
             }
         );
 
 
 
         /* =================================================
-           CURRENT ARTWORK INFORMATION
+           UPDATE INFORMATION
         ================================================= */
 
         const work =
             artworks[
                 activeIndex
             ];
+
 
 
         if (counter) {
@@ -651,6 +679,7 @@ function initializeWorksCarousel(
         }
 
 
+
         if (workNumber) {
 
             workNumber.textContent =
@@ -659,27 +688,32 @@ function initializeWorksCarousel(
         }
 
 
+
         if (title) {
 
             title.textContent =
-                work.title || "UNTITLED";
+                work.title ||
+                "UNTITLED";
 
         }
+
 
 
         if (year) {
 
             year.textContent =
-                work.year || "";
+                work.year ||
+                "";
 
         }
+
 
     }
 
 
 
     /* =====================================================
-       PREVIOUS
+       PREVIOUS / NEXT
     ===================================================== */
 
     function previousArtwork() {
@@ -690,11 +724,6 @@ function initializeWorksCarousel(
 
     }
 
-
-
-    /* =====================================================
-       NEXT
-    ===================================================== */
 
     function nextArtwork() {
 
@@ -718,6 +747,7 @@ function initializeWorksCarousel(
         );
 
     }
+
 
 
     if (nextButton) {
@@ -745,11 +775,14 @@ function initializeWorksCarousel(
                 "ArrowLeft"
             ) {
 
+
                 event.preventDefault();
+
 
                 previousArtwork();
 
             }
+
 
 
             if (
@@ -757,17 +790,23 @@ function initializeWorksCarousel(
                 "ArrowRight"
             ) {
 
+
                 event.preventDefault();
+
 
                 nextArtwork();
 
             }
 
 
+
             if (
                 event.key ===
                 "Enter"
             ) {
+
+
+                event.preventDefault();
 
 
                 const currentWork =
@@ -777,9 +816,10 @@ function initializeWorksCarousel(
 
 
                 window.location.href =
-                    `/artwork.html?id=${currentWork.id}`;
+                    `/artwork.html?id=${encodeURIComponent(currentWork.id)}`;
 
             }
+
 
         }
     );
@@ -787,7 +827,7 @@ function initializeWorksCarousel(
 
 
     /* =====================================================
-       MOUSE WHEEL / TRACKPAD
+       WHEEL / TRACKPAD
     ===================================================== */
 
     carousel.addEventListener(
@@ -799,6 +839,7 @@ function initializeWorksCarousel(
                 performance.now();
 
 
+
             if (
                 now -
                 lastWheelTime <
@@ -808,6 +849,7 @@ function initializeWorksCarousel(
                 return;
 
             }
+
 
 
             const movement =
@@ -823,6 +865,7 @@ function initializeWorksCarousel(
                 event.deltaY;
 
 
+
             if (
                 Math.abs(
                     movement
@@ -835,11 +878,13 @@ function initializeWorksCarousel(
             }
 
 
+
             event.preventDefault();
 
 
             lastWheelTime =
                 now;
+
 
 
             if (
@@ -856,6 +901,7 @@ function initializeWorksCarousel(
 
             }
 
+
         },
         {
             passive: false
@@ -865,12 +911,35 @@ function initializeWorksCarousel(
 
 
     /* =====================================================
-       DRAG / SWIPE
+       DRAG
+       NO POINTER CAPTURE
     ===================================================== */
 
     stage.addEventListener(
         "pointerdown",
         event => {
+
+
+            /*
+               Only primary / left pointer
+            */
+
+            if (
+                event.button !== undefined &&
+                event.button !== 0
+            ) {
+
+                return;
+
+            }
+
+
+            pointerDown =
+                true;
+
+
+            dragging =
+                false;
 
 
             pointerStartX =
@@ -881,34 +950,10 @@ function initializeWorksCarousel(
                 event.clientX;
 
 
-            dragging =
-                false;
-
-
             stage.classList.add(
                 "is-dragging"
             );
 
-
-            if (
-                stage.setPointerCapture
-            ) {
-
-                try {
-
-                    stage.setPointerCapture(
-                        event.pointerId
-                    );
-
-                }
-
-                catch (error) {
-
-                    /* ignore */
-
-                }
-
-            }
 
         }
     );
@@ -921,9 +966,7 @@ function initializeWorksCarousel(
 
 
             if (
-                !stage.classList.contains(
-                    "is-dragging"
-                )
+                !pointerDown
             ) {
 
                 return;
@@ -940,10 +983,9 @@ function initializeWorksCarousel(
                 pointerStartX;
 
 
+
             if (
-                Math.abs(
-                    distance
-                ) >
+                Math.abs(distance) >
                 10
             ) {
 
@@ -953,27 +995,31 @@ function initializeWorksCarousel(
             }
 
 
-            /* subtle physical movement */
 
-            track.style.setProperty(
-                "--drag-offset",
-                `${distance * .16}px`
-            );
+            if (
+                dragging
+            ) {
+
+
+                track.style.setProperty(
+                    "--drag-offset",
+                    `${distance * .16}px`
+                );
+
+
+            }
+
 
         }
     );
 
 
 
-    function finishDrag(
-        event
-    ) {
+    function finishDrag() {
 
 
         if (
-            !stage.classList.contains(
-                "is-dragging"
-            )
+            !pointerDown
         ) {
 
             return;
@@ -981,14 +1027,19 @@ function initializeWorksCarousel(
         }
 
 
-        const distance =
-            pointerCurrentX -
-            pointerStartX;
+        pointerDown =
+            false;
 
 
         stage.classList.remove(
             "is-dragging"
         );
+
+
+        const distance =
+            pointerCurrentX -
+            pointerStartX;
+
 
 
         track.style.setProperty(
@@ -997,13 +1048,21 @@ function initializeWorksCarousel(
         );
 
 
+
         if (
             dragging
         ) {
 
+
+            /*
+               Prevent click that fires
+               immediately after pointerup.
+            */
+
             suppressClickUntil =
                 performance.now() +
-                350;
+                300;
+
 
 
             if (
@@ -1023,33 +1082,14 @@ function initializeWorksCarousel(
 
             }
 
+
         }
+
 
 
         dragging =
             false;
 
-
-        if (
-            event &&
-            stage.releasePointerCapture
-        ) {
-
-            try {
-
-                stage.releasePointerCapture(
-                    event.pointerId
-                );
-
-            }
-
-            catch (error) {
-
-                /* ignore */
-
-            }
-
-        }
 
     }
 
@@ -1067,14 +1107,45 @@ function initializeWorksCarousel(
     );
 
 
+    stage.addEventListener(
+        "pointerleave",
+        event => {
+
+
+            /*
+               If pointer leaves during drag,
+               finish it safely.
+            */
+
+            if (
+                pointerDown &&
+                event.buttons === 0
+            ) {
+
+                finishDrag();
+
+            }
+
+
+        }
+    );
+
+
+    window.addEventListener(
+        "pointerup",
+        finishDrag
+    );
+
+
 
     /* =====================================================
-       INITIAL STATE
+       INITIALIZE
     ===================================================== */
 
     setActive(
         0
     );
+
 
 }
 
@@ -1240,7 +1311,7 @@ function loadAbout() {
 
 
 /* =========================================================
-   MENU CONTROL
+   MENU
 ========================================================= */
 
 menuLinks.forEach(link => {
@@ -1312,7 +1383,9 @@ document.addEventListener(
 
 
         if (!backButton) {
+
             return;
+
         }
 
 
@@ -1334,10 +1407,6 @@ document.addEventListener(
 (function () {
 
 
-    /* =====================================================
-       REMOVE OLD SPRAY ELEMENTS
-    ===================================================== */
-
     const oldCanvas =
         document.getElementById(
             "spray-canvas"
@@ -1349,6 +1418,7 @@ document.addEventListener(
         oldCanvas.remove();
 
     }
+
 
 
     const oldNozzle =
@@ -1366,7 +1436,7 @@ document.addEventListener(
 
 
     /* =====================================================
-       CREATE CANVAS
+       CANVAS
     ===================================================== */
 
     const canvas =
@@ -1392,7 +1462,7 @@ document.addEventListener(
 
 
     /* =====================================================
-       CREATE NOZZLE
+       NOZZLE
     ===================================================== */
 
     const nozzle =
@@ -1412,7 +1482,7 @@ document.addEventListener(
 
 
     /* =====================================================
-       CANVAS SIZE
+       RESIZE
     ===================================================== */
 
     let dpr = 1;
@@ -1476,7 +1546,7 @@ document.addEventListener(
 
 
     /* =====================================================
-       MOUSE STATE
+       STATE
     ===================================================== */
 
     let mouseX =
@@ -1508,7 +1578,7 @@ document.addEventListener(
 
 
     /* =====================================================
-       MOUSE MOVE
+       MOVE
     ===================================================== */
 
     document.addEventListener(
@@ -1532,6 +1602,7 @@ document.addEventListener(
                 event.clientY;
 
 
+
             const dx =
                 mouseX -
                 previousX;
@@ -1549,6 +1620,7 @@ document.addEventListener(
                 );
 
 
+
             nozzle.style.display =
                 "block";
 
@@ -1563,6 +1635,7 @@ document.addEventListener(
 
             nozzle.style.top =
                 mouseY + "px";
+
 
 
             if (
@@ -1590,9 +1663,6 @@ document.addEventListener(
 
     /* =====================================================
        LEFT CLICK = SPRAY
-
-       BUT:
-       carousel controls/drag do not spray
     ===================================================== */
 
     document.addEventListener(
@@ -1609,6 +1679,12 @@ document.addEventListener(
             }
 
 
+
+            /*
+               Do NOT spray while interacting
+               with carousel.
+            */
+
             if (
                 event.target.closest(
                     ".works-carousel"
@@ -1620,7 +1696,9 @@ document.addEventListener(
             }
 
 
-            spraying = true;
+
+            spraying =
+                true;
 
 
             nozzle.classList.add(
@@ -1649,7 +1727,8 @@ document.addEventListener(
         () => {
 
 
-            spraying = false;
+            spraying =
+                false;
 
 
             nozzle.classList.remove(
@@ -1667,7 +1746,8 @@ document.addEventListener(
         () => {
 
 
-            spraying = false;
+            spraying =
+                false;
 
 
             nozzle.classList.remove(
@@ -1681,7 +1761,7 @@ document.addEventListener(
 
 
     /* =====================================================
-       CREATE SPRAY PARTICLES
+       CREATE SPRAY
     ===================================================== */
 
     function createSpray(
@@ -1702,6 +1782,7 @@ document.addEventListener(
         const amount =
             Math.min(
                 70,
+
                 30 +
                 Math.floor(
                     speed * .65
@@ -1736,6 +1817,7 @@ document.addEventListener(
 
 
             let size;
+
 
 
             if (
@@ -1899,9 +1981,7 @@ document.addEventListener(
     let lastSpray = 0;
 
 
-    function continuousSpray(
-        time
-    ) {
+    function continuousSpray(time) {
 
 
         if (
@@ -1932,12 +2012,10 @@ document.addEventListener(
 
 
     /* =====================================================
-       DRAW LOOP
+       DRAW
     ===================================================== */
 
-    function draw(
-        time
-    ) {
+    function draw(time) {
 
 
         ctx.clearRect(
@@ -2009,6 +2087,7 @@ document.addEventListener(
             let alpha;
 
 
+
             if (
                 ratio > .30
             ) {
@@ -2026,8 +2105,7 @@ document.addEventListener(
                 alpha =
                     Math.max(
                         0,
-                        ratio *
-                        2.5
+                        ratio * 2.5
                     );
 
 
@@ -2073,7 +2151,7 @@ document.addEventListener(
 
 
     /* =====================================================
-       LEAVE WINDOW
+       LEAVE
     ===================================================== */
 
     document.addEventListener(
@@ -2142,18 +2220,10 @@ document.addEventListener(
 
 /* =========================================================
    NIRMUKA ARTWORK PROTECTION
-
-   ACTIVE:
-   - CAROUSEL / WORKS
-   - ARTWORK DETAIL
 ========================================================= */
 
 (function () {
 
-
-    /* =====================================================
-       CREATE WARNING
-    ===================================================== */
 
     const oldWarning =
         document.querySelector(
@@ -2166,6 +2236,7 @@ document.addEventListener(
         oldWarning.remove();
 
     }
+
 
 
     const warning =
@@ -2181,9 +2252,7 @@ document.addEventListener(
     warning.innerHTML = `
 
         <div class="theft-warning-text">
-
             THOU SHALL NOT STEAL !!
-
         </div>
 
     `;
@@ -2199,10 +2268,6 @@ document.addEventListener(
         null;
 
 
-
-    /* =====================================================
-       SHOW WARNING
-    ===================================================== */
 
     function showWarning() {
 
@@ -2248,7 +2313,7 @@ document.addEventListener(
             const protectedArtwork =
                 event.target.closest(
 
-                    ".carousel-artwork img, .art-card img, #art-image, .artwork-image img"
+                    ".carousel-artwork img, #art-image, .artwork-image img"
 
                 );
 
@@ -2274,7 +2339,7 @@ document.addEventListener(
 
 
     /* =====================================================
-       BLOCK DRAG
+       BLOCK IMAGE DRAG
     ===================================================== */
 
     document.addEventListener(
@@ -2285,7 +2350,7 @@ document.addEventListener(
             const protectedArtwork =
                 event.target.closest(
 
-                    ".carousel-artwork img, .art-card img, #art-image, .artwork-image img"
+                    ".carousel-artwork img, #art-image, .artwork-image img"
 
                 );
 
@@ -2308,7 +2373,7 @@ document.addEventListener(
 
 
     /* =====================================================
-       BLOCK SELECTION
+       BLOCK IMAGE SELECTION
     ===================================================== */
 
     document.addEventListener(
@@ -2319,7 +2384,7 @@ document.addEventListener(
             const protectedArtwork =
                 event.target.closest(
 
-                    ".carousel-artwork img, .art-card img, #art-image, .artwork-image img"
+                    ".carousel-artwork img, #art-image, .artwork-image img"
 
                 );
 
