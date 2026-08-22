@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+
+<head>
+
+
+<meta charset="UTF-8">
+
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+
+
+<title>
+NIRMUKA | Writing
+</title>
+
+
+
+<link rel="stylesheet" href="/style.css?v=1">
+
+
+<link rel="stylesheet" href="/writings.css?v=1">
+
+
+
+</head>
+
+
+
+<body>
+
+
+
+<main class="article-page">
+
+
+
+<div class="article-container">
+
+
+
+
+
+<a
+href="/index.html"
+class="back-home"
+>
+
+← BACK TO WRITINGS
+
+</a>
+
+
+
+
+
+
+
+<header class="article-header">
+
+
+
+<p
+class="work-number"
+>
+
+WRITINGS / ARCHIVE
+
+</p>
+
+
+
+
+
+<h1 id="article-title">
+
+Loading...
+
+</h1>
+
+
+
+
+
+<p
+id="article-subtitle"
+>
+
+</p>
+
+
+
+
+
+
+
+<div class="article-meta">
+
+
+<span id="article-category"></span>
+
+
+<span id="article-year"></span>
+
+
+<span id="article-type"></span>
+
+
+</div>
+
+
+
+
+
+</header>
+
+
+
+
+
+
+
+
+<article
+id="article-content"
+class="article-content"
+>
+
+
+</article>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+</main>
+
+
+
+
+
+
+
+
+
+<script>
+
+
+(async function(){
+
+
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+
+
+const id =
+params.get("id");
+
+
+
+
+
+if(!id){
+
+return;
+
+}
+
+
+
+
+
+
+/*
+LOAD WRITING DATABASE
+*/
+
+
+const response =
+await fetch(
+"/writings.json?v=1"
+);
+
+
+
+const writings =
+await response.json();
+
+
+
+
+
+
+const writing =
+writings.find(
+item =>
+item.id === id
+);
+
+
+
+
+
+
+if(!writing){
+
+document
+.getElementById(
+"article-content"
+)
+.innerHTML =
+
+"<h2>WRITING NOT FOUND</h2>";
+
+return;
+
+}
+
+
+
+
+
+
+
+
+
+/*
+METADATA
+*/
+
+
+
+document.title =
+writing.title +
+" | NIRMUKA";
+
+
+
+
+document
+.getElementById(
+"article-title"
+)
+.textContent =
+writing.title;
+
+
+
+
+document
+.getElementById(
+"article-subtitle"
+)
+.textContent =
+writing.subtitle || "";
+
+
+
+
+document
+.getElementById(
+"article-category"
+)
+.textContent =
+writing.category;
+
+
+
+
+document
+.getElementById(
+"article-year"
+)
+.textContent =
+writing.year;
+
+
+
+
+document
+.getElementById(
+"article-type"
+)
+.textContent =
+writing.type;
+
+
+
+
+
+
+
+
+
+/*
+LOAD CONTENT FILE
+*/
+
+
+const contentResponse =
+await fetch(
+writing.file
+);
+
+
+
+const content =
+await contentResponse.text();
+
+
+
+
+
+
+
+document
+.getElementById(
+"article-content"
+)
+.innerHTML =
+content;
+
+
+
+
+
+})();
+
+
+
+</script>
+
+
+
+
+
+
+</body>
+
+</html>
