@@ -13,6 +13,20 @@ const menuLinks = document.querySelectorAll(".main-menu a");
 
 function curtainTransition(callback) {
 
+    /*
+       Kalau halaman memiliki curtain,
+       jalankan transisi.
+
+       Kalau tidak ada curtain
+       (misalnya artwork.html),
+       callback tetap dijalankan.
+    */
+
+    if (!curtain) {
+        callback();
+        return;
+    }
+
     curtain.classList.add("active");
 
     setTimeout(() => {
@@ -22,7 +36,6 @@ function curtainTransition(callback) {
         curtain.classList.remove("active");
 
     }, 900);
-
 }
 
 
@@ -34,7 +47,9 @@ function backToLanding() {
 
     curtainTransition(() => {
 
-        content.innerHTML = "";
+        if (content) {
+            content.innerHTML = "";
+        }
 
         window.scrollTo({
             top: 0,
@@ -42,7 +57,6 @@ function backToLanding() {
         });
 
     });
-
 }
 
 
@@ -51,6 +65,8 @@ function backToLanding() {
 ===================================== */
 
 function loadWorks() {
+
+    if (!content) return;
 
     curtainTransition(() => {
 
@@ -83,19 +99,38 @@ function loadWorks() {
 
         fetch("artworks.json")
 
-        .then(response => response.json())
+        .then(response => {
+
+            if (!response.ok) {
+                throw new Error(
+                    "artworks.json gagal dimuat"
+                );
+            }
+
+            return response.json();
+
+        })
 
         .then(artworks => {
 
             const gallery =
-                document.querySelector(".works-gallery");
+                document.querySelector(
+                    ".works-gallery"
+                );
+
+            if (!gallery) return;
 
 
             artworks.forEach(work => {
 
-                gallery.innerHTML += `
+                const card =
+                    document.createElement("div");
 
-                <div class="art-card">
+                card.className =
+                    "art-card";
+
+
+                card.innerHTML = `
 
                     <a href="artwork.html?id=${work.id}">
 
@@ -114,9 +149,10 @@ function loadWorks() {
 
                     </a>
 
-                </div>
-
                 `;
+
+
+                gallery.appendChild(card);
 
             });
 
@@ -132,7 +168,6 @@ function loadWorks() {
         });
 
     });
-
 }
 
 
@@ -141,6 +176,8 @@ function loadWorks() {
 ===================================== */
 
 function loadWritings() {
+
+    if (!content) return;
 
     curtainTransition(() => {
 
@@ -175,7 +212,6 @@ function loadWritings() {
         `;
 
     });
-
 }
 
 
@@ -184,6 +220,8 @@ function loadWritings() {
 ===================================== */
 
 function loadAbout() {
+
+    if (!content) return;
 
     curtainTransition(() => {
 
@@ -248,12 +286,11 @@ function loadAbout() {
         `;
 
     });
-
 }
 
 
 /* =====================================
-   MENU CONTROL
+   MAIN MENU
 ===================================== */
 
 menuLinks.forEach(link => {
@@ -289,24 +326,27 @@ menuLinks.forEach(link => {
 
 
 /* =====================================
-   BACK BUTTON CONTROL
+   BACK BUTTON
 ===================================== */
 
 document.addEventListener(
     "click",
     event => {
 
-        if (
-            event.target.classList.contains(
-                "back-home"
-            )
-        ) {
+        const backButton =
+            event.target.closest(
+                ".back-home"
+            );
 
-            event.preventDefault();
 
-            backToLanding();
-
+        if (!backButton) {
+            return;
         }
+
+
+        event.preventDefault();
+
+        backToLanding();
 
     }
 );
@@ -319,29 +359,59 @@ document.addEventListener(
 (function () {
 
     /*
-       only desktop / mouse devices
+       Efek spray hanya untuk perangkat
+       dengan pointer/mouse presisi.
     */
 
-    if (
-        !window.matchMedia(
+    const finePointer =
+        window.matchMedia(
             "(pointer: fine)"
-        ).matches
-    ) {
+        );
 
+
+    if (!finePointer.matches) {
         return;
-
     }
 
 
     /* =====================================
-       CREATE SPRAY CANVAS
+       REMOVE OLD ELEMENTS
+       prevent duplicates
+    ===================================== */
+
+    const oldCanvas =
+        document.getElementById(
+            "spray-canvas"
+        );
+
+    if (oldCanvas) {
+        oldCanvas.remove();
+    }
+
+
+    const oldCursor =
+        document.querySelector(
+            ".spray-cursor"
+        );
+
+    if (oldCursor) {
+        oldCursor.remove();
+    }
+
+
+    /* =====================================
+       CREATE CANVAS
     ===================================== */
 
     const sprayCanvas =
-        document.createElement("canvas");
+        document.createElement(
+            "canvas"
+        );
+
 
     sprayCanvas.id =
         "spray-canvas";
+
 
     document.body.appendChild(
         sprayCanvas
@@ -349,18 +419,24 @@ document.addEventListener(
 
 
     const ctx =
-        sprayCanvas.getContext("2d");
+        sprayCanvas.getContext(
+            "2d"
+        );
 
 
     /* =====================================
-       CREATE SPRAY NOZZLE
+       CREATE NOZZLE
     ===================================== */
 
     const sprayCursor =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     sprayCursor.className =
         "spray-cursor";
+
 
     document.body.appendChild(
         sprayCursor
@@ -368,14 +444,10 @@ document.addEventListener(
 
 
     /* =====================================
-       SCREEN RESOLUTION
+       CANVAS RESOLUTION
     ===================================== */
 
-    let dpr =
-        Math.min(
-            window.devicePixelRatio || 1,
-            2
-        );
+    let dpr = 1;
 
 
     function resizeCanvas() {
@@ -388,13 +460,17 @@ document.addEventListener(
 
 
         sprayCanvas.width =
-            window.innerWidth *
-            dpr;
+            Math.floor(
+                window.innerWidth *
+                dpr
+            );
 
 
         sprayCanvas.height =
-            window.innerHeight *
-            dpr;
+            Math.floor(
+                window.innerHeight *
+                dpr
+            );
 
 
         sprayCanvas.style.width =
@@ -429,27 +505,39 @@ document.addEventListener(
 
 
     /* =====================================
-       MOUSE DATA
+       POINTER STATE
     ===================================== */
 
-    let mouseX = 0;
-    let mouseY = 0;
-
-    let previousX = 0;
-    let previousY = 0;
-
-    let mouseSpeed = 0;
-
-    let spraying = false;
-
-    let mouseVisible = false;
+    let mouseX =
+        window.innerWidth / 2;
 
 
-    const particles = [];
+    let mouseY =
+        window.innerHeight / 2;
+
+
+    let previousX =
+        mouseX;
+
+
+    let previousY =
+        mouseY;
+
+
+    let mouseSpeed =
+        0;
+
+
+    let spraying =
+        false;
+
+
+    const particles =
+        [];
 
 
     /* =====================================
-       MOVE
+       ALWAYS SHOW NOZZLE ON MOVE
     ===================================== */
 
     document.addEventListener(
@@ -459,12 +547,14 @@ document.addEventListener(
             previousX =
                 mouseX;
 
+
             previousY =
                 mouseY;
 
 
             mouseX =
                 event.clientX;
+
 
             mouseY =
                 event.clientY;
@@ -487,6 +577,20 @@ document.addEventListener(
                 );
 
 
+            /*
+               Ini bagian penting:
+               setiap mouse bergerak,
+               nozzle DIPAKSA muncul lagi.
+
+               Jadi Works / About /
+               Writings tidak bisa
+               membuatnya hilang.
+            */
+
+            sprayCursor.style.opacity =
+                "1";
+
+
             sprayCursor.style.left =
                 mouseX + "px";
 
@@ -495,22 +599,7 @@ document.addEventListener(
                 mouseY + "px";
 
 
-            if (
-                !mouseVisible
-            ) {
-
-                sprayCursor.style.opacity =
-                    "1";
-
-                mouseVisible =
-                    true;
-
-            }
-
-
-            if (
-                spraying
-            ) {
+            if (spraying) {
 
                 createSpray(
                     mouseX,
@@ -520,28 +609,25 @@ document.addEventListener(
 
             }
 
+        },
+        {
+            passive: true
         }
     );
 
 
     /* =====================================
-       PRESS MOUSE
+       LEFT CLICK = START SPRAY
     ===================================== */
 
     document.addEventListener(
         "mousedown",
         event => {
 
-            /*
-               left click only
-            */
-
             if (
                 event.button !== 0
             ) {
-
                 return;
-
             }
 
 
@@ -555,8 +641,8 @@ document.addEventListener(
 
 
             createSpray(
-                mouseX,
-                mouseY,
+                event.clientX,
+                event.clientY,
                 0
             );
 
@@ -565,7 +651,7 @@ document.addEventListener(
 
 
     /* =====================================
-       RELEASE MOUSE
+       RELEASE = STOP
     ===================================== */
 
     document.addEventListener(
@@ -584,6 +670,10 @@ document.addEventListener(
     );
 
 
+    /* =====================================
+       WINDOW LOSES FOCUS
+    ===================================== */
+
     window.addEventListener(
         "blur",
         () => {
@@ -601,7 +691,7 @@ document.addEventListener(
 
 
     /* =====================================
-       CREATE SPRAY
+       CREATE SPRAY PARTICLES
     ===================================== */
 
     function createSpray(
@@ -610,25 +700,20 @@ document.addEventListener(
         speed = 0
     ) {
 
-        /*
-           moving faster makes
-           the spray wider
-        */
-
         const spread =
-            30 +
+            31 +
             Math.min(
-                speed * .8,
+                speed * .65,
                 25
             );
 
 
         const amount =
             Math.min(
-                65,
-                25 +
+                58,
+                24 +
                 Math.floor(
-                    speed * .8
+                    speed * .55
                 )
             );
 
@@ -645,30 +730,12 @@ document.addEventListener(
                 2;
 
 
-            /*
-               nonlinear distribution:
-               more particles stay
-               near the nozzle
-            */
-
             const distance =
                 Math.pow(
                     Math.random(),
-                    1.8
+                    1.85
                 ) *
                 spread;
-
-
-            const xPosition =
-                x +
-                Math.cos(angle) *
-                distance;
-
-
-            const yPosition =
-                y +
-                Math.sin(angle) *
-                distance;
 
 
             const random =
@@ -678,18 +745,14 @@ document.addEventListener(
             let size;
 
 
-            /*
-               occasional large paint dots
-            */
-
             if (
-                random > .96
+                random > .965
             ) {
 
                 size =
-                    2.8 +
+                    2.6 +
                     Math.random() *
-                    3.2;
+                    3;
 
             }
 
@@ -698,9 +761,9 @@ document.addEventListener(
             ) {
 
                 size =
-                    1.2 +
+                    1.1 +
                     Math.random() *
-                    1.7;
+                    1.6;
 
             }
 
@@ -715,7 +778,7 @@ document.addEventListener(
 
 
             const life =
-                85 +
+                95 +
                 Math.random() *
                 100;
 
@@ -723,10 +786,14 @@ document.addEventListener(
             particles.push({
 
                 x:
-                    xPosition,
+                    x +
+                    Math.cos(angle) *
+                    distance,
 
                 y:
-                    yPosition,
+                    y +
+                    Math.sin(angle) *
+                    distance,
 
                 size:
                     size,
@@ -739,29 +806,27 @@ document.addEventListener(
 
                 driftX:
                     (Math.random() - .5) *
-                    .08,
+                    .06,
 
                 driftY:
                     (Math.random() - .5) *
-                    .08
+                    .06
 
             });
 
         }
 
 
-        /*
-           denser paint in middle
-        */
+        /* dense paint in center */
 
         for (
             let i = 0;
-            i < 7;
+            i < 6;
             i++
         ) {
 
             const life =
-                90 +
+                100 +
                 Math.random() *
                 100;
 
@@ -771,17 +836,17 @@ document.addEventListener(
                 x:
                     x +
                     (Math.random() - .5) *
-                    10,
+                    9,
 
                 y:
                     y +
                     (Math.random() - .5) *
-                    10,
+                    9,
 
                 size:
-                    1.4 +
+                    1.3 +
                     Math.random() *
-                    2.2,
+                    2,
 
                 life:
                     life,
@@ -803,10 +868,10 @@ document.addEventListener(
 
 
     /* =====================================
-       HOLD CLICK = CONTINUOUS SPRAY
+       CONTINUOUS SPRAY
     ===================================== */
 
-    let previousSprayTime =
+    let lastSprayTime =
         0;
 
 
@@ -817,8 +882,8 @@ document.addEventListener(
         if (
             spraying &&
             time -
-            previousSprayTime >
-            25
+            lastSprayTime >
+            27
         ) {
 
             createSpray(
@@ -828,7 +893,7 @@ document.addEventListener(
             );
 
 
-            previousSprayTime =
+            lastSprayTime =
                 time;
 
         }
@@ -837,7 +902,7 @@ document.addEventListener(
 
 
     /* =====================================
-       DRAW SPRAY
+       DRAW PARTICLES
     ===================================== */
 
     function draw(
@@ -871,7 +936,7 @@ document.addEventListener(
 
 
             particle.life -=
-                .65;
+                .6;
 
 
             if (
@@ -896,7 +961,7 @@ document.addEventListener(
                 particle.driftY;
 
 
-            const lifeRatio =
+            const ratio =
                 particle.life /
                 particle.maxLife;
 
@@ -904,28 +969,22 @@ document.addEventListener(
             let alpha;
 
 
-            /*
-               paint stays strong
-               for most of its life
-            */
-
             if (
-                lifeRatio >
-                .30
+                ratio > .28
             ) {
 
                 alpha =
-                    .70 +
-                    Math.random() *
-                    .18;
+                    .72;
 
             }
 
             else {
 
                 alpha =
-                    lifeRatio *
-                    2.2;
+                    Math.max(
+                        0,
+                        ratio * 2.5
+                    );
 
             }
 
@@ -943,12 +1002,7 @@ document.addEventListener(
 
 
             ctx.fillStyle =
-                `rgba(
-                    245,
-                    245,
-                    240,
-                    ${alpha}
-                )`;
+                `rgba(245,245,240,${alpha})`;
 
 
             ctx.fill();
@@ -969,7 +1023,7 @@ document.addEventListener(
 
 
     /* =====================================
-       CURSOR LEAVES WINDOW
+       POINTER LEAVES BROWSER
     ===================================== */
 
     document.addEventListener(
@@ -979,8 +1033,10 @@ document.addEventListener(
             sprayCursor.style.opacity =
                 "0";
 
+
             spraying =
                 false;
+
 
             sprayCursor.classList.remove(
                 "spraying"
@@ -990,9 +1046,29 @@ document.addEventListener(
     );
 
 
+    /* =====================================
+       POINTER RETURNS
+    ===================================== */
+
     document.addEventListener(
         "mouseenter",
-        () => {
+        event => {
+
+            mouseX =
+                event.clientX;
+
+
+            mouseY =
+                event.clientY;
+
+
+            sprayCursor.style.left =
+                mouseX + "px";
+
+
+            sprayCursor.style.top =
+                mouseY + "px";
+
 
             sprayCursor.style.opacity =
                 "1";
