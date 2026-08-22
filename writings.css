@@ -870,3 +870,327 @@ pointer-events:none;
 
 
 }
+
+/* =====================================================
+   ARCHIVE ROOM STYLE
+===================================================== */
+
+
+
+.writing-category-menu {
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(3,1fr);
+
+
+    gap:35px;
+
+
+}
+
+
+
+
+
+
+.writing-category-menu button {
+
+
+    position:relative;
+
+
+    height:260px;
+
+
+    background:
+
+    rgba(255,255,255,.02);
+
+
+    border:
+
+    1px solid rgba(255,255,255,.25);
+
+
+    color:white;
+
+
+    cursor:pointer;
+
+
+    overflow:hidden;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    justify-content:center;
+
+
+    align-items:flex-start;
+
+
+    padding:35px;
+
+
+    text-align:left;
+
+
+    transition:.6s;
+
+
+}
+
+
+
+
+
+
+
+
+/* NUMBER */
+
+
+.archive-number {
+
+
+    position:absolute;
+
+
+    top:20px;
+
+
+    right:25px;
+
+
+    font-family:
+
+    "Times New Roman",
+    serif;
+
+
+    font-size:80px;
+
+
+    color:
+
+    rgba(255,255,255,.08);
+
+
+    transition:.5s;
+
+
+}
+
+
+
+
+
+
+
+
+/* TITLE */
+
+
+.archive-name {
+
+
+    font-family:
+
+    "Times New Roman",
+    serif;
+
+
+    font-size:48px;
+
+
+    font-weight:400;
+
+
+    letter-spacing:1px;
+
+
+}
+
+
+
+
+
+
+
+
+.archive-label {
+
+
+    margin-top:20px;
+
+
+    font-family:
+
+    Arial,
+    sans-serif;
+
+
+    font-size:10px;
+
+
+    letter-spacing:5px;
+
+
+    color:
+
+    rgba(255,255,255,.5);
+
+
+}
+
+
+
+
+
+
+
+
+
+/* HOVER */
+
+
+.writing-category-menu button:hover {
+
+
+    transform:
+
+    translateY(-15px);
+
+
+    background:
+
+    rgba(255,255,255,.08);
+
+
+    border-color:white;
+
+
+}
+
+
+
+
+
+
+
+.writing-category-menu button:hover
+.archive-number {
+
+
+    color:
+
+    rgba(255,255,255,.25);
+
+
+    transform:
+
+    scale(1.15);
+
+
+}
+
+
+
+
+
+
+
+.writing-category-menu button::after {
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    bottom:0;
+
+
+    left:0;
+
+
+    width:100%;
+
+
+    height:2px;
+
+
+    background:white;
+
+
+    transform:
+
+    scaleX(0);
+
+
+    transform-origin:left;
+
+
+    transition:.5s;
+
+
+}
+
+
+
+
+
+.writing-category-menu button:hover::after {
+
+
+    transform:
+
+    scaleX(1);
+
+
+}
+
+
+
+
+
+
+
+
+
+/* RESPONSIVE */
+
+
+@media(max-width:900px){
+
+
+.writing-category-menu {
+
+
+grid-template-columns:1fr;
+
+
+}
+
+
+
+.writing-category-menu button {
+
+
+height:200px;
+
+
+}
+
+
+}
