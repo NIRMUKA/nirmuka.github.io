@@ -1,45 +1,32 @@
 /* =====================================================
-
- NIRMUKA WRITINGS CORE STYLE
-
+   NIRMUKA WRITINGS
+   ARCHIVE EXPERIENCE
 ===================================================== */
 
 
-*{
 
-box-sizing:border-box;
-
-}
-
-
-html{
+/* ===============================
+   MAIN PAGE
+=============================== */
+html {
 
 scroll-behavior:smooth;
 
 }
 
-
-body.writing-page-body{
-
-
-margin:0;
-
-background:#050505;
-
-color:white;
-
-}
+.writings-page {
 
 
+    min-height:300vh;
 
 
+    background:#050505;
 
-.writings-container{
+
+    color:white;
 
 
-width:min(1200px,90%);
-
-margin:auto;
+    padding:0 30px;
 
 
 }
@@ -47,117 +34,13 @@ margin:auto;
 
 
 
+.writings-container {
 
-.writing-intro{
 
+    max-width:1200px;
 
-height:100vh;
 
-
-display:flex;
-
-flex-direction:column;
-
-justify-content:center;
-
-align-items:center;
-
-text-align:center;
-
-
-}
-
-
-
-
-
-.back-home{
-
-
-position:absolute;
-
-top:40px;
-
-left:50px;
-
-
-color:white;
-
-text-decoration:none;
-
-
-font-family:Arial,sans-serif;
-
-font-size:11px;
-
-letter-spacing:5px;
-
-
-}
-
-
-
-
-
-.work-number{
-
-
-font-family:Arial,sans-serif;
-
-font-size:11px;
-
-letter-spacing:8px;
-
-opacity:.5;
-
-
-}
-
-
-
-
-
-.writing-intro h1{
-
-
-font-family:"Times New Roman",serif;
-
-
-font-size:clamp(
-80px,
-14vw,
-180px
-);
-
-
-font-weight:400;
-
-
-margin:40px 0;
-
-
-}
-
-
-
-
-
-.writing-intro p{
-
-
-font-family:"Times New Roman",serif;
-
-
-font-size:22px;
-
-
-max-width:650px;
-
-
-line-height:1.8;
-
-
-opacity:.7;
+    margin:auto;
 
 
 }
@@ -168,21 +51,52 @@ opacity:.7;
 
 
 
+/* ===============================
+   INTRO SECTION
+=============================== */
 
 
-/* ARCHIVE */
+.writing-intro {
 
 
-.writing-archive{
+    min-height:100vh;
 
 
-height:100vh;
+    display:flex;
 
 
-display:flex;
+    flex-direction:column;
 
 
-align-items:center;
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    text-align:center;
+
+
+}
+
+
+
+
+.writing-intro .work-number {
+
+
+    font-family:Arial,sans-serif;
+
+
+    font-size:11px;
+
+
+    letter-spacing:6px;
+
+
+    color:
+
+    rgba(255,255,255,.45);
 
 
 }
@@ -191,66 +105,32 @@ align-items:center;
 
 
 
-.writing-category-menu{
+
+.writing-intro h1 {
 
 
-display:grid;
+    font-family:
+
+    "Times New Roman",
+    serif;
 
 
-grid-template-columns:
-repeat(3,1fr);
+    font-size:
+
+    clamp(
+        80px,
+        12vw,
+        160px
+    );
 
 
-gap:40px;
+    font-weight:400;
 
 
-width:100%;
+    margin:40px 0;
 
 
-}
-
-
-
-
-
-.writing-category-menu button{
-
-
-height:330px;
-
-
-background:
-
-rgba(255,255,255,.03);
-
-
-border:
-
-1px solid rgba(255,255,255,.2);
-
-
-color:white;
-
-
-cursor:pointer;
-
-
-padding:40px;
-
-
-text-align:left;
-
-
-display:flex;
-
-
-flex-direction:column;
-
-
-justify-content:center;
-
-
-position:relative;
+    letter-spacing:2px;
 
 
 }
@@ -258,64 +138,27 @@ position:relative;
 
 
 
-
-.archive-number{
-
-
-position:absolute;
+.writing-intro p:last-child {
 
 
-right:25px;
-
-top:10px;
+    max-width:650px;
 
 
-font-size:120px;
+    font-family:
+
+    "Times New Roman",
+    serif;
 
 
-font-family:"Times New Roman",serif;
+    font-size:22px;
 
 
-opacity:.08;
+    line-height:1.8;
 
 
-}
+    color:
 
-
-
-
-
-.archive-name{
-
-
-font-family:"Times New Roman",serif;
-
-
-font-size:50px;
-
-
-font-weight:400;
-
-
-}
-
-
-
-
-
-.archive-label{
-
-
-margin-top:20px;
-
-
-font-size:10px;
-
-
-letter-spacing:5px;
-
-
-opacity:.5;
+    rgba(255,255,255,.65);
 
 
 }
@@ -328,30 +171,21 @@ opacity:.5;
 
 
 
-/* LIST */
+/* ===============================
+   ARCHIVE ROOM
+=============================== */
 
 
-.writing-list-section{
+.writing-archive {
 
 
-min-height:100vh;
+    min-height:100vh;
 
 
-padding:150px 0;
+    display:flex;
 
 
-}
-
-
-
-
-
-#writing-list{
-
-
-width:min(850px,100%);
-
-margin:auto;
+    align-items:center;
 
 
 }
@@ -360,51 +194,22 @@ margin:auto;
 
 
 
-.archive-title{
+
+.writing-category-menu {
 
 
-text-align:center;
+    width:100%;
 
 
-font-family:"Times New Roman",serif;
+    display:grid;
 
 
-font-size:70px;
+    grid-template-columns:
+
+    repeat(3,1fr);
 
 
-font-weight:400;
-
-
-margin-bottom:80px;
-
-
-}
-
-
-
-
-
-.writing-item{
-
-
-display:flex;
-
-
-gap:40px;
-
-
-padding:45px 0;
-
-
-border-bottom:
-
-1px solid rgba(255,255,255,.15);
-
-
-text-decoration:none;
-
-
-color:white;
+    gap:35px;
 
 
 }
@@ -413,16 +218,80 @@ color:white;
 
 
 
-.writing-number{
 
 
-font-family:Arial,sans-serif;
+
+.writing-category-menu button {
 
 
-letter-spacing:4px;
+    position:relative;
 
 
-opacity:.5;
+    height:300px;
+
+
+    padding:40px;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    justify-content:center;
+
+
+    align-items:flex-start;
+
+
+    text-align:left;
+
+
+    background:
+
+    rgba(255,255,255,.02);
+
+
+    border:
+
+    1px solid rgba(255,255,255,.25);
+
+
+    color:white;
+
+
+    cursor:pointer;
+
+
+    overflow:hidden;
+
+
+    transition:
+
+    .6s ease;
+
+
+}
+
+
+
+
+
+.writing-category-menu button:hover {
+
+
+    transform:
+
+    translateY(-20px);
+
+
+    background:
+
+    rgba(255,255,255,.08);
+
+
+    border-color:white;
 
 
 }
@@ -431,19 +300,57 @@ opacity:.5;
 
 
 
-.writing-data h3{
 
 
-font-family:"Times New Roman",serif;
 
 
-font-size:38px;
+/* NUMBER */
 
 
-font-weight:400;
+.archive-number {
 
 
-margin:0 0 20px;
+    position:absolute;
+
+
+    right:30px;
+
+
+    top:20px;
+
+
+    font-family:
+
+    "Times New Roman",
+    serif;
+
+
+    font-size:100px;
+
+
+    color:
+
+    rgba(255,255,255,.08);
+
+
+    transition:.5s;
+
+
+}
+
+
+
+
+.writing-category-menu button:hover
+.archive-number {
+
+
+    color:
+
+    rgba(255,255,255,.25);
+
+
+    transform:scale(1.2);
 
 
 }
@@ -452,16 +359,53 @@ margin:0 0 20px;
 
 
 
-.writing-data p{
 
 
-font-family:"Times New Roman",serif;
+/* TITLE */
 
 
-font-size:20px;
+.archive-name {
 
 
-opacity:.6;
+    font-family:
+
+    "Times New Roman",
+    serif;
+
+
+    font-size:48px;
+
+
+    font-weight:400;
+
+
+}
+
+
+
+
+
+
+.archive-label {
+
+
+    margin-top:20px;
+
+
+    font-family:
+
+    Arial,sans-serif;
+
+
+    font-size:10px;
+
+
+    letter-spacing:5px;
+
+
+    color:
+
+    rgba(255,255,255,.45);
 
 
 }
@@ -470,36 +414,604 @@ opacity:.6;
 
 
 
-.writing-data span{
 
 
-font-family:Arial,sans-serif;
 
 
-font-size:10px;
+/* LINE EFFECT */
 
 
-letter-spacing:4px;
+.writing-category-menu button::after {
 
 
-opacity:.5;
+    content:"";
+
+
+    position:absolute;
+
+
+    bottom:0;
+
+
+    left:0;
+
+
+    width:100%;
+
+
+    height:3px;
+
+
+    background:white;
+
+
+    transform:
+
+    scaleX(0);
+
+
+    transform-origin:left;
+
+
+    transition:.5s;
 
 
 }
 
 
 
+
+
+.writing-category-menu button:hover::after {
+
+
+    transform:scaleX(1);
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ===============================
+   WRITING LIST
+=============================== */
+
+
+.writing-list-section {
+
+
+    min-height:100vh;
+
+
+    padding:
+
+    120px 0;
+
+
+}
+
+
+
+
+
+
+.writing-title {
+
+
+    text-align:center;
+
+
+    font-family:
+
+    "Times New Roman",
+    serif;
+
+
+    font-size:80px;
+
+
+    font-weight:400;
+
+
+    margin-bottom:100px;
+
+
+}
+
+
+
+
+
+
+
+.writing-items {
+
+
+    max-width:900px;
+
+
+    margin:auto;
+
+
+}
+
+
+
+/* ===============================
+   SCROLL CINEMATIC
+=============================== */
+
+
+html {
+
+    scroll-behavior:smooth;
+
+}
+
+
+
+.writing-intro,
+.writing-archive,
+.writing-list-section {
+
+
+    scroll-snap-align:center;
+
+
+}
+
+
+
+.writings-page {
+
+
+    scroll-snap-type:y proximity;
+
+
+}
+
+
+.writing-item {
+
+
+    display:flex;
+
+
+    gap:40px;
+
+
+    padding:50px 0;
+
+
+    border-bottom:
+
+    1px solid rgba(255,255,255,.2);
+
+
+    text-decoration:none;
+
+
+    color:white;
+
+
+    transition:.4s;
+
+
+}
+
+
+
+
+
+
+.writing-item:hover {
+
+
+    transform:
+
+    translateX(20px);
+
+
+}
+
+
+
+
+
+
+
+.writing-number {
+
+
+    font-family:Arial,sans-serif;
+
+
+    font-size:12px;
+
+
+    opacity:.5;
+
+
+}
+
+
+
+
+
+.writing-data h2 {
+
+
+    font-family:
+
+    "Times New Roman",
+    serif;
+
+
+    font-size:42px;
+
+
+    font-weight:400;
+
+
+    margin:0;
+
+
+}
+
+
+
+
+
+
+.writing-data p {
+
+
+    font-family:
+
+    "Times New Roman",
+    serif;
+
+
+    font-size:20px;
+
+
+    line-height:1.8;
+
+
+    color:
+
+    rgba(255,255,255,.65);
+
+
+}
+
+
+
+
+
+
+
+.writing-data span {
+
+
+    font-family:Arial,sans-serif;
+
+
+    font-size:10px;
+
+
+    letter-spacing:4px;
+
+
+    opacity:.5;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ===============================
+   MOBILE
+=============================== */
 
 
 @media(max-width:900px){
 
 
-.writing-category-menu{
+.writing-category-menu {
 
 
 grid-template-columns:1fr;
 
+
 }
+
+
+
+.writing-category-menu button {
+
+
+height:220px;
+
+
+}
+
+
+
+.writing-intro h1 {
+
+
+font-size:70px;
+
+
+}
+
+
+
+.writing-title {
+
+
+font-size:55px;
+
+
+}
+
+
+
+}
+/* =====================================================
+   WRITING LIST FINAL FIX
+===================================================== */
+
+
+.writing-list-section {
+
+    min-height:100vh;
+
+    padding:120px 0;
+
+}
+
+
+
+#writing-list {
+
+
+    max-width:900px;
+
+    margin:0 auto;
+
+}
+
+
+
+
+
+.writing-title {
+
+
+    text-align:center;
+
+
+    font-family:
+    "Times New Roman",
+    serif;
+
+
+    font-size:70px;
+
+
+    font-weight:400;
+
+
+    margin-bottom:80px;
+
+
+    color:white;
+
+
+}
+
+
+
+
+
+.writing-items {
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+}
+
+
+
+
+
+.writing-item {
+
+
+    display:flex;
+
+
+    align-items:flex-start;
+
+
+    gap:40px;
+
+
+    padding:45px 0;
+
+
+    border-bottom:
+
+    1px solid rgba(255,255,255,.2);
+
+
+    text-decoration:none;
+
+
+    color:white;
+
+
+    opacity:1;
+
+
+}
+
+
+
+
+
+.writing-item:hover {
+
+
+    transform:translateX(15px);
+
+
+}
+
+
+
+
+
+
+.writing-number {
+
+
+    min-width:50px;
+
+
+    font-family:Arial,sans-serif;
+
+
+    font-size:12px;
+
+
+    letter-spacing:3px;
+
+
+    color:
+
+    rgba(255,255,255,.5);
+
+
+}
+
+
+
+
+
+.writing-data {
+
+
+    flex:1;
+
+
+}
+
+
+
+
+
+.writing-data h2 {
+
+
+    display:block;
+
+
+    font-family:
+
+    "Times New Roman",
+    serif;
+
+
+    font-size:42px;
+
+
+    font-weight:400;
+
+
+    line-height:1.3;
+
+
+    margin:0 0 20px 0;
+
+
+    color:white;
+
+
+}
+
+
+
+
+
+.writing-data p {
+
+
+    display:block;
+
+
+    font-family:
+
+    "Times New Roman",
+    serif;
+
+
+    font-size:20px;
+
+
+    line-height:1.8;
+
+
+    color:
+
+    rgba(255,255,255,.65);
+
+
+}
+
+
+
+
+
+.writing-data span {
+
+
+    display:block;
+
+
+    margin-top:20px;
+
+
+    font-family:Arial,sans-serif;
+
+
+    font-size:10px;
+
+
+    letter-spacing:4px;
+
+
+    color:
+
+    rgba(255,255,255,.45);
 
 
 }
