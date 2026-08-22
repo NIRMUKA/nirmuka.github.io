@@ -606,6 +606,217 @@ font-size:25px;
 
 }
 
+/* =====================================
+   WRITINGS ARCHIVE PAGE
+===================================== */
 
+
+.writings-page {
+
+min-height:100vh;
+
+background:#050505;
+
+color:white;
+
+padding:100px 30px;
+
+}
+
+
+
+.writings-container {
+
+
+max-width:1100px;
+
+margin:auto;
+
+background:#050505;
+
+position:relative;
+
+z-index:2;
+
+
+}
+
+
+
+.writing-header {
+
+
+text-align:center;
+
+margin-bottom:100px;
+
+
+}
+
+
+
+.writing-header h1 {
+
+
+font-family:
+"Times New Roman",
+serif;
+
+
+font-size:90px;
+
+
+font-weight:400;
+
+
+letter-spacing:2px;
+
+
+}
+
+
+
+.writing-header p {
+
+
+font-family:
+"Times New Roman",
+serif;
+
+
+font-size:20px;
+
+
+line-height:1.8;
+
+
+max-width:650px;
+
+
+margin:30px auto;
+
+
+color:
+rgba(255,255,255,.7);
+
+
+}
+
+
+
+
+
+.writing-category-menu {
+
+
+display:grid;
+
+
+grid-template-columns:
+repeat(3,1fr);
+
+
+gap:30px;
+
+
+margin-bottom:100px;
+
+
+}
+
+
+
+.writing-category-menu button {
+
+
+height:180px;
+
+
+background:transparent;
+
+
+border:
+
+1px solid rgba(255,255,255,.4);
+
+
+color:white;
+
+
+font-family:
+"Times New Roman",
+serif;
+
+
+font-size:40px;
+
+
+cursor:pointer;
+
+
+transition:.4s;
+
+
+}
+
+
+
+.writing-category-menu button:hover {
+
+
+background:white;
+
+
+color:black;
+
+
+}
+
+
+
+
+
+.writing-item {
+
+
+display:flex;
+
+
+gap:30px;
+
+
+padding:40px 0;
+
+
+border-bottom:
+
+1px solid rgba(255,255,255,.2);
+
+
+color:white;
+
+
+text-decoration:none;
+
+
+}
+
+
+
+.writing-item h2 {
+
+
+font-family:
+"Times New Roman",
+serif;
+
+
+font-size:40px;
+
+
+font-weight:400;
+
+
+}
 
 }
