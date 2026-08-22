@@ -1,0 +1,351 @@
+/* =========================================================
+   NIRMUKA ARTWORK DETAIL SYSTEM
+
+   Museum / Archive Experience
+
+========================================================= */
+
+
+
+.artwork-detail-page {
+
+    min-height:100vh;
+
+    background:#050505;
+
+    color:white;
+
+    padding:
+
+    80px 30px 150px;
+
+}
+
+
+
+
+
+.artwork-container {
+
+    max-width:1200px;
+
+    margin:auto;
+
+}
+
+
+
+
+
+
+/* BACK */
+
+.back-home {
+
+    color:white;
+
+    text-decoration:none;
+
+    letter-spacing:4px;
+
+    font-size:12px;
+
+    opacity:.7;
+
+    transition:.3s;
+
+}
+
+
+.back-home:hover {
+
+    opacity:1;
+
+}
+
+
+
+
+
+
+
+
+/* IMAGE */
+
+.artwork-image-container {
+
+    margin-top:70px;
+
+    width:100%;
+
+}
+
+
+
+.artwork-image {
+
+
+    width:100%;
+
+
+    max-height:850px;
+
+
+    object-fit:contain;
+
+
+    display:block;
+
+
+    user-select:none;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* INFORMATION */
+
+.artwork-information {
+
+
+    margin-top:90px;
+
+
+}
+
+
+
+
+
+.artwork-information h1 {
+
+
+    font-family:
+
+    "Rubik Spray Paint",
+    cursive;
+
+
+    font-size:
+
+    clamp(
+        60px,
+        10vw,
+        150px
+    );
+
+
+    line-height:.85;
+
+
+    font-weight:400;
+
+
+    text-transform:uppercase;
+
+
+}
+
+
+
+
+
+
+
+.artwork-meta {
+
+
+    margin-top:40px;
+
+
+    display:flex;
+
+
+    flex-wrap:wrap;
+
+
+    gap:15px;
+
+
+}
+
+
+
+.artwork-meta span {
+
+
+    border:
+
+    1px solid rgba(255,255,255,.3);
+
+
+    padding:
+
+    12px 20px;
+
+
+    font-size:11px;
+
+
+    letter-spacing:3px;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* WRITING STYLE */
+
+.artwork-section {
+
+
+    max-width:900px;
+
+
+    margin-top:120px;
+
+
+}
+
+
+
+
+.artwork-section h2 {
+
+
+    font-family:
+
+    "Sedgwick Ave Display",
+    cursive;
+
+
+    font-size:
+
+    clamp(
+        35px,
+        5vw,
+        60px
+    );
+
+
+    margin-bottom:35px;
+
+
+    transform:
+
+    rotate(-2deg);
+
+
+}
+
+
+
+
+
+.artwork-section p {
+
+
+    font-family:
+
+    Georgia,
+    serif;
+
+
+    font-size:20px;
+
+
+    line-height:2;
+
+
+    color:
+
+    rgba(255,255,255,.75);
+
+
+}
+
+
+
+
+
+
+
+
+/* DIVIDER */
+
+.artwork-section::after {
+
+
+    content:"";
+
+
+    display:block;
+
+
+    margin-top:70px;
+
+
+    width:100%;
+
+
+    height:1px;
+
+
+    background:
+
+    rgba(255,255,255,.15);
+
+
+}
+
+
+
+
+
+
+
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+
+.artwork-detail-page {
+
+    padding:
+
+    40px 20px 100px;
+
+}
+
+
+
+.artwork-information h1 {
+
+    font-size:60px;
+
+}
+
+
+
+.artwork-section p {
+
+    font-size:17px;
+
+}
+
+
+}
