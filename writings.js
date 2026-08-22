@@ -29,10 +29,33 @@
 
 
 
-/* =========================================================
-   OPEN WRITINGS
-========================================================= */
+function smoothScrollTo(element){
 
+    if(!element){
+        return;
+    }
+
+
+    const target =
+    element.getBoundingClientRect().top
+    +
+    window.pageYOffset
+    -
+    (window.innerHeight / 2)
+    +
+    (element.offsetHeight / 2);
+
+
+
+    window.scrollTo({
+
+        top:target,
+
+        behavior:"smooth"
+
+    });
+
+}
 
 window.openWritingArchive = function(){
 
@@ -279,19 +302,12 @@ document.getElementById(
 if(archive){
 
 
-archive.scrollIntoView({
-
-behavior:"smooth",
-
-block:"center"
-
-});
-
+smoothScrollTo(archive);
 
 }
 
 
-},1000);
+},1400);
 
 
 
