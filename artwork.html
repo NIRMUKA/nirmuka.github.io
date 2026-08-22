@@ -1,1480 +1,679 @@
-@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Rock+Salt&family=Rubik+Spray+Paint&family=Sedgwick+Ave+Display&display=swap');
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
 
-/* =====================================
-   NIRMUKA DIGITAL ART ARCHIVE
-===================================== */
+    <meta charset="UTF-8">
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-html {
-    scroll-behavior: smooth;
-}
+    <title>NIRMUKA | Artwork</title>
 
-body {
-    background: #050505;
-    color: #ffffff;
-    font-family: "Permanent Marker", cursive;
-    overflow-x: hidden;
-}
 
+    <!-- =====================================
+         MAIN STYLESHEET
+    ====================================== -->
 
-/* =====================================
-   CURTAIN TRANSITION
-===================================== */
+    <link
+        rel="stylesheet"
+        href="/style.css?v=20260822-2"
+    >
 
-.curtain {
-    position: fixed;
-    inset: 0;
-    background: #050505;
-    z-index: 9999;
 
-    transform: translateY(-100%);
+    <!-- =====================================
+         DARK FALLBACK
 
-    transition:
-        transform .9s cubic-bezier(.77, 0, .18, 1);
-}
+         Kalau style.css terlambat/gagal dimuat,
+         halaman TETAP hitam.
+    ====================================== -->
 
-.curtain.active {
-    transform: translateY(0);
-}
+    <style>
 
+        html,
+        body {
+            margin: 0;
+            padding: 0;
 
-/* =====================================
-   LANDING PAGE
-===================================== */
+            min-height: 100%;
 
-.landing {
-    height: 100vh;
+            background: #050505;
+            color: #ffffff;
+        }
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
-    position: relative;
+        body {
+            min-height: 100vh;
+        }
 
-    background:
-        linear-gradient(
-            rgba(0,0,0,.5),
-            rgba(0,0,0,.86)
-        ),
-        url("hero.jpg");
 
-    background-size: cover;
-    background-position: center;
-}
+        .artwork-page {
+            min-height: 100vh;
+            background: #050505;
+        }
 
 
-.hero-overlay {
-    position: absolute;
-    inset: 0;
+        .artwork-container {
+            position: relative;
+            z-index: 2;
+        }
 
-    background:
-        repeating-linear-gradient(
-            0deg,
-            rgba(255,255,255,.03),
-            rgba(255,255,255,.03) 1px,
-            transparent 1px,
-            transparent 4px
-        );
-}
+    </style>
 
+</head>
 
-.hero-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-}
 
+<body>
 
-/* =====================================
-   NIRMUKA TITLE
-===================================== */
 
-.nirmuka {
-    position: relative;
-    display: inline-block;
+<!-- =====================================
+     CURTAIN
+===================================== -->
 
-    font-family:
-        "Rubik Spray Paint",
-        cursive;
+<div class="curtain"></div>
 
-    font-size:
-        clamp(74px, 11vw, 150px);
 
-    font-weight: 400;
 
-    line-height: .88;
+<!-- =====================================
+     ARTWORK DETAIL PAGE
+===================================== -->
 
-    letter-spacing: 1px;
+<main class="artwork-page">
 
-    text-transform: uppercase;
 
-    color: #f5f2ea;
+    <div class="artwork-container">
 
-    transform:
-        rotate(-4deg)
-        skewX(-3deg);
 
-    transform-origin: center;
+        <!-- =====================================
+             BACK
+        ====================================== -->
 
-    isolation: isolate;
+        <a
+            href="/"
+            class="back-button"
+            id="artwork-back"
+        >
+            ← BACK TO WORKS
+        </a>
 
-    text-shadow:
-        6px 6px 0 rgba(0,0,0,.70),
-        -2px 3px 0 rgba(255,255,255,.08);
 
-    transition:
-        transform .35s ease;
-}
 
+        <!-- =====================================
+             ARTWORK IMAGE
+        ====================================== -->
 
-.nirmuka::before {
-    content: "NIRMUKA";
+        <div class="artwork-image">
 
-    position: absolute;
+            <img
+                id="art-image"
+                src=""
+                alt="Artwork"
+            >
 
-    left: -8px;
-    top: 7px;
+        </div>
 
-    width: 100%;
 
-    font-family:
-        "Rubik Spray Paint",
-        cursive;
 
-    color: transparent;
+        <!-- =====================================
+             ARTWORK INFORMATION
+        ====================================== -->
 
-    -webkit-text-stroke:
-        1px rgba(255,255,255,.22);
+        <div class="artwork-info">
 
-    transform:
-        rotate(2deg);
 
-    z-index: -1;
+            <p
+                class="work-number"
+                id="art-id"
+            >
+                WORK
+            </p>
 
-    opacity: .75;
-}
 
 
-.nirmuka::after {
-    content: "";
+            <h1 id="art-title">
+                Loading...
+            </h1>
 
-    position: absolute;
 
-    left: -4%;
-    bottom: -18px;
 
-    width: 110%;
-    height: 8px;
+            <!-- =====================================
+                 BASIC META
+            ====================================== -->
 
-    background:
-        repeating-linear-gradient(
-            173deg,
-            rgba(255,255,255,.8) 0 8px,
-            transparent 8px 14px,
-            rgba(255,255,255,.25) 14px 19px,
-            transparent 19px 27px
-        );
+            <div class="meta">
 
-    transform:
-        rotate(-3deg)
-        skewX(-20deg);
 
-    opacity: .55;
-}
+                <div>
 
+                    <strong>
+                        YEAR
+                    </strong>
 
-.nirmuka:hover {
-    transform:
-        rotate(-1deg)
-        skewX(2deg)
-        scale(1.035);
-}
+                    <span id="art-year">
+                        —
+                    </span>
 
+                </div>
 
-/* =====================================
-   ARTIST TAG
-===================================== */
 
-.artist-tag {
-    margin-top: 32px;
+                <div>
 
-    font-family:
-        "Rock Salt",
-        cursive;
+                    <strong>
+                        MEDIUM
+                    </strong>
 
-    font-size: 10px;
+                    <span id="art-medium">
+                        —
+                    </span>
 
-    letter-spacing: 4px;
+                </div>
 
-    line-height: 1.8;
 
-    opacity: .62;
-}
+                <div>
 
+                    <strong>
+                        DIMENSION
+                    </strong>
 
-/* =====================================
-   MAIN MENU
-===================================== */
+                    <span id="art-dimension">
+                        —
+                    </span>
 
-.main-menu {
-    margin-top: 80px;
+                </div>
 
-    display: flex;
-    justify-content: center;
 
-    gap: 80px;
-}
+            </div>
 
 
-.main-menu a {
-    position: relative;
 
-    color: #ffffff;
+            <!-- =====================================
+                 ARTWORK TEXT
+            ====================================== -->
 
-    text-decoration: none;
+            <div class="description-block">
 
-    font-family:
-        "Sedgwick Ave Display",
-        cursive;
 
-    font-size: 36px;
+                <h2>
+                    BACKGROUND
+                </h2>
 
-    font-weight: 400;
+                <p id="art-background"></p>
 
-    letter-spacing: 1px;
 
-    transition:
-        transform .35s ease,
-        opacity .35s ease;
-}
 
+                <h2>
+                    CONCEPT
+                </h2>
 
-.main-menu a:nth-child(1) {
-    transform: rotate(-3deg);
-}
+                <p id="art-concept"></p>
 
-.main-menu a:nth-child(2) {
-    transform: rotate(2deg);
-}
 
-.main-menu a:nth-child(3) {
-    transform: rotate(-2deg);
-}
 
+                <h2>
+                    VISUAL DESCRIPTION
+                </h2>
 
-.main-menu a:hover {
-    opacity: .55;
+                <p id="art-visual"></p>
 
-    transform:
-        rotate(-5deg)
-        translateY(-8px)
-        scale(1.08);
-}
 
 
-.main-menu a::after {
-    content: "";
+                <h2>
+                    ARTIST STATEMENT
+                </h2>
 
-    position: absolute;
+                <p id="art-statement"></p>
 
-    left: -5%;
-    bottom: -7px;
 
-    width: 0;
-    height: 3px;
 
-    background:
-        rgba(255,255,255,.65);
+                <h2>
+                    INSPIRATION
+                </h2>
 
-    transform: rotate(-3deg);
+                <p id="art-inspiration"></p>
 
-    transition:
-        width .3s ease;
-}
 
 
-.main-menu a:hover::after {
-    width: 110%;
-}
+                <h2>
+                    CREATIVE PROCESS
+                </h2>
 
+                <p id="art-process"></p>
 
-/* =====================================
-   DYNAMIC CONTENT
-===================================== */
 
-#content-container {
-    min-height: 100vh;
-}
+            </div>
 
 
-/* =====================================
-   PAGE BACKGROUND
-   ABSTRACT PAINT LEFT + RIGHT
-===================================== */
+        </div>
 
-.page-section {
-    position: relative;
 
-    min-height: 100vh;
+    </div>
 
-    padding:
-        100px 20px;
 
-    overflow: hidden;
+</main>
 
-    background:
-        linear-gradient(
-            90deg,
-            #111 0%,
-            #090909 18%,
-            #050505 32%,
-            #050505 68%,
-            #090909 82%,
-            #111 100%
+
+
+<!-- =====================================
+     LOAD ARTWORK DATA
+===================================== -->
+
+<script>
+
+(function () {
+
+
+    /* =====================================
+       READ ID FROM URL
+    ====================================== */
+
+    const params =
+        new URLSearchParams(
+            window.location.search
         );
 
-    isolation: isolate;
-}
+
+    const artworkId =
+        params.get("id");
 
 
-/* LEFT PAINT WALL */
 
-.page-section::before {
-    content: "";
+    /* =====================================
+       NO ID
+    ====================================== */
 
-    position: absolute;
+    if (!artworkId) {
 
-    left: 0;
-    top: 0;
-
-    width: 31vw;
-    height: 100%;
-
-    pointer-events: none;
-
-    z-index: 0;
-
-    opacity: .90;
-
-    background:
-
-        radial-gradient(
-            ellipse at 12% 8%,
-            rgba(225,225,215,.28) 0 6%,
-            transparent 7%
-        ),
-
-        radial-gradient(
-            ellipse at 28% 17%,
-            rgba(255,255,255,.13) 0 9%,
-            transparent 10%
-        ),
-
-        radial-gradient(
-            circle at 7% 24%,
-            rgba(220,220,210,.28) 0 4%,
-            transparent 5%
-        ),
-
-        radial-gradient(
-            ellipse at 35% 33%,
-            rgba(255,255,255,.10) 0 14%,
-            transparent 15%
-        ),
-
-        radial-gradient(
-            ellipse at 15% 46%,
-            rgba(200,200,190,.22) 0 13%,
-            transparent 14%
-        ),
-
-        radial-gradient(
-            circle at 42% 57%,
-            rgba(255,255,255,.17) 0 7%,
-            transparent 8%
-        ),
-
-        radial-gradient(
-            ellipse at 20% 68%,
-            rgba(235,235,220,.25) 0 12%,
-            transparent 13%
-        ),
-
-        radial-gradient(
-            ellipse at 39% 81%,
-            rgba(255,255,255,.09) 0 17%,
-            transparent 18%
-        ),
-
-        radial-gradient(
-            circle at 10% 91%,
-            rgba(220,220,210,.20) 0 8%,
-            transparent 9%
-        ),
-
-        repeating-linear-gradient(
-            78deg,
-            transparent 0 18px,
-            rgba(255,255,255,.04) 18px 21px,
-            transparent 21px 45px
+        showError(
+            "ARTWORK NOT FOUND"
         );
 
-    filter:
-        blur(.4px)
-        contrast(1.2);
+        return;
 
-    transform:
-        rotate(-1deg)
-        scale(1.03);
-}
+    }
 
 
-/* RIGHT PAINT WALL */
 
-.page-section::after {
-    content: "";
+    /* =====================================
+       LOAD ARTWORK DATABASE
+    ====================================== */
 
-    position: absolute;
+    fetch(
+        "/artworks.json?v=20260822-2"
+    )
 
-    right: 0;
-    top: 0;
+    .then(response => {
 
-    width: 31vw;
-    height: 100%;
 
-    pointer-events: none;
+        if (!response.ok) {
 
-    z-index: 0;
+            throw new Error(
+                "Could not load artworks.json"
+            );
 
-    opacity: .90;
+        }
 
-    background:
 
-        radial-gradient(
-            ellipse at 85% 7%,
-            rgba(230,230,220,.24) 0 8%,
-            transparent 9%
-        ),
+        return response.json();
 
-        radial-gradient(
-            circle at 63% 18%,
-            rgba(255,255,255,.18) 0 5%,
-            transparent 6%
-        ),
+    })
 
-        radial-gradient(
-            ellipse at 91% 28%,
-            rgba(210,210,200,.23) 0 10%,
-            transparent 11%
-        ),
+    .then(artworks => {
 
-        radial-gradient(
-            ellipse at 66% 39%,
-            rgba(255,255,255,.10) 0 15%,
-            transparent 16%
-        ),
 
-        radial-gradient(
-            circle at 88% 51%,
-            rgba(245,245,235,.25) 0 8%,
-            transparent 9%
-        ),
+        const artwork =
+            artworks.find(
+                item =>
+                    item.id === artworkId
+            );
 
-        radial-gradient(
-            ellipse at 64% 62%,
-            rgba(255,255,255,.12) 0 11%,
-            transparent 12%
-        ),
 
-        radial-gradient(
-            ellipse at 88% 74%,
-            rgba(225,225,215,.25) 0 14%,
-            transparent 15%
-        ),
+        if (!artwork) {
 
-        radial-gradient(
-            circle at 61% 86%,
-            rgba(255,255,255,.13) 0 7%,
-            transparent 8%
-        ),
+            showError(
+                "ARTWORK NOT FOUND"
+            );
 
-        radial-gradient(
-            ellipse at 90% 96%,
-            rgba(210,210,200,.18) 0 12%,
-            transparent 13%
-        ),
+            return;
 
-        repeating-linear-gradient(
-            -74deg,
-            transparent 0 22px,
-            rgba(255,255,255,.035) 22px 25px,
-            transparent 25px 48px
+        }
+
+
+        renderArtwork(
+            artwork
         );
 
-    filter:
-        blur(.4px)
-        contrast(1.2);
 
-    transform:
-        rotate(1deg)
-        scale(1.03);
-}
+    })
 
+    .catch(error => {
 
-/* =====================================
-   BLACK READING COLUMN
-===================================== */
 
-.section-inner {
-    position: relative;
-
-    z-index: 2;
-
-    max-width: 980px;
-
-    margin: auto;
-
-    padding:
-        50px 55px;
-
-    background:
-        rgba(5,5,5,.97);
-
-    box-shadow:
-        0 0 70px rgba(0,0,0,.95);
-}
-
-
-/* =====================================
-   ARCHIVE SMALL LABEL
-===================================== */
-
-.work-number {
-    font-family:
-        "Rock Salt",
-        cursive;
-
-    font-size: 10px;
-
-    letter-spacing: 3px;
-
-    line-height: 1.8;
-
-    opacity: .5;
-
-    margin-bottom: 28px;
-}
-
-
-/* =====================================
-   PAGE TITLES
-===================================== */
-
-.page-section h2 {
-    position: relative;
-
-    display: inline-block;
-
-    font-family:
-        "Rubik Spray Paint",
-        cursive;
-
-    font-size: 68px;
-
-    font-weight: 400;
-
-    line-height: 1;
-
-    letter-spacing: 1px;
-
-    margin-bottom: 60px;
-
-    transform:
-        rotate(-2deg);
-}
-
-
-.page-section h2::after {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    bottom: -13px;
-
-    width: 76%;
-    height: 4px;
-
-    background:
-        rgba(255,255,255,.48);
-
-    transform:
-        rotate(-2deg)
-        skewX(-16deg);
-}
-
-
-/* =====================================
-   BACK BUTTONS
-===================================== */
-
-.back-home,
-.back-button {
-    display: inline-block;
-
-    color: #ffffff;
-
-    text-decoration: none;
-
-    font-family:
-        "Sedgwick Ave Display",
-        cursive;
-
-    font-size: 22px;
-
-    letter-spacing: 1px;
-
-    opacity: .62;
-
-    transition:
-        opacity .3s ease,
-        transform .3s ease;
-}
-
-
-.back-home {
-    margin-bottom: 50px;
-}
-
-
-.back-button {
-    margin-bottom: 60px;
-}
-
-
-.back-home:hover,
-.back-button:hover {
-    opacity: 1;
-
-    transform:
-        translateX(-8px)
-        rotate(-4deg);
-}
-
-
-/* =====================================
-   WORKS GALLERY
-===================================== */
-
-.works-gallery {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 40px;
-}
-
-
-.art-card {
-    background:
-        #0d0d0d;
-
-    padding: 18px;
-
-    transition:
-        transform .45s ease;
-}
-
-
-.art-card:nth-child(odd) {
-    transform:
-        rotate(-.35deg);
-}
-
-
-.art-card:nth-child(even) {
-    transform:
-        rotate(.35deg);
-}
-
-
-.art-card:hover {
-    transform:
-        rotate(-1deg)
-        translateY(-10px);
-}
-
-
-.art-card a {
-    color: #ffffff;
-
-    text-decoration: none;
-}
-
-
-.art-card img {
-    width: 100%;
-
-    aspect-ratio: 1 / 1;
-
-    object-fit: cover;
-
-    display: block;
-}
-
-
-.art-card h3 {
-    margin-top: 20px;
-
-    font-family:
-        "Permanent Marker",
-        cursive;
-
-    font-size: 27px;
-
-    font-weight: 400;
-
-    line-height: 1.15;
-
-    letter-spacing: .5px;
-
-    transform:
-        rotate(-1deg);
-}
-
-
-.art-card p {
-    margin-top: 12px;
-
-    font-family:
-        "Rock Salt",
-        cursive;
-
-    font-size: 9px;
-
-    line-height: 1.6;
-
-    opacity: .5;
-}
-
-
-/* =====================================
-   WRITINGS
-===================================== */
-
-.section-description {
-    max-width: 700px;
-
-    font-family:
-        "Permanent Marker",
-        cursive;
-
-    font-size: 18px;
-
-    line-height: 1.95;
-
-    color: #d5d5d5;
-}
-
-
-/* =====================================
-   ABOUT
-===================================== */
-
-.about-page .section-inner {
-    max-width: 900px;
-}
-
-
-.about-content {
-    max-width: 760px;
-}
-
-
-.about-content p {
-    font-family:
-        "Permanent Marker",
-        cursive;
-
-    font-size: 18px;
-
-    font-weight: 400;
-
-    line-height: 2;
-
-    margin-bottom: 45px;
-
-    color: #d5d5d5;
-}
-
-
-.about-content .signature {
-    margin-top: 80px;
-
-    font-family:
-        "Sedgwick Ave Display",
-        cursive;
-
-    font-size: 36px;
-
-    letter-spacing: 1px;
-
-    color: #ffffff;
-
-    transform:
-        rotate(-4deg);
-}
-
-
-/* =====================================
-   ARTWORK DETAIL PAGE
-===================================== */
-
-.artwork-page {
-    position: relative;
-
-    min-height: 100vh;
-
-    padding:
-        80px 20px;
-
-    overflow: hidden;
-
-    background:
-        linear-gradient(
-            90deg,
-            #111 0%,
-            #090909 18%,
-            #050505 32%,
-            #050505 68%,
-            #090909 82%,
-            #111 100%
+        console.error(
+            "NIRMUKA artwork error:",
+            error
         );
 
-    isolation: isolate;
-}
 
-
-/* LEFT ABSTRACT WALL */
-
-.artwork-page::before {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    top: 0;
-
-    width: 31vw;
-    height: 100%;
-
-    pointer-events: none;
-
-    z-index: 0;
-
-    opacity: .9;
-
-    background:
-
-        radial-gradient(
-            ellipse at 15% 8%,
-            rgba(230,230,220,.25) 0 8%,
-            transparent 9%
-        ),
-
-        radial-gradient(
-            circle at 35% 20%,
-            rgba(255,255,255,.13) 0 6%,
-            transparent 7%
-        ),
-
-        radial-gradient(
-            ellipse at 12% 35%,
-            rgba(210,210,200,.20) 0 13%,
-            transparent 14%
-        ),
-
-        radial-gradient(
-            ellipse at 40% 50%,
-            rgba(255,255,255,.10) 0 14%,
-            transparent 15%
-        ),
-
-        radial-gradient(
-            circle at 16% 65%,
-            rgba(235,235,225,.23) 0 9%,
-            transparent 10%
-        ),
-
-        radial-gradient(
-            ellipse at 38% 80%,
-            rgba(255,255,255,.10) 0 16%,
-            transparent 17%
-        ),
-
-        radial-gradient(
-            ellipse at 12% 95%,
-            rgba(220,220,210,.20) 0 11%,
-            transparent 12%
+        showError(
+            "ARTWORK COULD NOT BE LOADED"
         );
 
-    filter:
-        blur(.5px)
-        contrast(1.2);
-}
+
+    });
 
 
-/* RIGHT ABSTRACT WALL */
 
-.artwork-page::after {
-    content: "";
+    /* =====================================
+       RENDER ARTWORK
+    ====================================== */
 
-    position: absolute;
+    function renderArtwork(
+        artwork
+    ) {
 
-    right: 0;
-    top: 0;
 
-    width: 31vw;
-    height: 100%;
+        /* browser title */
 
-    pointer-events: none;
+        document.title =
+            `${artwork.title} | NIRMUKA`;
 
-    z-index: 0;
 
-    opacity: .9;
 
-    background:
+        /* IMAGE */
 
-        radial-gradient(
-            ellipse at 84% 10%,
-            rgba(225,225,215,.25) 0 9%,
-            transparent 10%
-        ),
+        const artworkImage =
+            document.getElementById(
+                "art-image"
+            );
 
-        radial-gradient(
-            circle at 63% 23%,
-            rgba(255,255,255,.14) 0 6%,
-            transparent 7%
-        ),
 
-        radial-gradient(
-            ellipse at 90% 39%,
-            rgba(210,210,200,.20) 0 13%,
-            transparent 14%
-        ),
+        if (artwork.image) {
 
-        radial-gradient(
-            ellipse at 61% 54%,
-            rgba(255,255,255,.10) 0 14%,
-            transparent 15%
-        ),
+            /*
+               Images are stored
+               in GitHub repository ROOT.
+            */
 
-        radial-gradient(
-            circle at 86% 69%,
-            rgba(235,235,225,.22) 0 9%,
-            transparent 10%
-        ),
+            artworkImage.src =
+                artwork.image.startsWith("/")
+                    ? artwork.image
+                    : "/" + artwork.image;
 
-        radial-gradient(
-            ellipse at 65% 84%,
-            rgba(255,255,255,.10) 0 16%,
-            transparent 17%
-        ),
 
-        radial-gradient(
-            ellipse at 90% 96%,
-            rgba(220,220,210,.20) 0 11%,
-            transparent 12%
+            artworkImage.alt =
+                artwork.title || "Artwork";
+
+
+            artworkImage.onerror =
+                function () {
+
+                    console.error(
+                        "Artwork image failed:",
+                        artwork.image
+                    );
+
+                    this.style.display =
+                        "none";
+
+                };
+
+        }
+
+        else {
+
+            artworkImage.style.display =
+                "none";
+
+        }
+
+
+
+        /* WORK NUMBER */
+
+        let workNumber =
+            String(
+                artwork.id || ""
+            ).replace(
+                "karya",
+                ""
+            );
+
+
+        workNumber =
+            workNumber.padStart(
+                2,
+                "0"
+            );
+
+
+        setText(
+            "art-id",
+            `WORK ${workNumber}`
         );
 
-    filter:
-        blur(.5px)
-        contrast(1.2);
-}
 
 
-/* =====================================
-   ARTWORK BLACK CENTER
-===================================== */
+        /* BASIC DATA */
 
-.artwork-container {
-    position: relative;
+        setText(
+            "art-title",
+            artwork.title || "UNTITLED"
+        );
 
-    z-index: 2;
 
-    max-width: 980px;
+        setText(
+            "art-year",
+            artwork.year || "—"
+        );
 
-    margin: auto;
 
-    padding:
-        50px 55px;
+        setText(
+            "art-medium",
+            artwork.medium || "—"
+        );
 
-    background:
-        rgba(5,5,5,.98);
 
-    box-shadow:
-        0 0 70px rgba(0,0,0,.95);
-}
+        setText(
+            "art-dimension",
+            artwork.dimension || "—"
+        );
 
 
-/* =====================================
-   ARTWORK IMAGE
-===================================== */
 
-.artwork-image img {
-    width: 100%;
+        /* LONG TEXT */
 
-    max-height: 750px;
+        setText(
+            "art-background",
+            artwork.background || ""
+        );
 
-    object-fit: contain;
 
-    display: block;
-}
+        setText(
+            "art-concept",
+            artwork.concept || ""
+        );
 
 
-.artwork-info {
-    max-width: 760px;
+        setText(
+            "art-visual",
+            artwork.visual_description || ""
+        );
 
-    margin:
-        60px auto;
-}
 
+        setText(
+            "art-statement",
+            artwork.artist_statement || ""
+        );
 
-/* =====================================
-   ARTWORK TITLE
-===================================== */
 
-#art-title {
-    font-family:
-        "Rubik Spray Paint",
-        cursive;
+        setText(
+            "art-inspiration",
+            artwork.inspiration || ""
+        );
 
-    font-size: 60px;
 
-    font-weight: 400;
+        setText(
+            "art-process",
+            artwork.creative_process || ""
+        );
 
-    line-height: 1.05;
 
-    letter-spacing: .5px;
-
-    transform:
-        rotate(-1deg);
-}
-
-
-/* =====================================
-   ARTWORK META
-===================================== */
-
-.meta {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 30px;
-
-    padding:
-        35px 0;
-
-    border-top:
-        1px solid #333;
-
-    border-bottom:
-        1px solid #333;
-
-    margin:
-        50px 0;
-}
-
-
-.meta div {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 12px;
-}
-
-
-.meta strong {
-    font-family:
-        "Rock Salt",
-        cursive;
-
-    font-size: 9px;
-
-    font-weight: 400;
-
-    letter-spacing: 2px;
-
-    opacity: .5;
-}
-
-
-.meta span {
-    font-family:
-        "Permanent Marker",
-        cursive;
-
-    font-size: 15px;
-
-    line-height: 1.6;
-}
-
-
-/* =====================================
-   ARTWORK DESCRIPTION
-===================================== */
-
-.description-block h2 {
-    font-family:
-        "Sedgwick Ave Display",
-        cursive;
-
-    font-size: 30px;
-
-    font-weight: 400;
-
-    letter-spacing: 1px;
-
-    margin-top: 60px;
-
-    margin-bottom: 20px;
-
-    transform:
-        rotate(-1deg);
-}
-
-
-.description-block p {
-    max-width: 700px;
-
-    font-family:
-        "Permanent Marker",
-        cursive;
-
-    line-height: 1.95;
-
-    font-size: 17px;
-
-    color: #d5d5d5;
-}
-
-
-/* =====================================
-   SPRAY PAINT CANVAS
-===================================== */
-
-#spray-canvas {
-    position: fixed;
-
-    left: 0;
-    top: 0;
-
-    width: 100vw;
-    height: 100vh;
-
-    pointer-events: none;
-
-    z-index: 9997;
-}
-
-
-/* =====================================
-   SPRAY NOZZLE
-===================================== */
-
-.spray-cursor {
-    position: fixed;
-
-    left: 0;
-    top: 0;
-
-    width: 24px;
-    height: 24px;
-
-    pointer-events: none;
-
-    z-index: 10001;
-
-    transform:
-        translate(-50%, -50%)
-        rotate(-8deg);
-
-    opacity: 0;
-
-    transition:
-        width .12s ease,
-        height .12s ease,
-        transform .12s ease,
-        opacity .15s ease;
-}
-
-
-.spray-cursor::before {
-    content: "";
-
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    width: 15px;
-    height: 15px;
-
-    transform:
-        translate(-50%, -50%);
-
-    border:
-        2px solid rgba(255,255,255,.95);
-
-    border-radius: 50%;
-
-    background:
-        rgba(0,0,0,.45);
-
-    box-shadow:
-        0 0 0 1px rgba(0,0,0,.9),
-        0 0 11px rgba(255,255,255,.16);
-}
-
-
-.spray-cursor::after {
-    content: "";
-
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    width: 4px;
-    height: 4px;
-
-    transform:
-        translate(-50%, -50%);
-
-    border-radius: 50%;
-
-    background:
-        #ffffff;
-
-    box-shadow:
-        0 0 5px rgba(255,255,255,.8);
-}
-
-
-.spray-cursor.spraying {
-    width: 31px;
-    height: 31px;
-
-    transform:
-        translate(-50%, -50%)
-        rotate(8deg)
-        scale(.88);
-}
-
-
-.spray-cursor.spraying::before {
-    box-shadow:
-        0 0 0 1px rgba(0,0,0,.9),
-        0 0 16px rgba(255,255,255,.28),
-        0 0 32px rgba(255,255,255,.10);
-}
-
-
-/* =====================================
-   MOBILE
-===================================== */
-
-@media(max-width: 700px) {
-
-    .landing {
-        padding:
-            20px;
     }
 
 
-    .nirmuka {
-        font-size:
-            clamp(56px, 17vw, 82px);
 
-        letter-spacing: 0;
+    /* =====================================
+       SAFE TEXT SETTER
+    ====================================== */
 
-        transform:
-            rotate(-4deg)
-            skewX(-2deg);
+    function setText(
+        id,
+        value
+    ) {
+
+        const element =
+            document.getElementById(
+                id
+            );
+
+
+        if (element) {
+
+            element.textContent =
+                value;
+
+        }
+
     }
 
 
-    .nirmuka::before {
-        left: -4px;
-        top: 5px;
+
+    /* =====================================
+       ERROR PAGE
+    ====================================== */
+
+    function showError(
+        message
+    ) {
+
+        const container =
+            document.querySelector(
+                ".artwork-container"
+            );
+
+
+        if (!container) {
+            return;
+        }
+
+
+        container.innerHTML = `
+
+            <a
+                href="/"
+                class="back-button"
+            >
+                ← BACK
+            </a>
+
+
+            <p class="work-number">
+                NIRMUKA / ARCHIVE ERROR
+            </p>
+
+
+            <h1 id="art-title">
+                ${message}
+            </h1>
+
+        `;
+
     }
 
 
-    .nirmuka::after {
-        bottom: -13px;
-        height: 7px;
+})();
+
+</script>
+
+
+
+<!-- =====================================
+     GLOBAL NIRMUKA SYSTEM
+
+     Loads:
+     - spray nozzle
+     - spray paint
+     - interaction system
+
+     script.js is designed so that
+     missing landing/menu elements
+     do not break artwork.html.
+===================================== -->
+
+<script src="/script.js?v=20260822-2"></script>
+
+
+
+<!-- =====================================
+     BACK TO WORKS
+===================================== -->
+
+<script>
+
+(function () {
+
+
+    const backButton =
+        document.getElementById(
+            "artwork-back"
+        );
+
+
+    if (!backButton) {
+        return;
     }
 
 
-    .artist-tag {
-        margin-top: 28px;
-
-        font-size: 8px;
-
-        letter-spacing: 3px;
-    }
+    backButton.addEventListener(
+        "click",
+        function (event) {
 
 
-    .main-menu {
-        flex-direction: column;
+            /*
+               Jika user datang dari
+               halaman NIRMUKA sendiri,
+               gunakan browser history.
 
-        gap: 35px;
-
-        margin-top: 65px;
-    }
-
-
-    .main-menu a {
-        font-size: 31px;
-
-        letter-spacing: 1px;
-    }
+               Ini memungkinkan user kembali
+               ke daftar WORKS sebelumnya.
+            */
 
 
-    .page-section {
-        padding:
-            55px 10px;
-    }
+            if (
+                document.referrer &&
+                document.referrer.includes(
+                    window.location.hostname
+                )
+            ) {
+
+                event.preventDefault();
+
+                window.history.back();
+
+            }
 
 
-    .page-section::before,
-    .page-section::after {
-        width: 18vw;
-
-        opacity: .42;
-    }
+        }
+    );
 
 
-    .section-inner {
-        padding:
-            35px 24px;
+})();
 
-        max-width:
-            calc(100% - 24px);
-    }
+</script>
 
 
-    .page-section h2 {
-        font-size: 48px;
+</body>
 
-        letter-spacing: 0;
-    }
-
-
-    .works-gallery {
-        grid-template-columns:
-            1fr;
-    }
-
-
-    .art-card h3 {
-        font-size: 24px;
-    }
-
-
-    .about-content p {
-        font-size: 16px;
-
-        line-height: 1.9;
-
-        margin-bottom: 35px;
-    }
-
-
-    .artwork-page {
-        padding:
-            50px 10px;
-    }
-
-
-    .artwork-page::before,
-    .artwork-page::after {
-        width: 18vw;
-
-        opacity: .42;
-    }
-
-
-    .artwork-container {
-        padding:
-            35px 24px;
-
-        max-width:
-            calc(100% - 24px);
-    }
-
-
-    #art-title {
-        font-size: 42px;
-    }
-
-
-    .meta {
-        grid-template-columns:
-            1fr;
-    }
-
-
-    .description-block h2 {
-        font-size: 27px;
-    }
-
-
-    .description-block p {
-        font-size: 16px;
-
-        line-height: 1.9;
-    }
-
-}
-
-
-/* =====================================
-   TOUCH DEVICE
-===================================== */
-
-@media (pointer: coarse) {
-
-    #spray-canvas,
-    .spray-cursor {
-        display: none !important;
-    }
-
-}
-
-
-/* =====================================
-   REMOVE NATIVE CURSOR ON DESKTOP
-===================================== */
-
-@media (pointer: fine) {
-
-    html,
-    body,
-    body *,
-    body *::before,
-    body *::after {
-        cursor: none !important;
-    }
-
-}
+</html>
