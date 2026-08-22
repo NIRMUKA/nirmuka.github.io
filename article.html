@@ -1,17 +1,11 @@
 <!DOCTYPE html>
-
-<html lang="en">
-
+<html lang="id">
 
 <head>
 
-
 <meta charset="UTF-8">
 
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
 <title>
@@ -19,12 +13,9 @@ NIRMUKA | Writing
 </title>
 
 
-
 <link rel="stylesheet" href="/style.css?v=1">
 
-
 <link rel="stylesheet" href="/writings.css?v=1">
-
 
 
 </head>
@@ -38,10 +29,7 @@ NIRMUKA | Writing
 <main class="article-page">
 
 
-
 <div class="article-container">
-
-
 
 
 
@@ -49,11 +37,8 @@ NIRMUKA | Writing
 href="/index.html"
 class="back-home"
 >
-
 ← BACK TO WRITINGS
-
 </a>
-
 
 
 
@@ -63,37 +48,19 @@ class="back-home"
 <header class="article-header">
 
 
-
-<p
-class="work-number"
->
-
+<p class="work-number">
 WRITINGS / ARCHIVE
-
 </p>
-
-
 
 
 
 <h1 id="article-title">
-
-Loading...
-
+LOADING...
 </h1>
 
 
 
-
-
-<p
-id="article-subtitle"
->
-
-</p>
-
-
-
+<p id="article-subtitle"></p>
 
 
 
@@ -103,16 +70,12 @@ id="article-subtitle"
 
 <span id="article-category"></span>
 
-
 <span id="article-year"></span>
-
 
 <span id="article-type"></span>
 
 
 </div>
-
-
 
 
 
@@ -130,11 +93,10 @@ id="article-content"
 class="article-content"
 >
 
+LOADING ARTICLE...
+
 
 </article>
-
-
-
 
 
 
@@ -153,12 +115,20 @@ class="article-content"
 
 
 
-
 <script>
 
 
 (async function(){
 
+
+
+try {
+
+
+
+/* ==========================
+GET ID
+========================== */
 
 
 const params =
@@ -173,11 +143,21 @@ params.get("id");
 
 
 
+console.log(
+"ARTICLE ID:",
+id
+);
+
+
 
 
 if(!id){
 
-return;
+
+throw new Error(
+"No article id"
+);
+
 
 }
 
@@ -185,22 +165,30 @@ return;
 
 
 
+/* ==========================
+LOAD DATABASE
+========================== */
 
-/*
-LOAD WRITING DATABASE
-*/
 
-
-const response =
+const jsonResponse =
 await fetch(
-"/writings.json?v=1"
+"/writings.json?v=100"
 );
 
 
 
-const writings =
-await response.json();
+if(!jsonResponse.ok){
 
+throw new Error(
+"writings.json gagal"
+);
+
+}
+
+
+
+const writings =
+await jsonResponse.json();
 
 
 
@@ -216,18 +204,22 @@ item.id === id
 
 
 
+console.log(
+"FOUND:",
+writing
+);
+
+
+
+
 
 if(!writing){
 
-document
-.getElementById(
-"article-content"
-)
-.innerHTML =
 
-"<h2>WRITING NOT FOUND</h2>";
+throw new Error(
+"Writing tidak ditemukan"
+);
 
-return;
 
 }
 
@@ -237,11 +229,9 @@ return;
 
 
 
-
-
-/*
+/* ==========================
 METADATA
-*/
+========================== */
 
 
 
@@ -258,6 +248,7 @@ document
 )
 .textContent =
 writing.title;
+
 
 
 
@@ -307,20 +298,72 @@ writing.type;
 
 
 
-/*
-LOAD CONTENT FILE
-*/
+/* ==========================
+LOAD ARTICLE FILE
+========================== */
 
 
-const contentResponse =
-await fetch(
-writing.file
+let file =
+writing.file;
+
+
+
+
+if(
+!file.startsWith("/")
+){
+
+file =
+"/" + file;
+
+}
+
+
+
+
+
+
+
+console.log(
+"LOAD ARTICLE:",
+file
 );
 
 
 
-const content =
-await contentResponse.text();
+
+
+
+const articleResponse =
+await fetch(
+file + "?v=100"
+);
+
+
+
+
+
+
+
+if(!articleResponse.ok){
+
+
+throw new Error(
+"Artikel tidak ditemukan: "
++
+file
+);
+
+
+}
+
+
+
+
+
+
+const articleHTML =
+await articleResponse.text();
 
 
 
@@ -333,9 +376,49 @@ document
 "article-content"
 )
 .innerHTML =
-content;
+articleHTML;
 
 
+
+
+
+
+
+}
+
+
+catch(error){
+
+
+
+console.error(
+error
+);
+
+
+
+document
+.getElementById(
+"article-content"
+)
+.innerHTML = `
+
+
+<h2>
+404
+</h2>
+
+
+<p>
+${error.message}
+</p>
+
+
+`;
+
+
+
+}
 
 
 
@@ -344,7 +427,6 @@ content;
 
 
 </script>
-
 
 
 
