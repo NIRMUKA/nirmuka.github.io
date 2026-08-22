@@ -1,32 +1,46 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
+
 
 <head>
 
+
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
 
 
 <title>
-NIRMUKA | Writing
+NIRMUKA — Article
 </title>
 
 
-<link rel="stylesheet" href="/style.css?v=1">
 
-<link rel="stylesheet" href="/writings.css?v=1">
+
+<link
+rel="stylesheet"
+href="/article.css?v=1"
+/>
+
+
+<link
+rel="stylesheet"
+href="/article-effects.css?v=1"
+/>
 
 
 </head>
 
 
 
-<body>
+<body class="article-page">
 
 
 
-<main class="article-page">
 
 
 <div class="article-container">
@@ -34,11 +48,14 @@ NIRMUKA | Writing
 
 
 <a
-href="/index.html"
-class="back-home"
+href="/writings.html"
+class="article-back"
 >
+
 ← BACK TO WRITINGS
+
 </a>
+
 
 
 
@@ -48,19 +65,34 @@ class="back-home"
 <header class="article-header">
 
 
-<p class="work-number">
-WRITINGS / ARCHIVE
+
+<p
+id="article-category"
+>
+
 </p>
 
 
 
-<h1 id="article-title">
-LOADING...
+
+
+<h1
+id="article-title"
+>
+
 </h1>
 
 
 
-<p id="article-subtitle"></p>
+
+
+
+<p
+id="article-subtitle"
+>
+
+</p>
+
 
 
 
@@ -68,18 +100,19 @@ LOADING...
 <div class="article-meta">
 
 
-<span id="article-category"></span>
+<span id="article-type"></span>
+
 
 <span id="article-year"></span>
-
-<span id="article-type"></span>
 
 
 </div>
 
 
 
+
 </header>
+
 
 
 
@@ -93,10 +126,37 @@ id="article-content"
 class="article-content"
 >
 
-LOADING ARTICLE...
-
 
 </article>
+
+
+
+
+
+
+
+
+
+<footer class="article-footer">
+
+
+<p>
+
+END OF MANUSCRIPT
+
+</p>
+
+
+
+<a href="/writings.html">
+
+RETURN TO ARCHIVE
+
+</a>
+
+
+</footer>
+
 
 
 
@@ -106,332 +166,17 @@ LOADING ARTICLE...
 </div>
 
 
-</main>
 
 
 
 
+<script src="/article.js?v=1"></script>
 
+<script src="/article-effects.js?v=1"></script>
 
 
 
-<script>
 
-
-(async function(){
-
-
-
-try {
-
-
-
-/* ==========================
-GET ID
-========================== */
-
-
-const params =
-new URLSearchParams(
-window.location.search
-);
-
-
-
-const id =
-params.get("id");
-
-
-
-console.log(
-"ARTICLE ID:",
-id
-);
-
-
-
-
-if(!id){
-
-
-throw new Error(
-"No article id"
-);
-
-
-}
-
-
-
-
-
-/* ==========================
-LOAD DATABASE
-========================== */
-
-
-const jsonResponse =
-await fetch(
-"/writings.json?v=100"
-);
-
-
-
-if(!jsonResponse.ok){
-
-throw new Error(
-"writings.json gagal"
-);
-
-}
-
-
-
-const writings =
-await jsonResponse.json();
-
-
-
-
-
-const writing =
-writings.find(
-item =>
-item.id === id
-);
-
-
-
-
-
-console.log(
-"FOUND:",
-writing
-);
-
-
-
-
-
-if(!writing){
-
-
-throw new Error(
-"Writing tidak ditemukan"
-);
-
-
-}
-
-
-
-
-
-
-
-/* ==========================
-METADATA
-========================== */
-
-
-
-document.title =
-writing.title +
-" | NIRMUKA";
-
-
-
-
-document
-.getElementById(
-"article-title"
-)
-.textContent =
-writing.title;
-
-
-
-
-
-document
-.getElementById(
-"article-subtitle"
-)
-.textContent =
-writing.subtitle || "";
-
-
-
-
-document
-.getElementById(
-"article-category"
-)
-.textContent =
-writing.category;
-
-
-
-
-document
-.getElementById(
-"article-year"
-)
-.textContent =
-writing.year;
-
-
-
-
-document
-.getElementById(
-"article-type"
-)
-.textContent =
-writing.type;
-
-
-
-
-
-
-
-
-
-/* ==========================
-LOAD ARTICLE FILE
-========================== */
-
-
-let file =
-writing.file;
-
-
-
-
-if(
-!file.startsWith("/")
-){
-
-file =
-"/" + file;
-
-}
-
-
-
-
-
-
-
-console.log(
-"LOAD ARTICLE:",
-file
-);
-
-
-
-
-
-
-const articleResponse =
-await fetch(
-file + "?v=100"
-);
-
-
-
-
-
-
-
-if(!articleResponse.ok){
-
-
-throw new Error(
-"Artikel tidak ditemukan: "
-+
-file
-);
-
-
-}
-
-
-
-
-
-
-const articleHTML =
-await articleResponse.text();
-
-
-
-
-
-
-
-document
-.getElementById(
-"article-content"
-)
-.innerHTML =
-articleHTML;
-
-
-
-
-
-
-
-}
-
-
-catch(error){
-
-
-
-console.error(
-error
-);
-
-
-
-document
-.getElementById(
-"article-content"
-)
-.innerHTML = `
-
-
-<h2>
-404
-</h2>
-
-
-<p>
-${error.message}
-</p>
-
-
-`;
-
-
-
-}
-
-
-
-})();
-
-
-
-</script>
-
-
-
-
-<script src="/spray.js?v=20"></script>
 </body>
 
 </html>
