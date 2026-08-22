@@ -2696,3 +2696,87 @@ body *::after {
     }
 
 }
+
+/* =========================================
+   NIRMUKA SPRAY NOZZLE FIX
+========================================= */
+
+
+.spray-nozzle {
+
+    position: fixed !important;
+
+    width: 40px;
+
+    height: 50px;
+
+    left: 0;
+
+    top: 0;
+
+    transform:
+        translate(-50%, -50%);
+
+
+    z-index: 999999 !important;
+
+
+    pointer-events: none;
+
+
+    display: block;
+
+
+    opacity: 1;
+
+
+}
+
+
+
+
+.nozzle-top {
+
+    width: 14px;
+
+    height: 8px;
+
+
+    background:white;
+
+
+    margin:auto;
+
+
+}
+
+
+
+.nozzle-body {
+
+
+    width:28px;
+
+    height:38px;
+
+
+    margin:auto;
+
+
+    margin-top:4px;
+
+
+    background:
+
+    linear-gradient(
+        90deg,
+        #111,
+        white,
+        #111
+    );
+
+
+    border-radius:5px;
+
+
+}
