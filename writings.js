@@ -1,11 +1,17 @@
 /* =========================================================
    NIRMUKA WRITINGS ENGINE
 
-   Handle:
-   - Writing archive
-   - Category navigation
-   - Writing list
-   - Article redirect
+   SYSTEM:
+
+   WRITINGS
+      |
+      |
+      ↓
+   writings.json
+      |
+      |
+      ↓
+   article.html?id=
 
 ========================================================= */
 
@@ -19,33 +25,28 @@
 
 
 
-/* =========================================================
-   CONNECT TO SCRIPT.JS
-
-========================================================= */
-
-
 window.openWritingArchive = function(){
 
 
-    const content =
-    document.getElementById(
-        "content-container"
-    );
+
+const content =
+document.getElementById(
+"content-container"
+);
 
 
 
-    if(!content){
+if(!content){
 
-        return;
+return;
 
-    }
-
-
+}
 
 
 
-    content.innerHTML = `
+
+
+content.innerHTML = `
 
 
 <section class="writings-page">
@@ -55,24 +56,20 @@ window.openWritingArchive = function(){
 
 
 
-
-
-
 <a
 href="#"
 class="back-home"
 >
+
 ← BACK
+
 </a>
 
 
 
 
 
-
-
-
-<div class="writing-header">
+<header class="writing-header">
 
 
 <p class="work-number">
@@ -80,8 +77,6 @@ class="back-home"
 ARCHIVE / WRITINGS
 
 </p>
-
-
 
 
 <h1>
@@ -92,19 +87,16 @@ WRITINGS
 
 
 
-
 <p>
 
-A collection of thoughts,
-questions, reflections,
-and intellectual fragments.
+A collection of philosophical,
+theological, and reflective writings.
 
 </p>
 
 
 
-</div>
-
+</header>
 
 
 
@@ -115,30 +107,21 @@ and intellectual fragments.
 <div class="writing-category-menu">
 
 
-<button
-data-category="FILSAFAT"
->
+<button data-category="FILSAFAT">
 
 FILSAFAT
 
 </button>
 
 
-
-<button
-data-category="TEOLOGI"
->
+<button data-category="TEOLOGI">
 
 TEOLOGI
 
 </button>
 
 
-
-
-<button
-data-category="UMUM"
->
+<button data-category="UMUM">
 
 UMUM
 
@@ -152,24 +135,15 @@ UMUM
 
 
 
-
-
-<div
-id="writing-list"
->
+<div id="writing-list">
 
 
 <p>
-
 SELECT ARCHIVE
-
 </p>
 
 
 </div>
-
-
-
 
 
 
@@ -187,7 +161,8 @@ SELECT ARCHIVE
 
 
 
-loadWritingData();
+loadWriting();
+
 
 
 };
@@ -200,25 +175,18 @@ loadWritingData();
 
 
 
-/* =========================================================
-   LOAD DATABASE
-
-========================================================= */
-
-
-function loadWritingData(){
+function loadWriting(){
 
 
 
 fetch(
-"/writings.json?v=1"
+"/writings.json?v=10"
 )
 
 
 
 .then(
-response =>
-response.json()
+res=>res.json()
 )
 
 
@@ -227,12 +195,12 @@ response.json()
 data=>{
 
 
-window.nirmukaWriting =
+window.nirmukaWritingData =
 data;
 
 
 
-activateCategory();
+initCategory();
 
 
 
@@ -240,15 +208,13 @@ activateCategory();
 
 )
 
-
-
 .catch(
-error=>{
+err=>{
 
 
 console.error(
-"WRITING ERROR:",
-error
+"WRITINGS ERROR",
+err
 );
 
 
@@ -267,53 +233,33 @@ error
 
 
 
-/* =========================================================
-   CATEGORY BUTTON
 
-========================================================= */
-
-
-function activateCategory(){
+function initCategory(){
 
 
 
-const buttons =
-document.querySelectorAll(
+document
+.querySelectorAll(
 "[data-category]"
-);
-
-
-
-
-
-buttons.forEach(
+)
+.forEach(
 button=>{
 
 
-button.addEventListener(
-"click",
-()=>{
-
-
-const category =
-button.dataset.category;
+button.onclick=function(){
 
 
 
-showWritingList(
-category
+showWriting(
+button.dataset.category
 );
 
 
 
-}
-);
+};
 
 
-
-}
-);
-
+});
 
 
 }
@@ -326,38 +272,23 @@ category
 
 
 
-/* =========================================================
-   SHOW LIST
-
-========================================================= */
-
-
-function showWritingList(
+function showWriting(
 category
 ){
 
 
 
-const container =
+const list =
 document.getElementById(
 "writing-list"
 );
 
 
 
-
-if(!container){
-
-return;
-
-}
-
-
-
-
-const writings =
-window.nirmukaWriting.filter(
-item =>
+const data =
+window.nirmukaWritingData
+.filter(
+item=>
 item.category === category
 );
 
@@ -365,17 +296,14 @@ item.category === category
 
 
 
-if(
-writings.length === 0
-){
+
+if(!data.length){
 
 
-container.innerHTML = `
+list.innerHTML = `
 
 <p>
-
-NO WRITING FOUND
-
+NO ARCHIVE FOUND
 </p>
 
 `;
@@ -390,7 +318,7 @@ return;
 
 
 
-container.innerHTML = `
+list.innerHTML = `
 
 
 
@@ -407,27 +335,34 @@ ${category}
 
 
 ${
-writings.map(
-(item,index)=>{
 
-
-return `
+data.map(
+(item,index)=>`
 
 
 <a
 
-class="writing-item"
+href="/article.html?id=${item.id}"
 
-href="${item.file}"
+class="writing-item"
 
 >
 
 
+
 <div class="writing-number">
 
-${String(index+1).padStart(2,"0")}
+
+${
+
+String(index+1)
+.padStart(2,"0")
+
+}
+
 
 </div>
+
 
 
 
@@ -443,7 +378,6 @@ ${item.title}
 
 
 
-
 <p>
 
 ${item.subtitle || ""}
@@ -456,25 +390,28 @@ ${item.subtitle || ""}
 <span>
 
 ${item.type}
- · 
+
+·
+
 ${item.year}
 
 </span>
 
 
+
 </div>
+
 
 
 
 </a>
 
 
-`;
 
-
-}
+`
 
 ).join("")
+
 }
 
 
@@ -487,7 +424,6 @@ ${item.year}
 
 
 }
-
 
 
 
