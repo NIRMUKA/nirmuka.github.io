@@ -12,22 +12,22 @@
 
     "type": "PHILOSOPHICAL ESSAY",
 
-    "status": "Published",
+    "author": "NIRMUKA",
 
     "language": "Indonesia",
 
-    "author": "NIRMUKA",
+    "status": "Published",
 
-    "abstract": "Sebuah eksplorasi filosofis mengenai persoalan identitas personal, kontinuitas, dan kemungkinan keberadaan proses yang tetap berlangsung tanpa mempertahankan subjek yang sama.",
+    "abstract": "Sebuah eksplorasi filosofis mengenai kontinuitas proses, identitas personal, dan pertanyaan metafisik mengenai apakah keberlanjutan dapat terjadi tanpa keberadaan diri yang tetap.",
 
     "tags": [
       "Personal Identity",
-      "Continuity",
       "Self",
+      "Continuity",
       "Metaphysics"
     ],
 
-    "content": "",
+    "content": "/writings-content/filsafat/kontinuitas-tanpa-diri.md",
 
     "references": []
   },
@@ -40,19 +40,19 @@
 
     "title": "Beyond Homo Technicus: Reconstructing Human Responsibility and Moral Self-Transformation in the Age of Artificial Intelligence",
 
-    "subtitle": "A philosophical inquiry into human responsibility, moral transformation, and the reconstruction of humanity in the age of artificial intelligence.",
+    "subtitle": "A philosophical inquiry into human responsibility, moral transformation, and humanity in the age of artificial intelligence.",
 
     "year": "2026",
 
     "type": "PHILOSOPHICAL ESSAY",
 
-    "status": "Published",
+    "author": "NIRMUKA",
 
     "language": "English",
 
-    "author": "NIRMUKA",
+    "status": "Published",
 
-    "abstract": "A philosophical investigation of artificial intelligence through the perspectives of human responsibility, moral self-transformation, and the relationship between technology and humanity.",
+    "abstract": "A philosophical exploration of artificial intelligence through the perspectives of human responsibility, moral self-transformation, and the future of humanity beyond technological reduction.",
 
     "tags": [
       "Artificial Intelligence",
@@ -62,9 +62,12 @@
       "Human Transformation"
     ],
 
-    "content": "",
+    "content": "/writings-content/filsafat/beyond-homo-technicus.md",
 
-    "references": []
+    "references": [
+      "Hans Jonas",
+      "Mou Zongsan"
+    ]
   },
 
 
@@ -81,22 +84,23 @@
 
     "type": "THEOLOGICAL ESSAY",
 
-    "status": "Published",
+    "author": "NIRMUKA",
 
     "language": "Indonesia",
 
-    "author": "NIRMUKA",
+    "status": "Published",
 
-    "abstract": "Sebuah refleksi teologis mengenai manusia, iman, dan pencarian makna dalam pengalaman keberadaan.",
+    "abstract": "Sebuah refleksi teologis mengenai manusia, iman, penderitaan, dan pencarian makna dalam pengalaman keberadaan manusia.",
 
     "tags": [
       "Human",
       "Faith",
       "Meaning",
-      "Existence"
+      "Existence",
+      "Theology"
     ],
 
-    "content": "",
+    "content": "/writings-content/teologi/manusia-dan-pencarian-makna.md",
 
     "references": []
   }
