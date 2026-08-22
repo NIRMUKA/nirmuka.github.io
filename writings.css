@@ -501,5 +501,20 @@ grid-template-columns:1fr;
 
 }
 
+.writings-page {
 
+    opacity:1 !important;
+
+    transform:none !important;
+
+}
+
+
+.writing-category-menu button {
+
+    opacity:1 !important;
+
+    transform:none !important;
+
+}
 }
