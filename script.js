@@ -2,9 +2,20 @@
    NIRMUKA DIGITAL ARCHIVE SYSTEM
 ===================================== */
 
-const curtain = document.querySelector(".curtain");
-const content = document.getElementById("content-container");
-const menuLinks = document.querySelectorAll(".main-menu a");
+
+/* =====================================
+   GLOBAL ELEMENTS
+===================================== */
+
+const curtain =
+    document.querySelector(".curtain");
+
+const content =
+    document.getElementById("content-container");
+
+const menuLinks =
+    document.querySelectorAll(".main-menu a");
+
 
 
 /* =====================================
@@ -14,20 +25,22 @@ const menuLinks = document.querySelectorAll(".main-menu a");
 function curtainTransition(callback) {
 
     /*
-       Kalau halaman memiliki curtain,
-       jalankan transisi.
+       artwork.html juga memakai script.js.
 
-       Kalau tidak ada curtain
-       (misalnya artwork.html),
-       callback tetap dijalankan.
+       Kalau halaman tersebut tidak memiliki
+       curtain, callback tetap berjalan.
     */
 
     if (!curtain) {
+
         callback();
+
         return;
     }
 
+
     curtain.classList.add("active");
+
 
     setTimeout(() => {
 
@@ -36,7 +49,9 @@ function curtainTransition(callback) {
         curtain.classList.remove("active");
 
     }, 900);
+
 }
+
 
 
 /* =====================================
@@ -48,16 +63,24 @@ function backToLanding() {
     curtainTransition(() => {
 
         if (content) {
+
             content.innerHTML = "";
+
         }
 
+
         window.scrollTo({
+
             top: 0,
+
             behavior: "smooth"
+
         });
 
     });
+
 }
+
 
 
 /* =====================================
@@ -66,7 +89,10 @@ function backToLanding() {
 
 function loadWorks() {
 
-    if (!content) return;
+    if (!content) {
+        return;
+    }
+
 
     curtainTransition(() => {
 
@@ -76,19 +102,27 @@ function loadWorks() {
 
             <div class="section-inner">
 
-                <a href="#" class="back-home">
+
+                <a
+                    href="#"
+                    class="back-home"
+                >
                     ← BACK
                 </a>
+
 
                 <p class="work-number">
                     ARCHIVE / WORKS
                 </p>
 
+
                 <h2>
                     WORKS
                 </h2>
 
+
                 <div class="works-gallery"></div>
+
 
             </div>
 
@@ -97,19 +131,24 @@ function loadWorks() {
         `;
 
 
-        fetch("artworks.json")
+
+        fetch("/artworks.json?v=20260822-3")
 
         .then(response => {
 
             if (!response.ok) {
+
                 throw new Error(
                     "artworks.json gagal dimuat"
                 );
+
             }
+
 
             return response.json();
 
         })
+
 
         .then(artworks => {
 
@@ -118,7 +157,10 @@ function loadWorks() {
                     ".works-gallery"
                 );
 
-            if (!gallery) return;
+
+            if (!gallery) {
+                return;
+            }
 
 
             artworks.forEach(work => {
@@ -126,17 +168,19 @@ function loadWorks() {
                 const card =
                     document.createElement("div");
 
+
                 card.className =
                     "art-card";
 
 
                 card.innerHTML = `
 
-                    <a href="artwork.html?id=${work.id}">
+                    <a href="/artwork.html?id=${work.id}">
 
                         <img
                             src="${work.image}"
                             alt="${work.title}"
+                            draggable="false"
                         >
 
                         <h3>
@@ -158,6 +202,7 @@ function loadWorks() {
 
         })
 
+
         .catch(error => {
 
             console.error(
@@ -168,7 +213,9 @@ function loadWorks() {
         });
 
     });
+
 }
+
 
 
 /* =====================================
@@ -177,7 +224,10 @@ function loadWorks() {
 
 function loadWritings() {
 
-    if (!content) return;
+    if (!content) {
+        return;
+    }
+
 
     curtainTransition(() => {
 
@@ -187,23 +237,31 @@ function loadWritings() {
 
             <div class="section-inner">
 
-                <a href="#" class="back-home">
+
+                <a
+                    href="#"
+                    class="back-home"
+                >
                     ← BACK
                 </a>
+
 
                 <p class="work-number">
                     ARCHIVE / WRITINGS
                 </p>
 
+
                 <h2>
                     WRITINGS
                 </h2>
+
 
                 <p class="section-description">
                     Tulisan-tulisan NIRMUKA akan disusun
                     dalam tiga arsip utama:
                     Filsafat, Teologi, dan Umum.
                 </p>
+
 
             </div>
 
@@ -212,7 +270,9 @@ function loadWritings() {
         `;
 
     });
+
 }
+
 
 
 /* =====================================
@@ -221,7 +281,10 @@ function loadWritings() {
 
 function loadAbout() {
 
-    if (!content) return;
+    if (!content) {
+        return;
+    }
+
 
     curtainTransition(() => {
 
@@ -231,53 +294,70 @@ function loadAbout() {
 
             <div class="section-inner">
 
-                <a href="#" class="back-home">
+
+                <a
+                    href="#"
+                    class="back-home"
+                >
                     ← BACK
                 </a>
+
 
                 <p class="work-number">
                     ABOUT NIRMUKA
                 </p>
 
+
                 <h2>
                     ABOUT
                 </h2>
 
+
                 <div class="about-content">
+
 
                     <p>
                         Jujur, saya tidak pernah benar-benar tahu bagaimana cara menjelaskan diri saya sendiri. Saya selalu merasa bahwa manusia terlalu kompleks untuk diringkas menjadi beberapa kalimat sederhana: nama, pekerjaan, pencapaian, atau daftar hal-hal yang pernah dilakukan. Ada terlalu banyak bagian dalam diri seseorang yang tidak terlihat oleh orang lain; ketakutan yang disimpan, pikiran yang tidak pernah diucapkan, ingatan yang terus kembali meskipun kita berusaha melupakannya. Mungkin karena itu saya memilih membuat karya. Bukan karena saya memiliki semua jawaban, tetapi karena saya sendiri sedang mencoba memahami sesuatu yang bahkan sering kali tidak bisa saya jelaskan.
                     </p>
 
+
                     <p>
                         Saya tidak melihat dunia sebagai tempat yang sepenuhnya indah. Saya sering merasa bahwa ada sesuatu yang salah dalam cara manusia menjalani hidup. Kita membangun begitu banyak hal, mengejar begitu banyak hal, menciptakan berbagai bentuk kemajuan, tetapi di balik semua itu tetap ada rasa kosong yang tidak pernah benar-benar hilang. Manusia mampu menciptakan keindahan yang luar biasa, tetapi manusia yang sama juga mampu menciptakan kehancuran yang mengerikan.
                     </p>
+
 
                     <p>
                         Karya-karya saya lahir dari kegelisahan terhadap kondisi manusia. Saya tertarik pada sisi yang sering dihindari: rasa kehilangan, kesepian, ketakutan, ingatan yang menyakitkan, dan pertanyaan tentang keberadaan kita. Saya tidak tertarik membuat karya yang hanya memberikan kenyamanan atau menjadi hiasan yang menyenangkan untuk dilihat. Saya ingin karya saya memiliki luka, memiliki gangguan, memiliki sesuatu yang membuat seseorang berhenti sejenak dan bertanya mengapa mereka merasa tidak nyaman ketika melihatnya.
                     </p>
 
+
                     <p>
                         Dalam proses berkarya, saya banyak menggunakan distorsi, bentuk yang tidak sempurna, warna yang bertabrakan, dan elemen yang terlihat kacau. Bukan karena saya tidak mampu membuat sesuatu yang rapi, tetapi karena dunia yang saya lihat memang tidak selalu rapi. Manusia sendiri adalah sesuatu yang penuh dengan keretakan. Kita membawa masa lalu, trauma, harapan, keinginan, dan ketakutan dalam satu tubuh yang sama.
                     </p>
+
 
                     <p>
                         Saya tidak percaya bahwa seni harus selalu memberikan solusi. Terkadang seni bukan tentang menemukan cahaya, tetapi tentang berani masuk ke dalam kegelapan dan melihat apa yang ada di sana. Ada hal-hal dalam kehidupan yang mungkin tidak memiliki jawaban. Ada kehilangan yang tidak bisa diperbaiki. Ada pertanyaan yang mungkin akan tetap menjadi pertanyaan sampai akhir hidup kita.
                     </p>
 
+
                     <p>
                         NIRMUKA adalah ruang untuk semua kegelisahan itu. Sebuah arsip dari pikiran, ingatan, ketakutan, dan perjalanan batin yang terus berubah. Setiap karya bukan hanya sebuah gambar, tetapi sebuah bagian dari proses memahami manusia dan keberadaannya.
                     </p>
+
 
                     <p>
                         Karena pada akhirnya, mungkin seni bukan tentang menjelaskan dunia. Mungkin seni adalah cara kita bertahan ketika dunia terlalu sulit untuk dijelaskan.
                     </p>
 
+
                     <p class="signature">
                         — NIRMUKA
                     </p>
 
+
                 </div>
+
 
             </div>
 
@@ -286,11 +366,13 @@ function loadAbout() {
         `;
 
     });
+
 }
 
 
+
 /* =====================================
-   MAIN MENU
+   MAIN MENU CONTROL
 ===================================== */
 
 menuLinks.forEach(link => {
@@ -301,22 +383,29 @@ menuLinks.forEach(link => {
 
             event.preventDefault();
 
+
             const page =
                 link.dataset.page;
 
 
             if (page === "works") {
+
                 loadWorks();
+
             }
 
 
             if (page === "writings") {
+
                 loadWritings();
+
             }
 
 
             if (page === "about") {
+
                 loadAbout();
+
             }
 
         }
@@ -325,8 +414,9 @@ menuLinks.forEach(link => {
 });
 
 
+
 /* =====================================
-   BACK BUTTON
+   BACK BUTTON CONTROL
 ===================================== */
 
 document.addEventListener(
@@ -346,10 +436,12 @@ document.addEventListener(
 
         event.preventDefault();
 
+
         backToLanding();
 
     }
 );
+
 
 
 /* =====================================
@@ -358,10 +450,10 @@ document.addEventListener(
 
 (function () {
 
-    /*
-       Efek spray hanya untuk perangkat
-       dengan pointer/mouse presisi.
-    */
+
+    /* =====================================
+       DESKTOP MOUSE ONLY
+    ====================================== */
 
     const finePointer =
         window.matchMedia(
@@ -374,18 +466,21 @@ document.addEventListener(
     }
 
 
+
     /* =====================================
-       REMOVE OLD ELEMENTS
-       prevent duplicates
-    ===================================== */
+       REMOVE DUPLICATE SPRAY ELEMENTS
+    ====================================== */
 
     const oldCanvas =
         document.getElementById(
             "spray-canvas"
         );
 
+
     if (oldCanvas) {
+
         oldCanvas.remove();
+
     }
 
 
@@ -394,14 +489,18 @@ document.addEventListener(
             ".spray-cursor"
         );
 
+
     if (oldCursor) {
+
         oldCursor.remove();
+
     }
+
 
 
     /* =====================================
        CREATE CANVAS
-    ===================================== */
+    ====================================== */
 
     const sprayCanvas =
         document.createElement(
@@ -424,9 +523,10 @@ document.addEventListener(
         );
 
 
+
     /* =====================================
        CREATE NOZZLE
-    ===================================== */
+    ====================================== */
 
     const sprayCursor =
         document.createElement(
@@ -443,9 +543,10 @@ document.addEventListener(
     );
 
 
+
     /* =====================================
        CANVAS RESOLUTION
-    ===================================== */
+    ====================================== */
 
     let dpr = 1;
 
@@ -461,26 +562,22 @@ document.addEventListener(
 
         sprayCanvas.width =
             Math.floor(
-                window.innerWidth *
-                dpr
+                window.innerWidth * dpr
             );
 
 
         sprayCanvas.height =
             Math.floor(
-                window.innerHeight *
-                dpr
+                window.innerHeight * dpr
             );
 
 
         sprayCanvas.style.width =
-            window.innerWidth +
-            "px";
+            window.innerWidth + "px";
 
 
         sprayCanvas.style.height =
-            window.innerHeight +
-            "px";
+            window.innerHeight + "px";
 
 
         ctx.setTransform(
@@ -504,9 +601,10 @@ document.addEventListener(
     );
 
 
+
     /* =====================================
-       POINTER STATE
-    ===================================== */
+       POINTER DATA
+    ====================================== */
 
     let mouseX =
         window.innerWidth / 2;
@@ -536,9 +634,10 @@ document.addEventListener(
         [];
 
 
+
     /* =====================================
-       ALWAYS SHOW NOZZLE ON MOVE
-    ===================================== */
+       MOVE NOZZLE
+    ====================================== */
 
     document.addEventListener(
         "mousemove",
@@ -561,13 +660,11 @@ document.addEventListener(
 
 
             const dx =
-                mouseX -
-                previousX;
+                mouseX - previousX;
 
 
             const dy =
-                mouseY -
-                previousY;
+                mouseY - previousY;
 
 
             mouseSpeed =
@@ -578,13 +675,10 @@ document.addEventListener(
 
 
             /*
-               Ini bagian penting:
-               setiap mouse bergerak,
-               nozzle DIPAKSA muncul lagi.
+               Always force nozzle visible.
 
-               Jadi Works / About /
-               Writings tidak bisa
-               membuatnya hilang.
+               This prevents it disappearing
+               after LANDING → WORKS etc.
             */
 
             sprayCursor.style.opacity =
@@ -616,17 +710,16 @@ document.addEventListener(
     );
 
 
+
     /* =====================================
-       LEFT CLICK = START SPRAY
-    ===================================== */
+       LEFT CLICK
+    ====================================== */
 
     document.addEventListener(
         "mousedown",
         event => {
 
-            if (
-                event.button !== 0
-            ) {
+            if (event.button !== 0) {
                 return;
             }
 
@@ -650,9 +743,10 @@ document.addEventListener(
     );
 
 
+
     /* =====================================
-       RELEASE = STOP
-    ===================================== */
+       RELEASE
+    ====================================== */
 
     document.addEventListener(
         "mouseup",
@@ -670,9 +764,6 @@ document.addEventListener(
     );
 
 
-    /* =====================================
-       WINDOW LOSES FOCUS
-    ===================================== */
 
     window.addEventListener(
         "blur",
@@ -690,9 +781,10 @@ document.addEventListener(
     );
 
 
+
     /* =====================================
        CREATE SPRAY PARTICLES
-    ===================================== */
+    ====================================== */
 
     function createSpray(
         x,
@@ -745,9 +837,7 @@ document.addEventListener(
             let size;
 
 
-            if (
-                random > .965
-            ) {
+            if (random > .965) {
 
                 size =
                     2.6 +
@@ -756,9 +846,7 @@ document.addEventListener(
 
             }
 
-            else if (
-                random > .70
-            ) {
+            else if (random > .70) {
 
                 size =
                     1.1 +
@@ -795,14 +883,11 @@ document.addEventListener(
                     Math.sin(angle) *
                     distance,
 
-                size:
-                    size,
+                size: size,
 
-                life:
-                    life,
+                life: life,
 
-                maxLife:
-                    life,
+                maxLife: life,
 
                 driftX:
                     (Math.random() - .5) *
@@ -817,7 +902,8 @@ document.addEventListener(
         }
 
 
-        /* dense paint in center */
+
+        /* dense spray center */
 
         for (
             let i = 0;
@@ -848,17 +934,13 @@ document.addEventListener(
                     Math.random() *
                     2,
 
-                life:
-                    life,
+                life: life,
 
-                maxLife:
-                    life,
+                maxLife: life,
 
-                driftX:
-                    0,
+                driftX: 0,
 
-                driftY:
-                    0
+                driftY: 0
 
             });
 
@@ -867,9 +949,10 @@ document.addEventListener(
     }
 
 
+
     /* =====================================
        CONTINUOUS SPRAY
-    ===================================== */
+    ====================================== */
 
     let lastSprayTime =
         0;
@@ -881,9 +964,7 @@ document.addEventListener(
 
         if (
             spraying &&
-            time -
-            lastSprayTime >
-            27
+            time - lastSprayTime > 27
         ) {
 
             createSpray(
@@ -901,9 +982,10 @@ document.addEventListener(
     }
 
 
+
     /* =====================================
        DRAW PARTICLES
-    ===================================== */
+    ====================================== */
 
     function draw(
         time
@@ -925,9 +1007,7 @@ document.addEventListener(
         for (
             let i =
                 particles.length - 1;
-
             i >= 0;
-
             i--
         ) {
 
@@ -969,9 +1049,7 @@ document.addEventListener(
             let alpha;
 
 
-            if (
-                ratio > .28
-            ) {
+            if (ratio > .28) {
 
                 alpha =
                     .72;
@@ -1022,9 +1100,10 @@ document.addEventListener(
     );
 
 
+
     /* =====================================
-       POINTER LEAVES BROWSER
-    ===================================== */
+       POINTER LEAVES WINDOW
+    ====================================== */
 
     document.addEventListener(
         "mouseleave",
@@ -1046,9 +1125,10 @@ document.addEventListener(
     );
 
 
+
     /* =====================================
        POINTER RETURNS
-    ===================================== */
+    ====================================== */
 
     document.addEventListener(
         "mouseenter",
@@ -1076,18 +1156,62 @@ document.addEventListener(
         }
     );
 
+
 })();
 
+
+
 /* =====================================
-   NIRMUKA — THOU SHALL NOT STEAL
+   NIRMUKA ARTWORK PROTECTION
+   DETAIL PAGE ONLY
 ===================================== */
 
 (function () {
 
-    /* CREATE WARNING SCREEN */
+
+    /*
+       IMPORTANT:
+
+       Kalau halaman ini BUKAN
+       artwork detail page,
+       jangan aktifkan anti-theft.
+
+       Jadi halaman WORKS tidak akan
+       menampilkan THOU SHALL NOT STEAL.
+    */
+
+
+    const detailArtwork =
+        document.getElementById(
+            "art-image"
+        );
+
+
+    const artworkPage =
+        document.querySelector(
+            ".artwork-page"
+        );
+
+
+    if (
+        !detailArtwork ||
+        !artworkPage
+    ) {
+
+        return;
+
+    }
+
+
+
+    /* =====================================
+       CREATE WARNING SCREEN
+    ====================================== */
 
     const warning =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     warning.className =
@@ -1097,7 +1221,9 @@ document.addEventListener(
     warning.innerHTML = `
 
         <div class="theft-warning-text">
+
             THOU SHALL NOT STEAL !!
+
         </div>
 
     `;
@@ -1108,13 +1234,15 @@ document.addEventListener(
     );
 
 
-    let warningTimer = null;
+
+    let warningTimer =
+        null;
 
 
 
     /* =====================================
        SHOW WARNING
-    ===================================== */
+    ====================================== */
 
     function showTheftWarning() {
 
@@ -1129,34 +1257,41 @@ document.addEventListener(
 
 
         warningTimer =
-            setTimeout(() => {
+            setTimeout(
+                () => {
 
-                warning.classList.remove(
-                    "show"
-                );
+                    warning.classList.remove(
+                        "show"
+                    );
 
-            }, 1500);
+                },
+                1500
+            );
 
     }
 
 
 
     /* =====================================
-       RIGHT CLICK PROTECTION
-    ===================================== */
+       BLOCK RIGHT CLICK
+       ONLY LARGE ARTWORK IMAGE
+    ====================================== */
 
     document.addEventListener(
         "contextmenu",
-        function (event) {
+        event => {
+
 
             const artwork =
                 event.target.closest(
-                    ".art-card img, #art-image, .artwork-image"
+                    "#art-image"
                 );
 
 
             if (!artwork) {
+
                 return;
+
             }
 
 
@@ -1171,22 +1306,21 @@ document.addEventListener(
 
 
     /* =====================================
-       PREVENT DRAGGING
-    ===================================== */
+       BLOCK DRAGGING
+       DETAIL IMAGE ONLY
+    ====================================== */
 
-    document.addEventListener(
+    detailArtwork.setAttribute(
+        "draggable",
+        "false"
+    );
+
+
+    detailArtwork.addEventListener(
         "dragstart",
-        function (event) {
+        event => {
 
-            if (
-                event.target.matches(
-                    ".art-card img, #art-image, .artwork-image img"
-                )
-            ) {
-
-                event.preventDefault();
-
-            }
+            event.preventDefault();
 
         }
     );
@@ -1194,24 +1328,18 @@ document.addEventListener(
 
 
     /* =====================================
-       PREVENT IMAGE SELECTION
-    ===================================== */
+       BLOCK SELECTION
+       DETAIL IMAGE ONLY
+    ====================================== */
 
-    document.addEventListener(
+    detailArtwork.addEventListener(
         "selectstart",
-        function (event) {
+        event => {
 
-            if (
-                event.target.matches(
-                    ".art-card img, #art-image, .artwork-image img"
-                )
-            ) {
-
-                event.preventDefault();
-
-            }
+            event.preventDefault();
 
         }
     );
+
 
 })();
