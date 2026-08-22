@@ -900,4 +900,150 @@ body {
         line-height: 1.9;
     }
 
+   /* =====================================
+   NIRMUKA — SPRAY PAINT CURSOR
+===================================== */
+
+/* cursor asli hilang hanya di desktop */
+@media (pointer: fine) {
+
+    html,
+    body,
+    a,
+    button,
+    .art-card {
+        cursor: none !important;
+    }
+}
+
+
+/* canvas tempat cat pilox */
+#spray-canvas {
+    position: fixed;
+
+    left: 0;
+    top: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    pointer-events: none;
+
+    z-index: 9997;
+}
+
+
+/* nozzle pilox */
+.spray-cursor {
+    position: fixed;
+
+    left: 0;
+    top: 0;
+
+    width: 22px;
+    height: 22px;
+
+    pointer-events: none;
+
+    z-index: 10001;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-8deg);
+
+    transition:
+        width .12s ease,
+        height .12s ease,
+        transform .12s ease;
+
+    opacity: 0;
+}
+
+
+/* lingkaran nozzle */
+.spray-cursor::before {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 13px;
+    height: 13px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border: 2px solid rgba(255,255,255,.95);
+
+    border-radius: 50%;
+
+    background:
+        rgba(0,0,0,.30);
+
+    box-shadow:
+        0 0 0 1px rgba(0,0,0,.8),
+        0 0 12px rgba(255,255,255,.12);
+}
+
+
+/* lubang kecil di tengah */
+.spray-cursor::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 4px;
+    height: 4px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background: #ffffff;
+}
+
+
+/* ketika mouse ditekan */
+.spray-cursor.spraying {
+    width: 30px;
+    height: 30px;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(7deg)
+        scale(.88);
+}
+
+
+/* sedikit kabut di sekitar nozzle */
+.spray-cursor.spraying::before {
+    box-shadow:
+        0 0 0 1px rgba(0,0,0,.8),
+        0 0 15px rgba(255,255,255,.28),
+        0 0 32px rgba(255,255,255,.10);
+}
+
+
+/* pointer tidak dipakai di HP/tablet */
+@media (pointer: coarse) {
+
+    #spray-canvas,
+    .spray-cursor {
+        display: none !important;
+    }
+
+    html,
+    body,
+    a,
+    button,
+    .art-card {
+        cursor: auto !important;
+    }
+}
 }
