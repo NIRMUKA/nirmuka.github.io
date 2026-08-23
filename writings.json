@@ -8,6 +8,7 @@
     "type": "PHILOSOPHICAL ESSAY",
     "content": "/writings-content/filsafat/kontinuitas-tanpa-diri.md"
   },
+
   {
     "id": "beyond-homo-technicus",
     "category": "FILSAFAT",
@@ -16,5 +17,116 @@
     "year": "2026",
     "type": "PHILOSOPHICAL ESSAY",
     "content": "/writings-content/filsafat/beyond-homo-technicus.md"
+  },
+
+  {
+    "id": "artificial-intelligence-human-existence",
+    "category": "FILSAFAT",
+    "title": "Artificial Intelligence and the Fate of Human Existence: An Existential Inquiry into Intelligence, Freedom, and Meaning in the Age of Machines",
+    "subtitle": "An existential inquiry into intelligence, freedom, and human meaning in the age of artificial intelligence.",
+    "year": "2026",
+    "type": "PHILOSOPHICAL ESSAY",
+    "content": "/writings-content/filsafat/artificial-intelligence-human-existence.md"
+  },
+
+  {
+    "id": "nirmuka-and-the-desire-to-outlive-the-face",
+    "category": "FILSAFAT",
+    "title": "NIRMUKA and the Desire to Outlive the Face",
+    "subtitle": "A philosophical reflection on identity, recognition, memory, and the human desire to transcend finitude.",
+    "year": "2026",
+    "type": "PHILOSOPHICAL ESSAY",
+    "content": "/writings-content/filsafat/nirmuka-and-the-desire-to-outlive-the-face.md"
+  },
+
+  {
+    "id": "relasi-kuasa-produksi-kebenaran",
+    "category": "FILSAFAT",
+    "title": "Relasi Kuasa dan Produksi Kebenaran: Membaca Bahlil Lahadalia dalam Perspektif Foucault",
+    "subtitle": "A Foucauldian reading of power, knowledge, and the production of truth in contemporary political discourse.",
+    "year": "2026",
+    "type": "PHILOSOPHICAL ESSAY",
+    "content": "/writings-content/filsafat/relasi-kuasa-produksi-kebenaran.md"
+  },
+
+  {
+    "id": "menulis-dengan-luka-estetika-penderitaan-cioran",
+    "category": "FILSAFAT",
+    "title": "Menulis dengan Luka: Estetika Penderitaan dalam Pemikiran Emil Cioran",
+    "subtitle": "An existential reflection on suffering, writing, despair, and the aesthetics of human brokenness.",
+    "year": "2026",
+    "type": "PHILOSOPHICAL ESSAY",
+    "content": "/writings-content/filsafat/menulis-dengan-luka-estetika-penderitaan-cioran.md"
+  },
+
+  {
+    "id": "jokowi-sebagai-pangeran-populisme-machiavellian",
+    "category": "FILSAFAT",
+    "title": "Jokowi sebagai Pangeran: Populisme Machiavellian dalam Demokrasi Indonesia",
+    "subtitle": "A philosophical analysis of power, political image, legitimacy, and Machiavellian strategies in Indonesian democracy.",
+    "year": "2026",
+    "type": "PHILOSOPHICAL ESSAY",
+    "content": "/writings-content/filsafat/jokowi-sebagai-pangeran-populisme-machiavellian.md"
+  },
+
+  {
+    "id": "desolatism-the-final-honesty-of-human-existence",
+    "category": "FILSAFAT",
+    "title": "Desolatism: The Final Honesty of Human Existence After the Failure of Meaning",
+    "subtitle": "A philosophical inquiry beyond existentialism and nihilism into finitude, meaning, and human limitation.",
+    "year": "2026",
+    "type": "PHILOSOPHICAL ESSAY",
+    "content": "/writings-content/filsafat/desolatism-the-final-honesty-of-human-existence.md"
+  },
+
+  {
+    "id": "eksistensi-kebenaran-dalam-etika-norma",
+    "category": "FILSAFAT",
+    "title": "Eksistensi Kebenaran dalam Etika Norma",
+    "subtitle": "An inquiry into truth, morality, and the tension between subjective experience and objective ethical reality.",
+    "year": "2026",
+    "type": "PHILOSOPHICAL ESSAY",
+    "content": "/writings-content/filsafat/eksistensi-kebenaran-dalam-etika-norma.md"
+  },
+
+
+  {
+    "id": "abu-nawas-sufism",
+    "category": "TEOLOGI",
+    "title": "Abu Nawas, Sufism, and the Existential Presence of God: An Inquiry into Sin, Repentance, and the Human Search for Divine Meaning",
+    "subtitle": "An existential theological reflection on sin, repentance, divine mercy, and the human search for God.",
+    "year": "2026",
+    "type": "THEOLOGICAL ESSAY",
+    "content": "/writings-content/teologi/abu-nawas-sufism.md"
+  },
+
+  {
+    "id": "anak-manusia-dalam-apokaliptik",
+    "category": "TEOLOGI",
+    "title": "Anak Manusia dalam Apokaliptik",
+    "subtitle": "An exploration of apocalyptic traditions, Christology, and the theological meaning of the Son of Man.",
+    "year": "2026",
+    "type": "THEOLOGICAL ESSAY",
+    "content": "/writings-content/teologi/anak-manusia-dalam-apokaliptik.md"
+  },
+
+  {
+    "id": "from-incarnation-to-cosmos",
+    "category": "TEOLOGI",
+    "title": "From Incarnation to Cosmos: The Total Trans-Existence of God-Human in Christ and the Network of God-Human-Creation Relation",
+    "subtitle": "A theological exploration of incarnation, trans-existence, and the cosmic relationship between God, humanity, and creation.",
+    "year": "2026",
+    "type": "THEOLOGICAL ESSAY",
+    "content": "/writings-content/teologi/from-incarnation-to-cosmos.md"
+  },
+
+  {
+    "id": "public-lament-feast-o-tuan-theology-of-mortal-delay",
+    "category": "TEOLOGI",
+    "title": "Popular Music as Public Lament: .Feast’s “O, Tuan” and the Theology of Mortal Delay",
+    "subtitle": "A theological reading of popular music, grief, mortality, and lament beyond ecclesial spaces.",
+    "year": "2026",
+    "type": "THEOLOGICAL ESSAY",
+    "content": "/writings-content/teologi/public-lament-feast-o-tuan-theology-of-mortal-delay.md"
   }
 ]
