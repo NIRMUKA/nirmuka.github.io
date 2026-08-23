@@ -425,6 +425,21 @@ artworks
 ){
 
 
+if(
+!Array.isArray(artworks)
+||
+artworks.length===0
+){
+
+console.error(
+"Carousel initialization failed: no artworks"
+);
+
+return;
+
+}
+
+
 
 const track =
 document.querySelector(
