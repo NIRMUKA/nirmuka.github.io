@@ -1,117 +1,131 @@
 /* =====================================================
    NIRMUKA WRITINGS ENGINE
+   VERSION 1.0
 
-   Function:
-   - Load writings.json
-   - Render writing archive
-   - Category filter
-   - Open detail page
+   Handle:
+   - Load writings database
+   - Category archive
+   - Writing list
+   - Detail navigation
 
 ===================================================== */
 
 
 (function(){
 
-
 "use strict";
 
 
-
-let writings = [];
-
-let currentCategory = "ALL";
-
-
+let writingsDatabase = [];
 
 
 
 /* =====================================================
-   INIT
+   OPEN WRITINGS ARCHIVE
 ===================================================== */
 
 
 window.openWritingArchive = function(){
 
 
-const container =
+const content =
 document.getElementById(
 "content-container"
 );
 
 
-
-if(!container){
-
-console.error(
-"Writing container missing"
-);
-
+if(!content){
 return;
-
 }
 
 
 
-container.innerHTML = `
+content.innerHTML = `
 
 
-<section class="writing-archive">
+<section class="page-section writings-page">
 
 
-<header class="writing-title">
+<div class="section-inner">
 
-<p>
-WRITINGS
+
+<a href="#"
+class="back-home">
+
+← BACK
+
+</a>
+
+
+
+<p class="work-number">
+
+ARCHIVE / WRITINGS
+
 </p>
 
 
-<h1>
-Archive of Thoughts
-</h1>
+
+<h2>
+
+WRITINGS
+
+</h2>
 
 
-</header>
 
-
-
-<nav class="writing-filter">
-
-
-<button data-category="ALL">
-ALL
-</button>
+<div class="writing-category-menu">
 
 
 <button data-category="FILSAFAT">
+
+01
+
+<br>
+
 FILSAFAT
+
 </button>
+
 
 
 <button data-category="TEOLOGI">
+
+02
+
+<br>
+
 TEOLOGI
+
 </button>
+
 
 
 <button data-category="UMUM">
+
+03
+
+<br>
+
 UMUM
+
 </button>
-
-
-</nav>
-
-
-
-<div 
-id="writing-list"
-class="writing-list"
->
 
 
 </div>
 
 
-</section>
 
+
+<div id="writing-list">
+
+</div>
+
+
+
+</div>
+
+</section>
 
 
 `;
@@ -127,10 +141,6 @@ loadWritings();
 
 
 
-
-
-
-
 /* =====================================================
    LOAD JSON
 ===================================================== */
@@ -139,42 +149,29 @@ loadWritings();
 function loadWritings(){
 
 
-fetch(
-"/writings.json?v=1"
-)
+fetch("/writings.json?v=1")
 
 
-.then(
-response =>
-response.json()
-)
+.then(response=>response.json())
 
 
-.then(
-data=>{
+.then(data=>{
 
 
-writings = data;
+writingsDatabase=data;
 
 
-renderWritings();
+activateCategory();
 
 
-setupFilter();
+})
 
 
-
-}
-
-)
-
-
-.catch(
-error=>{
+.catch(error=>{
 
 
 console.error(
-"WRITING LOAD ERROR",
+"WRITINGS ERROR",
 error
 );
 
@@ -189,201 +186,22 @@ error
 
 
 
-
-
-
 /* =====================================================
-   RENDER
+   CATEGORY BUTTON
 ===================================================== */
 
 
-function renderWritings(){
+function activateCategory(){
 
 
-
-const container =
-document.getElementById(
-"writing-list"
+const buttons =
+document.querySelectorAll(
+"[data-category]"
 );
 
 
 
-if(!container)
-return;
-
-
-
-
-let filtered =
-writings.filter(
-item=>{
-
-
-if(currentCategory==="ALL")
-return true;
-
-
-return item.category === currentCategory;
-
-
-}
-
-);
-
-
-
-
-
-container.innerHTML =
-filtered
-.map(
-writing=>`
-
-
-<article 
-class="writing-card"
-data-id="${writing.id}"
->
-
-
-<p class="writing-category">
-
-${writing.category}
-
-</p>
-
-
-
-<h2>
-
-${writing.title}
-
-</h2>
-
-
-
-<p class="writing-subtitle">
-
-${writing.subtitle}
-
-</p>
-
-
-
-<div class="writing-meta">
-
-
-<span>
-${writing.year}
-</span>
-
-
-<span>
-${writing.type}
-</span>
-
-
-</div>
-
-
-
-</article>
-
-
-
-`
-
-)
-.join("");
-
-
-
-
-
-addCardEvents();
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =====================================================
-   CARD CLICK
-===================================================== */
-
-
-function addCardEvents(){
-
-
-document
-.querySelectorAll(
-".writing-card"
-)
-.forEach(
-card=>{
-
-
-card.addEventListener(
-"click",
-()=>{
-
-
-const id =
-card.dataset.id;
-
-
-
-window.location.href =
-
-"/writing-detail.html?id="
-+
-id;
-
-
-
-}
-
-);
-
-
-
-}
-
-);
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =====================================================
-   FILTER
-===================================================== */
-
-
-function setupFilter(){
-
-
-document
-.querySelectorAll(
-".writing-filter button"
-)
-.forEach(
-button=>{
+buttons.forEach(button=>{
 
 
 button.addEventListener(
@@ -391,50 +209,171 @@ button.addEventListener(
 ()=>{
 
 
-currentCategory =
-button.dataset.category;
-
-
-
-document
-.querySelectorAll(
-".writing-filter button"
-)
-.forEach(
-btn=>
-btn.classList.remove(
-"active"
-)
-
+showCategory(
+button.dataset.category
 );
 
 
-
-button.classList.add(
-"active"
-);
+});
 
 
-
-renderWritings();
-
-
-
-}
-
-);
-
-
-
-}
-
-);
-
+});
 
 
 }
 
 
+
+
+
+
+
+/* =====================================================
+   SHOW WRITING LIST
+===================================================== */
+
+
+function showCategory(category){
+
+
+
+const list =
+document.getElementById(
+"writing-list"
+);
+
+
+
+if(!list){
+return;
+}
+
+
+
+const writings =
+writingsDatabase.filter(
+item =>
+item.category === category
+);
+
+
+
+if(writings.length===0){
+
+
+list.innerHTML=`
+
+<h3>
+NO ARCHIVE FOUND
+</h3>
+
+`;
+
+
+return;
+
+
+}
+
+
+
+
+list.innerHTML=`
+
+
+
+<h3 class="writing-category-title">
+
+${category}
+
+</h3>
+
+
+
+
+<div class="writing-items">
+
+
+${
+writings.map(
+(item,index)=>`
+
+
+<a
+
+class="writing-item"
+
+href="/writing-detail.html?id=${item.id}"
+
+>
+
+
+<div class="writing-number">
+
+${
+
+String(index+1)
+.padStart(2,"0")
+
+}
+
+</div>
+
+
+
+
+<div class="writing-data">
+
+
+<h2>
+
+${item.title}
+
+</h2>
+
+
+
+<p>
+
+${item.subtitle || ""}
+
+</p>
+
+
+
+<span>
+
+${item.type}
+
+·
+
+${item.year}
+
+</span>
+
+
+
+</div>
+
+
+
+</a>
+
+
+`
+).join("")
+}
+
+
+</div>
+
+
+
+`;
+
+
+
+}
 
 
 
