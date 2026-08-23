@@ -1,49 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
 
 
 <meta charset="UTF-8">
 
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
+<meta 
+name="viewport" 
+content="width=device-width, initial-scale=1.0"
 >
 
 
+
 <title>
-    NIRMUKA
+NIRMUKA | Visual Archive
 </title>
 
 
 
+<meta 
+name="description"
+content="NIRMUKA — Visual Archive, Writings, Philosophy, Theology, and Artistic Works."
+>
+
+
+
+<meta 
+name="author"
+content="NIRMUKA"
+>
+
+
+
+
 <!-- =================================================
-     MAIN STYLE
+     MAIN VISUAL ENGINE
 ================================================== -->
 
 
 <link
-    rel="stylesheet"
-    href="/style.css?v=2"
+rel="stylesheet"
+href="/style.css?v=50"
 />
 
-
-
-<!-- =================================================
-     WRITINGS STYLE
-================================================== -->
-
-
-<link
-    rel="stylesheet"
-    href="/writings.css?v=2"
-/>
 
 
 
 </head>
+
+
 
 
 
@@ -53,11 +61,29 @@
 
 
 <!-- =================================================
-     CURTAIN TRANSITION
+     SPRAY CANVAS ENGINE
 ================================================== -->
 
 
-<div class="curtain"></div>
+<canvas 
+id="spray-canvas">
+</canvas>
+
+
+
+
+
+
+
+<!-- =================================================
+     PAGE TRANSITION
+================================================== -->
+
+
+<div 
+class="curtain">
+</div>
+
 
 
 
@@ -71,32 +97,45 @@
 
 
 <section
-    class="landing"
+class="landing"
 >
 
 
 
-<div class="hero-overlay"></div>
+<div
+class="hero-overlay">
+</div>
 
 
 
 
-<div class="hero-content">
+
+
+<div
+class="hero-content"
+>
 
 
 
-<h1 class="nirmuka">
 
-    NIRMUKA
+<h1
+class="nirmuka"
+>
+
+NIRMUKA
 
 </h1>
 
 
 
 
-<p class="artist-tag">
 
-    VISUAL ARCHIVE · WRITER · ARTIST
+
+<p
+class="artist-tag"
+>
+
+VISUAL ARCHIVE · WRITER · ARTIST
 
 </p>
 
@@ -105,12 +144,16 @@
 
 
 
-<nav class="main-menu">
+
+<nav
+class="main-menu"
+>
+
 
 
 <a
-    href="#"
-    data-page="works"
+href="#"
+data-page="works"
 >
 
 WORKS
@@ -121,8 +164,8 @@ WORKS
 
 
 <a
-    href="#"
-    data-page="writings"
+href="#"
+data-page="writings"
 >
 
 WRITINGS
@@ -134,8 +177,8 @@ WRITINGS
 
 
 <a
-    href="#"
-    data-page="about"
+href="#"
+data-page="about"
 >
 
 ABOUT
@@ -145,6 +188,8 @@ ABOUT
 
 
 </nav>
+
+
 
 
 
@@ -161,19 +206,19 @@ ABOUT
 
 
 
+
+
 <!-- =================================================
-     DYNAMIC PAGE CONTAINER
-
-     WORKS
-     WRITINGS
-     ABOUT
-
+     DYNAMIC CONTENT SYSTEM
 ================================================== -->
 
 
 <main
-    id="content-container"
-></main>
+id="content-container"
+>
+
+</main>
+
 
 
 
@@ -183,49 +228,49 @@ ABOUT
 
 
 <!-- =================================================
-     JAVASCRIPT SYSTEM
-
-     IMPORTANT ORDER
-
+     JAVASCRIPT ENGINE
 ================================================== -->
 
 
 
-<!-- CORE WEBSITE -->
+
+<!-- CORE NAVIGATION -->
 
 <script
-src="/script.js?v=2">
+src="/script.js?v=20">
 </script>
 
 
 
 
 
-<!-- WRITINGS ARCHIVE -->
+<!-- VISUAL SPRAY EFFECT -->
 
 <script
-src="/writings.js?v=2">
+src="/spray.js?v=20">
 </script>
 
 
 
 
 
-<!-- SPRAY EFFECT -->
+<!-- WRITING ARCHIVE -->
 
 <script
-src="/spray.js?v=2">
+src="/writings.js?v=20">
 </script>
 
 
 
 
 
-<!-- ART PROTECTION -->
+
+<!-- SECURITY -->
 
 <script
-src="/protection.js?v=2">
+src="/protection.js?v=20">
 </script>
+
 
 
 
