@@ -289,19 +289,66 @@ loadArtworks();
 function loadArtworks(){
 
 
-
 fetch(
-"/artworks.json?v=10"
+"/artworks.json?v=30"
 )
 
 
 .then(
-response=>response.json()
+response=>{
+
+
+if(!response.ok){
+
+throw new Error(
+"ARTWORK JSON ERROR: " + response.status
+);
+
+}
+
+
+return response.json();
+
+
+}
+
 )
 
 
 .then(
 data=>{
+
+
+console.log(
+"NIRMUKA ARTWORK DATABASE:",
+data.length,
+"works"
+);
+
+
+
+if(
+!Array.isArray(data)
+){
+
+throw new Error(
+"ARTWORK DATA FORMAT INVALID"
+);
+
+}
+
+
+
+if(
+data.length===0
+){
+
+throw new Error(
+"ARTWORK DATABASE EMPTY"
+);
+
+}
+
 
 
 createCarousel(
@@ -322,6 +369,35 @@ console.error(
 "Artwork error:",
 error
 );
+
+
+
+const track =
+document.querySelector(
+".carousel-track"
+);
+
+
+
+if(track){
+
+track.innerHTML =
+
+`
+<div style="
+color:white;
+text-align:center;
+padding:60px;
+font-family:Arial;
+width:100%;
+">
+ARTWORK ARCHIVE ERROR
+<br><br>
+${error.message}
+</div>
+`;
+
+}
 
 
 }
