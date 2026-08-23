@@ -4,11 +4,12 @@
 
 <head>
 
+
 <meta charset="UTF-8">
 
 
-<meta 
-name="viewport" 
+<meta
+name="viewport"
 content="width=device-width, initial-scale=1.0"
 >
 
@@ -19,9 +20,27 @@ NIRMUKA | Writing
 
 
 
-<link rel="stylesheet" href="/style.css?v=20">
 
-<link rel="stylesheet" href="/writing-detail.css?v=1">
+<meta
+name="description"
+content="NIRMUKA Writing Archive"
+>
+
+
+
+
+<!-- =================================================
+     MAIN VISUAL ENGINE
+================================================== -->
+
+
+<link
+rel="stylesheet"
+href="/style.css?v=50"
+/>
+
+
+
 
 
 </head>
@@ -29,23 +48,62 @@ NIRMUKA | Writing
 
 
 
+
+
 <body>
 
 
-<div class="curtain"></div>
+
+<!-- =================================================
+     SPRAY CANVAS
+================================================== -->
+
+
+<canvas
+id="spray-canvas">
+</canvas>
 
 
 
 
-<main class="writing-detail-page">
 
 
 
-<div class="writing-detail-container">
+<!-- =================================================
+     PAGE TRANSITION
+================================================== -->
+
+
+<div
+class="curtain">
+</div>
 
 
 
-<a 
+
+
+
+
+<!-- =================================================
+     WRITING DETAIL PAGE
+================================================== -->
+
+
+<main
+class="writing-detail-page"
+>
+
+
+
+<div
+class="writing-detail-container"
+>
+
+
+
+
+
+<a
 href="/"
 class="back-home"
 >
@@ -59,11 +117,14 @@ class="back-home"
 
 
 
-<header class="writing-header">
+
+<header
+class="writing-header"
+>
 
 
 
-<p 
+<p
 class="writing-category"
 id="writing-category"
 >
@@ -74,7 +135,11 @@ CATEGORY
 
 
 
-<h1 id="writing-title">
+
+
+<h1
+id="writing-title"
+>
 
 Loading...
 
@@ -82,7 +147,9 @@ Loading...
 
 
 
-<p 
+
+
+<p
 class="writing-subtitle"
 id="writing-subtitle"
 >
@@ -92,10 +159,16 @@ id="writing-subtitle"
 
 
 
-<div class="writing-meta">
 
 
-<span id="writing-year">
+
+<div
+class="writing-meta"
+>
+
+
+<span
+id="writing-year">
 </span>
 
 
@@ -104,12 +177,15 @@ id="writing-subtitle"
 </span>
 
 
-<span id="writing-type">
+<span
+id="writing-type">
 </span>
 
 
 
 </div>
+
+
 
 
 
@@ -121,7 +197,11 @@ id="writing-subtitle"
 
 
 
-<section class="writing-abstract">
+
+
+<section
+class="writing-abstract"
+>
 
 
 <h2>
@@ -132,9 +212,12 @@ ABSTRACT
 
 
 
-<p id="writing-abstract">
+<p
+id="writing-abstract"
+>
 
 </p>
+
 
 
 </section>
@@ -146,7 +229,10 @@ ABSTRACT
 
 
 
-<section class="writing-content">
+
+<section
+class="writing-content"
+>
 
 
 <h2>
@@ -157,10 +243,14 @@ ESSAY
 
 
 
-<div id="writing-content">
+
+<div
+id="writing-content"
+>
 
 
 </div>
+
 
 
 </section>
@@ -172,7 +262,10 @@ ESSAY
 
 
 
-<section class="writing-reference">
+
+<section
+class="writing-reference"
+>
 
 
 <h2>
@@ -183,10 +276,15 @@ REFERENCES
 
 
 
-<ul id="writing-references">
+
+<ul
+id="writing-references"
+>
 
 
 </ul>
+
+
 
 
 </section>
@@ -206,7 +304,45 @@ REFERENCES
 
 
 
-<script src="/writing-detail.js?v=1"></script>
+
+
+
+
+<!-- =================================================
+     JAVASCRIPT ENGINE
+================================================== -->
+
+
+
+<!-- LOAD WRITING CONTENT -->
+
+<script
+src="/writing-detail.js?v=20">
+</script>
+
+
+
+
+
+<!-- GLOBAL PROTECTION -->
+
+<script
+src="/protection.js?v=50">
+</script>
+
+
+
+
+
+<!-- SPRAY EFFECT -->
+
+<script
+src="/spray.js?v=20">
+</script>
+
+
+
+
 
 
 </body>
