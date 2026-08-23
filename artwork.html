@@ -7,15 +7,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
 <title>NIRMUKA | Artwork</title>
-
 
 <link rel="stylesheet" href="/style.css?v=20260822">
 
-
 </head>
-
 
 
 <body>
@@ -24,16 +20,9 @@
 <div class="curtain"></div>
 
 
-
-
-
 <main class="artwork-page">
 
-
 <div class="artwork-container">
-
-
-
 
 
 <a
@@ -41,19 +30,11 @@ href="/"
 class="back-button"
 id="artwork-back"
 >
-
 ← BACK TO WORKS
-
 </a>
 
 
-
-
-
-
-
 <div class="artwork-image">
-
 
 <img
 
@@ -67,18 +48,11 @@ draggable="false"
 
 >
 
-
 </div>
 
 
 
-
-
-
-
-
 <div class="artwork-info">
-
 
 
 <p
@@ -90,14 +64,9 @@ WORK
 
 
 
-
-
 <h1 id="art-title">
 Loading...
 </h1>
-
-
-
 
 
 
@@ -114,7 +83,6 @@ YEAR
 —
 </span>
 
-
 </div>
 
 
@@ -129,9 +97,7 @@ MEDIUM
 —
 </span>
 
-
 </div>
-
 
 
 
@@ -145,17 +111,10 @@ DIMENSION
 —
 </span>
 
-
 </div>
 
 
-
 </div>
-
-
-
-
-
 
 
 
@@ -172,13 +131,11 @@ BACKGROUND
 
 
 
-
 <h2>
 CONCEPT
 </h2>
 
 <p id="art-concept"></p>
-
 
 
 
@@ -190,13 +147,11 @@ VISUAL DESCRIPTION
 
 
 
-
 <h2>
 ARTIST STATEMENT
 </h2>
 
 <p id="art-statement"></p>
-
 
 
 
@@ -208,7 +163,6 @@ INSPIRATION
 
 
 
-
 <h2>
 CREATIVE PROCESS
 </h2>
@@ -216,13 +170,7 @@ CREATIVE PROCESS
 <p id="art-process"></p>
 
 
-
 </div>
-
-
-
-
-
 
 
 </div>
@@ -238,8 +186,6 @@ CREATIVE PROCESS
 
 
 
-
-
 <script>
 
 
@@ -248,6 +194,7 @@ CREATIVE PROCESS
 
 
 const id =
+
 new URLSearchParams(
 window.location.search
 )
@@ -255,9 +202,11 @@ window.location.search
 
 
 
-
-
 if(!id){
+
+console.error(
+"No artwork ID"
+);
 
 return;
 
@@ -266,18 +215,98 @@ return;
 
 
 
-
-
-
 fetch(
-"/artworks.json?v=10"
+"/artworks.json?v=999"
 )
 
 
 .then(
-response =>
-response.json()
+response=>{
+
+
+if(!response.ok){
+
+throw new Error(
+"Cannot load artworks.json"
+);
+
+}
+
+
+return response.text();
+
+
+}
+
 )
+
+
+
+.then(
+text=>{
+
+
+let artworks;
+
+
+try{
+
+
+artworks =
+JSON.parse(text);
+
+
+}
+
+catch(error){
+
+
+console.error(
+"BROKEN JSON:",
+error
+);
+
+
+document.getElementById(
+"art-title"
+).textContent =
+"JSON ERROR";
+
+
+throw error;
+
+
+}
+
+
+
+console.log(
+"NIRMUKA DATABASE:",
+artworks.length,
+"works"
+);
+
+
+
+if(!Array.isArray(artworks)){
+
+
+throw new Error(
+"Invalid artwork format"
+);
+
+
+}
+
+
+
+return artworks;
+
+
+}
+
+)
+
 
 
 .then(
@@ -285,33 +314,39 @@ artworks=>{
 
 
 const artwork =
+
 artworks.find(
-item =>
+
+item=>
+
 item.id === id
+
 );
-
-
 
 
 
 if(!artwork){
 
+
 console.error(
-"Artwork not found"
+"Artwork not found:",
+id
 );
 
+
 return;
+
 
 }
 
 
 
 
-
 document.title =
-artwork.title +
-" | NIRMUKA";
 
+artwork.title
++
+" | NIRMUKA";
 
 
 
@@ -321,6 +356,7 @@ artwork.title +
 
 
 const image =
+
 document.getElementById(
 "art-image"
 );
@@ -328,15 +364,21 @@ document.getElementById(
 
 
 image.src =
+
 artwork.image.startsWith("/")
+
 ?
+
 artwork.image
+
 :
+
 "/"+artwork.image;
 
 
 
 image.alt =
+
 artwork.title;
 
 
@@ -344,16 +386,15 @@ artwork.title;
 
 
 
-/* BASIC */
+
+/* META */
 
 
 set(
 "art-id",
-"WORK "+
-String(
-id.replace("karya","")
-)
-.padStart(2,"0")
+"WORK "
++
+id.replace("karya","").padStart(2,"0")
 );
 
 
@@ -389,8 +430,7 @@ artwork.dimension
 
 
 
-
-/* TEXT */
+/* DESCRIPTION */
 
 
 set(
@@ -435,21 +475,26 @@ artwork.creative_process
 
 
 
+}
+
+)
 
 
-})
+
 .catch(
+
 error=>{
 
+
 console.error(
-"NIRMUKA ERROR",
+"NIRMUKA ERROR:",
 error
 );
+
 
 }
 
 );
-
 
 
 
@@ -461,14 +506,19 @@ id,
 value
 ){
 
+
 const el =
+
 document.getElementById(id);
+
 
 
 if(el){
 
+
 el.textContent =
 value || "";
+
 
 }
 
@@ -487,10 +537,10 @@ value || "";
 
 
 
-
 <!-- VISUAL ENGINE -->
 
 <script src="/spray.js?v=1"></script>
+
 
 
 <!-- ART PROTECTION -->
@@ -501,13 +551,16 @@ value || "";
 
 
 
+
 <script>
 
 
 const back =
+
 document.getElementById(
 "artwork-back"
 );
+
 
 
 if(back){
@@ -517,13 +570,16 @@ back.onclick=function(e){
 
 
 if(
-document.referrer
-.includes(
+
+document.referrer.includes(
 location.hostname
 )
+
 ){
 
+
 e.preventDefault();
+
 
 history.back();
 
@@ -537,11 +593,11 @@ history.back();
 }
 
 
+
 </script>
 
 
 
 </body>
-
 
 </html>
