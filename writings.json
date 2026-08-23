@@ -105,3 +105,38 @@
     "references": []
   }
 ]
+
+{
+  "id": "beyond-homo-technicus",
+  "category": "FILSAFAT",
+  "title": "Beyond Homo Technicus: Reconstructing Human Responsibility and Moral Self-Transformation in the Age of Artificial Intelligence",
+  "subtitle": "A philosophical inquiry into human responsibility, moral transformation, and the reconstruction of humanity in the age of artificial intelligence.",
+  "year": "2026",
+  "type": "PHILOSOPHICAL ESSAY",
+  "author": "NIRMUKA",
+  "language": "English",
+  "status": "Published",
+  "abstract": "The emergence of artificial intelligence challenges not only technological capacities but also humanity’s moral and existential self-understanding. This article reconstructs human responsibility beyond technological mastery through Heidegger’s critique of technology, Hans Jonas’s ethics of responsibility, Shannon Vallor’s technomoral virtues, and Mou Zongsan’s moral metaphysics.",
+  "tags": [
+    "Artificial Intelligence",
+    "Philosophy of Technology",
+    "Human Responsibility",
+    "Hans Jonas",
+    "Heidegger",
+    "Mou Zongsan",
+    "Technomoral Virtues"
+  ],
+  "content": "/writings-content/filsafat/beyond-homo-technicus.md",
+  "references": [
+    "Billioud (2012)",
+    "Boland (2025)",
+    "Bostrom (2014)",
+    "Ernst et al. (2026)",
+    "Harari (2016)",
+    "Heidegger (1977)",
+    "Jonas (1984)",
+    "Mitcham (1994)",
+    "Tang (2023)",
+    "Vallor (2016)"
+  ]
+}
