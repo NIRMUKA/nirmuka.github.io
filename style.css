@@ -4268,3 +4268,132 @@ opacity:1;
 
 
 }
+
+/* =====================================================
+   NIRMUKA PROTECTION WARNING
+===================================================== */
+
+
+.protection-overlay {
+
+
+    position:fixed;
+
+    inset:0;
+
+
+    z-index:999999;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+
+    background:
+
+    rgba(0,0,0,.92);
+
+
+
+    opacity:0;
+
+
+    pointer-events:none;
+
+
+
+    transition:
+
+    opacity .3s ease;
+
+
+
+}
+
+
+
+.protection-overlay.show{
+
+
+    opacity:1;
+
+
+    pointer-events:auto;
+
+
+}
+
+
+
+.protection-warning-box{
+
+
+    animation:
+
+    protectionShake .4s ease;
+
+
+}
+
+
+
+.protection-warning-image{
+
+
+    width:
+
+    min(90vw,900px);
+
+
+
+    max-height:
+
+    85vh;
+
+
+
+    object-fit:contain;
+
+
+
+    box-shadow:
+
+    0 0 80px rgba(255,255,255,.2);
+
+
+
+}
+
+
+
+@keyframes protectionShake{
+
+
+0%{
+
+transform:scale(.7) rotate(-5deg);
+
+}
+
+
+50%{
+
+transform:scale(1.05) rotate(3deg);
+
+}
+
+
+100%{
+
+transform:scale(1) rotate(0);
+
+}
+
+
+}
