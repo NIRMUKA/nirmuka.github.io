@@ -6,7 +6,7 @@
 
     "title": "Ketika Proses Berlanjut, tetapi Subjek Tidak Bertahan: Persoalan Kontinuitas Tanpa Diri yang Berkelanjutan",
 
-    "subtitle": "Sebuah kajian mengenai kontinuitas proses, identitas personal, dan kemungkinan keberlanjutan tanpa subjek yang sama.",
+    "subtitle": "Sebuah eksplorasi filosofis mengenai kontinuitas, identitas personal, dan kemungkinan keberlanjutan tanpa keberadaan diri yang tetap.",
 
     "year": "2026",
 
@@ -18,13 +18,14 @@
 
     "status": "Published",
 
-    "abstract": "Sebuah eksplorasi filosofis mengenai kontinuitas proses, identitas personal, dan pertanyaan metafisik mengenai apakah keberlanjutan dapat terjadi tanpa keberadaan diri yang tetap.",
+    "abstract": "Tulisan ini mengeksplorasi persoalan filosofis mengenai kontinuitas tanpa keberadaan diri yang tetap. Pertanyaan utama yang dibahas adalah apakah suatu proses dapat dianggap berkelanjutan apabila tidak terdapat subjek identik yang mempertahankan kesinambungan pengalaman, ingatan, dan identitas personal.",
 
     "tags": [
       "Personal Identity",
-      "Self",
+      "Metaphysics",
       "Continuity",
-      "Metaphysics"
+      "Self",
+      "Process Philosophy"
     ],
 
     "content": "/writings-content/filsafat/kontinuitas-tanpa-diri.md",
@@ -40,7 +41,7 @@
 
     "title": "Beyond Homo Technicus: Reconstructing Human Responsibility and Moral Self-Transformation in the Age of Artificial Intelligence",
 
-    "subtitle": "A philosophical inquiry into human responsibility, moral transformation, and humanity in the age of artificial intelligence.",
+    "subtitle": "A philosophical inquiry into human responsibility, moral transformation, and the reconstruction of humanity in the age of artificial intelligence.",
 
     "year": "2026",
 
@@ -52,91 +53,32 @@
 
     "status": "Published",
 
-    "abstract": "A philosophical exploration of artificial intelligence through the perspectives of human responsibility, moral self-transformation, and the future of humanity beyond technological reduction.",
+    "abstract": "The emergence of artificial intelligence challenges not only technological capacities but also humanity’s moral and existential self-understanding. This article reconstructs human responsibility beyond technological mastery through Heidegger’s critique of technology, Hans Jonas’s ethics of responsibility, Shannon Vallor’s technomoral virtues, and Mou Zongsan’s moral metaphysics.",
 
     "tags": [
       "Artificial Intelligence",
+      "Philosophy of Technology",
+      "Human Responsibility",
       "Hans Jonas",
+      "Heidegger",
       "Mou Zongsan",
-      "Responsibility",
-      "Human Transformation"
+      "Technomoral Virtues",
+      "Homo Responsibilis"
     ],
 
     "content": "/writings-content/filsafat/beyond-homo-technicus.md",
 
     "references": [
-      "Hans Jonas",
-      "Mou Zongsan"
+      "Billioud (2012)",
+      "Boland (2025)",
+      "Bostrom (2014)",
+      "Ernst et al. (2026)",
+      "Harari (2016)",
+      "Heidegger (1977)",
+      "Jonas (1984)",
+      "Mitcham (1994)",
+      "Tang (2023)",
+      "Vallor (2016)"
     ]
-  },
-
-
-  {
-    "id": "manusia-dan-pencarian-makna",
-
-    "category": "TEOLOGI",
-
-    "title": "Manusia dan Pencarian Makna",
-
-    "subtitle": "Refleksi mengenai manusia, iman, dan keberadaan.",
-
-    "year": "2026",
-
-    "type": "THEOLOGICAL ESSAY",
-
-    "author": "NIRMUKA",
-
-    "language": "Indonesia",
-
-    "status": "Published",
-
-    "abstract": "Sebuah refleksi teologis mengenai manusia, iman, penderitaan, dan pencarian makna dalam pengalaman keberadaan manusia.",
-
-    "tags": [
-      "Human",
-      "Faith",
-      "Meaning",
-      "Existence",
-      "Theology"
-    ],
-
-    "content": "/writings-content/teologi/manusia-dan-pencarian-makna.md",
-
-    "references": []
   }
 ]
-
-{
-  "id": "beyond-homo-technicus",
-  "category": "FILSAFAT",
-  "title": "Beyond Homo Technicus: Reconstructing Human Responsibility and Moral Self-Transformation in the Age of Artificial Intelligence",
-  "subtitle": "A philosophical inquiry into human responsibility, moral transformation, and the reconstruction of humanity in the age of artificial intelligence.",
-  "year": "2026",
-  "type": "PHILOSOPHICAL ESSAY",
-  "author": "NIRMUKA",
-  "language": "English",
-  "status": "Published",
-  "abstract": "The emergence of artificial intelligence challenges not only technological capacities but also humanity’s moral and existential self-understanding. This article reconstructs human responsibility beyond technological mastery through Heidegger’s critique of technology, Hans Jonas’s ethics of responsibility, Shannon Vallor’s technomoral virtues, and Mou Zongsan’s moral metaphysics.",
-  "tags": [
-    "Artificial Intelligence",
-    "Philosophy of Technology",
-    "Human Responsibility",
-    "Hans Jonas",
-    "Heidegger",
-    "Mou Zongsan",
-    "Technomoral Virtues"
-  ],
-  "content": "/writings-content/filsafat/beyond-homo-technicus.md",
-  "references": [
-    "Billioud (2012)",
-    "Boland (2025)",
-    "Bostrom (2014)",
-    "Ernst et al. (2026)",
-    "Harari (2016)",
-    "Heidegger (1977)",
-    "Jonas (1984)",
-    "Mitcham (1994)",
-    "Tang (2023)",
-    "Vallor (2016)"
-  ]
-}
