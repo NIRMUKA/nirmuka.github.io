@@ -1,54 +1,100 @@
 /* =========================================================
    NIRMUKA ART PROTECTION SYSTEM
+   VERSION 3.0
 
-   Handle:
-   - Disable context menu
+   Protection:
+   - Disable right click
+   - Disable copy
+   - Disable cut
    - Disable image dragging
-   - Theft warning overlay
+   - Disable save shortcuts
+   - Disable inspect shortcuts
+   - Warning image overlay
 
 ========================================================= */
 
 
 (function(){
 
-
 "use strict";
 
 
 
+const CONFIG = {
+
+    warningImage:
+    "/images-12.webp",
+
+    duration:
+    2500
+
+};
+
+
+
+let overlay = null;
+
+let timer = null;
+
+
+
+
 /* =========================================================
-   CREATE WARNING OVERLAY
+   CREATE OVERLAY
 ========================================================= */
 
 
-const warning =
+function createOverlay(){
+
+
+    if(overlay){
+        return;
+    }
+
+
+
+    overlay =
     document.createElement(
         "div"
     );
 
 
-warning.className =
-    "theft-warning";
+    overlay.className =
+    "protection-overlay";
 
 
 
-warning.innerHTML = `
+    overlay.innerHTML = `
 
 
-    <div class="theft-warning-text">
-
-        THOU SHALL NOT STEAL !!
-
-    </div>
+        <div class="protection-warning-box">
 
 
-`;
+            <img
+
+            src="${CONFIG.warningImage}"
+
+            class="protection-warning-image"
+
+            alt="Protection Warning"
+
+            >
+
+
+        </div>
+
+
+    `;
 
 
 
-document.body.appendChild(
-    warning
-);
+    document.body.appendChild(
+        overlay
+    );
+
+
+
+}
 
 
 
@@ -62,21 +108,30 @@ document.body.appendChild(
 function showWarning(){
 
 
-    warning.classList.add(
+    createOverlay();
+
+
+
+    clearTimeout(timer);
+
+
+
+    overlay.classList.add(
         "show"
     );
 
 
 
+    timer =
     setTimeout(()=>{
 
 
-        warning.classList.remove(
+        overlay.classList.remove(
             "show"
         );
 
 
-    },1600);
+    }, CONFIG.duration);
 
 
 
@@ -88,191 +143,315 @@ function showWarning(){
 
 
 
-
 /* =========================================================
-   DETECT PROTECTED IMAGE
-
+   BLOCK ACTION
 ========================================================= */
 
 
-function isArtworkImage(
-    element
-){
+function blockAction(event){
+
+
+    event.preventDefault();
+
+
+
+    if(event.stopImmediatePropagation){
+
+        event.stopImmediatePropagation();
+
+    }
+
+
+
+    event.stopPropagation();
+
+
+
+    showWarning();
+
+
+
+    return false;
+
+
+}
+
+
+
+
+
+
+
+/* =========================================================
+   RIGHT CLICK
+========================================================= */
+
+
+document.addEventListener(
+
+"contextmenu",
+
+function(event){
+
+
+    blockAction(event);
+
+
+
+},
+
+true
+
+);
+
+
+
+
+
+
+
+
+/* =========================================================
+   COPY
+========================================================= */
+
+
+document.addEventListener(
+
+"copy",
+
+function(event){
+
+
+    blockAction(event);
+
+
+
+},
+
+true
+
+);
+
+
+
+
+
+
+
+
+/* =========================================================
+   CUT
+========================================================= */
+
+
+document.addEventListener(
+
+"cut",
+
+function(event){
+
+
+    blockAction(event);
+
+
+
+},
+
+true
+
+);
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   DRAG IMAGE
+========================================================= */
+
+
+document.addEventListener(
+
+"dragstart",
+
+function(event){
+
+
+    const target =
+    event.target;
+
 
 
     if(
-        !element
+
+        target.tagName === "IMG"
+
+        ||
+
+        target.tagName === "CANVAS"
+
     ){
 
-        return false;
+
+        blockAction(event);
+
+
+    }
+
+
+
+},
+
+true
+
+);
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   KEYBOARD PROTECTION
+========================================================= */
+
+
+document.addEventListener(
+
+"keydown",
+
+function(event){
+
+
+
+    const key =
+    event.key.toLowerCase();
+
+
+
+    const command =
+    event.ctrlKey ||
+    event.metaKey;
+
+
+
+
+
+    if(
+
+        command &&
+
+        (
+
+        key==="c" ||
+
+        key==="x" ||
+
+        key==="s" ||
+
+        key==="u" ||
+
+        key==="p" ||
+
+        key==="a"
+
+        )
+
+    ){
+
+
+        blockAction(event);
+
 
     }
 
 
 
 
-    return (
 
-        element.tagName === "IMG"
 
-        &&
+    if(
+
+        event.key === "F12"
+
+    ){
+
+
+        blockAction(event);
+
+
+    }
+
+
+
+
+
+
+    if(
+
+        event.ctrlKey &&
+
+        event.shiftKey &&
 
         (
 
-            element.closest(
-                ".carousel-artwork"
-            )
+        key==="i" ||
 
-            ||
+        key==="j" ||
 
-            element.closest(
-                ".artwork-image"
-            )
-
-            ||
-
-            element.id ===
-            "art-image"
+        key==="c"
 
         )
 
-    );
+    ){
 
+
+        blockAction(event);
+
+
+    }
+
+
+
+},
+
+true
+
+);
+
+
+
+
+
+
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+
+document.addEventListener(
+
+"DOMContentLoaded",
+
+function(){
+
+
+    createOverlay();
 
 
 }
 
-
-
-
-
-
-
-/* =========================================================
-   BLOCK RIGHT CLICK
-
-========================================================= */
-
-
-document.addEventListener(
-    "contextmenu",
-    event=>{
-
-
-        if(
-            isArtworkImage(
-                event.target
-            )
-        ){
-
-
-            event.preventDefault();
-
-
-            showWarning();
-
-
-
-        }
-
-
-
-    }
-
 );
-
-
-
-
-
-
-
-/* =========================================================
-   BLOCK DRAG IMAGE
-
-========================================================= */
-
-
-document.addEventListener(
-    "dragstart",
-    event=>{
-
-
-        if(
-            isArtworkImage(
-                event.target
-            )
-        ){
-
-
-            event.preventDefault();
-
-
-            showWarning();
-
-
-
-        }
-
-
-
-    }
-
-);
-
-
-
-
-
-
-
-/* =========================================================
-   BLOCK IMAGE SAVE SHORTCUT
-
-   Ctrl + S
-   Cmd + S
-
-========================================================= */
-
-
-document.addEventListener(
-    "keydown",
-    event=>{
-
-
-        if(
-
-            (
-                event.ctrlKey ||
-                event.metaKey
-            )
-
-            &&
-
-            event.key.toLowerCase()
-            ===
-            "s"
-
-        ){
-
-
-            event.preventDefault();
-
-
-            showWarning();
-
-
-
-        }
-
-
-
-    }
-
-);
-
-
-
 
 
 
